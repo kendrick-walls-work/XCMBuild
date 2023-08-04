@@ -1,0 +1,27 @@
+*~
+.DS_Store
+
+# C extensions
+*.so
+*.dylib
+
+# Distribution / packaging
+env/
+build/
+dist/
+downloads/
+lib/
+lib64/
+.cache
+*.log
+# don't store keychains
+trustdb.gpg
+*.kbx
+Icon*
+*.workflow/xcuserdata
+*.xcodeproj/xcuserdata
+*.workflow/xcuserdata/*
+*.xcodeproj/project.workflow/xcuserdata/*
+swiftpm
+swiftpm/*
+IDEWorkspaceChecks.plist
