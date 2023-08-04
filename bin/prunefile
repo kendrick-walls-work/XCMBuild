@@ -1,0 +1,55 @@
+#! /bin/bash
+
+# reactive-firewall/XCMBuild Tool
+# ..................................
+# Copyright (c) 2014-2023, Mr. Walls
+# ..................................
+# Licensed under APACHE-2 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+# ..........................................
+# http://www.apache.org/licenses/LICENSE-2.0
+# ..........................................
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+test -x $(dirname "${0}")/"flatten" || exit 126 ;
+#else
+source $(dirname "${0}")/"flatten" || exit 126 ;
+
+# basic logic:
+# if file exists then un-exist it
+# if it is a file or directory then
+# check if we have a .Trash special directory, and move it there
+# either way if it is a directory attempt to remove any nested hiarchy as well
+# eitherway remove the file or directory
+# otherwise try to unlink the file-descriptor at the given path
+# cleanup and return
+
+function destroy() {
+	local JUNK = "${@}" ;
+	if [[ ( -e ${JUNK} ) ]] ; then
+		if [[ ( -f ${JUNK} ) ]] || [[ ( -d ${JUNK} ) ]] ; then
+			if [[ ( -d ${JUNK}) ]] ; then
+				flatten "${JUNK}" && \
+				rm -vfd ${JUNK}/* || false ;
+			else
+				rm -vf "${JUNK}" || false ;
+			fi
+		else
+			unlink ${JUNK} || false ;
+		fi
+	fi
+	unset JUNK || true ;
+	true ;
+}
+
+export -f destroy ;
+
+destroy "${@}" && true || false ; wait ;
+
+sync ;
+
+exit 0;
