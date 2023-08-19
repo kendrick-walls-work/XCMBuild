@@ -1,8 +1,8 @@
 #! /bin/bash
-
-# reactive-firewall/XCMBuild Tool
+#
+# reactive-firewall/XCMBuild file-lock Tool
 # ..................................
-# Copyright (c) 2014-2023, Mr. Walls
+# Copyright (c) 2023, Mr. Walls
 # ..................................
 # Licensed under APACHE-2 (the "License");
 # you may not use this file except in compliance with the License.
@@ -76,27 +76,60 @@
 #    the amount of five dollars ($5.00). The foregoing limitations will apply
 #    even if the above stated remedy fails of its essential purpose.
 ################################################################################
+PATH=${PATH:-"/bin:/sbin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin"} ;
+umask 0112
 
+declare -ir MINPARAMS=2
+declare LOCK_FILE="${LOCK_FILE:-/tmp/GIL.lock}"
+declare -i PID_VALUE="${PPID:-$$}"
+declare -i SHLOCK_CHECK_ONLY_MODE=1
 
-function flatten() {
-	local MULTILEVEL="${@}" ;
-	if [[ ( -e ${MULTILEVEL} ) ]] ; then
-		if [[ ( -f ${MULTILEVEL} ) ]] || [[ ( -d ${MULTILEVEL} ) ]] ; then
-			if [[ ( -d ${MULTILEVEL}) ]] ; then
-				find ${MULTILEVEL} -mindepth 2 -type f -exec mv -vf '{}' ${MULTILEVEL}/ ';' && \
-				find ${MULTILEVEL} -mindepth 1 -type l -exec unlink '{}' ';' && \
-				find ${MULTILEVEL} -mindepth 1 -type d -print0 | sort -z -r -d -t\/ | xargs -0 -I{} rmdir -v '{}' || false ;
-			fi ;
-			# do nothing for simple files
-		elif [[ ( -h ${MULTILEVEL} ) ]] || [[ ( -L ${MULTILEVEL} ) ]] ; then
-			# handle links by unlinking
-			unlink ${MULTILEVEL} 2>/dev/null || false ;
-		fi
+#declare -i VERSION=20230811
+
+test -x $(command -v head) || exit 126 ;
+test -x $(command -v kill) || exit 126 ;
+test -x $(command -v sync) || exit 126 ;
+EXIT_CODE=1 ;
+
+# exit codes: (caveat: not all implemented here)
+# x000000 = 0 = locked by ${PID_VALUE} ;
+# x000001 = 1 = not-locked by ${PID_VALUE} ;
+# x000010 = 2 = should be locked by ${PID_VALUE} but some generic error occured ;
+# x000011 = 3 = could not resolve to locked nor not-locked by ${PID_VALUE} (i.e. 1+2) ;
+# x000100 = 4 = locked by ${PID_VALUE} but looks like ${PID_VALUE} is gone now but still found lock (did you remember to unlock before relocking?)
+# x000101 = 5 = not-locked by ${PID_VALUE} but still found lock at ${LOCK_FILE} (i.e. 1+4)
+# x000110 = 6 = could not resolve to locked nor not-locked by ${PID_VALUE} but but still found lock at ${LOCK_FILE}
+# x000111 = 7 = not-locked by ${PID_VALUE} but but still found lock at ${LOCK_FILE} for unknown PID (including when invalid lock file)
+
+if [[ ( $# -ge $MINPARAMS ) ]] ; then
+	while [[ ( $# -gt 0 ) ]] ; do  # Until you run out of parameters . . .
+		case "${1}" in
+			-p|--pid) shift ; export PID_VALUE="${1}" ; SHLOCK_CHECK_ONLY_MODE=0 ;;
+			-f|--file) shift ; export LOCK_FILE="${1}" ;;
+			*) printf "$0: \"${1}\" Argument Unrecognized!\n" 1>&2 ; EXIT_CODE=3 ;;
+		esac ;  # Check next set of parameters.
+		shift ;
+	done
+
+fi ;
+if [[ ( $EXIT_CODE -lt $MINPARAMS ) ]] ; then
+if [[ ( -e "${LOCK_FILE}" ) ]] ; then  # just check -e and not -r nor -f to run fast and fail on read
+	if [[ ( "${PID_VALUE}" -eq $(head -n 1 "${LOCK_FILE}") ) ]] ; then
+		EXIT_CODE=0 ;
+		# could update with touch -am "${LOCK_FILE}"
+	elif [[ ( -r "${LOCK_FILE}" ) ]] ; then  # also can just check -r here instead
+		EXIT_CODE=5 ;
+	else
+		printf $"Error: Lock could not be checked\n" >&2 ;
+		EXIT_CODE=7 ;
 	fi
-	unset MULTILEVEL 2>/dev/null || true ;
-	true ;
-}
-
-export -f flatten ;
-
-# source to include
+elif [[ ( -z $( kill -n 0 "${PID_VALUE}" 2>&1 ) ) ]] ; then
+	printf "${PID_VALUE}\n" >"${LOCK_FILE}" && :
+	sync ; wait ;
+	if [[ ( -r "${LOCK_FILE}" ) ]] ; then EXIT_CODE=0 ; elif [[ ( -e "${LOCK_FILE}" ) ]] ; then EXIT_CODE=2 ; else EXIT_CODE=2 ; fi ;
+else
+	printf $"Error: Refuse to aquire lock for unkown process ${PID_VALUE}\n" >&2 ;
+	EXIT_CODE=6 ;
+fi
+fi ;
+exit ${EXIT_CODE:-126} ;

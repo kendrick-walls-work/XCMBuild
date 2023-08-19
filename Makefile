@@ -82,11 +82,11 @@ ifeq "$(RM)" ""
 endif
 
 ifeq "$(CHMOD)" ""
-	CHMOD=xcrun chmod -v
+	CHMOD=command -pv chmod -v
 endif
 
 ifeq "$(CHOWN)" ""
-	CHOWN=xcrun chown -v
+	CHOWN=command -pv chown -v
 endif
 
 ifeq "$(CP)" ""
@@ -94,7 +94,7 @@ ifeq "$(CP)" ""
 endif
 
 ifeq "$(MKDIR)" ""
-	MKDIR=xcrun mkdir -m 0755
+	MKDIR=command -pv mkdir -m 0755
 endif
 
 ifeq "$(RMDIR)" ""
@@ -207,7 +207,7 @@ purge: clean uninstall
 
 test: cleanup
 	$(QUIET)$(ECHO) "$@: START."
-	$(QUIET)ls -1 ./tests/test_*sh 2>/dev/null | xargs -L1 -I{} $(SHELL) -c "{} && echo '{}: OK' || echo '{}: FAILED' >&2 ; " ;
+	$(QUIET)ls -1 ./tests/test_*sh 2>/dev/null | xargs -L1 -I{} $(SHELL) -c "{} && echo '{}: Succeded' || echo '{}: FAILURE' >&2 ; " ;
 	$(QUIET)$(WAIT) ;
 	$(QUIET)$(ECHO) "$@: END."
 

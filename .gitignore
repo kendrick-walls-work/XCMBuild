@@ -2,8 +2,10 @@
 .DS_Store
 
 # C extensions
+*.[ao]
 *.so
 *.dylib
+*.dll
 
 # Distribution / packaging
 env/
@@ -22,6 +24,9 @@ Icon*
 *.xcodeproj/xcuserdata
 *.workflow/xcuserdata/*
 *.xcodeproj/project.workflow/xcuserdata/*
+# prevent including 3rd party git pre-rebase.sample
+*.xcodeproj/hooks/pre-rebase
+*.xcodeproj/hooks/pre-rebase.sample
 swiftpm
 swiftpm/*
 IDEWorkspaceChecks.plist

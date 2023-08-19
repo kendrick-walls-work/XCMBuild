@@ -1,8 +1,8 @@
 #! /bin/bash
 
-# reactive-firewall/XCMBuild Tool
+# reactive-firewall/XCMBuild Unit Test
 # ..................................
-# Copyright (c) 2014-2023, Mr. Walls
+# Copyright (c) 2023, Mr. Walls
 # ..................................
 # Licensed under APACHE-2 (the "License");
 # you may not use this file except in compliance with the License.
@@ -77,26 +77,6 @@
 #    even if the above stated remedy fails of its essential purpose.
 ################################################################################
 
+echo "Not Implemented Yet."
 
-function flatten() {
-	local MULTILEVEL="${@}" ;
-	if [[ ( -e ${MULTILEVEL} ) ]] ; then
-		if [[ ( -f ${MULTILEVEL} ) ]] || [[ ( -d ${MULTILEVEL} ) ]] ; then
-			if [[ ( -d ${MULTILEVEL}) ]] ; then
-				find ${MULTILEVEL} -mindepth 2 -type f -exec mv -vf '{}' ${MULTILEVEL}/ ';' && \
-				find ${MULTILEVEL} -mindepth 1 -type l -exec unlink '{}' ';' && \
-				find ${MULTILEVEL} -mindepth 1 -type d -print0 | sort -z -r -d -t\/ | xargs -0 -I{} rmdir -v '{}' || false ;
-			fi ;
-			# do nothing for simple files
-		elif [[ ( -h ${MULTILEVEL} ) ]] || [[ ( -L ${MULTILEVEL} ) ]] ; then
-			# handle links by unlinking
-			unlink ${MULTILEVEL} 2>/dev/null || false ;
-		fi
-	fi
-	unset MULTILEVEL 2>/dev/null || true ;
-	true ;
-}
-
-export -f flatten ;
-
-# source to include
+exit 0 ;

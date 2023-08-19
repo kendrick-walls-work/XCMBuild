@@ -6,13 +6,179 @@
 	objectVersion = 56;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		8462AFCF2A900E69001EFB68 /* Combine XCRunShell */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 8462AFD82A900E69001EFB68 /* Build configuration list for PBXAggregateTarget "Combine XCRunShell" */;
+			buildPhases = (
+				8462AFD42A900E69001EFB68 /* CopyFiles */,
+				8462AFD62A900E69001EFB68 /* CopyFiles */,
+			);
+			dependencies = (
+				8462AFD02A900E69001EFB68 /* PBXTargetDependency */,
+				8462AFD22A900E69001EFB68 /* PBXTargetDependency */,
+			);
+			name = "Combine XCRunShell";
+			productName = "Combine XCRunShell";
+		};
+		8462AFDD2A900F1E001EFB68 /* All */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 8462AFDE2A900F1E001EFB68 /* Build configuration list for PBXAggregateTarget "All" */;
+			buildPhases = (
+			);
+			dependencies = (
+				8462AFE82A900F4C001EFB68 /* PBXTargetDependency */,
+				8462AFE62A900F4C001EFB68 /* PBXTargetDependency */,
+				8462AFE22A900F4C001EFB68 /* PBXTargetDependency */,
+				8462AFE42A900F4C001EFB68 /* PBXTargetDependency */,
+			);
+			name = All;
+			productName = All;
+		};
+		8462AFE92A901205001EFB68 /* preflight_XCMB_build */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 8462AFEA2A901205001EFB68 /* Build configuration list for PBXAggregateTarget "preflight_XCMB_build" */;
+			buildPhases = (
+				84D6938C2A9017CD00827472 /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = preflight_XCMB_build;
+			productName = preflight_XCMB_build;
+		};
+		847517542A9006BE00C93D65 /* Combine Prune Scripts */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 847517552A9006BE00C93D65 /* Build configuration list for PBXAggregateTarget "Combine Prune Scripts" */;
+			buildPhases = (
+				847517582A9006CF00C93D65 /* CopyFiles */,
+			);
+			dependencies = (
+				8475175C2A90070500C93D65 /* PBXTargetDependency */,
+			);
+			name = "Combine Prune Scripts";
+			productName = "Combine XCRunShell";
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
-		84D3F45D2A7C38650022D176 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D3F45C2A7C38650022D176 /* main.m */; };
-		84D3F4513A7C38650022D176 /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 84D3F4523A7C38650022D176 /* main.m */; };
+		8418EDAD2A904C2E00AD07F0 /* Icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 8418EDAC2A904C2E00AD07F0 /* Icon.icns */; };
+		8418EDB22A90701600AD07F0 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8418EDB12A90701600AD07F0 /* Info.plist */; };
+		841B5D0C2A89E35100E589BB /* XCMShell.h in Headers */ = {isa = PBXBuildFile; fileRef = 841B5D0B2A89E35100E589BB /* XCMShell.h */; };
+		841B5D0E2A89E96C00E589BB /* XCMShell.m in Sources */ = {isa = PBXBuildFile; fileRef = 849B23BD2A89967600962A8A /* XCMShell.m */; };
+		8449D6DE2A85DDF600CA081A /* XCMBuild.h in Headers */ = {isa = PBXBuildFile; fileRef = 8489034D2A84535000F5F241 /* XCMBuild.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84619D5D2A859266009C5753 /* LICENSE-2.0.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8411D9A72A82EB860029B632 /* LICENSE-2.0.txt */; };
+		84619D7B2A85BCA7009C5753 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 84619D7A2A85BCA7009C5753 /* main.m */; };
+		8462AFD52A900E69001EFB68 /* xcrunshell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84E1D7A02A8AB66000779732 /* xcrunshell.h */; };
+		8462AFD72A900E69001EFB68 /* xcrunshell in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84619D782A85BCA7009C5753 /* xcrunshell */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		8462AFDB2A900E8A001EFB68 /* prunefile in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8446EC112A7C849700B93693 /* prunefile */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		8462AFDC2A900E8C001EFB68 /* flatten in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84838D2D2A7D8A46008BC8C1 /* flatten */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		8489034F2A84535000F5F241 /* XCMBuild.docc in Sources */ = {isa = PBXBuildFile; fileRef = 8489034E2A84535000F5F241 /* XCMBuild.docc */; };
+		849B23BF2A89A5D300962A8A /* XCMBuild.h in Headers */ = {isa = PBXBuildFile; fileRef = 8489034D2A84535000F5F241 /* XCMBuild.h */; };
+		849B23C22A89ACD800962A8A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 849B23C12A89ACD800962A8A /* Foundation.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		84CEAD432A8B290F00EBE49A /* XCMShell.h in Headers */ = {isa = PBXBuildFile; fileRef = 841B5D0B2A89E35100E589BB /* XCMShell.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84CEAD452A8B291500EBE49A /* xcrunshell.h in Headers */ = {isa = PBXBuildFile; fileRef = 84E1D7A02A8AB66000779732 /* xcrunshell.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		84CEAD472A8B2A4700EBE49A /* libobjc.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 84CEAD462A8B2A4700EBE49A /* libobjc.tbd */; settings = {ATTRIBUTES = (Weak, ); }; };
+		84CEAD492A8B2A8A00EBE49A /* libc.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 84CEAD482A8B2A8A00EBE49A /* libc.tbd */; settings = {ATTRIBUTES = (Weak, ); }; };
+		84CEAD4A2A8B2A9500EBE49A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 849B23C12A89ACD800962A8A /* Foundation.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		84E1D7A22A8ABA3700779732 /* xcrunshell.h in Headers */ = {isa = PBXBuildFile; fileRef = 84E1D7A02A8AB66000779732 /* xcrunshell.h */; settings = {ATTRIBUTES = (Private, ); }; };
 /* End PBXBuildFile section */
 
+/* Begin PBXBuildRule section */
+		848903582A845CA200F5F241 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			filePatterns = "*.xcodeproj/hooks/*";
+			fileType = pattern.proxy;
+			inputFiles = (
+				"$(SRCROOT)/$(PROJECT_NAME).xcodeproj/hooks/$(INPUT_FILE_NAME)",
+			);
+			isEditable = 1;
+			outputFiles = (
+				"$(DERIVED_FILE_DIR)/.git/hooks/$(INPUT_FILE_NAME)",
+			);
+			runOncePerArchitecture = 0;
+			script = "#! /bin/bash\ntest -d ${INPUT_FILE_DIR} || exit 2 ;\nif [[ ( -f \"${SCRIPT_INPUT_FILE}\" ) ]] ; then\nxcrun cp -vfp \"${SCRIPT_INPUT_FILE}\" \"${SCRIPT_OUTPUT_FILE_0}\" || exit 2\nxattr -w com.apple.xcode.CreatedByBuildSystem true \"${SCRIPT_OUTPUT_FILE_0}\" ; wait ;\nelse\necho \"SKIPPING\"\necho \"${SCRIPT_INPUT_FILE}\"\necho \"${INPUT_FILE_DIR}\"\necho \"\"\necho \"${DERIVED_FILE_DIR}\"\necho \"${SCRIPT_OUTPUT_FILE_0}\"\necho \"\"\nfi ;\nexit $? ;\n";
+		};
+/* End PBXBuildRule section */
+
+/* Begin PBXContainerItemProxy section */
+		8462AFD12A900E69001EFB68 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84D3F4512A7C38650022D176 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8489034A2A84535000F5F241;
+			remoteInfo = XCMBuild;
+		};
+		8462AFD32A900E69001EFB68 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84D3F4512A7C38650022D176 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 84619D772A85BCA7009C5753;
+			remoteInfo = xcrunshell;
+		};
+		8462AFE12A900F4C001EFB68 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84D3F4512A7C38650022D176 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 847517542A9006BE00C93D65;
+			remoteInfo = "Combine Prune Scripts";
+		};
+		8462AFE32A900F4C001EFB68 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84D3F4512A7C38650022D176 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8462AFCF2A900E69001EFB68;
+			remoteInfo = "Combine XCRunShell copy";
+		};
+		8462AFE52A900F4C001EFB68 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84D3F4512A7C38650022D176 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8489034A2A84535000F5F241;
+			remoteInfo = XCMBuild;
+		};
+		8462AFE72A900F4C001EFB68 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84D3F4512A7C38650022D176 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 84619D772A85BCA7009C5753;
+			remoteInfo = xcrunshell;
+		};
+		8475175B2A90070500C93D65 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84D3F4512A7C38650022D176 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8489034A2A84535000F5F241;
+			remoteInfo = XCMBuild;
+		};
+		84D693852A9013FB00827472 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84D3F4512A7C38650022D176 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8462AFE92A901205001EFB68;
+			remoteInfo = preflight_XCMB_build;
+		};
+		84D693872A90140500827472 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84D3F4512A7C38650022D176 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8462AFE92A901205001EFB68;
+			remoteInfo = preflight_XCMB_build;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
-		84D3F4572A7C38650022D176 /* CopyFiles */ = {
+		84619D722A85AB34009C5753 /* Embed XPC Services */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/XPCServices";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			name = "Embed XPC Services";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84619D762A85BCA7009C5753 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = /usr/share/man/man1/;
@@ -21,79 +187,301 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
-		84D3F4543A7C38650022D176 /* Pre-CopyFiles */ = {
+		8462AFD42A900E69001EFB68 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = .;
-			dstSubfolderSpec = 1;
+			dstPath = "$(PRIVATE_HEADERS_FOLDER_PATH)";
+			dstSubfolderSpec = 16;
 			files = (
-				84D3F4513A7C38650022D176 /* Makefile */,
+				8462AFD52A900E69001EFB68 /* xcrunshell.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8462AFD62A900E69001EFB68 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/usr/bin";
+			dstSubfolderSpec = 16;
+			files = (
+				8462AFD72A900E69001EFB68 /* xcrunshell in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		847517582A9006CF00C93D65 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/usr/bin";
+			dstSubfolderSpec = 16;
+			files = (
+				8462AFDB2A900E8A001EFB68 /* prunefile in CopyFiles */,
+				8462AFDC2A900E8C001EFB68 /* flatten in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		84D3F4592A7C38650022D176 /* XCMBuild */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = XCMBuild; sourceTree = BUILT_PRODUCTS_DIR; };
-		84D3F45C2A7C38650022D176 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		84D3F4523A7C38650022D176 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.makefile.make; path = Makefile; sourceTree = "<group>"; };
+		8411D99B2A82E8100029B632 /* test_codecov_config.bash */ = {isa = PBXFileReference; explicitFileType = text.script.bash; fileEncoding = 4; lastKnownFileType = text.script.sh; lineEnding = 0; name = test_codecov_config.bash; path = tests/test_codecov_config.bash; sourceTree = "<group>"; };
+		8411D99D2A82E8100029B632 /* test_plists.bash */ = {isa = PBXFileReference; explicitFileType = text.script.bash; fileEncoding = 4; lastKnownFileType = text.script.sh; lineEnding = 0; name = test_plists.bash; path = tests/test_plists.bash; sourceTree = "<group>"; };
+		8411D99E2A82E8100029B632 /* test_bash_shlock_tool.bash */ = {isa = PBXFileReference; explicitFileType = text.script.bash; fileEncoding = 4; lastKnownFileType = text.script.sh; lineEnding = 0; name = test_bash_shlock_tool.bash; path = tests/test_bash_shlock_tool.bash; sourceTree = "<group>"; };
+		8411D99F2A82E8100029B632 /* test_cc_lines.bash */ = {isa = PBXFileReference; explicitFileType = text.script.bash; fileEncoding = 4; lastKnownFileType = text.script.sh; lineEnding = 0; name = test_cc_lines.bash; path = tests/test_cc_lines.bash; sourceTree = "<group>"; };
+		8411D9A02A82E8100029B632 /* test_spelling.bash */ = {isa = PBXFileReference; explicitFileType = text.script.bash; fileEncoding = 4; lastKnownFileType = text.script.sh; lineEnding = 0; name = test_spelling.bash; path = tests/test_spelling.bash; sourceTree = "<group>"; };
+		8411D9A12A82E8100029B632 /* test_git_config.bash */ = {isa = PBXFileReference; explicitFileType = text.script.bash; fileEncoding = 4; lastKnownFileType = text.script.sh; lineEnding = 0; name = test_git_config.bash; path = tests/test_git_config.bash; sourceTree = "<group>"; };
+		8411D9A72A82EB860029B632 /* LICENSE-2.0.txt */ = {isa = PBXFileReference; explicitFileType = text; fileEncoding = 4; lineEnding = 0; path = "LICENSE-2.0.txt"; sourceTree = SOURCE_ROOT; };
+		8418EDAA2A904B0900AD07F0 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		8418EDAC2A904C2E00AD07F0 /* Icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Icon.icns; sourceTree = "<group>"; };
+		8418EDB12A90701600AD07F0 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		841B5D0B2A89E35100E589BB /* XCMShell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCMShell.h; sourceTree = "<group>"; };
+		842858FE2A8AF508002C447C /* orderfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = orderfile; sourceTree = "<group>"; };
+		8446EC0F2A7C849700B93693 /* genmac.sh */ = {isa = PBXFileReference; explicitFileType = text.script; fileEncoding = 4; name = genmac.sh; path = bin/genmac.sh; sourceTree = "<group>"; };
+		8446EC102A7C849700B93693 /* pretests.sh */ = {isa = PBXFileReference; explicitFileType = text.script.sh; fileEncoding = 4; lineEnding = 0; name = pretests.sh; path = bin/pretests.sh; sourceTree = "<group>"; };
+		8446EC112A7C849700B93693 /* prunefile */ = {isa = PBXFileReference; explicitFileType = text.script.sh; fileEncoding = 4; lineEnding = 0; name = prunefile; path = bin/prunefile; sourceTree = SOURCE_ROOT; };
+		8446EC122A7C849700B93693 /* runtests.sh */ = {isa = PBXFileReference; explicitFileType = text.script.sh; fileEncoding = 4; lineEnding = 0; name = runtests.sh; path = bin/runtests.sh; sourceTree = "<group>"; };
+		8446EC132A7C849700B93693 /* posttests.sh */ = {isa = PBXFileReference; explicitFileType = text.script.sh; fileEncoding = 4; lineEnding = 0; name = posttests.sh; path = bin/posttests.sh; sourceTree = "<group>"; };
+		8446EC142A7C849700B93693 /* tool_shlock_helper.sh */ = {isa = PBXFileReference; explicitFileType = text.script.bash; fileEncoding = 4; lastKnownFileType = text.script.sh; lineEnding = 0; name = tool_shlock_helper.sh; path = bin/tool_shlock_helper.sh; sourceTree = "<group>"; };
+		8446EC152A7C849700B93693 /* styletests.sh */ = {isa = PBXFileReference; explicitFileType = text.script.sh; fileEncoding = 4; lineEnding = 0; name = styletests.sh; path = bin/styletests.sh; sourceTree = "<group>"; };
+		84619D782A85BCA7009C5753 /* xcrunshell */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = xcrunshell; sourceTree = BUILT_PRODUCTS_DIR; };
+		84619D7A2A85BCA7009C5753 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		84838D2D2A7D8A46008BC8C1 /* flatten */ = {isa = PBXFileReference; explicitFileType = text.script.sh; fileEncoding = 4; lineEnding = 0; name = flatten; path = bin/flatten; sourceTree = SOURCE_ROOT; };
+		8489034B2A84535000F5F241 /* XCMBuild.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = XCMBuild.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8489034D2A84535000F5F241 /* XCMBuild.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCMBuild.h; sourceTree = "<group>"; };
+		8489034E2A84535000F5F241 /* XCMBuild.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = XCMBuild.docc; sourceTree = SOURCE_ROOT; };
+		849B23BC2A898A4500962A8A /* test_build_paths_start */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = test_build_paths_start; sourceTree = "<group>"; };
+		849B23BD2A89967600962A8A /* XCMShell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCMShell.m; sourceTree = "<group>"; };
+		849B23C12A89ACD800962A8A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		84CEAD412A8B280100EBE49A /* xcrunshell */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = xcrunshell; sourceTree = "<group>"; };
+		84CEAD462A8B2A4700EBE49A /* libobjc.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libobjc.tbd; path = usr/lib/libobjc.tbd; sourceTree = SDKROOT; };
+		84CEAD482A8B2A8A00EBE49A /* libc.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libc.tbd; path = usr/lib/libc.tbd; sourceTree = SDKROOT; };
+		84D3F4523A7C38650022D176 /* Makefile */ = {isa = PBXFileReference; explicitFileType = sourcecode.makefile.make; fileEncoding = 4; lastKnownFileType = sourcecode.make; lineEnding = 0; path = Makefile; sourceTree = SOURCE_ROOT; };
+		84DFD9482A844E190078F7F9 /* .github */ = {isa = PBXFileReference; lastKnownFileType = folder; path = .github; sourceTree = SOURCE_ROOT; };
+		84E1D7A02A8AB66000779732 /* xcrunshell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = xcrunshell.h; sourceTree = "<group>"; };
+		84FD741A2A84425200F72966 /* XcodeKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XcodeKit.framework; path = Library/Frameworks/XcodeKit.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		84D3F4562A7C38650022D176 /* Frameworks */ = {
+		84619D752A85BCA7009C5753 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				849B23C22A89ACD800962A8A /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		848903482A84535000F5F241 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84CEAD492A8B2A8A00EBE49A /* libc.tbd in Frameworks */,
+				84CEAD472A8B2A4700EBE49A /* libobjc.tbd in Frameworks */,
+				84CEAD4A2A8B2A9500EBE49A /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8411D9982A82E6910029B632 /* tests */ = {
+			isa = PBXGroup;
+			children = (
+				8411D99E2A82E8100029B632 /* test_bash_shlock_tool.bash */,
+				8411D99F2A82E8100029B632 /* test_cc_lines.bash */,
+				8411D99B2A82E8100029B632 /* test_codecov_config.bash */,
+				8411D9A12A82E8100029B632 /* test_git_config.bash */,
+				8411D99D2A82E8100029B632 /* test_plists.bash */,
+				8411D9A02A82E8100029B632 /* test_spelling.bash */,
+			);
+			name = tests;
+			sourceTree = "<group>";
+		};
+		8411D9A22A82E8720029B632 /* stubs */ = {
+			isa = PBXGroup;
+			children = (
+				8418EDAC2A904C2E00AD07F0 /* Icon.icns */,
+				8418EDAA2A904B0900AD07F0 /* Icon.png */,
+				842858FE2A8AF508002C447C /* orderfile */,
+				8411D9A52A82E9430029B632 /* envs */,
+			);
+			path = stubs;
+			sourceTree = "<group>";
+		};
+		8411D9A52A82E9430029B632 /* envs */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = envs;
+			sourceTree = "<group>";
+		};
+		8411D9A62A82EB520029B632 /* docs */ = {
+			isa = PBXGroup;
+			children = (
+				8489034E2A84535000F5F241 /* XCMBuild.docc */,
+				8411D9A72A82EB860029B632 /* LICENSE-2.0.txt */,
+			);
+			name = docs;
+			sourceTree = "<group>";
+		};
+		8446EC0D2A7C843D00B93693 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				84D3F4523A7C38650022D176 /* Makefile */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		8446EC0E2A7C846000B93693 /* bin */ = {
+			isa = PBXGroup;
+			children = (
+				8446EC0F2A7C849700B93693 /* genmac.sh */,
+				8446EC132A7C849700B93693 /* posttests.sh */,
+				8446EC102A7C849700B93693 /* pretests.sh */,
+				8446EC112A7C849700B93693 /* prunefile */,
+				8446EC122A7C849700B93693 /* runtests.sh */,
+				8446EC152A7C849700B93693 /* styletests.sh */,
+				8446EC142A7C849700B93693 /* tool_shlock_helper.sh */,
+				84838D2D2A7D8A46008BC8C1 /* flatten */,
+			);
+			name = bin;
+			sourceTree = "<group>";
+		};
+		84619D792A85BCA7009C5753 /* xcrunshell */ = {
+			isa = PBXGroup;
+			children = (
+				84E1D7A02A8AB66000779732 /* xcrunshell.h */,
+				84619D7A2A85BCA7009C5753 /* main.m */,
+			);
+			path = xcrunshell;
+			sourceTree = "<group>";
+		};
+		8489034C2A84535000F5F241 /* XCMBuild */ = {
+			isa = PBXGroup;
+			children = (
+				8418EDB12A90701600AD07F0 /* Info.plist */,
+				8489034D2A84535000F5F241 /* XCMBuild.h */,
+				841B5D0B2A89E35100E589BB /* XCMShell.h */,
+				849B23BD2A89967600962A8A /* XCMShell.m */,
+				84619D792A85BCA7009C5753 /* xcrunshell */,
+			);
+			path = XCMBuild;
+			sourceTree = "<group>";
+		};
+		849B23BB2A8989B000962A8A /* unittests */ = {
+			isa = PBXGroup;
+			children = (
+				849B23BC2A898A4500962A8A /* test_build_paths_start */,
+			);
+			path = unittests;
+			sourceTree = "<group>";
+		};
 		84D3F4502A7C38650022D176 = {
 			isa = PBXGroup;
 			children = (
-				84D3F45B2A7C38650022D176 /* XCMBuild */,
+				8446EC0E2A7C846000B93693 /* bin */,
+				8411D9A62A82EB520029B632 /* docs */,
+				8411D9982A82E6910029B632 /* tests */,
+				849B23BB2A8989B000962A8A /* unittests */,
+				84FD74132A84381800F72966 /* XCMClean */,
+				8489034C2A84535000F5F241 /* XCMBuild */,
 				84D3F45A2A7C38650022D176 /* Products */,
+				84DFD9482A844E190078F7F9 /* .github */,
+				8411D9A22A82E8720029B632 /* stubs */,
+				8446EC0D2A7C843D00B93693 /* Recovered References */,
+				84FD74192A84425200F72966 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
 		84D3F45A2A7C38650022D176 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				84D3F4592A7C38650022D176 /* XCMBuild */,
+				8489034B2A84535000F5F241 /* XCMBuild.framework */,
+				84619D782A85BCA7009C5753 /* xcrunshell */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		84D3F45B2A7C38650022D176 /* XCMBuild */ = {
+		84FD74132A84381800F72966 /* XCMClean */ = {
 			isa = PBXGroup;
 			children = (
-				84D3F45C2A7C38650022D176 /* main.m */,
 			);
-			path = XCMBuild;
+			path = XCMClean;
+			sourceTree = "<group>";
+		};
+		84FD74192A84425200F72966 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				84CEAD482A8B2A8A00EBE49A /* libc.tbd */,
+				84CEAD462A8B2A4700EBE49A /* libobjc.tbd */,
+				84CEAD412A8B280100EBE49A /* xcrunshell */,
+				849B23C12A89ACD800962A8A /* Foundation.framework */,
+				84FD741A2A84425200F72966 /* XcodeKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		848903462A84535000F5F241 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84CEAD432A8B290F00EBE49A /* XCMShell.h in Headers */,
+				84CEAD452A8B291500EBE49A /* xcrunshell.h in Headers */,
+				8449D6DE2A85DDF600CA081A /* XCMBuild.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		849B23BE2A89A5CB00962A8A /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84E1D7A22A8ABA3700779732 /* xcrunshell.h in Headers */,
+				841B5D0C2A89E35100E589BB /* XCMShell.h in Headers */,
+				849B23BF2A89A5D300962A8A /* XCMBuild.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
-		84D3F4582A7C38650022D176 /* XCMBuild */ = {
+		84619D772A85BCA7009C5753 /* xcrunshell */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 84D3F4602A7C38650022D176 /* Build configuration list for PBXNativeTarget "XCMBuild" */;
+			buildConfigurationList = 84619D7C2A85BCA7009C5753 /* Build configuration list for PBXNativeTarget "xcrunshell" */;
 			buildPhases = (
-				84D3F4543A7C38650022D176 /* Pre-CopyFiles */,
-				84D3F4552A7C38650022D176 /* Sources */,
-				84D3F4562A7C38650022D176 /* Frameworks */,
-				84D3F4572A7C38650022D176 /* CopyFiles */,
+				849B23BE2A89A5CB00962A8A /* Headers */,
+				84619D742A85BCA7009C5753 /* Sources */,
+				84619D752A85BCA7009C5753 /* Frameworks */,
+				84619D762A85BCA7009C5753 /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				84D693862A9013FB00827472 /* PBXTargetDependency */,
+			);
+			name = xcrunshell;
+			productName = xcrunshell;
+			productReference = 84619D782A85BCA7009C5753 /* xcrunshell */;
+			productType = "com.apple.product-type.tool";
+		};
+		8489034A2A84535000F5F241 /* XCMBuild */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 848903512A84535000F5F241 /* Build configuration list for PBXNativeTarget "XCMBuild" */;
+			buildPhases = (
+				848903462A84535000F5F241 /* Headers */,
+				848903472A84535000F5F241 /* Sources */,
+				848903482A84535000F5F241 /* Frameworks */,
+				848903492A84535000F5F241 /* Resources */,
+				84619D722A85AB34009C5753 /* Embed XPC Services */,
+			);
+			buildRules = (
+				848903582A845CA200F5F241 /* PBXBuildRule */,
+			);
+			dependencies = (
+				84D693882A90140500827472 /* PBXTargetDependency */,
 			);
 			name = XCMBuild;
 			productName = XCMBuild;
-			productReference = 84D3F4592A7C38650022D176 /* XCMBuild */;
-			productType = "com.apple.product-type.tool";
+			productReference = 8489034B2A84535000F5F241 /* XCMBuild.framework */;
+			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
@@ -102,15 +490,30 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
+				CLASSPREFIX = XCM;
 				KnownAssetTags = (
+					XCMBuild,
+					XCMClean,
 					XCMHelper,
 					XCMRunner,
-					XCMBuild,
 				);
+				LastSwiftUpdateCheck = 1430;
 				LastUpgradeCheck = 1430;
 				ORGANIZATIONNAME = org.pak.dt;
 				TargetAttributes = {
-					84D3F4582A7C38650022D176 = {
+					84619D772A85BCA7009C5753 = {
+						CreatedOnToolsVersion = 14.3.1;
+					};
+					8462AFDD2A900F1E001EFB68 = {
+						CreatedOnToolsVersion = 14.3.1;
+					};
+					8462AFE92A901205001EFB68 = {
+						CreatedOnToolsVersion = 14.3.1;
+					};
+					847517542A9006BE00C93D65 = {
+						CreatedOnToolsVersion = 14.3.1;
+					};
+					8489034A2A84535000F5F241 = {
 						CreatedOnToolsVersion = 14.3.1;
 					};
 				};
@@ -128,33 +531,466 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				84D3F4582A7C38650022D176 /* XCMBuild */,
+				8462AFE92A901205001EFB68 /* preflight_XCMB_build */,
+				8489034A2A84535000F5F241 /* XCMBuild */,
+				84619D772A85BCA7009C5753 /* xcrunshell */,
+				847517542A9006BE00C93D65 /* Combine Prune Scripts */,
+				8462AFCF2A900E69001EFB68 /* Combine XCRunShell */,
+				8462AFDD2A900F1E001EFB68 /* All */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		848903492A84535000F5F241 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8418EDAD2A904C2E00AD07F0 /* Icon.icns in Resources */,
+				84619D5D2A859266009C5753 /* LICENSE-2.0.txt in Resources */,
+				8418EDB22A90701600AD07F0 /* Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		84D6938C2A9017CD00827472 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/stubs/orderfile",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(PROJECT_TEMP_DIR)/$(PROJECT_NAME:c99extidentifier)-order-$(CURRENT_VARIANT)-x86_64.txt",
+				"$(PROJECT_TEMP_DIR)/$(PROJECT_NAME:c99extidentifier)-order-$(CURRENT_VARIANT)-arm64.txt",
+				"$(PROJECT_TEMP_DIR)/$(PROJECT_NAME:c99extidentifier)-order-$(CURRENT_VARIANT)-arm64e.txt",
+				"$(PROJECT_TEMP_DIR)/$(PROJECT_NAME:c99extidentifier)-order-$(CURRENT_VARIANT)-arch64.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "\n#find target path\nif [[ ( -d $(dirname ${ORDER_FILE}) ) ]] ; then\n\ttouch -a $(dirname ${ORDER_FILE}) || true ;\nelse\n\tmkdir -p $(dirname ${ORDER_FILE}) || echo \"Failure: $0:${BASH_LINE_NO:-9}: unreadable generate path for: ${ORDER_FILE}\" >&2 ; exit 1 ;\nfi\n\nfor CURRENT_VARIANT in $BUILD_VARIANTS ; do \nfor CURRENT_ARCH in $ARCHS ; do\n\t# copy orderfile into place\n\tif [[ ( -r ${SCRIPT_INPUT_FILE_0} ) ]] ; then\n\t\tcp -vfp ${SCRIPT_INPUT_FILE_0} ${PROJECT_TEMP_DIR}/${PROJECT_NAME}-order-${CURRENT_VARIANT}-${CURRENT_ARCH}.txt ;\n\telse\n\t\tunlink ${PROJECT_TEMP_DIR}/${PROJECT_NAME}-order-${CURRENT_VARIANT}-${CURRENT_ARCH}.txt 2>/dev/null || true ;\n\t\techo \"Failure: $0:${BASH_LINE_NO:-17}: unreadable order file: ${SCRIPT_INPUT_FILE_0}\" >&2 ; exit 2 ;\n\tfi\n\ndone ;\ndone\nexit $? ;\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
-		84D3F4552A7C38650022D176 /* Sources */ = {
+		84619D742A85BCA7009C5753 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84D3F45D2A7C38650022D176 /* main.m in Sources */,
+				841B5D0E2A89E96C00E589BB /* XCMShell.m in Sources */,
+				84619D7B2A85BCA7009C5753 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		848903472A84535000F5F241 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8489034F2A84535000F5F241 /* XCMBuild.docc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		8462AFD02A900E69001EFB68 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8489034A2A84535000F5F241 /* XCMBuild */;
+			targetProxy = 8462AFD12A900E69001EFB68 /* PBXContainerItemProxy */;
+		};
+		8462AFD22A900E69001EFB68 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 84619D772A85BCA7009C5753 /* xcrunshell */;
+			targetProxy = 8462AFD32A900E69001EFB68 /* PBXContainerItemProxy */;
+		};
+		8462AFE22A900F4C001EFB68 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 847517542A9006BE00C93D65 /* Combine Prune Scripts */;
+			targetProxy = 8462AFE12A900F4C001EFB68 /* PBXContainerItemProxy */;
+		};
+		8462AFE42A900F4C001EFB68 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8462AFCF2A900E69001EFB68 /* Combine XCRunShell */;
+			targetProxy = 8462AFE32A900F4C001EFB68 /* PBXContainerItemProxy */;
+		};
+		8462AFE62A900F4C001EFB68 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8489034A2A84535000F5F241 /* XCMBuild */;
+			targetProxy = 8462AFE52A900F4C001EFB68 /* PBXContainerItemProxy */;
+		};
+		8462AFE82A900F4C001EFB68 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 84619D772A85BCA7009C5753 /* xcrunshell */;
+			targetProxy = 8462AFE72A900F4C001EFB68 /* PBXContainerItemProxy */;
+		};
+		8475175C2A90070500C93D65 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8489034A2A84535000F5F241 /* XCMBuild */;
+			targetProxy = 8475175B2A90070500C93D65 /* PBXContainerItemProxy */;
+		};
+		84D693862A9013FB00827472 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8462AFE92A901205001EFB68 /* preflight_XCMB_build */;
+			targetProxy = 84D693852A9013FB00827472 /* PBXContainerItemProxy */;
+		};
+		84D693882A90140500827472 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8462AFE92A901205001EFB68 /* preflight_XCMB_build */;
+			targetProxy = 84D693872A90140500827472 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		84619D7D2A85BCA7009C5753 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_VARIANTS = (
+					profile,
+					normal,
+				);
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = FAF5N99QTH;
+				ENABLE_HARDENED_RUNTIME = YES;
+				EXCLUDED_ARCHS = "$(ARCHS_STANDARD_32_BIT) undefined_arch";
+				EXECUTABLE_EXTENSION = "-$(CURRENT_VARIANT)";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
+				KEEP_PRIVATE_EXTERNS = YES;
+				LD_GENERATE_MAP_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				"LINKER_DISPLAYS_MANGLED_NAMES[sdk=macosx*][arch=x86_64]" = YES;
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
+				"MACOSX_DEPLOYMENT_TARGET[arch=arm64]" = 13.3;
+				"MACOSX_DEPLOYMENT_TARGET[arch=arm64e]" = 13.3;
+				OTHER_LDFLAGS = (
+					"-weak_framework",
+					"Foundation,framework",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PUBLIC_HEADERS_FOLDER_PATH = Headers;
+				SKIP_INSTALL = YES;
+				SYMROOT = build/bin;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Debug;
+		};
+		84619D7E2A85BCA7009C5753 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEPLOYMENT_POSTPROCESSING = YES;
+				DEVELOPMENT_TEAM = FAF5N99QTH;
+				ENABLE_HARDENED_RUNTIME = YES;
+				EXCLUDED_ARCHS = "$(ARCHS_STANDARD_32_BIT) undefined_arch";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PUBLIC_HEADERS_FOLDER_PATH = Headers;
+				SUPPORTED_PLATFORMS = "watchsimulator watchos macosx iphonesimulator iphoneos driverkit appletvsimulator appletvos";
+				SUPPORTS_MACCATALYST = YES;
+				SYMROOT = build/bin;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8462AFD92A900E69001EFB68 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLY_RULES_IN_COPY_FILES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CONTENTS_FOLDER_PATH = "$(PRODUCT_NAME:c99extidentifier).$(WRAPPER_EXTENSION)/Versions/Current";
+				DEVELOPMENT_TEAM = FAF5N99QTH;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
+				INFOPLIST_KEY_NSPrincipalClass = NSBundle;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				MODULEMAP_FILE = "$(CONTENTS_FOLDER_PATH)/Modules/module.modulemap";
+				OBJROOT = build;
+				PLIST_FILE_OUTPUT_FORMAT = XML;
+				PRIVATE_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/PrivateHeaders";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.adhoc.dt.$(PROJECT_NAME:c99extidentifier)";
+				PRODUCT_MODULE_NAME = "$(PROJECT_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(PROJECT_NAME:c99extidentifier)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Headers";
+				STRINGS_FILE_OUTPUT_ENCODING = "UTF-8";
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Debug;
+		};
+		8462AFDA2A900E69001EFB68 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLY_RULES_IN_COPY_FILES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CONTENTS_FOLDER_PATH = "$(PRODUCT_NAME:c99extidentifier).$(WRAPPER_EXTENSION)/Versions/Current";
+				DEVELOPMENT_TEAM = FAF5N99QTH;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
+				INFOPLIST_KEY_NSPrincipalClass = NSBundle;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				"MACOSX_DEPLOYMENT_TARGET[arch=arm64e]" = 13.3;
+				"MACOSX_DEPLOYMENT_TARGET[arch=i386]" = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
+				MODULEMAP_FILE = "$(CONTENTS_FOLDER_PATH)/Modules/module.modulemap";
+				OBJROOT = build;
+				PRIVATE_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/PrivateHeaders";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.adhoc.dt.$(PROJECT_NAME:c99extidentifier)";
+				PRODUCT_MODULE_NAME = "$(PROJECT_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(PROJECT_NAME:c99extidentifier)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Headers";
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Release;
+		};
+		8462AFDF2A900F1E001EFB68 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
+				INFOPLIST_KEY_NSPrincipalClass = NSBundle;
+				PRODUCT_NAME = "$(PROJECT_NAME:c99extidentifier)";
+			};
+			name = Debug;
+		};
+		8462AFE02A900F1E001EFB68 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
+				INFOPLIST_KEY_NSPrincipalClass = NSBundle;
+				PRODUCT_NAME = "$(PROJECT_NAME:c99extidentifier)";
+			};
+			name = Release;
+		};
+		8462AFEB2A901205001EFB68 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_VARIANTS = (
+					profile,
+					normal,
+				);
+				ENABLE_TESTABILITY = NO;
+				LD_GENERATE_MAP_FILE = NO;
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "org.adhoc.dt.orderfile.$(PROJECT:c99extidentifier)";
+				PRODUCT_MODULE_NAME = "$(PROJECT_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(PROJECT_NAME:c99extidentifier)-order-$(CURRENT_VARRIANT)-$(CURRENT_ARCH).txt";
+			};
+			name = Debug;
+		};
+		8462AFEC2A901205001EFB68 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_VARIANTS = (
+					profile,
+					normal,
+				);
+				LD_GENERATE_MAP_FILE = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "org.adhoc.dt.orderfile.$(PROJECT:c99extidentifier)";
+				PRODUCT_MODULE_NAME = "$(PROJECT_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(PROJECT_NAME:c99extidentifier)-order-$(CURRENT_VARRIANT)-$(CURRENT_ARCH).txt";
+				SUPPORTED_PLATFORMS = "watchsimulator watchos macosx iphonesimulator iphoneos driverkit appletvsimulator appletvos";
+				SUPPORTS_MACCATALYST = YES;
+			};
+			name = Release;
+		};
+		847517562A9006BE00C93D65 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLY_RULES_IN_COPY_FILES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CONTENTS_FOLDER_PATH = "$(PRODUCT_NAME:c99extidentifier).$(WRAPPER_EXTENSION)/Versions/Current";
+				DEVELOPMENT_TEAM = FAF5N99QTH;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
+				INFOPLIST_KEY_NSPrincipalClass = NSBundle;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				MODULEMAP_FILE = "$(CONTENTS_FOLDER_PATH)/Modules/module.modulemap";
+				OBJROOT = build;
+				PLIST_FILE_OUTPUT_FORMAT = XML;
+				PRIVATE_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/PrivateHeaders";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.adhoc.dt.$(PROJECT_NAME:c99extidentifier)";
+				PRODUCT_MODULE_NAME = "$(PROJECT_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(PROJECT_NAME:c99extidentifier)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Headers";
+				STRINGS_FILE_OUTPUT_ENCODING = "UTF-8";
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Debug;
+		};
+		847517572A9006BE00C93D65 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLY_RULES_IN_COPY_FILES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CONTENTS_FOLDER_PATH = "$(PRODUCT_NAME:c99extidentifier).$(WRAPPER_EXTENSION)/Versions/Current";
+				DEVELOPMENT_TEAM = FAF5N99QTH;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
+				INFOPLIST_KEY_NSPrincipalClass = NSBundle;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				"MACOSX_DEPLOYMENT_TARGET[arch=arm64e]" = 13.3;
+				"MACOSX_DEPLOYMENT_TARGET[arch=i386]" = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
+				MODULEMAP_FILE = "$(CONTENTS_FOLDER_PATH)/Modules/module.modulemap";
+				OBJROOT = build;
+				PRIVATE_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/PrivateHeaders";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.adhoc.dt.$(PROJECT_NAME:c99extidentifier)";
+				PRODUCT_MODULE_NAME = "$(PROJECT_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(PROJECT_NAME:c99extidentifier)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Headers";
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Release;
+		};
+		848903522A84535000F5F241 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
+				APPLY_RULES_IN_COPY_FILES = YES;
+				CLANG_ANALYZER_SECURITY_INSECUREAPI_STRCPY = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				COMPILER_INDEX_STORE_ENABLE = YES;
+				CURRENT_PROJECT_VERSION = "$(PROJECT_VERSION_MAJOR).$(PROJECT_VERSION_MINOR)";
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DONT_GENERATE_INFOPLIST_FILE = NO;
+				DYLIB_COMPATIBILITY_VERSION = "$(PROJECT_VERSION_MAJOR)";
+				DYLIB_CURRENT_VERSION = "$(DYLIB_COMPATIBILITY_VERSION).$(PROJECT_VERSION_MINOR)";
+				ENABLE_MODULE_VERIFIER = NO;
+				FRAMEWORK_VERSION = "$(CURRENT_PROJECT_VERSION).$(PROJECT_VERSION_BUILD)";
+				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_TEXT_BASED_STUBS = YES;
+				INFOPLIST_FILE = XCMBuild/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = XCMBuild;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "\"Copyright (c) 2014-2023 org.pak.dt.XCMBuild - Mr. Walls\"";
+				INFOPLIST_KEY_NSPrincipalClass = NSBundle;
+				INFOPLIST_OUTPUT_FORMAT = XML;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = "";
+				"IPHONEOS_DEPLOYMENT_TARGET[arch=i386]" = "";
+				"IPHONEOS_DEPLOYMENT_TARGET[sdk=iphoneos*]" = 16.4;
+				"IPHONEOS_DEPLOYMENT_TARGET[sdk=iphonesimulator*]" = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
+				"MACOSX_DEPLOYMENT_TARGET[arch=*]" = 13.3;
+				"MACOSX_DEPLOYMENT_TARGET[arch=i386]" = 10.15;
+				MARKETING_VERSION = "$(FRAMEWORK_VERSION)";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";
+				OBJROOT = build;
+				ON_DEMAND_RESOURCES_INITIAL_INSTALL_TAGS = XCMBuild;
+				PLIST_FILE_OUTPUT_FORMAT = XML;
+				PRESERVE_DEAD_CODE_INITS_AND_TERMS = YES;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				SKIP_INSTALL = YES;
+				"SKIP_INSTALL[sdk=*]" = YES;
+				STRINGS_FILE_OUTPUT_ENCODING = "UTF-8";
+				SUPPORTED_PLATFORMS = macosx;
+				SUPPORTS_MACCATALYST = NO;
+				TAPI_VERIFY_MODE = Pedantic;
+				"TVOS_DEPLOYMENT_TARGET[arch=*]" = "";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Debug;
+		};
+		848903532A84535000F5F241 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
+				APPLY_RULES_IN_COPY_FILES = YES;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CLANG_ANALYZER_SECURITY_INSECUREAPI_RAND = YES;
+				CLANG_ANALYZER_SECURITY_INSECUREAPI_STRCPY = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				"COPY_PHASE_STRIP[sdk=*]" = YES;
+				CURRENT_PROJECT_VERSION = "$(PROJECT_VERSION_MAJOR).$(PROJECT_VERSION_MINOR)";
+				DEAD_CODE_STRIPPING = YES;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DONT_GENERATE_INFOPLIST_FILE = NO;
+				DYLIB_COMPATIBILITY_VERSION = "$(PROJECT_VERSION_MAJOR)";
+				DYLIB_CURRENT_VERSION = "$(DYLIB_COMPATIBILITY_VERSION).$(PROJECT_VERSION_MINOR)";
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_MODULE_VERIFIER = NO;
+				FRAMEWORK_VERSION = "$(CURRENT_PROJECT_VERSION).$(PROJECT_VERSION_BUILD)";
+				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_TEXT_BASED_STUBS = NO;
+				INFOPLIST_FILE = XCMBuild/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = XCMBuild;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "\"Copyright (c) 2014-2023 org.pak.dt.XCMBuild - Mr. Walls\"";
+				INFOPLIST_KEY_NSPrincipalClass = NSBundle;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
+				"MACOSX_DEPLOYMENT_TARGET[arch=arm64]" = 13.3;
+				"MACOSX_DEPLOYMENT_TARGET[arch=arm64e]" = 13.3;
+				"MACOSX_DEPLOYMENT_TARGET[arch=i386]" = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
+				"MACOSX_DEPLOYMENT_TARGET[arch=x86_64]" = 13.3;
+				MARKETING_VERSION = "$(FRAMEWORK_VERSION)";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";
+				OBJROOT = build;
+				ON_DEMAND_RESOURCES_INITIAL_INSTALL_TAGS = XCMBuild;
+				OSACOMPILE_EXECUTE_ONLY = YES;
+				PRESERVE_DEAD_CODE_INITS_AND_TERMS = YES;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				SKIP_INSTALL = YES;
+				"SKIP_INSTALL[sdk=appletvos*]" = YES;
+				"SKIP_INSTALL[sdk=iphoneos*]" = YES;
+				"SKIP_INSTALL[sdk=macosx*]" = NO;
+				"SKIP_INSTALL[sdk=watchos*]" = YES;
+				STRINGS_FILE_OUTPUT_ENCODING = "UTF-8";
+				SUPPORTED_PLATFORMS = macosx;
+				SUPPORTS_MACCATALYST = NO;
+				TAPI_VERIFY_MODE = ErrorsAndWarnings;
+				TREAT_MISSING_BASELINES_AS_TEST_FAILURES = YES;
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Release;
+		};
 		84D3F45E2A7C38650022D176 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUILD_VARIANTS = (
+					profile,
+					normal,
+				);
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_UNDEFINED_BEHAVIOR_SANITIZER_INTEGER = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
@@ -177,10 +1013,19 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMPILER_INDEX_STORE_ENABLE = YES;
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = "$(PROJECT_VERSION_MAJOR).$(PROJECT_VERSION_MINOR)";
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_ASSET_PATHS = ".github .git";
+				DSTROOT = "/tmp/$(PROJECT_NAME).dst";
+				DYLIB_COMPATIBILITY_VERSION = "$(PROJECT_VERSION_MAJOR)";
+				DYLIB_CURRENT_VERSION = "$(PROJECT_VERSION_MAJOR).$(PROJECT_VERSION_MINOR)";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				EXCLUDED_ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				FRAMEWORK_VERSION = "$(PROJECT_VERSION_MAJOR).$(PROJECT_VERSION_MINOR).$(PROJECT_VERSION_BUILD)";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -189,17 +1034,44 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
+				"GCC_PREPROCESSOR_DEFINITIONS[sdk=macosx*]" = (
+					"TARGET_OS_OSX=1",
+					"$(inherited)",
+				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_TEXT_BASED_STUBS = YES;
+				INFOPLIST_FILE = "";
+				INFOPLIST_KEY_CFBundleDisplayName = "$(PROJECT_NAME:c99extidentifier)";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright (c) 2014-2023 - Mr. Walls";
+				INSTALL_GROUP = _developer;
+				"LD_GENERATE_MAP_FILE[sdk=macosx*][arch=arm64]" = YES;
+				"LD_GENERATE_MAP_FILE[sdk=macosx*][arch=arm64e]" = YES;
+				"LD_GENERATE_MAP_FILE[sdk=macosx*][arch=x86_64]" = YES;
+				LD_MAP_FILE_PATH = "$(TARGET_TEMP_DIR)/Objects-$(CURRENT_VARIANT)/$(CURRENT_ARCH)/$(PRODUCT_NAME)-LinkMap.txt";
 				MACOSX_DEPLOYMENT_TARGET = 13.3;
+				MARKETING_VERSION = "$(FRAMEWORK_VERSION)";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
+				OBJROOT = "build/$(CURRENT_VARIANT)";
 				ONLY_ACTIVE_ARCH = YES;
+				ORDER_FILE = "$(PROJECT_TEMP_DIR)/$(PROJECT_NAME:c99extidentifier)-order-$(CURRENT_VARIANT)-$(CURRENT_ARCH).txt";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.adhoc.dt.$(TARGET_NAME:c99extidentifier)";
+				PROJECT_VERSION_BUILD = 11;
+				PROJECT_VERSION_MAJOR = 1;
+				PROJECT_VERSION_MINOR = 4;
 				SDKROOT = macosx;
+				STRIP_STYLE = "non-global";
+				"STRIP_STYLE[sdk=macosx*]" = debugging;
+				SYMROOT = dist;
+				TAPI_VERIFY_MODE = ErrorsAndWarnings;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = PAK_;
 			};
 			name = Debug;
 		};
@@ -213,6 +1085,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_LINK_OBJC_RUNTIME = YES;
+				CLANG_UNDEFINED_BEHAVIOR_SANITIZER_INTEGER = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
@@ -236,47 +1110,107 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = "$(PROJECT_VERSION_MAJOR).$(PROJECT_VERSION_MINOR)";
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_ASSET_PATHS = ".github .git";
+				DSTROOT = "$(SRCROOT)/$(SYMROOT)/$(PROJECT_NAME).dst";
+				DYLIB_COMPATIBILITY_VERSION = "$(PROJECT_VERSION_MAJOR)";
+				DYLIB_CURRENT_VERSION = "$(PROJECT_VERSION_MAJOR).$(PROJECT_VERSION_MINOR)";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_VERSION = "$(PROJECT_VERSION_MAJOR).$(PROJECT_VERSION_MINOR).$(PROJECT_VERSION_BUILD)";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "";
+				INFOPLIST_KEY_CFBundleDisplayName = "$(PROJECT_NAME:c99extidentifier)";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright (c) 2014-2023 - Mr. Walls";
+				INSTALL_GROUP = _developer;
+				LD_MAP_FILE_PATH = "$(TARGET_TEMP_DIR)/Objects-$(CURRENT_VARIANT)/$(CURRENT_ARCH)/$(PRODUCT_NAME)-LinkMap.txt";
 				MACOSX_DEPLOYMENT_TARGET = 13.3;
+				MARKETING_VERSION = "$(FRAMEWORK_VERSION)";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				OBJROOT = "build/$(CURRENT_VARIANT)";
+				ORDER_FILE = "$(PROJECT_TEMP_DIR)/$(PROJECT_NAME:c99extidentifier)-order-$(CURRENT_VARIANT)-$(CURRENT_ARCH).txt";
+				OSACOMPILE_EXECUTE_ONLY = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "org.adhoc.dt.$(TARGET_NAME:c99extidentifier)";
+				PROJECT_VERSION_BUILD = 0;
+				PROJECT_VERSION_MAJOR = 2;
+				PROJECT_VERSION_MINOR = 0;
 				SDKROOT = macosx;
-			};
-			name = Release;
-		};
-		84D3F4612A7C38650022D176 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "-";
-				ENABLE_HARDENED_RUNTIME = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		84D3F4622A7C38650022D176 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = FAF5N99QTH;
-				ENABLE_HARDENED_RUNTIME = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYMROOT = dist;
+				TAPI_VERIFY_MODE = Pedantic;
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = PAK_;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		84619D7C2A85BCA7009C5753 /* Build configuration list for PBXNativeTarget "xcrunshell" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				84619D7D2A85BCA7009C5753 /* Debug */,
+				84619D7E2A85BCA7009C5753 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		8462AFD82A900E69001EFB68 /* Build configuration list for PBXAggregateTarget "Combine XCRunShell" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8462AFD92A900E69001EFB68 /* Debug */,
+				8462AFDA2A900E69001EFB68 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		8462AFDE2A900F1E001EFB68 /* Build configuration list for PBXAggregateTarget "All" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8462AFDF2A900F1E001EFB68 /* Debug */,
+				8462AFE02A900F1E001EFB68 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		8462AFEA2A901205001EFB68 /* Build configuration list for PBXAggregateTarget "preflight_XCMB_build" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8462AFEB2A901205001EFB68 /* Debug */,
+				8462AFEC2A901205001EFB68 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		847517552A9006BE00C93D65 /* Build configuration list for PBXAggregateTarget "Combine Prune Scripts" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				847517562A9006BE00C93D65 /* Debug */,
+				847517572A9006BE00C93D65 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		848903512A84535000F5F241 /* Build configuration list for PBXNativeTarget "XCMBuild" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				848903522A84535000F5F241 /* Debug */,
+				848903532A84535000F5F241 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
 		84D3F4542A7C38650022D176 /* Build configuration list for PBXProject "XCMBuild" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -284,16 +1218,7 @@
 				84D3F45F2A7C38650022D176 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		84D3F4602A7C38650022D176 /* Build configuration list for PBXNativeTarget "XCMBuild" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				84D3F4612A7C38650022D176 /* Debug */,
-				84D3F4622A7C38650022D176 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};

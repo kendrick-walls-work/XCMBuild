@@ -1,0 +1,11 @@
+# order file
+xcrunshell_vers.o:_PAK_xcrunshellVersionNumber
+XCMBuild_vers.o:_PAK_XCMBuildVersionNumber
+x86_64:xcrunshell_vers.o:_PAK_xcrunshellVersionString
+x86_64:XCMBuild_vers.o:_PAK_xcrunshellVersionString
+arm64:xcrunshell_vers.o:_PAK_xcrunshellVersionString
+arm64:XCMBuild_vers.o:_PAK_xcrunshellVersionString
+_NSLog
+"XCMBuild"
+XCMShell.o:"XCMShellTask"
+"/bin/bash"
