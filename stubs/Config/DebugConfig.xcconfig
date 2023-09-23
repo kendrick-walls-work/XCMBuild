@@ -30,7 +30,7 @@ SYMROOT = dist
 OBJROOT = build/$(CURRENT_VARIANT)
 SHARED_PRECOMPS_DIR = $(OBJROOT:standardizepath)/SharedPrecompiledHeaders
 DSTROOT = /tmp/$(PROJECT_DIR:standardizepath).dst/$(PROJECT_DIR:standardizepath)/dist
-PROJECT_VERSION_BUILD = 4
+PROJECT_VERSION_BUILD = 6
 PROJECT_VERSION_MAJOR = 2
 PROJECT_VERSION_MINOR = 1
 #include "CommonConfig.xcconfig"
