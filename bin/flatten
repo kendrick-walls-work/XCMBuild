@@ -77,20 +77,25 @@
 #    even if the above stated remedy fails of its essential purpose.
 ################################################################################
 
+test -x "$(command -v mv)" || exit 126 ;
+test -x "$(command -v rm)" || exit 126 ;
+test -x "$(command -v find)" || exit 126 ;
+test -x "$(command -v xargs)" || exit 126 ;
+test -x "$(command -v unlink)" || exit 126 ;
 
 function flatten() {
-	local MULTILEVEL="${@}" ;
-	if [[ ( -e ${MULTILEVEL} ) ]] ; then
-		if [[ ( -f ${MULTILEVEL} ) ]] || [[ ( -d ${MULTILEVEL} ) ]] ; then
-			if [[ ( -d ${MULTILEVEL}) ]] ; then
-				find ${MULTILEVEL} -mindepth 2 -type f -exec mv -vf '{}' ${MULTILEVEL}/ ';' && \
-				find ${MULTILEVEL} -mindepth 1 -type l -exec unlink '{}' ';' && \
-				find ${MULTILEVEL} -mindepth 1 -type d -print0 | sort -z -r -d -t\/ | xargs -0 -I{} rmdir -v '{}' || false ;
+	local MULTILEVEL="${*}" ;
+	if [[ ( -e "${MULTILEVEL}" ) ]] ; then
+		if [[ ( -f "${MULTILEVEL}" ) ]] || [[ ( -d "${MULTILEVEL}" ) ]] ; then
+			if [[ ( -d "${MULTILEVEL}") ]] ; then
+				( find "${MULTILEVEL}" -mindepth 2 -type f -exec mv -vf '{}' "${MULTILEVEL}"/ ';' && \
+				find "${MULTILEVEL}" -mindepth 1 -type l -exec unlink '{}' ';' && \
+				find "${MULTILEVEL}" -mindepth 1 -type d -print0 | sort -z -r -d -t/ | xargs -0 -I{} rmdir -v '{}' ; wait ; ) || false ;
 			fi ;
 			# do nothing for simple files
-		elif [[ ( -h ${MULTILEVEL} ) ]] || [[ ( -L ${MULTILEVEL} ) ]] ; then
+		elif [[ ( -h "${MULTILEVEL}" ) ]] || [[ ( -L "${MULTILEVEL}" ) ]] ; then
 			# handle links by unlinking
-			unlink ${MULTILEVEL} 2>/dev/null || false ;
+			unlink "${MULTILEVEL}" 2>/dev/null || false ;
 		fi
 	fi
 	unset MULTILEVEL 2>/dev/null || true ;

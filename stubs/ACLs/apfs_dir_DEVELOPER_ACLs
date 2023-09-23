@@ -1,0 +1,14 @@
+everyone allow readsecurity,limit_inherit
+guest deny write,execute,append,writeattr,writeextattr,writesecurity,chown
+guest deny add_file,search,add_subdirectory,writeattr,writeextattr,writesecurity,chown,directory_inherit,only_inherit
+guest deny list,delete_child,readattr,readextattr
+guest deny readsecurity,file_inherit,only_inherit
+group:staff allow list,search,readattr,readextattr,readsecurity,directory_inherit,only_inherit
+group:admin allow list,add_file,search,delete,add_subdirectory,delete_child,readattr,writeattr,readextattr,writeextattr,readsecurity,writesecurity,chown
+group:admin allow readattr,writeattr,readextattr,writeextattr,readsecurity,writesecurity,only_inherit
+group:_developer allow delete,readsecurity,only_inherit
+group:_developer allow list,add_file,search,delete,add_subdirectory,delete_child,readattr,writeattr,readextattr,writeextattr
+group:_developer allow read,write,delete,readattr,writeattr,readextattr,writeextattr,chown,file_inherit,only_inherit
+group:_developer allow list,add_file,search,add_subdirectory,readattr,writeattr,readextattr,writeextattr,chown,directory_inherit
+group:_developer allow delete_child,directory_inherit,only_inherit
+group:_developer allow read,write,delete,readattr,writeattr,readextattr,writeextattr,chown

@@ -1,0 +1,8 @@
+everyone allow readsecurity
+everyone deny execute
+owner allow read,write,delete,readattr,writeattr,readextattr,writeextattr,writesecurity,chown
+guest deny write,execute,delete,append,writeattr,writeextattr,writesecurity,chown
+group:staff allow read,readattr,readextattr
+guest allow read,readattr,readextattr
+group:admin allow chown
+group:admin allow readattr,writeattr,readextattr,writeextattr,readsecurity,writesecurity

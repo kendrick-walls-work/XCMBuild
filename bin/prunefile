@@ -16,9 +16,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-test -x $(dirname "${0}")/"flatten" || exit 126 ;
-
-source $(dirname "${0}")/"flatten" || exit 126 ;
+test -x "$(command -v rm)" || exit 126 ;
+test -x "$(command -v find)" || exit 126 ;
+test -x "$(command -v unlink)" || exit 126 ;
+test -x "$(command -v dirname)" || exit 126 ;
+# shellcheck disable=SC2086
+test -x "$(dirname ${0})/flatten" || exit 126 ;
+# shellcheck disable=SC2086,SC1091
+source "$(dirname ${0})/flatten" || exit 126 ;
 
 # basic logic:
 # if file exists then un-exist it
@@ -30,14 +35,14 @@ source $(dirname "${0}")/"flatten" || exit 126 ;
 # cleanup and return
 
 function destroy() {
-	local JUNK="${@}" ;
-	if [[ ( -e ${JUNK} ) ]] ; then
-		if [[ ( -f ${JUNK} ) ]] || [[ ( -d ${JUNK} ) ]] ; then
-			if [[ ( -d ${JUNK}) ]] ; then
-				flatten "${JUNK}" && \
+	local JUNK="${*}" ;
+	if [[ ( -e "${JUNK}" ) ]] ; then
+		if [[ ( -f "${JUNK}" ) ]] || [[ ( -d "${JUNK}" ) ]] ; then
+			if [[ ( -d "${JUNK}") ]] ; then
+				( flatten "${JUNK}" && \
 				find "${JUNK}" -mindepth 1 -type l -exec unlink '{}' ';' && \
 				find "${JUNK}" -mindepth 1 -type f -exec rm -vf '{}' ';' && \
-				find "${JUNK}" -type d -exec rmdir -v '{}' ';' || false ;
+				find "${JUNK}" -type d -exec rmdir -v '{}' ';' ) || false ;
 			else
 				rm -vf "${JUNK}" || false ;
 			fi
@@ -51,8 +56,8 @@ function destroy() {
 
 export -f destroy ;
 
-destroy "${@}" && true || false ; wait ;
-
-sync ;
-
-exit 0;
+if [[ $0 == *prunefile ]] ; then
+	( destroy "${*}" && true ) || false ;
+	wait ; sync ;
+	exit 0;
+fi ;  # else import as source

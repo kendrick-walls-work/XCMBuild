@@ -1,0 +1,37 @@
+//
+//  Config.xcconfig
+//  XCMBuild
+//
+// reactive-firewall/XCMBuild General Config
+// ..................................
+// Copyright (c) 2023, Mr. Walls
+// ..................................
+// Licensed under APACHE-2 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// ..........................................
+// http://www.apache.org/licenses/LICENSE-2.0
+// ..........................................
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+
+//:completeSettings = some
+MODULE_NAME = $(ON_DEMAND_RESOURCES_INITIAL_INSTALL_TAGS)
+MODULE_VERIFIER_SUPPORTED_LANGUAGES = objective-c
+PRODUCT_MODULE_NAME = $(PROJECT_NAME:c99extidentifier)
+PRODUCT_BUNDLE_IDENTIFIER = $(PRODUCT_ORG_IDENTIFIER)$(PRODUCT_MODULE_NAME)
+GENERATE_INFOPLIST_FILE = YES
+INFOPLIST_FILE = stubs/$(TARGET_NAME)-Info.plist
+INFOPLIST_KEY_LSApplicationCategoryType = public.app-category.developer-tools
+INFOPLIST_KEY_CFBundleDisplayName = $(PROJECT_NAME:c99extidentifier)
+INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright (c) 2014-2023 $(PRODUCT_BUNDLE_IDENTIFIER) - $(VERSION_INFO_BUILDER)"
+ORDER_FILE = $(CONFIGURATION_TEMP_DIR:standardizepath)/$(PROJECT_NAME:c99extidentifier)-order-$(CURRENT_VARIANT)-$(CURRENT_ARCH).txt
+MODULEMAP_FILE = stubs/Clang/module.modulemap
+LD_MAP_FILE_PATH = $(CONFIGURATION_TEMP_DIR:standardizepath)/$(TARGET_NAME)-LinkMap-$(CURRENT_VARIANT)-$(CURRENT_ARCH).txt

@@ -64,19 +64,24 @@ ulimit -t 600
 PATH="/bin:/sbin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin"
 umask 137
 
-LOCK_FILE="${TMPDIR:-/tmp}/cc_line_test_script_lock"
+LOCK_FILE="${TMPDIR:-/tmp}/org.pak.dt.test-cc-script.lock"
 EXIT_CODE=1
 
-test -x $(command -v grep) || exit 126 ;
-test -x $(command -v curl) || exit 126 ;
-test -x $(command -v find) || exit 126 ;
-test -x $(command -v git) || exit 126 ;
+test -x "$(command -v grep)" || exit 126 ;
+test -x "$(command -v curl)" || exit 126 ;
+test -x "$(command -v find)" || exit 126 ;
+test -x "$(command -v git)" || exit 126 ;
+test -x "$(command -v head)" || exit 126 ;
+hash -p ./.github/tool_shlock_helper.sh shlock || exit 255 ;
+test -x "$(command -v shlock)" || exit 126 ;
+EXIT_CODE=1
 
 function cleanup() {
-	rm -f ${LOCK_FILE} 2>/dev/null || true ; wait ;
+	rm -f "${LOCK_FILE}" 2>/dev/null || true ; wait ;
+	hash -d shlock 2>/dev/null > /dev/null || true ;
 }
 
-if [[ ( $(shlock -f ${LOCK_FILE} -p $$ ) -eq 0 ) ]] ; then
+if [[ ( $(shlock -f "${LOCK_FILE}" -p $$ ) -eq 0 ) ]] ; then
 		EXIT_CODE=0 ; #  only can succeed AFTER initial lock
 		trap 'cleanup ; wait ; exit 1 ;' SIGHUP || EXIT_CODE=3
 		trap 'cleanup ; wait ; exit 1 ;' SIGTERM || EXIT_CODE=4
@@ -87,7 +92,8 @@ if [[ ( $(shlock -f ${LOCK_FILE} -p $$ ) -eq 0 ) ]] ; then
 		trap 'cleanup ; wait ; exit 1 ;' SIGABRT || EXIT_CODE=9
 		trap 'cleanup ; wait ; exit ${EXIT_CODE} ;' EXIT || EXIT_CODE=1
 else
-		echo "Check for Copyright lines already in progress by "`head ${LOCK_FILE}` ;
+		# shellcheck disable=SC2046
+		echo "Check for Copyright lines already in progress by "$(head "${LOCK_FILE}") ;
 		false ;
 		exit 126 ;
 fi
@@ -107,12 +113,12 @@ fi
 
 _TEST_YEAR=$(date -j "+%C%y" 2>/dev/null ;)
 
-for _TEST_DOC in $(find ${_TEST_ROOT_DIR} \( -iname '*.py' -o -iname '*.h' -o -ipath './bin/*' -o -iname '*.txt' -o -iname '*.md' \) -a -print0 | xargs -0 -L1 -I{} git ls-files "{}" 2>/dev/null; wait ;) ; do
-	if [[ ($(grep -cF 'Disclaimer' "${_TEST_DOC}" 2>&1 || EXIT_CODE=$? ;) -ne 0) ]] ; then
+for _TEST_DOC in $(find "${_TEST_ROOT_DIR}" \( -iname '*.py' -o -iname '*.h' -o -ipath './bin/*' -o -iname '*.txt' -o -iname '*.md' \) -a -print0 | xargs -0 -L1 -I{} git ls-files "{}" 2>/dev/null; wait ;) ; do
+	if [[ ($(grep -cF 'Disclaimer' "${_TEST_DOC}" 2>&1 ;) -ne 0) ]] ; then
 		echo "SKIP: ${_TEST_DOC} is disclaimed." ;
 		if [[ ( ${EXIT_CODE} -le 0 ) ]] ; then EXIT_CODE=126 ; fi ;
 	else
-		if [[ ($(grep -cF "Copyright" "${_TEST_DOC}" 2>&1 || EXIT_CODE=$? ;) -le 0) ]] ; then
+		if [[ ($(grep -cF "Copyright" "${_TEST_DOC}" 2>&1 ;) -le 0) ]] ; then
 			echo "FAIL: ${_TEST_DOC} is missing a copyright line" >&2 ;
 			EXIT_CODE=127
 		fi
@@ -138,7 +144,7 @@ unset _TEST_ROOT_DIR 2>/dev/null || true ;
 unset _TEST_DOC 2>/dev/null || true ;
 unset _TEST_YEAR 2>/dev/null || true ;
 
-cleanup 2>/dev/null || rm -f ${LOCK_FILE} 2>/dev/null > /dev/null || true ; wait ;
+cleanup 2>/dev/null || rm -f "${LOCK_FILE}" 2>/dev/null > /dev/null || true ; wait ;
 
 # goodbye
 exit ${EXIT_CODE:-255} ;

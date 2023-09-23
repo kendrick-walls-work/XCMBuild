@@ -1,6 +1,6 @@
 #! /bin/bash
 #
-# reactive-firewall/XCMBuild file-lock Tool
+# reactive-firewall/XCMBuild plist linter Test
 # ..................................
 # Copyright (c) 2023, Mr. Walls
 # ..................................
@@ -76,60 +76,95 @@
 #    the amount of five dollars ($5.00). The foregoing limitations will apply
 #    even if the above stated remedy fails of its essential purpose.
 ################################################################################
-PATH=${PATH:-"/bin:/sbin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin"} ;
-umask 0112
 
-declare -ir MINPARAMS=2
-declare LOCK_FILE="${LOCK_FILE:-/tmp/GIL.lock}"
-declare -i PID_VALUE="${PPID:-$$}"
-declare -i SHLOCK_CHECK_ONLY_MODE=1
+ulimit -t 600
+PATH="/bin:/sbin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin:${PATH}"
+#umask 137
 
-#declare -i VERSION=20230811
+LOCK_FILE="/tmp/shellscript_test_script.lock"
+test -x "$(command -v grep)" || exit 126 ;
+test -x "$(command -v xargs)" || exit 126 ;
+test -x "$(command -v find)" || exit 126 ;
+test -x "$(command -v git)" || exit 126 ;
+hash -p ./.github/tool_shlock_helper.sh shlock || exit 255 ;
+test -x "$(command -v shlock)" || exit 126 ;
+test -x "$(command -v shellcheck)" || exit 126 ;
+declare -i EXIT_CODE=1 ;
 
-test -x $(command -v head) || exit 126 ;
-test -x $(command -v kill) || exit 126 ;
-test -x $(command -v sync) || exit 126 ;
-EXIT_CODE=1 ;
+function cleanup() {
+	rm -f "${LOCK_FILE}" 2>/dev/null || true ; wait ;
+	hash -d shlock 2>/dev/null > /dev/null || true ;
+}
 
-# exit codes: (caveat: not all implemented here)
-# x000000 = 0 = locked by ${PID_VALUE} ;
-# x000001 = 1 = not-locked by ${PID_VALUE} ;
-# x000010 = 2 = should be locked by ${PID_VALUE} but some generic error occured ;
-# x000011 = 3 = could not resolve to locked nor not-locked by ${PID_VALUE} (i.e. 1+2) ;
-# x000100 = 4 = locked by ${PID_VALUE} but looks like ${PID_VALUE} is gone now but still found lock (did you remember to unlock before relocking?)
-# x000101 = 5 = not-locked by ${PID_VALUE} but still found lock at ${LOCK_FILE} (i.e. 1+4)
-# x000110 = 6 = could not resolve to locked nor not-locked by ${PID_VALUE} but but still found lock at ${LOCK_FILE}
-# x000111 = 7 = not-locked by ${PID_VALUE} but but still found lock at ${LOCK_FILE} for unknown PID (including when invalid lock file)
+if [[ ( $(shlock -f ${LOCK_FILE} -p $$ ) -eq 0 ) ]] ; then
+		EXIT_CODE=0
+		trap 'cleanup 2>/dev/null || rm -f ${LOCK_FILE} 2>/dev/null > /dev/null || true ; wait ; exit 1 ;' SIGHUP || EXIT_CODE=3
+		trap 'cleanup 2>/dev/null || rm -f ${LOCK_FILE} 2>/dev/null > /dev/null || true ; wait ; exit 1 ;' SIGTERM || EXIT_CODE=4
+		trap 'cleanup 2>/dev/null || rm -f ${LOCK_FILE} 2>/dev/null > /dev/null || true ; wait ; exit 1 ;' SIGQUIT || EXIT_CODE=5
+		#trap 'cleanup 2>/dev/null || rm -f ${LOCK_FILE} 2>/dev/null > /dev/null || true ; wait ; exit 1 ;' SIGSTOP || EXIT_CODE=7
+		trap 'cleanup 2>/dev/null || rm -f ${LOCK_FILE} 2>/dev/null > /dev/null || true ; wait ; exit 1 ;' SIGINT || EXIT_CODE=8
+		trap 'cleanup 2>/dev/null || rm -f ${LOCK_FILE} 2>/dev/null > /dev/null || true || true ; wait ; exit 1 ;' SIGABRT || EXIT_CODE=9
+		trap 'cleanup 2>/dev/null || rm -f ${LOCK_FILE} 2>/dev/null > /dev/null || true ; wait ; exit ${EXIT_CODE} ;' EXIT || EXIT_CODE=1
+else
+		# shellcheck disable=SC2046
+		echo "Test already in progress by "$(head "${LOCK_FILE}") ;
+		false ;
+		exit 255 ;
+fi
 
-if [[ ( $# -ge $MINPARAMS ) ]] ; then
-	while [[ ( $# -gt 0 ) ]] ; do  # Until you run out of parameters . . .
-		case "${1}" in
-			-p|--pid) shift ; export PID_VALUE="${1}" ; SHLOCK_CHECK_ONLY_MODE=0 ;;
-			-f|--file) shift ; export LOCK_FILE="${1}" ;;
-			*) printf "$0: \"${1}\" Argument Unrecognized!\n" 1>&2 ; EXIT_CODE=3 ;;
-		esac ;  # Check next set of parameters.
-		shift ;
+# this is how test files are found:
+
+# THIS IS THE ACTUAL TEST
+_TEST_ROOT_DIR=$(git rev-parse --show-toplevel 2>/dev/null) ;
+if [[ -d ../.git ]] ; then
+	_TEST_ROOT_DIR="../" ;
+elif [[ -d ./.git ]] ; then
+	_TEST_ROOT_DIR=$(pwd) ;
+elif [[ ( -d $(git rev-parse --show-toplevel 2>/dev/null) ) ]] ; then
+	_TEST_ROOT_DIR=$(git rev-parse --show-toplevel 2>/dev/null) ;
+else
+	echo "FAIL: missing valid repository or source structure" >&2 ;
+	EXIT_CODE=40
+fi
+
+if [[ ( ${EXIT_CODE} -ne 0 ) ]] ; then
+	echo "SKIP: Can't check ${_TEST_ROOT_DIR}" ;
+else
+	for _TEST_DOC in $(find "${_TEST_ROOT_DIR}" -type f -iname '*.sh' -print0 2>/dev/null | xargs -0 -L1 -I{} git ls-files "{}" 2>/dev/null ) ; do
+		if [[ ( ${EXIT_CODE} -ne 0 ) ]] ; then continue ; else
+			shellcheck -a --shell=sh --color=auto "${_TEST_DOC}" || EXIT_CODE=$? ;
+			if [[ ( ${EXIT_CODE} -ne 0 ) ]] ; then
+				case "$EXIT_CODE" in
+					1) echo "SKIP: Unclassified issue with '${_TEST_DOC}'" ;;
+					2|3|4) echo "FAIL: '${_TEST_DOC}' is invalid." >&2 ;;
+					*) echo "SKIP: Can't check '${_TEST_DOC}'" ;;
+				esac
+			fi ;
+		fi ;
 	done
 
+	for _TEST_SCRIPT in $(find "${_TEST_ROOT_DIR}" -type f \( -iname '*.bash' -o -iname '*.command' -o -ipath './bin/*' \) -a -print0 2>/dev/null | xargs -0 -L1 -I{} git ls-files "{}" 2>/dev/null ) ; do
+		if [[ ( ${EXIT_CODE} -ne 0 ) ]] ; then continue ; else
+				shellcheck -a --shell=bash --color=auto "${_TEST_SCRIPT}" || EXIT_CODE=$? ;
+			if [[ ( ${EXIT_CODE} -ne 0 ) ]] ; then
+				case "$EXIT_CODE" in
+					1) echo "SKIP: Unclassified issue with '${_TEST_SCRIPT}'" ;;
+					2|3|4) echo "FAIL: '${_TEST_SCRIPT}' is invalid." >&2 ;;
+					*) echo "SKIP: Can't check '${_TEST_SCRIPT}'" ;;
+				esac
+			fi ;
+		fi ;
+	done
+
+	unset _TEST_ROOT_DIR 2>/dev/null || true ;
+	unset _TEST_DOC 2>/dev/null || true ;
+	unset _TEST_SCRIPT 2>/dev/null || true ;
+
 fi ;
-if [[ ( $EXIT_CODE -lt $MINPARAMS ) ]] ; then
-if [[ ( -e "${LOCK_FILE}" ) ]] ; then  # just check -e and not -r nor -f to run fast and fail on read
-	if [[ ( "${PID_VALUE}" -eq $(head -n 1 "${LOCK_FILE}") ) ]] ; then
-		EXIT_CODE=0 ;
-		# could update with touch -am "${LOCK_FILE}"
-	elif [[ ( -r "${LOCK_FILE}" ) ]] ; then  # also can just check -r here instead
-		EXIT_CODE=5 ;
-	else
-		printf $"Error: Lock could not be checked\n" >&2 ;
-		EXIT_CODE=7 ;
-	fi
-elif [[ ( -z $( kill -n 0 "${PID_VALUE}" 2>&1 ) ) ]] ; then
-	printf "${PID_VALUE}\n" >"${LOCK_FILE}" && :
-	sync ; wait ;
-	if [[ ( -r "${LOCK_FILE}" ) ]] ; then EXIT_CODE=0 ; elif [[ ( -e "${LOCK_FILE}" ) ]] ; then EXIT_CODE=2 ; else EXIT_CODE=2 ; fi ;
-else
-	printf $"Error: Refuse to aquire lock for unkown process ${PID_VALUE}\n" >&2 ;
-	EXIT_CODE=6 ;
-fi
-fi ;
-exit ${EXIT_CODE:-126} ;
+
+cleanup 2>/dev/null || rm -f "${LOCK_FILE}" 2>/dev/null > /dev/null || true ; wait ;
+
+unset LOCK_FILE 2>/dev/null || true ;
+
+# goodbye
+exit ${EXIT_CODE:-255} ;

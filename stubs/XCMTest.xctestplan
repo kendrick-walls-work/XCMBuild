@@ -1,0 +1,22 @@
+{
+  "configurations" : [
+    {
+      "id" : "26D975EF-3D62-430A-8704-A14D94C9C8F9",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:XCMBuild.xcodeproj",
+      "identifier" : "8462AFDD2A900F1E001EFB68",
+      "name" : "All"
+    }
+  },
+  "testTargets" : [
+
+  ],
+  "version" : 1
+}

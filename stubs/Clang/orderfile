@@ -1,0 +1,34 @@
+# order file
+XCMTest_vers.o:_PAK_XCMTestVersionNumber
+xcrunshell_vers.o:_PAK_xcrunshellVersionNumber
+XCMBuild_vers.o:_PAK_XCMBuildVersionNumber
+x86_64:XCMTest_vers.o:_PAK_XCMTestVersionString
+x86_64:xcrunshell_vers.o:_PAK_xcrunshellVersionString
+x86_64:XCMBuild_vers.o:_PAK_XCMBuildVersionString
+arm64:xcrunshell_vers.o:_PAK_xcrunshellVersionString
+arm64:XCMTest_vers.o:_PAK_XCMTestVersionString
+arm64:XCMBuild_vers.o:_PAK_XCMBuildVersionString
+arch64:xcrunshell_vers.o:_PAK_xcrunshellVersionString
+arch64:XCMTest_vers.o:_PAK_XCMTestVersionString
+arch64:XCMBuild_vers.o:_PAK_XCMBuildVersionString
+x86_64:XCMBuild.h:_NSLog
+x86_64:XCMBuild.h:NSTask_h
+x86_64:XCMBuild.h:NSBundle_h
+arm64:XCMBuild.h:_NSLog
+arm64:XCMBuild.h:NSTask_h
+arm64:XCMBuild.h:NSBundle_h
+arch64:XCMBuild.h:_NSLog
+arch64:XCMBuild.h:NSTask_h
+arch64:XCMBuild.h:NSBundle_h
+_OBJC_CLASS_$_NSObject
+_OBJC_CLASS_$_NSArray
+_OBJC_CLASS_$_NSPipe
+_OBJC_CLASS_$_NSString
+_OBJC_CLASS_$_NSTask
+_OBJC_CLASS_$_NSBundle
+# XCMShell.o:"+[XCMShellTask runCommand:]"
+# XCMBuildSystem.o:"-[XCMBuildSystem pathForAuxiliaryExecutable:]"
+# XCMTest.h:XCMTestCommandArgumentsString
+# skip x86_64:main.o:XCRS_MINARGS
+# skip arm64:main.o:XCRS_MINARGS
+# skip arch64:main.o:XCRS_MINARGS

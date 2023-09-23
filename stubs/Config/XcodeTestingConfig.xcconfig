@@ -1,0 +1,32 @@
+//
+//  Config.xcconfig
+//  XCMBuild
+//
+// reactive-firewall/XCMBuild Testing xcconfig
+// ..................................
+// Copyright (c) 2023, Mr. Walls
+// ..................................
+// Licensed under APACHE-2 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// ..........................................
+// http://www.apache.org/licenses/LICENSE-2.0
+// ..........................................
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+
+//:completeSettings = Testing
+CURRENT_PROJECT_VERSION = $(PROJECT_VERSION_MAJOR).$(PROJECT_VERSION_MINOR)
+MARKETING_VERSION = $(FRAMEWORK_VERSION)
+PRODUCT_NAME = $(PROJECT_NAME:c99extidentifier)
+WRAPPER_EXTENSION = framework
+WRAPPER_NAME = $(PRODUCT_NAME:c99extidentifier).$(WRAPPER_EXTENSION)
+CONTENTS_FOLDER_PATH = $(PRODUCT_NAME:c99extidentifier).$(WRAPPER_EXTENSION)/Versions/$(MARKETING_VERSION)
+DEAD_CODE_STRIPPING = YES

@@ -1,4 +1,21 @@
 #! /bin/bash
+
+# reactive-firewall/XCMBuild Tool
+# ..................................
+# Copyright (c) 2023, Mr. Walls
+# ..................................
+# Licensed under APACHE-2 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+# ..........................................
+# http://www.apache.org/licenses/LICENSE-2.0
+# ..........................................
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
 # Disclaimer of Warranties.
 # A. YOU EXPRESSLY ACKNOWLEDGE AND AGREE THAT, TO THE EXTENT PERMITTED BY
 #    APPLICABLE LAW, USE OF THIS SHELL SCRIPT AND ANY SERVICES PERFORMED
@@ -60,18 +77,25 @@
 #    even if the above stated remedy fails of its essential purpose.
 ################################################################################
 
-# checks if the codcov.yml file is valid
-# exit fast if command is missing
-EXIT_CODE=0 ;
-test -f "${1:-.codecov.yml}" || exit $EXIT_CODE ;
-if [[ ( $(curl --tlsv1.2 --header "Dnt: 1" -fsS --data-binary "@${1:-.codecov.yml}" https://codecov.io/validate 2>/dev/null | grep -Fc "Valid" ) -gt 0) ]] ; then
-	EXIT_CODE=0 ;
-else
-	EXIT_CODE=1 ;
-fi
-#if [[ ( $EXIT_CODE -gt 0 ) ]] ; then
-#	echo "FAIL: codecov.yml validation FAILED." ;
-#else
-#	echo "Ok: codecov.yml validation passed." ;
-#fi
-exit ${EXIT_CODE:255} ;
+
+function safetyCheckSerialized() {
+	if [[ -z ${SCRIPT_INPUT_FILE_COUNT} ]] || [[ -z ${SCRIPT_OUTPUT_FILE_COUNT} ]] ; then
+		echo "${FUNCNAME:-$0}:${BASH_LINENO:-0}: error: failed to validate serialized script mode. ( unsupported integration )" 1>&2 ;
+		echo "${FUNCNAME:-$0}:${BASH_LINENO:-0}: warning: expected serialized script mode. ( unsupported integration ) Hint: Try 'SCRIPT_INPUT_FILE_COUNT=1 ; SCRIPT_OUTPUT_FILE_COUNT=1 ; SCRIPT_INPUT_FILE_0=\${1} ; SCRIPT_OUTPUT_FILE_0=\${2} ; $0 ;' instead?" 1>&2 ;
+		false ;
+	else
+		if [[ ( ${SCRIPT_INPUT_FILE_COUNT} -gt 1 ) ]] || [[ ( ${SCRIPT_INPUT_FILE_COUNT} -lt 0 ) ]] ; then
+			echo "${FUNCNAME:-$0}:${BASH_LINENO:-0}: error: failed to validate serialized input. ( unsupported input )" 1>&2 ;
+			false ;
+		fi ;
+		if [[ ( ${SCRIPT_OUTPUT_FILE_COUNT} -gt 1 ) ]] || [[ ( ${SCRIPT_OUTPUT_FILE_COUNT} -lt 0 ) ]] ; then
+			echo "${FUNCNAME:-$0}:${BASH_LINENO:-0}: error: failed to validate serialized output. ( unsupported output )" 1>&2 ;
+			false ;
+		fi ;
+		true ;
+	fi ;
+}
+
+export -f safetyCheckSerialized ;
+
+# source to include

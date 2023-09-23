@@ -1,0 +1,53 @@
+//
+//  Config.xcconfig
+//  XCMBuild
+//
+// reactive-firewall/XCMBuild Repo Makefile
+// ..................................
+// Copyright (c) 2023, Mr. Walls
+// ..................................
+// Licensed under APACHE-2 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// ..........................................
+// http://www.apache.org/licenses/LICENSE-2.0
+// ..........................................
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+
+//:completeSettings = Default
+CURRENT_PROJECT_VERSION = $(PROJECT_VERSION_MAJOR).$(PROJECT_VERSION_MINOR)
+DYLIB_COMPATIBILITY_VERSION = $(PROJECT_VERSION_MAJOR)
+DYLIB_CURRENT_VERSION = $(PROJECT_VERSION_MAJOR).$(PROJECT_VERSION_MINOR)
+FRAMEWORK_VERSION = $(PROJECT_VERSION_MAJOR).$(PROJECT_VERSION_MINOR).$(PROJECT_VERSION_BUILD)
+MARKETING_VERSION = $(FRAMEWORK_VERSION)
+MODULE_VERSION = $(DYLIB_COMPATIBILITY_VERSION)
+VERSIONING_SYSTEM = apple-generic
+VERSION_INFO_PREFIX = PAK_
+SDKROOT = macosx
+SYMROOT = dist
+
+
+PROJECT_TEMP_DIR = $(PROJECT_TEMP_ROOT:standardizepath)/$(PROJECT_NAME).build // defaults to $(PROJECT_TEMP_ROOT)/$(PROJECT_NAME).build
+// CONFIGURATION_TEMP_DIR = $(PROJECT_TEMP_DIR)/$(CONFIGURATION) // defaults to $(PROJECT_TEMP_DIR)/$(CONFIGURATION)
+TARGET_TEMP_DIR = $(PROJECT_TEMP_DIR)/Cache/$(TARGET_NAME).tmp
+SHARED_DERIVED_FILE_DIR = $(OBJROOT:standardizepath)/SharedDerivedSources
+BUILD_DIR = $(PROJECT_DIR:standardizepath)/build
+SHARED_PRECOMPS_DIR = $(OBJROOT:standardizepath)/SharedPrecompiledHeaders
+INSTALL_PATH= $(LOCAL_LIBRARY_DIR:standardizepath)/Frameworks
+DYLIB_INSTALL_NAME_BASE = $(INSTALL_PATH:standardizepath)
+DEVELOPMENT_ASSET_PATHS = .github .git
+FRAMEWORK_SEARCH_PATHS = $(LOCAL_LIBRARY_DIR:standardizepath)/Frameworks $(BUILT_PRODUCTS_DIR:standardizepath)/$(LOCAL_LIBRARY_DIR:standardizepath)/Frameworks $(BUILT_PRODUCTS_DIR:standardizepath) $(inhereted)
+CONTENTS_FOLDER_PATH = $(WRAPPER_NAME)/Versions/$(MARKETING_VERSION)
+//BUNDLE_CONTENTS_FOLDER_PATH =
+//BUNDLE_CONTENTS_FOLDER_PATH_deep = "$(BUNDLE_CONTENTS_FOLDER_PATH)/Versions/$(MARKETING_VERSION)"
+PRIVATE_HEADERS_FOLDER_PATH = $(CONTENTS_FOLDER_PATH:standardizepath)/PrivateHeaders
+PUBLIC_HEADERS_FOLDER_PATH = $(CONTENTS_FOLDER_PATH:standardizepath)/Headers
+GCC_VERSION = com.apple.compilers.llvm.clang.1_0

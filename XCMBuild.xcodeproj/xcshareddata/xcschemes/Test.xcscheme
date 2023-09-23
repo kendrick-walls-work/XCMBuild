@@ -9,20 +9,6 @@
          <BuildActionEntry
             buildForTesting = "NO"
             buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8462AFDD2A900F1E001EFB68"
-               BuildableName = "All"
-               BlueprintName = "All"
-               ReferencedContainer = "container:XCMBuild.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "NO"
             buildForProfiling = "NO"
             buildForArchiving = "NO"
             buildForAnalyzing = "NO">
@@ -47,7 +33,6 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      disableMainThreadChecker = "YES"
       launchStyle = "0"
       useCustomWorkingDirectory = "YES"
       customWorkingDirectory = "$(PROJECT_DIR)"
@@ -56,22 +41,35 @@
       debugServiceExtension = "internal"
       enableGPUFrameCaptureMode = "3"
       allowLocationSimulation = "NO">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8486BF432AA67BD9005A02F4"
-            BuildableName = "XCMTest"
-            BlueprintName = "XCMTest"
-            ReferencedContainer = "container:XCMBuild.xcodeproj">
-         </BuildableReference>
-      </BuildableProductRunnable>
+      <PostActions>
+         <ExecutionAction
+            ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
+            <ActionContent
+               title = "Run Script"
+               scriptText = "# Type a script or drag a script file from your workspace to insert its path.&#10;echo &quot;Reaping Test Tools&quot; ;&#10;pkill XCMTest 2&gt;/dev/null || true&#10;exit 0 ;&#10;"
+               shellToInvoke = "/bin/bash">
+               <EnvironmentBuildable>
+                  <BuildableReference
+                     BuildableIdentifier = "primary"
+                     BlueprintIdentifier = "84AB43C42AAB8FC200E24981"
+                     BuildableName = "Test"
+                     BlueprintName = "Test"
+                     ReferencedContainer = "container:XCMBuild.xcodeproj">
+                  </BuildableReference>
+               </EnvironmentBuildable>
+            </ActionContent>
+         </ExecutionAction>
+      </PostActions>
+      <PathRunnable
+         runnableDebuggingMode = "0"
+         FilePath = "/Volumes/Sandbox/Developer/Xcode/DerivedData/XCMBuild-fawceopdxzpysoauwmdzraesuhou/Build/Products/Debug/XCMBuild.framework/Versions/2.1.4/usr/bin/XCMTest">
+      </PathRunnable>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8462AFDD2A900F1E001EFB68"
-            BuildableName = "All"
-            BlueprintName = "All"
+            BlueprintIdentifier = "84AB43C42AAB8FC200E24981"
+            BuildableName = "Test"
+            BlueprintName = "Test"
             ReferencedContainer = "container:XCMBuild.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -81,46 +79,27 @@
             isEnabled = "NO">
          </CommandLineArgument>
       </CommandLineArguments>
-      <EnvironmentVariables>
-         <EnvironmentVariable
-            key = "SHELL"
-            value = "/bin/bash"
+      <AdditionalOptions>
+         <AdditionalOption
+            key = "NSZombieEnabled"
+            value = "YES"
             isEnabled = "YES">
-         </EnvironmentVariable>
-         <EnvironmentVariable
-            key = "PROJECT_DIR"
-            value = "/Volumes/Sandbox/Developer/SDK/XCMBuild"
-            isEnabled = "YES">
-         </EnvironmentVariable>
-      </EnvironmentVariables>
+         </AdditionalOption>
+      </AdditionalOptions>
    </LaunchAction>
    <ProfileAction
-      buildConfiguration = "Debug"
+      buildConfiguration = "Release"
       shouldUseLaunchSchemeArgsEnv = "YES"
-      savedToolIdentifier = "File Activity"
-      useCustomWorkingDirectory = "YES"
+      savedToolIdentifier = "Time Profiler"
+      useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "YES"
       debugDocumentVersioning = "NO">
-      <PathRunnable
-         runnableDebuggingMode = "0"
-         FilePath = "/Volumes/Sandbox/Developer/Xcode/DerivedData/XCMBuild-fawceopdxzpysoauwmdzraesuhou/Build/Products/Debug/XCMTest_profile">
-      </PathRunnable>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8462AFDD2A900F1E001EFB68"
-            BuildableName = "All"
-            BlueprintName = "All"
-            ReferencedContainer = "container:XCMBuild.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
    </AnalyzeAction>
    <ArchiveAction
       buildConfiguration = "Release"
-      customArchiveName = "XCMBuild"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>

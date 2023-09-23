@@ -60,40 +60,54 @@
 #    even if the above stated remedy fails of its essential purpose.
 ################################################################################
 
-EXIT_CODE=0
-
 ulimit -t 600
-PATH="/bin:/sbin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin"
+PATH="/bin:/sbin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin:${PATH}"
 umask 137
 
-LOCK_FILE="/tmp/git_config_test_script_lock"
-EXIT_CODE=0
+LOCK_FILE="/tmp/org.pak.dt.test-git-config-script.lock"
+test -x "$(command -v grep)" || exit 126 ;
+test -x "$(command -v xargs)" || exit 126 ;
+test -x "$(command -v find)" || exit 126 ;
+test -x "$(command -v git)" || exit 126 ;
+hash -p ./.github/tool_shlock_helper.sh shlock || exit 255 ;
+test -x "$(command -v shlock)" || exit 126 ;
+test -x "$(command -v shellcheck)" || exit 126 ;
+declare -i EXIT_CODE=1 ;
 
-if [[ ( $(shlock -f ${LOCK_FILE} -p $$ ) -eq 0 ) ]] ; then
-        trap 'rm -f ${LOCK_FILE} 2>/dev/null || true ; wait ; exit 1 ;' SIGHUP || EXIT_CODE=3
-        trap 'rm -f ${LOCK_FILE} 2>/dev/null || true ; wait ; exit 1 ;' SIGTERM || EXIT_CODE=4
-        trap 'rm -f ${LOCK_FILE} 2>/dev/null || true ; wait ; exit 1 ;' SIGQUIT || EXIT_CODE=5
-        trap 'rm -f ${LOCK_FILE} 2>/dev/null || true ; wait ; exit 1 ;' SIGSTOP || EXIT_CODE=7
-        trap 'rm -f ${LOCK_FILE} 2>/dev/null || true ; wait ; exit 1 ;' SIGINT || EXIT_CODE=8
-        trap 'rm -f ${LOCK_FILE} 2>/dev/null || true ; wait ; exit 1 ;' SIGABRT || EXIT_CODE=9
-        trap 'rm -f ${LOCK_FILE} 2>/dev/null || true ; wait ; exit ${EXIT_CODE} ;' EXIT || EXIT_CODE=1
+function cleanup() {
+	rm -f "${LOCK_FILE}" 2>/dev/null || true ; wait ;
+	hash -d shlock 2>/dev/null > /dev/null || true ;
+}
+
+if [[ ( $(shlock -f "${LOCK_FILE}" -p $$ ) -eq 0 ) ]] ; then
+		EXIT_CODE=0 ;
+		trap 'cleanup 2>/dev/null || rm -f ${LOCK_FILE} 2>/dev/null > /dev/null || true ; wait ; exit 1 ;' SIGHUP || EXIT_CODE=3
+		trap 'cleanup 2>/dev/null || rm -f ${LOCK_FILE} 2>/dev/null > /dev/null || true ; wait ; exit 1 ;' SIGTERM || EXIT_CODE=4
+		trap 'cleanup 2>/dev/null || rm -f ${LOCK_FILE} 2>/dev/null > /dev/null || true ; wait ; exit 1 ;' SIGQUIT || EXIT_CODE=5
+		#trap 'cleanup 2>/dev/null || rm -f ${LOCK_FILE} 2>/dev/null > /dev/null || true ; wait ; exit 1 ;' SIGSTOP || EXIT_CODE=7
+		trap 'cleanup 2>/dev/null || rm -f ${LOCK_FILE} 2>/dev/null > /dev/null || true ; wait ; exit 1 ;' SIGINT || EXIT_CODE=8
+		trap 'cleanup 2>/dev/null || rm -f ${LOCK_FILE} 2>/dev/null > /dev/null || true || true ; wait ; exit 1 ;' SIGABRT || EXIT_CODE=9
+		trap 'cleanup 2>/dev/null || rm -f ${LOCK_FILE} 2>/dev/null > /dev/null || true ; wait ; exit ${EXIT_CODE} ;' EXIT || EXIT_CODE=1
 else
-        echo Test already in progress by `head ${LOCK_FILE}` ;
-        false ;
-        exit 255 ;
+		# shellcheck disable=SC2046
+		echo "Test already in progress by "$(head "${LOCK_FILE}") >&2 ;
+		false ;
+		exit 255 ;
 fi
 
 # THIS IS THE ACTUAL TEST
-if [[ -f ../.git/config ]] ; then
-	git config -f ../.git/config --list --name-only 1>/dev/null 2>&1 || EXIT_CODE=1
-elif [[ -f ./.git/config ]] ; then
-	git config -f ./.git/config --list --name-only 1>/dev/null 2>&1 || EXIT_CODE=1
+if [[ ( -f ../.git/config ) ]] ; then
+	git config -f ../.git/config --list --name-only 1>/dev/null 2>&1 || EXIT_CODE=1 ;
+elif [[ ( -f ./.git/config ) ]] ; then
+	git config -f ./.git/config --list --name-only 1>/dev/null 2>&1 || EXIT_CODE=1 ;
+elif [[ ( -d $(git rev-parse --show-toplevel 2>/dev/null) ) ]] ; then
+	git config -f "$(git rev-parse --show-toplevel 2>/dev/null)/.git/config" --list --name-only 1>/dev/null 2>&1 || EXIT_CODE=1 ;
 else
-	echo "FAIL: missing git config file"
-	EXIT_CODE=1
+	echo "FAIL: missing git config file" >&2 ;
+	EXIT_CODE=1 ;
 fi
 
-rm -f ${LOCK_FILE} 2>/dev/null > /dev/null || true ; wait ;
+cleanup 2>/dev/null || rm -f "${LOCK_FILE}" 2>/dev/null > /dev/null || true ; wait ;
 
 # goodbye
 exit ${EXIT_CODE:-255} ;

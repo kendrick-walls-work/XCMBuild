@@ -32,7 +32,7 @@ ifneq ($(words $(MAKECMDGOALS)),1) # if no argument was given to make...
 .DEFAULT_GOAL = all # set the default goal to all
 
 ifeq "$(ECHO)" ""
-	ECHO=command -p echo
+	ECHO=command -pv echo
 endif
 
 %:		# define a last resort default rule
@@ -66,11 +66,15 @@ ifeq "$(ALFW)" ""
 endif
 
 ifeq "$(PFCTL)" ""
-	PFCTL=command -pv pfctl
+	PFCTL=command -v pfctl
 endif
 
 ifeq "$(LINK)" ""
-	LINK=command -pv ln -sf
+	LINK=command -v ln -sf
+endif
+
+ifeq "$(GIT)" ""
+	GIT=`command -pv git`
 endif
 
 ifeq "$(WAIT)" ""
@@ -142,7 +146,7 @@ endif
 
 .SUFFIXES: .zip .php .css .html .bash .sh .py .pyc .txt .js .plist .dmg
 
-PHONY: must_be_root cleanup uninstall all
+PHONY: must_be_root cleanup uninstall test all
 
 all: install test
 	$(QUIET)$(WAIT)
@@ -207,7 +211,7 @@ purge: clean uninstall
 
 test: cleanup
 	$(QUIET)$(ECHO) "$@: START."
-	$(QUIET)ls -1 ./tests/test_*sh 2>/dev/null | xargs -L1 -I{} $(SHELL) -c "{} && echo '{}: Succeded' || echo '{}: FAILURE' >&2 ; " ;
+	$(QUIET)$(GIT) ls-files ./tests/test_*sh 2>/dev/null | xargs -L1 -I{} $(SHELL) -c "({} && echo '{}: Succeded') || echo '{}: FAILURE' >&2 ; " ;
 	$(QUIET)$(WAIT) ;
 	$(QUIET)$(ECHO) "$@: END."
 
@@ -220,6 +224,7 @@ test-style: cleanup
 cleanup:
 	$(QUIET)$(RM) tests/*~ 2>/dev/null || true
 	$(QUIET)$(RM) ./.git/*~ 2>/dev/null || true
+	$(QUIET)$(RM) ./.DS_Store 2>/dev/null || true
 	$(QUIET)$(RM) ./*/.DS_Store 2>/dev/null || true
 	$(QUIET)$(RM) ./*/*/.DS_Store 2>/dev/null || true
 	$(QUIET)$(RM) ./**/*.DS_Store 2>/dev/null || true
@@ -237,6 +242,7 @@ cleanup:
 	$(QUIET)$(RMDIR) ./.tox/ 2>/dev/null || true
 
 clean: cleanup
+	$(QUIET)$(WAIT) ;
 	$(QUIET)$(ECHO) "$@: Done."
 
 must_be_root:

@@ -1,6 +1,6 @@
 //
 //  XCMShell.h
-//  xcrunshell
+//  XCMBuild.XCMShell
 //
 
 //	Copyright (c) 2023 Mr.Walls
@@ -17,9 +17,9 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-/*
+/*! @parseOnly
 Some of the following code was inspired from CC BY-SA (v3) content
-namely regarding lines 59 through 84 of this Header
+namely regarding lines 56 through 83 of this Header
 see https://stackoverflow.com/help/licensing for details
 
 This Modified Code is under dual-licenses APACHE-2 and CC BY-SA 3.0
@@ -30,9 +30,9 @@ THANKS to the user https://stackoverflow.com/users/478597/kenial
 For the solid answer to https://stackoverflow.com/a/12310154
 */
 
-/*
+/*! @parseOnly
  Some of the following code was inspired from CC BY-SA (v3) content
- namely regarding lines 76 through 77 of this Header
+ namely regarding lines 77 through 78 of this Header
  see https://stackoverflow.com/help/licensing for details
 
  This Modified Code is under dual-licenses APACHE-2 and CC BY-SA 3.0
@@ -43,44 +43,50 @@ For the solid answer to https://stackoverflow.com/a/12310154
  For the partial answer to https://stackoverflow.com/a/49686965
 */
 
-#import "XCMShell.h"
+// see __has_builtin(__builtin_unpredictable) for sub-calls
 
-@implementation NSTask (XCMShellTask)
+//extern const char* XCMTestCommandArgumentsString __attribute__((weak_import));
+#include "XCMShell.h"
+
+@implementation XCMShellTask
 
 + (nullable NSString *)runCommand:(NSString *)commandToRun
 {
 	if (commandToRun != nil){
-		NSTask *task = [[NSTask alloc] init];
-		[task setLaunchPath:@"/bin/bash"];
-
-		NSArray *arguments = [NSArray arrayWithObjects:
-								@"-c" ,
-								[NSString stringWithFormat:@"%@", commandToRun, nil],
-								nil];
-#if DEBUG
-		NSLog(@"run command:%@", commandToRun);
-#else
-#endif
-		[task setArguments:arguments];
-
-		NSPipe *pipe = [NSPipe pipe];
-		[task setStandardOutput:pipe];
-
+		NSPipe *pipe = [[NSPipe alloc] init];
 		NSFileHandle *file = [pipe fileHandleForReading];
+		NSTask *task = [[NSTask alloc] init];
+		NSArray *arguments = [NSArray arrayWithObjects:
+					 @"-c", [NSString stringWithFormat:@"%@", commandToRun],
+					 nil];
+		[task setLaunchPath:@"/bin/bash"];
+		[task setArguments:arguments];
+		[task setStandardOutput:pipe];
+		[task setStandardInput:[NSPipe pipe]];
 
 		[task launch];
 		NSData *data = [file readDataToEndOfFile];
-
-		if(task.isRunning)
+		if ([task isRunning])
 			[task waitUntilExit];
 
-		int status = [task terminationStatus];
-		if(status == 0){
-			NSString *output = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-			return output;
-		} else { return nil; }
-	} else { return nil; }
+		if (![task isRunning]) {
+			int status = [task terminationStatus];
+			if (status == 0) {
+				NSString *output = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+				//[file closeFile];
+				return output;
+			} else {
+				return @"XCMShellTask failed.";
+			}
+			//#if __has_builtin(__builtin_unreachable)
+			//				__builtin_unreachable();
+			//#endif
+		};
+		//[file closeFile];
+		return @"XCMShellTask Crashed!";
+	} else { return @"XCRunShell Requires a NON-NULL command!"; }
 }
+
 
 @end
 

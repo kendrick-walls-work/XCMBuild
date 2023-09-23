@@ -1,1 +1,1 @@
-../bin/tool_shlock_helper.sh
+../bin/tool_shlock_helper.bash

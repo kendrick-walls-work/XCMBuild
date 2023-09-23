@@ -1,0 +1,12 @@
+framework module XCMBuild_Private {
+	requires objc, objc_arc, !cplusplus
+	module XCRunner {
+		requires objc, objc_arc, !cplusplus
+		conflict XCMBuild.XCMTest, "XCRunner is NOT needed with XCMTest"
+		private textual header "xcrunshell.h"
+		link framework "XCMBuild"
+		link framework "Foundation"
+		export *
+	}
+	export_as XCRunner
+}

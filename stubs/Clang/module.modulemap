@@ -1,0 +1,23 @@
+framework module XCMBuild {
+	requires objc, objc_arc, !cplusplus
+	umbrella header "XCMBuild.h"
+	config_macros DEBUG
+	use Foundation
+	exclude header "xcrunshell.h"
+	export *
+	explicit module XCMShell {
+		requires objc, objc_arc, !cplusplus
+		textual header "XCMShell.h"
+		export *
+	}
+	use XCMBuild.XCMShell
+	textual header "XCMBuildSystem.h"
+	module XCMTest {
+		requires objc, objc_arc, !cplusplus
+		textual header "XCMTest.h"
+		conflict XCMBuild.XCRunner, "XCRunner is NOT needed with XCMTest"
+		link framework "XCMBuild"
+		export *
+	}
+	link framework "Foundation"
+}

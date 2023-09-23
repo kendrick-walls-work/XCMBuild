@@ -1,6 +1,6 @@
 #! /bin/bash
 #
-# reactive-firewall/XCMBuild plist linter Test
+# reactive-firewall/XCMBuild file-lock Tool
 # ..................................
 # Copyright (c) 2023, Mr. Walls
 # ..................................
@@ -76,87 +76,79 @@
 #    the amount of five dollars ($5.00). The foregoing limitations will apply
 #    even if the above stated remedy fails of its essential purpose.
 ################################################################################
+PATH=${PATH:-"/bin:/sbin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin"} ;
+umask 0112
 
-ulimit -t 600
-PATH="/bin:/sbin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin"
-umask 137
+declare -ir MINPARAMS=2
+declare LOCK_FILE="${LOCK_FILE:-/tmp/GIL.lock}"
+declare -i PID_VALUE="${PPID:-$$}"
+declare -i SHLOCK_CHECK_ONLY_MODE=1
 
-LOCK_FILE="/tmp/plist_test_script_lock"
-test -x "$(command -v find)" || exit 126 ;
+#declare -i VERSION=20230811
+
 test -x "$(command -v head)" || exit 126 ;
-test -x "$(command -v git)" || exit 126 ;
-hash -p ./.github/tool_shlock_helper.sh shlock || exit 255 ;
-test -x "$(command -v shlock)" || exit 126 ;
-test -x "$(command -v xargs)" || exit 126 ;
-test -x "$(command -v xmllint)" || exit 126 ;
-declare -i EXIT_CODE=1 ;
+test -x "$(command -v sync)" || exit 126 ;
+EXIT_CODE=1 ;
 
-function cleanup() {
-	rm -f "${LOCK_FILE}" 2>/dev/null || true ; wait ;
-	hash -d shlock 2>/dev/null > /dev/null || true ;
-}
+# exit codes: (caveat: not all implemented here)
+# x000000 = 0 = locked by ${PID_VALUE} ;
+# x000001 = 1 = not-locked by ${PID_VALUE} ; (ie when valid lock file for unknown PID)
+# x000010 = 2 = should be locked by ${PID_VALUE} but some generic error occured ;
+# x000011 = 3 = could not resolve to locked nor not-locked by ${PID_VALUE} (i.e. 1+2) ;
+# x000100 = 4 = locked by ${PID_VALUE} but looks like ${PID_VALUE} is gone now but still found lock (did you remember to unlock before relocking?)
+# x000101 = 5 = not-locked by ${PID_VALUE} but still found lock at ${LOCK_FILE} (i.e. 1+4)
+# x000110 = 6 = could not resolve to locked nor not-locked by ${PID_VALUE} but but still found lock at ${LOCK_FILE}
+# x000111 = 7 = not-locked by ${PID_VALUE} but but still found lock at ${LOCK_FILE} for unknown PID (including when invalid lock file)
 
-if [[ ( $(shlock -f ${LOCK_FILE} -p $$ ) -eq 0 ) ]] ; then
-		EXIT_CODE=0
-		trap 'cleanup 2>/dev/null || rm -f ${LOCK_FILE} 2>/dev/null > /dev/null || true ; wait ; exit 1 ;' SIGHUP || EXIT_CODE=3
-		trap 'cleanup 2>/dev/null || rm -f ${LOCK_FILE} 2>/dev/null > /dev/null || true ; wait ; exit 1 ;' SIGTERM || EXIT_CODE=4
-		trap 'cleanup 2>/dev/null || rm -f ${LOCK_FILE} 2>/dev/null > /dev/null || true ; wait ; exit 1 ;' SIGQUIT || EXIT_CODE=5
-		#trap 'cleanup 2>/dev/null || rm -f ${LOCK_FILE} 2>/dev/null > /dev/null || true ; wait ; exit 1 ;' SIGSTOP || EXIT_CODE=7
-		trap 'cleanup 2>/dev/null || rm -f ${LOCK_FILE} 2>/dev/null > /dev/null || true ; wait ; exit 1 ;' SIGINT || EXIT_CODE=8
-		trap 'cleanup 2>/dev/null || rm -f ${LOCK_FILE} 2>/dev/null > /dev/null || true || true ; wait ; exit 1 ;' SIGABRT || EXIT_CODE=9
-		trap 'cleanup 2>/dev/null || rm -f ${LOCK_FILE} 2>/dev/null > /dev/null || true ; wait ; exit ${EXIT_CODE} ;' EXIT || EXIT_CODE=1
+# macOS hints
+export XPC_SERVICE_NAME="shlock" ;
+
+if [[ ( $# -ge $MINPARAMS ) ]] ; then
+	while [[ ( $# -gt 0 ) ]] ; do  # Until you run out of parameters . . .
+		case "${1}" in
+			-p|--pid) shift ; export PID_VALUE="${1}" ; SHLOCK_CHECK_ONLY_MODE=0 ;;
+			-f|--file) shift ; export LOCK_FILE="${1}" ;;
+			-d) : ;;  # not implemented
+			*) printf "%b: \"%s\" Argument Unrecognized!\n" "$0" "${1}" 1>&2 ; EXIT_CODE=3 ;;
+		esac ;  # Check next set of parameters.
+		shift ;
+	done
+
+fi ;
+if [[ ( $EXIT_CODE -lt $MINPARAMS ) ]] ; then
+if [[ ( -e "${LOCK_FILE}" ) ]] ; then  # just check -e and not -r nor -f to run fast and fail on read
+	if [[ ( "${PID_VALUE}" -eq $(head -n 1 "${LOCK_FILE}") ) ]] ; then
+		EXIT_CODE=0 ;
+		# could update with touch -am "${LOCK_FILE}"
+	elif [[ ( -r "${LOCK_FILE}" ) ]] ; then  # also can just check -r here instead
+		EXIT_CODE=6 ;
+		PID_VALUE=$(head -n 1 "${LOCK_FILE}") ;
+		if [[ ( -z $( kill -n 0 "${PID_VALUE}" 2>&1 ) ) ]] ; then
+			EXIT_CODE=1 ;
+		elif [[ ( $SHLOCK_CHECK_ONLY_MODE -gt 0 ) ]] ; then
+			EXIT_CODE=5 ;
+		fi ;
+	else
+		printf $"Error: Lock could not be checked\n" >&2 ;
+		EXIT_CODE=7 ;
+	fi
+elif [[ ( -z $( kill -n 0 "${PID_VALUE}" 2>&1 ) ) ]] ; then
+	# printf is builtin and often faster than echo but will interpret patterns in variables.
+	# See https://www.shellcheck.net/wiki/SC2059 (In POSIX, you can instead ignore this warning.)
+	# shellcheck disable=SC2059
+	printf "${PID_VALUE}\n" >"${LOCK_FILE}" && :
+	sync ; wait ;
+	if [[ ( -r "${LOCK_FILE}" ) ]] ; then EXIT_CODE=0 ; elif [[ ( -e "${LOCK_FILE}" ) ]] ; then EXIT_CODE=2 ; else EXIT_CODE=2 ; fi ;
 else
-		# shellcheck disable=SC2046
-		echo "Test already in progress by "$(head "${LOCK_FILE}") ;
-		false ;
-		exit 255 ;
+	EXIT_CODE=3 ;
+	if [[ ( $SHLOCK_CHECK_ONLY_MODE -gt 0 ) ]] ; then
+		# printf is builtin and often faster than echo but will interpret patterns in variables.
+		# See https://www.shellcheck.net/wiki/SC2059 (In POSIX, you can instead ignore this warning.)
+		# shellcheck disable=SC2059
+		printf $"Error: lock \"${LOCK_FILE}\" for unkown process is invalid.\n" >&2 ;
+	else
+		printf $"Error: Refuse to aquire lock for unkown process %s\n" "${PID_VALUE}" >&2 ;
+	fi ;
 fi
-
-# this is how test files are found:
-
-# THIS IS THE ACTUAL TEST
-_TEST_ROOT_DIR="./stubs" ;
-if [[ -d ../payload ]] ; then
-	_TEST_ROOT_DIR="../stubs" ;
-elif [[ -d ./payload ]] ; then
-	_TEST_ROOT_DIR="./stubs" ;
-elif [[ -d ./.git/ ]] ; then
-	_TEST_ROOT_DIR="./" ;
-else
-	echo "FAIL: missing valid app or file"
-	EXIT_CODE=1
-fi
-
-for _TEST_DOC in $(find "${_TEST_ROOT_DIR}" \( -iname '*.plist' -o -iname "*.mobileconfig" \) -a -print0 | xargs -0 -L1 -I{} git ls-files "{}" ; wait ;) ; do
-	plutil -lint -- "${_TEST_DOC}" 1>/dev/null 2>&1 || EXIT_CODE=$? ;
-	if [[ (${EXIT_CODE} -ne 0) ]] ; then
-		echo "SKIP: ${_TEST_DOC} is not a valid plist" ;
-	fi
-	xmllint --noout --valid <(plutil -convert xml1 -o - -- "${_TEST_DOC}" ) 1>/dev/null 2>&1 || EXIT_CODE=$? ;
-	if [[ ( ${EXIT_CODE} -ne 0 ) ]] ; then
-		case "$EXIT_CODE" in
-			1) echo "SKIP: Unclassified issue with '${_TEST_DOC}'" ;;
-			2|3|4) echo "FAIL: '${_TEST_DOC}' is invalid." >&2 ;;
-			*) echo "SKIP: Can't check ${_TEST_DOC}" ;;
-		esac
-	fi
-done
-
-for _TEST_DOC in $(find "${_TEST_ROOT_DIR}" -type f -iname '*.xml' -print0 | xargs -0 -L1 -I{} git ls-files "{}" ; wait ;) ; do
-	xmllint --noout --valid "${_TEST_DOC}" 1>/dev/null 2>&1 || EXIT_CODE=$?
-	if [[ ( ${EXIT_CODE} -ne 0 ) ]] ; then
-		case "$EXIT_CODE" in
-			1) echo "SKIP: Unclassified issue with '${_TEST_DOC}'" ;;
-			2|3|4) echo "FAIL: '${_TEST_DOC}' is invalid." >&2 ;;
-			*) echo "SKIP: Can't check ${_TEST_DOC}" ;;
-		esac
-	fi
-done
-
-unset _TEST_ROOT_DIR 2>/dev/null || true ;
-unset _TEST_DOC 2>/dev/null || true ;
-
-cleanup 2>/dev/null || rm -f ${LOCK_FILE} 2>/dev/null > /dev/null || true ; wait ;
-
-# goodbye
-exit ${EXIT_CODE:-255} ;
+fi ;
+exit ${EXIT_CODE:-126} ;

@@ -68,12 +68,12 @@ umask 027
 LOCK_FILE="/tmp/test_$RANDOM$RANDOM$RANDOM$RANDOM$RANDOM$RANDOM$RANDOM.lock" ;
 EXIT_CODE=1
 
-test -x $(command -v grep) || exit 126 ;
-test -x $(command -v curl) || exit 126 ;
-test -x $(command -v find) || exit 126 ;
-test -x $(command -v git) || exit 126 ;
+test -x "$(command -v grep)" || exit 126 ;
+test -x "$(command -v curl)" || exit 126 ;
+test -x "$(command -v find)" || exit 126 ;
+test -x "$(command -v git)" || exit 126 ;
 hash -p ./.github/tool_shlock_helper.sh shlock || exit 255 ;
-test -x $(command -v shlock) || exit 126 ;
+test -x "$(command -v shlock)" || exit 126 ;
 
 function cleanup() {
 	rm -f "${LOCK_FILE}" 2>/dev/null || true ; wait ;
@@ -107,7 +107,7 @@ if [[ ( ${EXIT_CODE} -ne 0 ) ]] ; then
 	esac
 fi
 
-cleanup || rm -f ${LOCK_FILE} 2>/dev/null > /dev/null || true ; wait ;
+cleanup || rm -f "${LOCK_FILE}" 2>/dev/null > /dev/null || true ; wait ;
 
 # goodbye
-exit ${EXIT_CODE:-255} ;
+exit "${EXIT_CODE:-255}" ;

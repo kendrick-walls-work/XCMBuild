@@ -64,9 +64,9 @@
 test -x /usr/bin/spellintian || exit 0 ;
 
 THE_TEMP_FILE="/tmp/swapfile_spellcheck_${RANDOM}.tmp.txt" ;
-( (spellintian "${@:-./**/*}" 2>/dev/null | fgrep -v "(duplicate word)" | fgrep " -> ") & (spellintian "${@:-./*}" 2>/dev/null | fgrep -v "(duplicate word)" | fgrep " -> ") & (spellintian "${@:-./**/**/*}"  2>/dev/null | fgrep -v "(duplicate word)" | fgrep " -> ") ) | sort -h | uniq | tee -a ${THE_TEMP_FILE:-/dev/null} ;
+( (spellintian "${@:-./**/*}" 2>/dev/null | grep -vF "(duplicate word)" | grep -F " -> ") & (spellintian "${@:-./*}" 2>/dev/null | grep -vF "(duplicate word)" | grep -F " -> ") & (spellintian "${@:-./**/**/*}"  2>/dev/null | grep -vF "(duplicate word)" | grep -F " -> ") ) | sort -d | uniq | tee -a ${THE_TEMP_FILE:-/dev/null} ;
 wait ;
-THECOUNT=$( (wc -l ${THE_TEMP_FILE} 2>/dev/null || echo 0) | cut -d\  -f 1 ) ;
+THECOUNT=$( (wc -l "${THE_TEMP_FILE}" 2>/dev/null || echo 0) | cut -d\  -f 1 ) ;
 EXIT_CODE=${THECOUNT} ;
 if [[ ("${THECOUNT}" -le 1) ]] ; then
 	EXIT_CODE=0 ;
@@ -76,4 +76,4 @@ else
 fi
 rm -f ${THE_TEMP_FILE} 2>/dev/null >> /dev/null || true ;
 wait ;
-exit ${EXIT_CODE:255} ;
+exit "${EXIT_CODE:255}" ;
