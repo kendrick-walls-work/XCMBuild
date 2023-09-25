@@ -1,0 +1,41 @@
+//
+//  XcodeCompileRunShellDebug.xcconfig
+//  XCMBuild
+//
+// reactive-firewall/XCMBuild XcodeCompileRunShellDebug xcconfig
+// ..................................
+// Copyright (c) 2023, Mr. Walls
+// ..................................
+// Licensed under APACHE-2 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// ..........................................
+// http://www.apache.org/licenses/LICENSE-2.0
+// ..........................................
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+#include "XcodeCompileToolsDebug.xcconfig"
+
+//:completeSettings = XcodeCompileRunShellDebug
+EXCLUDED_ARCHS = $(ARCHS_STANDARD_32_BIT) undefined_arch
+ON_DEMAND_RESOURCES_INITIAL_INSTALL_TAGS = XCMRunner
+BUILD_VARIANTS = profile normal
+VALIDATE_PRODUCT = YES
+LINKER_DISPLAYS_MANGLED_NAMES[sdk=macosx*][arch=x86_64] = YES
+OTHER_LDFLAGS = -ObjC -weak_framework Foundation,framework -framework XCMBuild,framework
+SEPARATE_SYMBOL_EDIT = YES
+MODULEMAP_PRIVATE_FILE = stubs/Clang/module.private.modulemap
+PRODUCT_MODULE_NAME = $(PROJECT_NAME:c99extidentifier).$(ON_DEMAND_RESOURCES_INITIAL_INSTALL_TAGS:c99extidentifier)
+PRODUCT_NAME = $(TARGET_NAME:c99extidentifier)
+CODE_SIGN_ENTITLEMENTS = stubs/xcrunshell.entitlements
+TAPI_EXCLUDE_PROJECT_HEADERS = XCMTest.h
+TAPI_EXTRA_PRIVATE_HEADERS = xcrunshell.h
+TAPI_EXTRA_PROJECT_HEADERS = XCMShell.h
+TAPI_EXTRA_PUBLIC_HEADERS = XCMBuild.h

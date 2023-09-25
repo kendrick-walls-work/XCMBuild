@@ -414,6 +414,8 @@
 		8459CF3C2AA137E800DAFF86 /* serialized */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = serialized; path = bin/serialized; sourceTree = "<group>"; };
 		845B9CC12AB3EB2600C58987 /* XcodeBuildGlueConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = XcodeBuildGlueConfig.xcconfig; path = Config/XcodeBuildGlueConfig.xcconfig; sourceTree = "<group>"; };
 		845B9CC22AB3ECD900C58987 /* XcodeBuildDebugGlueConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = XcodeBuildDebugGlueConfig.xcconfig; path = Config/XcodeBuildDebugGlueConfig.xcconfig; sourceTree = "<group>"; };
+		845C71132AC2367B00DD9EE9 /* XcodeCompileRunShellDebug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = XcodeCompileRunShellDebug.xcconfig; path = Config/XcodeCompileRunShellDebug.xcconfig; sourceTree = "<group>"; };
+		845C71142AC237E900DD9EE9 /* XcodeCompileRunShell.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = XcodeCompileRunShell.xcconfig; path = Config/XcodeCompileRunShell.xcconfig; sourceTree = "<group>"; };
 		84619D782A85BCA7009C5753 /* xcrunshell */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = xcrunshell; sourceTree = BUILT_PRODUCTS_DIR; };
 		84619D7A2A85BCA7009C5753 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		847527F42AA150E000B1FDE3 /* apfs_dir_CONFIG_ACLs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; lineEnding = 0; path = apfs_dir_CONFIG_ACLs; sourceTree = "<group>"; };
@@ -493,23 +495,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		84D3F4502A7C38650022D176 = {
-			isa = PBXGroup;
-			children = (
-				8446EC0E2A7C846000B93693 /* bin */,
-				8489034C2A84535000F5F241 /* XCMBuild */,
-				84FD74132A84381800F72966 /* XCMClean */,
-				8411D9A62A82EB520029B632 /* docs */,
-				8411D9A22A82E8720029B632 /* stubs */,
-				8411D9982A82E6910029B632 /* tests */,
-				849B23BB2A8989B000962A8A /* unittests */,
-				84D3F45A2A7C38650022D176 /* Products */,
-				8446EC0D2A7C843D00B93693 /* Recovered References */,
-				84DFD9482A844E190078F7F9 /* .github */,
-				84FD74192A84425200F72966 /* Frameworks */,
-			);
-			sourceTree = "<group>";
-		};
 		8411D9982A82E6910029B632 /* tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -552,6 +537,8 @@
 				84BF4DF52ABA564D00E33993 /* XcodePreBuildGlueConfig.xcconfig */,
 				84BF4DF62ABA581700E33993 /* XcodePreBuildDebugGlueConfig.xcconfig */,
 				843F3C952ABE392600A11150 /* XcodeCompileToolsDebug.xcconfig */,
+				845C71132AC2367B00DD9EE9 /* XcodeCompileRunShellDebug.xcconfig */,
+				845C71142AC237E900DD9EE9 /* XcodeCompileRunShell.xcconfig */,
 				843F3C962ABE3ECF00A11150 /* XcodeCompileToolsRelease.xcconfig */,
 				8498B86E2AB108AD001084D8 /* XcodeFrameworkConfig.xcconfig */,
 			);
@@ -649,6 +636,23 @@
 				849B23BC2A898A4500962A8A /* test_build_paths_start */,
 			);
 			path = unittests;
+			sourceTree = "<group>";
+		};
+		84D3F4502A7C38650022D176 = {
+			isa = PBXGroup;
+			children = (
+				8446EC0E2A7C846000B93693 /* bin */,
+				8489034C2A84535000F5F241 /* XCMBuild */,
+				84FD74132A84381800F72966 /* XCMClean */,
+				8411D9A62A82EB520029B632 /* docs */,
+				8411D9A22A82E8720029B632 /* stubs */,
+				8411D9982A82E6910029B632 /* tests */,
+				849B23BB2A8989B000962A8A /* unittests */,
+				84D3F45A2A7C38650022D176 /* Products */,
+				8446EC0D2A7C843D00B93693 /* Recovered References */,
+				84DFD9482A844E190078F7F9 /* .github */,
+				84FD74192A84425200F72966 /* Frameworks */,
+			);
 			sourceTree = "<group>";
 		};
 		84D3F45A2A7C38650022D176 /* Products */ = {
@@ -1181,31 +1185,9 @@
 					profile,
 					normal,
 				);
-				CLANG_MODULES_AUTOLINK = YES;
 				CODE_SIGN_ENTITLEMENTS = stubs/xcrunshell.entitlements;
-				CODE_SIGN_STYLE = Manual;
-				CONTENTS_FOLDER_PATH = "$(PROJECT_NAME:c99extidentifier).framework/Versions/Current";
-				DEAD_CODE_STRIPPING = YES;
-				ENABLE_HARDENED_RUNTIME = YES;
 				EXCLUDED_ARCHS = "$(ARCHS_STANDARD_32_BIT) undefined_arch";
-				EXECUTABLE_EXTENSION = "-$(CURRENT_VARIANT)";
-				GCC_INPUT_FILETYPE = sourcecode.c.objc;
-				GENERATE_TEXT_BASED_STUBS = NO;
-				INFOPLIST_KEY_CFBundleDisplayName = "";
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
-				LD_GENERATE_MAP_FILE = YES;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/Frameworks",
-				);
 				"LINKER_DISPLAYS_MANGLED_NAMES[sdk=macosx*][arch=x86_64]" = YES;
-				LLVM_LTO = NO;
-				"LLVM_LTO[sdk=macosx*][arch=arm64]" = YES_THIN;
-				"LLVM_LTO[sdk=macosx*][arch=x86_64]" = YES_THIN;
-				MACOSX_DEPLOYMENT_TARGET = 13.3;
-				"MACOSX_DEPLOYMENT_TARGET[arch=arm64]" = 13.3;
-				"MACOSX_DEPLOYMENT_TARGET[arch=arm64e]" = 13.3;
 				MODULEMAP_PRIVATE_FILE = stubs/Clang/module.private.modulemap;
 				ON_DEMAND_RESOURCES_INITIAL_INSTALL_TAGS = XCMRunner;
 				OTHER_LDFLAGS = (
@@ -1217,9 +1199,7 @@
 				);
 				PRODUCT_MODULE_NAME = "$(PROJECT_NAME:c99extidentifier).$(ON_DEMAND_RESOURCES_INITIAL_INSTALL_TAGS:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
 				SEPARATE_SYMBOL_EDIT = YES;
-				SKIP_INSTALL = YES;
 				TAPI_EXCLUDE_PROJECT_HEADERS = XCMTest.h;
 				TAPI_EXTRA_PRIVATE_HEADERS = xcrunshell.h;
 				TAPI_EXTRA_PROJECT_HEADERS = XCMShell.h;
@@ -1232,27 +1212,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
-				CLANG_TIDY_MISC_REDUNDANT_EXPRESSION = YES;
 				CODE_SIGN_ENTITLEMENTS = stubs/xcrunshell.entitlements;
-				CODE_SIGN_IDENTITY = "$(RELEASE_CODE_SIGN_IDENTITY)";
-				CODE_SIGN_STYLE = Manual;
-				CONTENTS_FOLDER_PATH = "$(PROJECT_NAME:c99extidentifier).framework/Versions/Current";
-				DEAD_CODE_STRIPPING = YES;
-				DEPLOYMENT_POSTPROCESSING = YES;
-				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
 				EXCLUDED_ARCHS = "$(ARCHS_STANDARD_32_BIT) undefined_arch";
-				GCC_INPUT_FILETYPE = sourcecode.c.objc;
-				GENERATE_TEXT_BASED_STUBS = NO;
-				INFOPLIST_KEY_CFBundleDisplayName = "";
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/Frameworks",
-				);
-				LLVM_LTO = NO;
-				"LLVM_LTO[sdk=macosx*]" = YES_THIN;
-				MACOSX_DEPLOYMENT_TARGET = 13.3;
 				MODULEMAP_PRIVATE_FILE = stubs/Clang/module.private.modulemap;
 				ON_DEMAND_RESOURCES_INITIAL_INSTALL_TAGS = XCMRunner;
 				OTHER_LDFLAGS = (
@@ -1264,10 +1225,7 @@
 				);
 				PRODUCT_MODULE_NAME = "$(PROJECT_NAME:c99extidentifier).$(ON_DEMAND_RESOURCES_INITIAL_INSTALL_TAGS:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
 				SEPARATE_SYMBOL_EDIT = YES;
-				SUPPORTED_PLATFORMS = "watchsimulator watchos macosx iphonesimulator iphoneos driverkit appletvsimulator appletvos";
-				SUPPORTS_MACCATALYST = YES;
 				TAPI_EXCLUDE_PROJECT_HEADERS = XCMTest.h;
 				TAPI_EXTRA_PRIVATE_HEADERS = xcrunshell.h;
 				TAPI_EXTRA_PROJECT_HEADERS = XCMShell.h;
@@ -1335,7 +1293,7 @@
 		};
 		8462AFDF2A900F1E001EFB68 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 847CEBDD2AB3958800D86C91 /* Debug.xcconfig */;
+			baseConfigurationReference = 845B9CC22AB3ECD900C58987 /* XcodeBuildDebugGlueConfig.xcconfig */;
 			buildSettings = {
 				CONTENTS_FOLDER_PATH = "$(PRODUCT_NAME:c99extidentifier).$(WRAPPER_EXTENSION)/Versions/$(MARKETING_VERSION)";
 				DEAD_CODE_STRIPPING = YES;
@@ -1354,7 +1312,7 @@
 		};
 		8462AFE02A900F1E001EFB68 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 847CEBE02AB3970300D86C91 /* Release.xcconfig */;
+			baseConfigurationReference = 845B9CC12AB3EB2600C58987 /* XcodeBuildGlueConfig.xcconfig */;
 			buildSettings = {
 				CONTENTS_FOLDER_PATH = "$(PRODUCT_NAME:c99extidentifier).$(WRAPPER_EXTENSION)/Versions/$(MARKETING_VERSION)";
 				DEAD_CODE_STRIPPING = YES;

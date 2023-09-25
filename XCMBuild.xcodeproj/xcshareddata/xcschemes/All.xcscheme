@@ -8,7 +8,7 @@
       <BuildActionEntries>
          <BuildActionEntry
             buildForTesting = "NO"
-            buildForRunning = "NO"
+            buildForRunning = "YES"
             buildForProfiling = "YES"
             buildForArchiving = "YES"
             buildForAnalyzing = "YES">
@@ -52,10 +52,12 @@
       useCustomWorkingDirectory = "YES"
       customWorkingDirectory = "$(PROJECT_DIR)"
       ignoresPersistentStateOnLaunch = "YES"
-      debugDocumentVersioning = "YES"
+      debugDocumentVersioning = "NO"
       debugServiceExtension = "internal"
-      enableGPUFrameCaptureMode = "3"
-      allowLocationSimulation = "NO">
+      allowLocationSimulation = "NO"
+      showNonLocalizedStrings = "YES"
+      consoleMode = "0"
+      structuredConsoleMode = "2">
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
@@ -87,14 +89,10 @@
    <ProfileAction
       buildConfiguration = "Debug"
       shouldUseLaunchSchemeArgsEnv = "YES"
-      savedToolIdentifier = "File Activity"
+      savedToolIdentifier = "Time Profiler"
       useCustomWorkingDirectory = "YES"
       ignoresPersistentStateOnLaunch = "YES"
       debugDocumentVersioning = "NO">
-      <PathRunnable
-         runnableDebuggingMode = "0"
-         FilePath = "/Volumes/Sandbox/Developer/Xcode/DerivedData/XCMBuild-fawceopdxzpysoauwmdzraesuhou/Build/Products/Debug/XCMTest_profile">
-      </PathRunnable>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"

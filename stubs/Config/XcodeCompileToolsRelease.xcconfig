@@ -26,19 +26,17 @@
 //:completeSettings = XcodeCompileToolsRelease
 ON_DEMAND_RESOURCES_INITIAL_INSTALL_TAGS = XCMHelper
 ON_DEMAND_RESOURCES_PREFETCH_ORDER = XCMBuild
-BUILD_VARIANTS = profile normal
+BUILD_VARIANTS = normal
 DEPLOYMENT_LOCATION = YES
 DEPLOYMENT_POSTPROCESSING = $(DEPLOYMENT_LOCATION)
 INSTALL_PATH = $(CONTENTS_FOLDER_PATH)/usr/bin
 STRIP_INSTALLED_PRODUCT = $(DEPLOYMENT_LOCATION)
-MACOSX_DEPLOYMENT_TARGET = 13.3
 MODULE_NAME = $(TARGET_NAME:c99extidentifier)
 DEAD_CODE_STRIPPING = $(STRIP_INSTALLED_PRODUCT)
 LINKER_DISPLAYS_MANGLED_NAMES[sdk=macosx*] = !$(DEAD_CODE_STRIPPING)
 OTHER_LDFLAGS = -ObjC -weak_framework CoreFoundation,framework -weak_framework Foundation,framework -framework XCMBuild,framework
 LD_RUNPATH_SEARCH_PATHS = $(inherited) @executable_path/../../../XCMBuild.framework @executable_path/../Frameworks @executable_path/../../../Current @loader_path/Frameworks $(DSTROOT:standardizepath)/$(LOCAL_LIBRARY_DIR:standardizepath)/Frameworks
 DEFINES_MODULE = YES
-EXECUTABLE_EXTENSION = -$(CURRENT_VARIANT)
 PRODUCT_MODULE_NAME = $(PROJECT_NAME:c99extidentifier).$(PRODUCT_NAME:c99extidentifier)
 PRODUCT_NAME = $(TARGET_NAME:c99extidentifier)
 CODE_SIGN_ENTITLEMENTS = stubs/$(PRODUCT_NAME:c99extidentifier).entitlements

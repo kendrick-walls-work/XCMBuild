@@ -1,8 +1,8 @@
 //
-//  Unspecialized.xcconfig
+//  XcodeCompileRunShell.xcconfig
 //  XCMBuild
 //
-// reactive-firewall/XCMBuild Debug Specialized Config
+// reactive-firewall/XCMBuild XcodeCompileRunShell xcconfig
 // ..................................
 // Copyright (c) 2023, Mr. Walls
 // ..................................
@@ -21,21 +21,20 @@
 // Configuration settings file format documentation can be found at:
 // https://help.apple.com/xcode/#/dev745c5c974
 
+#include "XcodeCompileToolsRelease.xcconfig"
 
-//:configuration = Debug
-SUPPORTED_PLATFORMS = macosx
-SDKROOT = macosx
-ARCHS = $(ARCHS_STANDARD)
-ONLY_ACTIVE_ARCH = NO
+//:completeSettings = XcodeCompileRunShell
 EXCLUDED_ARCHS = $(ARCHS_STANDARD_32_BIT) undefined_arch
+ON_DEMAND_RESOURCES_INITIAL_INSTALL_TAGS = XCMRunner
 ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES
-RECOMMENDED_MACOSX_DEPLOYMENT_TARGET = 10.14.6
-MACOSX_DEPLOYMENT_TARGET = 13
-MACOSX_DEPLOYMENT_TARGET[arch=i386] = $(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)
-DEPLOYMENT_TARGET[sdk=*] = $(inhereted)
-DEPLOYMENT_TARGET[sdk=macosx*] = $(MACOSX_DEPLOYMENT_TARGET)
-DEPLOYMENT_TARGET[sdk=iphone*] = $(IPHONEOS_DEPLOYMENT_TARGET)
-DEPLOYMENT_TARGET[sdk=appletv*] = $(TVOS_DEPLOYMENT_TARGET)
-DEPLOYMENT_TARGET[sdk=watch*] = $(WATCHOS_DEPLOYMENT_TARGET)
-INFOPLIST_KEY_LSMinimumSystemVersion[sdk=*] = $(DEPLOYMENT_TARGET)
-INFOPLIST_KEY_LSMinimumSystemVersion[sdk=macosx*] = $(MACOSX_DEPLOYMENT_TARGET)
+VALIDATE_PRODUCT = YES
+OTHER_LDFLAGS = -ObjC -weak_framework Foundation,framework -framework XCMBuild,framework
+SEPARATE_SYMBOL_EDIT = YES
+MODULEMAP_PRIVATE_FILE = stubs/Clang/module.private.modulemap
+PRODUCT_MODULE_NAME = $(PROJECT_NAME:c99extidentifier).$(ON_DEMAND_RESOURCES_INITIAL_INSTALL_TAGS:c99extidentifier)
+PRODUCT_NAME = $(TARGET_NAME:c99extidentifier)
+CODE_SIGN_ENTITLEMENTS = stubs/xcrunshell.entitlements
+TAPI_EXCLUDE_PROJECT_HEADERS = XCMTest.h
+TAPI_EXTRA_PRIVATE_HEADERS = xcrunshell.h
+TAPI_EXTRA_PROJECT_HEADERS = XCMShell.h
+TAPI_EXTRA_PUBLIC_HEADERS = XCMBuild.h
