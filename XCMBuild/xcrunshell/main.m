@@ -16,35 +16,41 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-#import "xcrunshell.h"
 
 #ifndef XCRS_MINARGS
-#define XCRS_MINARGS 1
+#import "xcrunshell.h"
 #endif
 
 int main(int argc, const char * argv[]) {
 	int exit_code = 1;
 	@autoreleasepool {
+#if defined(__has_feature)
+#if __has_feature(thread_sanitizer)
 		// setup by checking our pid
-#if DEBUG
 		int pid = [[NSProcessInfo processInfo] processIdentifier];
-#else
+		if (pid > 0) {
+#endif
 #endif
 
-		NS_VALID_UNTIL_END_OF_SCOPE NSString* console = @"Not Implemented Yet.";
-		if (argc >= XCRS_MINARGS){
-			NSArray *c_argv = [[NSProcessInfo processInfo] arguments];
-			NSArray *args = [c_argv subarrayWithRange:NSMakeRange(1, c_argv.count - 1)];
-			NSString* arguments = [args componentsJoinedByString:@" "];
-			console = [NSTask runCommand:arguments];
-			exit_code = 0;
-		} else { exit_code = 255; };
+			NS_VALID_UNTIL_END_OF_SCOPE NSString* console = @"Not Implemented Yet.";
+			if (argc >= XCRS_MINARGS){
+				NSArray *c_argv = [[NSProcessInfo processInfo] arguments];
+				NSArray *args = [c_argv subarrayWithRange:NSMakeRange(1, c_argv.count - 1)];
+				NSString* arguments = [args componentsJoinedByString:@" "];
+				console = [XCMShellTask runCommand:arguments];
+				exit_code = 0;
+			} else { exit_code = 255; };
 
-		if (exit_code == 0) {
-			NSLog(@"%@", console);
+			if (exit_code == 0) {
+				NSLog(@"%@", console);
+			};
+
+			console = nil;
+#if defined(__has_feature)
+#if __has_feature(thread_sanitizer)
 		};
-
-		console = nil;
+#endif
+#endif
 	}
 	return exit_code;
 }

@@ -461,10 +461,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				843C23C42AA9373F00F8F65C /* libc.tbd in Frameworks */,
 				843C23C32AA9373000F8F65C /* libobjc.tbd in Frameworks */,
 				8432BC422AA7FC3C008F67E2 /* Foundation.framework in Frameworks */,
 				840745012AA6C37D00D6FDA6 /* XCMBuild.framework in Frameworks */,
+				843C23C42AA9373F00F8F65C /* libc.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -493,6 +493,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		84D3F4502A7C38650022D176 = {
+			isa = PBXGroup;
+			children = (
+				8446EC0E2A7C846000B93693 /* bin */,
+				8489034C2A84535000F5F241 /* XCMBuild */,
+				84FD74132A84381800F72966 /* XCMClean */,
+				8411D9A62A82EB520029B632 /* docs */,
+				8411D9A22A82E8720029B632 /* stubs */,
+				8411D9982A82E6910029B632 /* tests */,
+				849B23BB2A8989B000962A8A /* unittests */,
+				84D3F45A2A7C38650022D176 /* Products */,
+				8446EC0D2A7C843D00B93693 /* Recovered References */,
+				84DFD9482A844E190078F7F9 /* .github */,
+				84FD74192A84425200F72966 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
 		8411D9982A82E6910029B632 /* tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -634,23 +651,6 @@
 			path = unittests;
 			sourceTree = "<group>";
 		};
-		84D3F4502A7C38650022D176 = {
-			isa = PBXGroup;
-			children = (
-				8446EC0E2A7C846000B93693 /* bin */,
-				8411D9A62A82EB520029B632 /* docs */,
-				8411D9982A82E6910029B632 /* tests */,
-				849B23BB2A8989B000962A8A /* unittests */,
-				84FD74132A84381800F72966 /* XCMClean */,
-				8489034C2A84535000F5F241 /* XCMBuild */,
-				84D3F45A2A7C38650022D176 /* Products */,
-				84DFD9482A844E190078F7F9 /* .github */,
-				8411D9A22A82E8720029B632 /* stubs */,
-				8446EC0D2A7C843D00B93693 /* Recovered References */,
-				84FD74192A84425200F72966 /* Frameworks */,
-			);
-			sourceTree = "<group>";
-		};
 		84D3F45A2A7C38650022D176 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -671,10 +671,10 @@
 		84FD74192A84425200F72966 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				84FADEAD2AAC13FB00C31C1A /* CoreFoundation.framework */,
 				84CEAD482A8B2A8A00EBE49A /* libc.tbd */,
 				84CEAD462A8B2A4700EBE49A /* libobjc.tbd */,
 				849B23C12A89ACD800962A8A /* Foundation.framework */,
+				84FADEAD2AAC13FB00C31C1A /* CoreFoundation.framework */,
 				84FD741A2A84425200F72966 /* XcodeKit.framework */,
 			);
 			name = Frameworks;
