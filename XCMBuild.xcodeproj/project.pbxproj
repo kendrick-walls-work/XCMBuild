@@ -113,6 +113,7 @@
 		84502A7C2AB922BF00AA5382 /* XCMBuild.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8489034B2A84535000F5F241 /* XCMBuild.framework */; };
 		8459CF442AA1485600DAFF86 /* serialized in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8459CF3C2AA137E800DAFF86 /* serialized */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		8459CF452AA1485600DAFF86 /* xcode_copyfile.bash in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8459CF3A2AA125FA00DAFF86 /* xcode_copyfile.bash */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		845C711B2AC2404500DD9EE9 /* libSystem.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 845C711A2AC2404500DD9EE9 /* libSystem.tbd */; platformFilters = (macos, ); settings = {ATTRIBUTES = (Weak, ); }; };
 		84619D5D2A859266009C5753 /* LICENSE-2.0.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8411D9A72A82EB860029B632 /* LICENSE-2.0.txt */; settings = {ASSET_TAGS = (XCMBuild, ); }; };
 		84619D7B2A85BCA7009C5753 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 84619D7A2A85BCA7009C5753 /* main.m */; settings = {COMPILER_FLAGS = "-x objective-c"; }; };
 		8462AFD72A900E69001EFB68 /* xcrunshell in Embed Helper Tools */ = {isa = PBXBuildFile; fileRef = 84619D782A85BCA7009C5753 /* xcrunshell */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -416,6 +417,7 @@
 		845B9CC22AB3ECD900C58987 /* XcodeBuildDebugGlueConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = XcodeBuildDebugGlueConfig.xcconfig; path = Config/XcodeBuildDebugGlueConfig.xcconfig; sourceTree = "<group>"; };
 		845C71132AC2367B00DD9EE9 /* XcodeCompileRunShellDebug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = XcodeCompileRunShellDebug.xcconfig; path = Config/XcodeCompileRunShellDebug.xcconfig; sourceTree = "<group>"; };
 		845C71142AC237E900DD9EE9 /* XcodeCompileRunShell.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = XcodeCompileRunShell.xcconfig; path = Config/XcodeCompileRunShell.xcconfig; sourceTree = "<group>"; };
+		845C711A2AC2404500DD9EE9 /* libSystem.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libSystem.tbd; path = usr/lib/libSystem.tbd; sourceTree = SDKROOT; };
 		84619D782A85BCA7009C5753 /* xcrunshell */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = xcrunshell; sourceTree = BUILT_PRODUCTS_DIR; };
 		84619D7A2A85BCA7009C5753 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		847527F42AA150E000B1FDE3 /* apfs_dir_CONFIG_ACLs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; lineEnding = 0; path = apfs_dir_CONFIG_ACLs; sourceTree = "<group>"; };
@@ -488,6 +490,7 @@
 			files = (
 				84FADEAB2AABF3EA00C31C1A /* libc.tbd in Frameworks */,
 				84B0F88C2AAA6F9E00224163 /* libobjc.tbd in Frameworks */,
+				845C711B2AC2404500DD9EE9 /* libSystem.tbd in Frameworks */,
 				841987692AA8054E005F335E /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -675,6 +678,7 @@
 		84FD74192A84425200F72966 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				845C711A2AC2404500DD9EE9 /* libSystem.tbd */,
 				84CEAD482A8B2A8A00EBE49A /* libc.tbd */,
 				84CEAD462A8B2A4700EBE49A /* libobjc.tbd */,
 				849B23C12A89ACD800962A8A /* Foundation.framework */,
@@ -921,6 +925,7 @@
 			inputPaths = (
 				"$(BUILT_PRODUCTS_DIR)/XCMBuild.framework/versions/Current/_CodeSignature",
 				"$(BUILT_PRODUCTS_DIR)/XCMBuild.framework/versions/2.1.4/XCMBuild",
+				"$(BUILT_PRODUCTS_DIR)/XCMBuild.framework/versions/2.1.6/XCMBuild",
 			);
 			outputFileListPaths = (
 			);
@@ -933,6 +938,7 @@
 		};
 		84BD1E5E2AAFC73C004F72DF /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 8;
 			files = (
 			);
@@ -1180,57 +1186,15 @@
 		};
 		84619D7D2A85BCA7009C5753 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 845C71132AC2367B00DD9EE9 /* XcodeCompileRunShellDebug.xcconfig */;
 			buildSettings = {
-				BUILD_VARIANTS = (
-					profile,
-					normal,
-				);
-				CODE_SIGN_ENTITLEMENTS = stubs/xcrunshell.entitlements;
-				EXCLUDED_ARCHS = "$(ARCHS_STANDARD_32_BIT) undefined_arch";
-				"LINKER_DISPLAYS_MANGLED_NAMES[sdk=macosx*][arch=x86_64]" = YES;
-				MODULEMAP_PRIVATE_FILE = stubs/Clang/module.private.modulemap;
-				ON_DEMAND_RESOURCES_INITIAL_INSTALL_TAGS = XCMRunner;
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-framework",
-					"Foundation,framework",
-					"-weak_framework",
-					"XCMBuild,framework",
-				);
-				PRODUCT_MODULE_NAME = "$(PROJECT_NAME:c99extidentifier).$(ON_DEMAND_RESOURCES_INITIAL_INSTALL_TAGS:c99extidentifier)";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SEPARATE_SYMBOL_EDIT = YES;
-				TAPI_EXCLUDE_PROJECT_HEADERS = XCMTest.h;
-				TAPI_EXTRA_PRIVATE_HEADERS = xcrunshell.h;
-				TAPI_EXTRA_PROJECT_HEADERS = XCMShell.h;
-				TAPI_EXTRA_PUBLIC_HEADERS = XCMBuild.h;
-				VALIDATE_PRODUCT = YES;
 			};
 			name = Debug;
 		};
 		84619D7E2A85BCA7009C5753 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 845C71142AC237E900DD9EE9 /* XcodeCompileRunShell.xcconfig */;
 			buildSettings = {
-				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
-				CODE_SIGN_ENTITLEMENTS = stubs/xcrunshell.entitlements;
-				EXCLUDED_ARCHS = "$(ARCHS_STANDARD_32_BIT) undefined_arch";
-				MODULEMAP_PRIVATE_FILE = stubs/Clang/module.private.modulemap;
-				ON_DEMAND_RESOURCES_INITIAL_INSTALL_TAGS = XCMRunner;
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-framework",
-					"Foundation,framework",
-					"-weak_framework",
-					"XCMBuild,framework",
-				);
-				PRODUCT_MODULE_NAME = "$(PROJECT_NAME:c99extidentifier).$(ON_DEMAND_RESOURCES_INITIAL_INSTALL_TAGS:c99extidentifier)";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SEPARATE_SYMBOL_EDIT = YES;
-				TAPI_EXCLUDE_PROJECT_HEADERS = XCMTest.h;
-				TAPI_EXTRA_PRIVATE_HEADERS = xcrunshell.h;
-				TAPI_EXTRA_PROJECT_HEADERS = XCMShell.h;
-				TAPI_EXTRA_PUBLIC_HEADERS = XCMBuild.h;
-				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
