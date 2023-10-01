@@ -35,19 +35,34 @@
 #endif /* !__clang__ */
 #endif /* XCMBuild_h (outer) */
 
-#if TARGET_OS_OSX
+#if defined(TARGET_OS_OSX) && TARGET_OS_OSX || TARGET_OS_UNIX || TARGET_OS_LINUX
 
 @class NSArray<ObjectType>, NSDictionary<KeyType, ObjectType>, NSTask, NSString, NSObject;
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
-//! XCMShellTask allows running a subshell as a task.
-@interface XCMShellTask : NSObject
+/// Trivial delegate class for `NSTask`s to implement conviance constructors.
+/// ``XCMShellTask`` allows running a subshell as a task, thus simplifing the overhead of trivial invokations of `NSTask`.
+@interface XCMShellTask : NSObject {
+}
 
 #if defined(__clang__)
 #pragma mark *** XCMShellTask ***
 #endif /* !__clang__ */
 
+/// At the core of the ``XCMShellTask`` is the ability to spawn subtasks to use various system tools like `make`
+///
+///**Usage:**
+///```objectivec
+/// // set the commandTextToRun ...
+/// NSString * commandTextToRun = @"echo Hello World;";
+/// // ... and run the command and collect the output
+/// NSString * console = [XCMShellTask runCommand:commandTextToRun];
+/// ```
+///
+/// - Parameters:
+///   - commandToRun: The shell comand text to perform as an `NSString`.
+/// - Returns: The `standard output` of the resulting `task` as an `NSString`.
 + (nullable NSString *)runCommand:(NSString *)commandToRun;
 
 @end
@@ -55,6 +70,6 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 NS_HEADER_AUDIT_END(nullability, sendability)
 
 #endif /* !TARGET_OS_OSX */
-
+/// Defined whenever the ``XCMShellTask`` is loaded.
 #define XCMShell_h "XCMShell.h"
 #endif /* XCMShell_h */

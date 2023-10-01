@@ -1,0 +1,8 @@
+#! /bin/bash
+
+for HMAP_FILE_TMP in $(find "${1}" -type f -iname "*.hmap" -print ; wait ;) ; do
+basename "$HMAP_FILE_TMP:" ; wait ;
+xxd -p -g64 "$HMAP_FILE_TMP" | sed -E -e 's/(2e68)00/\1\n20202d0a/g' | xxd -r -p | xxd -s 120 -p | sed -E -e 's/2f00/2f200a/g' | xxd -r -p | xxd -p -c1 | sed -E -e 's/00/0a/g' | xxd -r -p ;
+wait ; echo "-----------------------";
+done
+exit 0;

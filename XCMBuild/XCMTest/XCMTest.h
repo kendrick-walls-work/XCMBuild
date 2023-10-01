@@ -47,11 +47,20 @@
 #if defined(__has_attribute)
 #if __has_attribute(used)
 #ifndef XCMTestCommandArgumentsString
-/*! @parseOnly */
+/// Use this to Makefile Testing cmdline string for XCMTest.
 extern NSString * const XCMTestCommandArgumentsString;
 #endif /* !XCMTestCommandArgumentsString */
 #endif /* !__attribute__ ((used)) */
 #endif /* !__has_attribute */
+
+
+/// Used to handle the testing of a project built with the ``XCMBuild`` system. Namely runs the equivilant of `make test`
+///
+/// - Returns: `0` (exit-code of zero) if the test reported back without errors. Otherwise Returns a value greater than `0` in the case
+/// - Parameters:
+///   - argc: main argument count input. Ignored here.
+///   - argv: main arguments from input. Ignored here.
+int main(int argc, const char * argv[]);
 
 /*! @parseOnly */
 #define XCMTest_h "XCMTest.h"

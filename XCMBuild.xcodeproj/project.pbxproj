@@ -29,7 +29,7 @@
 			);
 			dependencies = (
 				8462AFD02A900E69001EFB68 /* PBXTargetDependency */,
-				844399AB2AB14F280065758E /* PBXTargetDependency */,
+				844399A72AB14F1D0065758E /* PBXTargetDependency */,
 				843C23CE2AA963F900F8F65C /* PBXTargetDependency */,
 				8462AFD22A900E69001EFB68 /* PBXTargetDependency */,
 			);
@@ -72,7 +72,7 @@
 				847517582A9006CF00C93D65 /* CopyFiles */,
 			);
 			dependencies = (
-				844399A92AB14F210065758E /* PBXTargetDependency */,
+				844399A72AB14F1D0065758E /* PBXTargetDependency */,
 				8475175C2A90070500C93D65 /* PBXTargetDependency */,
 			);
 			name = "Combine Prune Scripts";
@@ -101,6 +101,7 @@
 		8423BA892AA7D2A800C04732 /* apfs_dir_CONFIG_ACLs in Resources */ = {isa = PBXBuildFile; fileRef = 847527F42AA150E000B1FDE3 /* apfs_dir_CONFIG_ACLs */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		8423BA8A2AA7D2A800C04732 /* apfs_dir_DEVELOPER_ACLs in Resources */ = {isa = PBXBuildFile; fileRef = 847527F52AA150E000B1FDE3 /* apfs_dir_DEVELOPER_ACLs */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		8423BA8B2AA7D2A800C04732 /* apfs_file_CONFIG_ACLs in Resources */ = {isa = PBXBuildFile; fileRef = 847527F62AA150E000B1FDE3 /* apfs_file_CONFIG_ACLs */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		842858FD2A8AF508002C447C /* orderfile in ShellScript */ = {isa = PBXBuildFile; fileRef = 842858FE2A8AF508002C447C /* orderfile */; };
 		8432BC422AA7FC3C008F67E2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 849B23C12A89ACD800962A8A /* Foundation.framework */; };
 		843C23C12AA9367C00F8F65C /* libc.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 84CEAD482A8B2A8A00EBE49A /* libc.tbd */; settings = {ATTRIBUTES = (Weak, ); }; };
 		843C23C22AA936C700F8F65C /* libobjc.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 84CEAD462A8B2A4700EBE49A /* libobjc.tbd */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -183,20 +184,6 @@
 			remoteInfo = XCMTest;
 		};
 		844399A62AB14F1D0065758E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 84D3F4512A7C38650022D176 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 8498B8702AB147B8001084D8;
-			remoteInfo = "Audit Core Codesign";
-		};
-		844399A82AB14F210065758E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 84D3F4512A7C38650022D176 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 8498B8702AB147B8001084D8;
-			remoteInfo = "Audit Core Codesign";
-		};
-		844399AA2AB14F280065758E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 84D3F4512A7C38650022D176 /* Project object */;
 			proxyType = 1;
@@ -411,8 +398,8 @@
 		8446EC142A7C849700B93693 /* tool_shlock_helper.bash */ = {isa = PBXFileReference; explicitFileType = text.script.bash; fileEncoding = 4; lastKnownFileType = text.script.sh; lineEnding = 0; name = tool_shlock_helper.bash; path = bin/tool_shlock_helper.bash; sourceTree = "<group>"; };
 		8446EC152A7C849700B93693 /* styletests.sh */ = {isa = PBXFileReference; explicitFileType = text.script.sh; fileEncoding = 4; lineEnding = 0; name = styletests.sh; path = bin/styletests.sh; sourceTree = "<group>"; };
 		84502A772AB8E44300AA5382 /* module.private.modulemap */ = {isa = PBXFileReference; explicitFileType = "sourcecode.module-map"; fileEncoding = 4; lineEnding = 0; name = module.private.modulemap; path = Clang/module.private.modulemap; sourceTree = "<group>"; };
-		8459CF3A2AA125FA00DAFF86 /* xcode_copyfile.bash */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = xcode_copyfile.bash; path = bin/xcode_copyfile.bash; sourceTree = "<group>"; };
-		8459CF3C2AA137E800DAFF86 /* serialized */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = serialized; path = bin/serialized; sourceTree = "<group>"; };
+		8459CF3A2AA125FA00DAFF86 /* xcode_copyfile.bash */ = {isa = PBXFileReference; explicitFileType = text.script.bash; fileEncoding = 4; lastKnownFileType = text.script.sh; name = xcode_copyfile.bash; path = bin/xcode_copyfile.bash; sourceTree = "<group>"; };
+		8459CF3C2AA137E800DAFF86 /* serialized */ = {isa = PBXFileReference; explicitFileType = text.script.bash; fileEncoding = 4; lastKnownFileType = text.script.sh; name = serialized; path = bin/serialized; sourceTree = "<group>"; };
 		845B9CC12AB3EB2600C58987 /* XcodeBuildGlueConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = XcodeBuildGlueConfig.xcconfig; path = Config/XcodeBuildGlueConfig.xcconfig; sourceTree = "<group>"; };
 		845B9CC22AB3ECD900C58987 /* XcodeBuildDebugGlueConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = XcodeBuildDebugGlueConfig.xcconfig; path = Config/XcodeBuildDebugGlueConfig.xcconfig; sourceTree = "<group>"; };
 		845C71132AC2367B00DD9EE9 /* XcodeCompileRunShellDebug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = XcodeCompileRunShellDebug.xcconfig; path = Config/XcodeCompileRunShellDebug.xcconfig; sourceTree = "<group>"; };
@@ -453,8 +440,8 @@
 		84D3F4523A7C38650022D176 /* Makefile */ = {isa = PBXFileReference; explicitFileType = sourcecode.makefile.make; fileEncoding = 4; lastKnownFileType = sourcecode.make; lineEnding = 0; path = Makefile; sourceTree = SOURCE_ROOT; };
 		84DFD9482A844E190078F7F9 /* .github */ = {isa = PBXFileReference; lastKnownFileType = folder; path = .github; sourceTree = SOURCE_ROOT; };
 		84E1D7A02A8AB66000779732 /* xcrunshell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = xcrunshell.h; sourceTree = "<group>"; };
-		84FADEA02AABBD5400C31C1A /* xcode_run_tests.bash */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = xcode_run_tests.bash; path = bin/xcode_run_tests.bash; sourceTree = "<group>"; };
-		84FADEA12AABBD5400C31C1A /* xcode_run_tool.bash */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = xcode_run_tool.bash; path = bin/xcode_run_tool.bash; sourceTree = "<group>"; };
+		84FADEA02AABBD5400C31C1A /* xcode_run_tests.bash */ = {isa = PBXFileReference; explicitFileType = text.script.bash; fileEncoding = 4; lastKnownFileType = text.script.sh; name = xcode_run_tests.bash; path = bin/xcode_run_tests.bash; sourceTree = "<group>"; };
+		84FADEA12AABBD5400C31C1A /* xcode_run_tool.bash */ = {isa = PBXFileReference; explicitFileType = text.script.bash; fileEncoding = 4; lastKnownFileType = text.script.sh; name = xcode_run_tool.bash; path = bin/xcode_run_tool.bash; sourceTree = "<group>"; };
 		84FADEA82AABEAA200C31C1A /* XCMTest.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = XCMTest.entitlements; sourceTree = "<group>"; };
 		84FADEAD2AAC13FB00C31C1A /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		84FD741A2A84425200F72966 /* XcodeKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XcodeKit.framework; path = Library/Frameworks/XcodeKit.framework; sourceTree = DEVELOPER_DIR; };
@@ -591,10 +578,10 @@
 				8446EC0F2A7C849700B93693 /* genmac.sh */,
 				8446EC132A7C849700B93693 /* posttests.sh */,
 				8446EC102A7C849700B93693 /* pretests.sh */,
-				8446EC112A7C849700B93693 /* prunefile */,
 				8446EC122A7C849700B93693 /* runtests.sh */,
 				8446EC152A7C849700B93693 /* styletests.sh */,
 				8446EC142A7C849700B93693 /* tool_shlock_helper.bash */,
+				8446EC112A7C849700B93693 /* prunefile */,
 				8459CF3C2AA137E800DAFF86 /* serialized */,
 				84838D2D2A7D8A46008BC8C1 /* flatten */,
 			);
@@ -735,7 +722,7 @@
 			);
 			name = Test;
 			passBuildSettingsInEnvironment = 1;
-			productName = xcode_run_tests;
+			productName = Test;
 			productSettingsXML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
 <!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">
 <plist version=\"1.0\">
@@ -758,8 +745,10 @@
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.developer-tools</string>
 	<key>NSHumanReadableCopyright</key>
-	<string>Copyright (c) 2014-2023 - Mr. Walls</string>
+	<string>\"Copyright (c) 2014-2023 - Mr.Walls\"</string>
 </dict>
 </plist>
 ";
@@ -843,7 +832,7 @@
 					XCMRunner,
 				);
 				LastSwiftUpdateCheck = 1430;
-				LastUpgradeCheck = 1430;
+				LastUpgradeCheck = 1500;
 				ORGANIZATIONNAME = org.pak.dt;
 				TargetAttributes = {
 					84619D772A85BCA7009C5753 = {
@@ -934,7 +923,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "\nif [[ ( -z \"$SHELL\" ) ]] || [[ ( \"$SHELL\" != *bash ) ]] ; then \n\texport SHELL=\"bash\" ;\n\t/bin/bash -c \"${0} ; exit $?\" ; exit $? ;\nfi ;\n\n# Type a script or drag a script file from your workspace to insert its path.\nif [[ -d \"${BUILT_PRODUCTS_DIR}/XCMBuild.framework\" ]] ; then\n((codesign -v -vvv -R=\"anchor apple generic\" --deep \"${BUILT_PRODUCTS_DIR}/${CONTENTS_FOLDER_PATH}/XCMBuild\" || exit $? ) && \\\ntouch \"${SCRIPT_OUTPUT_FILE_0}\" ; wait ; ) && \\\nxattr -sw com.apple.xcode.CreatedByBuildSystem true \"${SCRIPT_OUTPUT_FILE_0}\" && \\\ntouch -am \"${SCRIPT_OUTPUT_FILE_0}\" ; wait ;\necho \"$0:${BASH_LINE_NO:-12}: note: Verified code signature!\" ;\nexit 0 ;\nelse\necho \"$0:${BASH_LINE_NO:-15}: fatal error: Could not verify code signature!\" ;\nrm -vf \"${SCRIPT_OUTPUT_FILE_0}\" 2>/dev/null || true ;\nexit 127 ;\nfi ;\n";
+			shellScript = "\nif [[ ( -z \"$SHELL\" ) ]] || [[ ( \"$SHELL\" != *bash ) ]] ; then\n\texport SHELL=\"bash\" ;\n\t/bin/bash -c \"${0} ; exit $?\" ; exit $? ;\nfi ;\n\nif [[ ( -z \"$ACTION\" ) ]] ; then\n\texit 127 ;\nfi ;\n\n# Type a script or drag a script file from your workspace to insert its path.\nif [[ -d \"${BUILT_PRODUCTS_DIR}/XCMBuild.framework\" ]] && [[ \"${ACTION}\" != *clean ]]; then\nif [[ ( \"${SCRIPT_OUTPUT_FILE_0}\" -ot \"${BUILT_PRODUCTS_DIR}/XCMBuild.framework\" ) ]] ; then\n\trm -vf \"${SCRIPT_OUTPUT_FILE_0}\" 2>/dev/null || true ;\nfi ;\n((codesign -v -vvv -R=\"anchor apple generic\" --deep \"${BUILT_PRODUCTS_DIR}/${CONTENTS_FOLDER_PATH}/XCMBuild\" || exit $? ) && \\\ntouch \"${SCRIPT_OUTPUT_FILE_0}\" ; wait ; ) && \\\nxattr -sw com.apple.xcode.CreatedByBuildSystem true \"${SCRIPT_OUTPUT_FILE_0}\" && \\\ntouch -am \"${SCRIPT_OUTPUT_FILE_0}\" ; wait ;\necho \"$0:${BASH_LINE_NO:-17}: note: Verified code signature!\" ;\nexit 0 ;\nelse\nif [[ ( -z \"$ACTION\" ) ]] || [[ ( \"$ACTION\" != *clean ) ]] ; then\n\techo \"$0:${BASH_LINE_NO:-21}: fatal error: Could not verify code signature!\" ;\nelse\n\trm -vf \"${SCRIPT_OUTPUT_FILE_0}\" 2>/dev/null || true ;\n\tunlink -f \"${SCRIPT_OUTPUT_FILE_0}\" 2>/dev/null || true ;\nfi ;\nexit 127 ;\nfi ;\n";
 		};
 		84BD1E5E2AAFC73C004F72DF /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -954,6 +943,7 @@
 			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/bash;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\necho \"Target ALL $0:3: note: Building '$PRODUCT_NAME'\" ;\nexit 0 ;\n";
+			showEnvVarsInLog = 0;
 		};
 		84BD1E622AAFD54A004F72DF /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -964,7 +954,9 @@
 			);
 			inputPaths = (
 				"$(BUILT_PRODUCTS_DIR:standardizepath)/XCMTest_profile",
+				"$(BUILT_PRODUCTS_DIR:standardizepath)/XCMTest_debug",
 				"$(BUILT_PRODUCTS_DIR:standardizepath)/xcrunshell_profile",
+				"$(BUILT_PRODUCTS_DIR:standardizepath)/xcrunshell_debug",
 			);
 			outputFileListPaths = (
 			);
@@ -979,6 +971,7 @@
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				842858FD2A8AF508002C447C /* orderfile in ShellScript */,
 			);
 			inputFileListPaths = (
 			);
@@ -989,15 +982,21 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"$(CONFIGURATION_TEMP_DIR:standardizepath)/$(PROJECT_NAME:c99extidentifier)-order-$(CURRENT_VARIANT)-$(ARCH).txt",
 				"$(CONFIGURATION_TEMP_DIR:standardizepath)/$(PROJECT_NAME:c99extidentifier)-order-$(CURRENT_VARIANT)-x86_64.txt",
 				"$(CONFIGURATION_TEMP_DIR:standardizepath)/$(PROJECT_NAME:c99extidentifier)-order-$(CURRENT_VARIANT)-arm64.txt",
 				"$(CONFIGURATION_TEMP_DIR:standardizepath)/$(PROJECT_NAME:c99extidentifier)-order-$(CURRENT_VARIANT)-arm64e.txt",
 				"$(CONFIGURATION_TEMP_DIR:standardizepath)/$(PROJECT_NAME:c99extidentifier)-order-$(CURRENT_VARIANT)-arch64.txt",
 				"$(CONFIGURATION_TEMP_DIR:standardizepath)/$(PROJECT_NAME:c99extidentifier)-order-$(CURRENT_VARIANT)-i386.txt",
+				"$(CONFIGURATION_TEMP_DIR:standardizepath)/$(PROJECT_NAME:c99extidentifier)-order-profile-x86_64.txt",
+				"$(CONFIGURATION_TEMP_DIR:standardizepath)/$(PROJECT_NAME:c99extidentifier)-order-profile-arm64.txt",
+				"$(CONFIGURATION_TEMP_DIR:standardizepath)/$(PROJECT_NAME:c99extidentifier)-order-profile-arm64e.txt",
+				"$(CONFIGURATION_TEMP_DIR:standardizepath)/$(PROJECT_NAME:c99extidentifier)-order-profile-arch64.txt",
+				"$(CONFIGURATION_TEMP_DIR:standardizepath)/$(PROJECT_NAME:c99extidentifier)-order-profile-i386.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "test -x \"$(command -v touch)\" || exit 3 ;\ntest -x \"$(command -v dirname)\" || exit 3 ;\ntest -x \"$(command -v mkdir)\" || exit 3 ;\ntest -x \"$(command -v cp)\" || exit 3 ;\ntest -x \"$(command -v unlink)\" || exit 3 ;\ntest -x \"$(command -v xattr)\" || exit 3 ;\n\nif [[ ( -z \"$SHELL\" ) ]] || [[ ( \"$SHELL\" != *bash ) ]] ; then \n\texport SHELL=\"bash\" ;\n\t/bin/bash -c \"${0} ; exit $?\" ; exit $? ;\nfi ;\n\n#find target path\nif [[ ( -d \"${CONFIGURATION_TEMP_DIR}\" ) ]] ; then\n\ttouch -a \"${CONFIGURATION_TEMP_DIR}\" || true ;\nelif [[ ( -n \"${CONFIGURATION_TEMP_DIR}\" ) ]] ; then\n\tmkdir -p \"${CONFIGURATION_TEMP_DIR}\" || echo \"Failure: $0:${BASH_LINE_NO:-12}: error: unreadable generate path for: ${ORDER_FILE}\" >&2 ; exit 126 ;\n\txattr -rsw com.apple.xcode.CreatedByBuildSystem true \"${CONFIGURATION_TEMP_DIR}\" >&2 || true ;\nelse\n\techo \"SKIPPING: $0:${BASH_LINE_NO:-16}: note: Order file (empty or missing)\" >&2 || true ;\n\texit 0;\nfi ;\n\nfor CURRENT_VARIANT in $BUILD_VARIANTS ; do \nfor CURRENT_ARCH in $VALID_ARCHS ; do\n\t# copy orderfile into place\n\tif [[ ( -r ${SCRIPT_INPUT_FILE_0} ) ]] ; then\n\t\t${CP:-cp} -vfp ${SCRIPT_INPUT_FILE_0} ${CONFIGURATION_TEMP_DIR}/${PROJECT_NAME}-order-${CURRENT_VARIANT}-${CURRENT_ARCH}.txt ;\n\t\txattr -sw com.apple.xcode.CreatedByBuildSystem true \"${CONFIGURATION_TEMP_DIR}/${PROJECT_NAME}-order-${CURRENT_VARIANT}-${CURRENT_ARCH}.txt\" ; wait ;\n\telif [[ ${ACTION:-\"Build\"} == *Clean* ]] ; then\n\t\tunlink ${CONFIGURATION_TEMP_DIR}/${PROJECT_NAME}-order-${CURRENT_VARIANT}-${CURRENT_ARCH}.txt 2>/dev/null || true ;\n\t\techo \"Failure $0:${BASH_LINE_NO:-28}: error: unreadable order file: ${SCRIPT_INPUT_FILE_0}\" >&2 ; exit 2 ;\n\tfi ;\n\ndone ;\ndone\nsync ;\necho \"Success: $0:34: note: Compleated!\" || true ;\nwait ;\nexit 0 ;\n";
+			shellScript = "test -x \"$(command -v touch)\" || exit 3 ;\ntest -x \"$(command -v dirname)\" || exit 3 ;\ntest -x \"$(command -v mkdir)\" || exit 3 ;\ntest -x \"$(command -v cp)\" || exit 3 ;\ntest -x \"$(command -v unlink)\" || exit 3 ;\ntest -x \"$(command -v xattr)\" || exit 3 ;\n\nif [[ ( -z \"$SHELL\" ) ]] || [[ ( \"$SHELL\" != *bash ) ]] ; then \n\texport SHELL=\"bash\" ;\n\t/bin/bash -c \"${0} ; exit $?\" ; exit $? ;\nfi ;\n\n#find target path\nif [[ ( -d \"${CONFIGURATION_TEMP_DIR}\" ) ]] ; then\n\ttouch -a \"${CONFIGURATION_TEMP_DIR}\" || true ;\nelif [[ ( -n \"${CONFIGURATION_TEMP_DIR}\" ) ]] ; then\n\tmkdir -p \"${CONFIGURATION_TEMP_DIR}\" || echo \"Failure: $0:${BASH_LINE_NO:-12}: error: unreadable generate path for: ${ORDER_FILE}\" >&2 ; exit 126 ;\n\txattr -rsw com.apple.xcode.CreatedByBuildSystem true \"${CONFIGURATION_TEMP_DIR}\" >&2 || true ;\nelse\n\techo \"SKIPPING: $0:${BASH_LINE_NO:-16}: note: Order file (empty or missing)\" >&2 || true ;\n\texit 0;\nfi ;\n\nfor CURRENT_VARIANT in $BUILD_VARIANTS $VARIANT ; do \nfor CURRENT_ARCH in $VALID_ARCHS ; do\n\t# copy orderfile into place\n\tif [[ ( -r ${SCRIPT_INPUT_FILE_0} ) ]] ; then\n\t\t${CP:-cp} -vfp ${SCRIPT_INPUT_FILE_0} ${CONFIGURATION_TEMP_DIR}/${PROJECT_NAME}-order-${CURRENT_VARIANT}-${CURRENT_ARCH}.txt ;\n\t\txattr -sw com.apple.xcode.CreatedByBuildSystem true \"${CONFIGURATION_TEMP_DIR}/${PROJECT_NAME}-order-${CURRENT_VARIANT}-${CURRENT_ARCH}.txt\" ; wait ;\n\telif [[ ${ACTION:-\"Build\"} == *Clean* ]] ; then\n\t\tunlink ${CONFIGURATION_TEMP_DIR}/${PROJECT_NAME}-order-${CURRENT_VARIANT}-${CURRENT_ARCH}.txt 2>/dev/null || true ;\n\t\techo \"Failure $0:${BASH_LINE_NO:-28}: error: unreadable order file: ${SCRIPT_INPUT_FILE_0}\" >&2 ; exit 2 ;\n\tfi ;\n\ndone ;\ndone\nsync ;\necho \"Success: $0:34: note: Compleated!\" || true ;\nwait ;\nexit 0 ;\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1055,16 +1054,6 @@
 			isa = PBXTargetDependency;
 			target = 8498B8702AB147B8001084D8 /* Audit Core Codesign */;
 			targetProxy = 844399A62AB14F1D0065758E /* PBXContainerItemProxy */;
-		};
-		844399A92AB14F210065758E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 8498B8702AB147B8001084D8 /* Audit Core Codesign */;
-			targetProxy = 844399A82AB14F210065758E /* PBXContainerItemProxy */;
-		};
-		844399AB2AB14F280065758E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 8498B8702AB147B8001084D8 /* Audit Core Codesign */;
-			targetProxy = 844399AA2AB14F280065758E /* PBXContainerItemProxy */;
 		};
 		845186602AB14CC9008A2D7E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1139,23 +1128,11 @@
 			baseConfigurationReference = 845B9CC22AB3ECD900C58987 /* XcodeBuildDebugGlueConfig.xcconfig */;
 			buildSettings = {
 				APPLY_RULES_IN_COPY_FILES = YES;
-				CONTENTS_FOLDER_PATH = "$(WRAPPER_NAME)/Versions/Current";
-				DEAD_CODE_STRIPPING = YES;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
-				INFOPLIST_KEY_NSPrincipalClass = NSBundle;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				OBJROOT = build;
 				ON_DEMAND_RESOURCES_PREFETCH_ORDER = XCMBuild;
-				OTHER_CODE_SIGN_FLAGS = "$(inhereted) --preserve-metadata";
-				PLIST_FILE_OUTPUT_FORMAT = XML;
-				PRIVATE_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/PrivateHeaders";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.adhoc.dt.$(PROJECT_NAME:c99extidentifier)";
 				PRODUCT_MODULE_NAME = "$(PROJECT_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(PROJECT_NAME:c99extidentifier)";
-				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Headers";
-				STRINGS_FILE_OUTPUT_ENCODING = "UTF-8";
 				WRAPPER_EXTENSION = framework;
-				WRAPPER_NAME = "$(PRODUCT_NAME:c99extidentifier).$(WRAPPER_EXTENSION)";
 			};
 			name = Debug;
 		};
@@ -1164,23 +1141,11 @@
 			baseConfigurationReference = 845B9CC12AB3EB2600C58987 /* XcodeBuildGlueConfig.xcconfig */;
 			buildSettings = {
 				APPLY_RULES_IN_COPY_FILES = YES;
-				CONTENTS_FOLDER_PATH = "$(WRAPPER_NAME)/Versions/Current";
-				DEAD_CODE_STRIPPING = YES;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
-				INFOPLIST_KEY_NSPrincipalClass = NSBundle;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				"MACOSX_DEPLOYMENT_TARGET[arch=arm64e]" = 13.3;
-				"MACOSX_DEPLOYMENT_TARGET[arch=i386]" = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
-				OBJROOT = build;
 				ON_DEMAND_RESOURCES_PREFETCH_ORDER = XCMBuild;
-				OTHER_CODE_SIGN_FLAGS = "$(inhereted) --preserve-metadata";
-				PRIVATE_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/PrivateHeaders";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.adhoc.dt.$(PROJECT_NAME:c99extidentifier)";
 				PRODUCT_MODULE_NAME = "$(PROJECT_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(PROJECT_NAME:c99extidentifier)";
-				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Headers";
 				WRAPPER_EXTENSION = framework;
-				WRAPPER_NAME = "$(PRODUCT_NAME:c99extidentifier).$(WRAPPER_EXTENSION)";
 			};
 			name = Release;
 		};
@@ -1205,25 +1170,15 @@
 				APPLY_RULES_IN_COPY_FILES = YES;
 				CODE_SIGN_ENTITLEMENTS = stubs/XCMTest.entitlements;
 				CONTENTS_FOLDER_PATH = "$(PRODUCT_NAME:c99extidentifier).$(WRAPPER_EXTENSION)/Versions/$(MARKETING_VERSION)";
-				DEAD_CODE_STRIPPING = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(LOCAL_LIBRARY_DIR:standardizepath)",
 					"$(BUILT_PRODUCTS_DIR:standardizepath)/**",
 					"$(inhereted)",
 				);
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				OBJROOT = build;
 				ON_DEMAND_RESOURCES_INITIAL_INSTALL_TAGS = XCMBuild;
 				ON_DEMAND_RESOURCES_PREFETCH_ORDER = "XCMBuild XCMHelper";
-				PLIST_FILE_OUTPUT_FORMAT = XML;
-				PRIVATE_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/PrivateHeaders";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.adhoc.dt.$(PROJECT_NAME:c99extidentifier)";
 				PRODUCT_MODULE_NAME = "$(PROJECT_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(PROJECT_NAME:c99extidentifier)";
-				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Headers";
-				STRINGS_FILE_OUTPUT_ENCODING = "UTF-8";
-				WRAPPER_EXTENSION = framework;
 				WRAPPER_NAME = "$(PRODUCT_NAME:c99extidentifier).$(WRAPPER_EXTENSION)";
 			};
 			name = Debug;
@@ -1235,22 +1190,15 @@
 				APPLY_RULES_IN_COPY_FILES = YES;
 				CODE_SIGN_ENTITLEMENTS = stubs/XCMTest.entitlements;
 				CONTENTS_FOLDER_PATH = "$(PRODUCT_NAME:c99extidentifier).$(WRAPPER_EXTENSION)/Versions/$(MARKETING_VERSION)";
-				DEAD_CODE_STRIPPING = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(LOCAL_LIBRARY_DIR:standardizepath)",
 					"$(BUILT_PRODUCTS_DIR:standardizepath)/**",
 					"$(inhereted)",
 				);
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				OBJROOT = build;
 				ON_DEMAND_RESOURCES_INITIAL_INSTALL_TAGS = XCMBuild;
 				ON_DEMAND_RESOURCES_PREFETCH_ORDER = "XCMBuild XCMHelper";
-				PRIVATE_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/PrivateHeaders";
 				PRODUCT_MODULE_NAME = "$(PROJECT_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(PROJECT_NAME:c99extidentifier)";
-				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Headers";
-				WRAPPER_EXTENSION = framework;
 				WRAPPER_NAME = "$(PRODUCT_NAME:c99extidentifier).$(WRAPPER_EXTENSION)";
 			};
 			name = Release;
@@ -1259,18 +1207,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 845B9CC22AB3ECD900C58987 /* XcodeBuildDebugGlueConfig.xcconfig */;
 			buildSettings = {
-				CONTENTS_FOLDER_PATH = "$(PRODUCT_NAME:c99extidentifier).$(WRAPPER_EXTENSION)/Versions/$(MARKETING_VERSION)";
-				DEAD_CODE_STRIPPING = YES;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
-				INFOPLIST_KEY_NSPrincipalClass = NSBundle;
+				INFOPLIST_KEY_NSPrincipalClass = XCMBuildSystem;
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				ON_DEMAND_RESOURCES_INITIAL_INSTALL_TAGS = "XCMBuild XCMClean XCMHelper XCMRunner";
 				PLIST_FILE_OUTPUT_FORMAT = XML;
-				"PLIST_FILE_OUTPUT_FORMAT[sdk=macosx*]" = "same-as-input";
 				PRODUCT_NAME = "$(PROJECT_NAME:c99extidentifier)";
 				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
-				STRINGS_FILE_OUTPUT_ENCODING = "UTF-8";
-				WRAPPER_EXTENSION = framework;
-				WRAPPER_NAME = "$(PRODUCT_NAME:c99extidentifier).$(WRAPPER_EXTENSION)";
 			};
 			name = Debug;
 		};
@@ -1278,14 +1221,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 845B9CC12AB3EB2600C58987 /* XcodeBuildGlueConfig.xcconfig */;
 			buildSettings = {
-				CONTENTS_FOLDER_PATH = "$(PRODUCT_NAME:c99extidentifier).$(WRAPPER_EXTENSION)/Versions/$(MARKETING_VERSION)";
-				DEAD_CODE_STRIPPING = YES;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
-				INFOPLIST_KEY_NSPrincipalClass = NSBundle;
+				INFOPLIST_KEY_NSPrincipalClass = XCMBuildSystem;
+				"MACOSX_DEPLOYMENT_TARGET[arch=i386]" = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
+				"MACOSX_DEPLOYMENT_TARGET[arch=x86_64]" = 12;
 				ON_DEMAND_RESOURCES_INITIAL_INSTALL_TAGS = "XCMBuild XCMClean XCMHelper XCMRunner";
+				PLIST_FILE_OUTPUT_FORMAT = "same-as-input";
 				PRODUCT_NAME = "$(PROJECT_NAME:c99extidentifier)";
-				WRAPPER_EXTENSION = framework;
-				WRAPPER_NAME = "$(PRODUCT_NAME:c99extidentifier).$(WRAPPER_EXTENSION)";
 			};
 			name = Release;
 		};
@@ -1299,11 +1241,14 @@
 					debug,
 				);
 				DEAD_CODE_STRIPPING = YES;
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				ONLY_ACTIVE_ARCH = NO;
 				ORDER_FILE = stubs/Clang/orderfile;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.adhoc.dt.orderfile.$(PROJECT:c99extidentifier)";
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
-				PRODUCT_NAME = "$(PROJECT_NAME:c99extidentifier)-order-$(CURRENT_VARRIANT)-$(CURRENT_ARCH).txt";
+				TARGET_TEMP_DIR = "$(PROJECT_TEMP_DIR:standardizepath)/Cache/$(PROJECT_NAME).tmp";
+				USE_HEADERMAP = NO;
+				WRAPPER_NAME = "$(PROJECT_NAME:c99extidentifier).$(WRAPPER_EXTENSION)";
 			};
 			name = Debug;
 		};
@@ -1317,11 +1262,14 @@
 					debug,
 				);
 				DEAD_CODE_STRIPPING = YES;
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				ORDER_FILE = stubs/Clang/orderfile;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.adhoc.dt.orderfile.$(PROJECT:c99extidentifier)";
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
-				PRODUCT_NAME = "$(PROJECT_NAME:c99extidentifier)-order-$(CURRENT_VARRIANT)-$(CURRENT_ARCH).txt";
 				SUPPORTED_PLATFORMS = "watchsimulator watchos macosx iphonesimulator iphoneos driverkit appletvsimulator appletvos";
+				TARGET_TEMP_DIR = "$(PROJECT_TEMP_DIR:standardizepath)/Cache/$(PROJECT_NAME).tmp";
+				USE_HEADERMAP = NO;
+				WRAPPER_NAME = "$(PROJECT_NAME:c99extidentifier).$(WRAPPER_EXTENSION)";
 			};
 			name = Release;
 		};
@@ -1335,6 +1283,7 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				INFOPLIST_KEY_NSPrincipalClass = NSBundle;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				OBJROOT = build;
 				ON_DEMAND_RESOURCES_PREFETCH_ORDER = XCMBuild;
 				OTHER_CODE_SIGN_FLAGS = "$(inhereted) --prefix=org.pak.dt. --preserve-metadata";
@@ -1360,6 +1309,7 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				INFOPLIST_KEY_NSPrincipalClass = NSBundle;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				"MACOSX_DEPLOYMENT_TARGET[arch=arm64e]" = 13.3;
 				"MACOSX_DEPLOYMENT_TARGET[arch=i386]" = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				OBJROOT = build;
@@ -1395,15 +1345,14 @@
 			buildSettings = {
 				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "";
 				DEPLOYMENT_LOCATION = YES;
 				DEPLOYMENT_POSTPROCESSING = YES;
-				"GENERATE_PKGINFO_FILE[sdk=macosx*]" = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = XCMBuild;
 				LLVM_LTO = NO;
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				ON_DEMAND_RESOURCES_INITIAL_INSTALL_TAGS = XCMBuild;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-8";
-				"TAPI_ENABLE_PROJECT_HEADERS[sdk=macosx*]" = YES;
 				TAPI_VERIFY_MODE = Pedantic;
 			};
 			name = Debug;
@@ -1413,13 +1362,12 @@
 			baseConfigurationReference = 8498B86E2AB108AD001084D8 /* XcodeFrameworkConfig.xcconfig */;
 			buildSettings = {
 				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
-				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = YES;
+				CODE_SIGN_IDENTITY = "";
 				DEPLOYMENT_LOCATION = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = XCMBuild;
 				LLVM_LTO = NO;
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				ON_DEMAND_RESOURCES_INITIAL_INSTALL_TAGS = XCMBuild;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				STRINGS_FILE_OUTPUT_ENCODING = "UTF-8";
 				TAPI_VERIFY_MODE = ErrorsAndWarnings;
 			};
 			name = Release;
@@ -1428,6 +1376,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8498B86E2AB108AD001084D8 /* XcodeFrameworkConfig.xcconfig */;
 			buildSettings = {
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				PRODUCT_NAME = "$(PROJECT_NAME)";
 			};
 			name = Debug;
@@ -1436,6 +1385,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8498B86E2AB108AD001084D8 /* XcodeFrameworkConfig.xcconfig */;
 			buildSettings = {
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				PRODUCT_NAME = "$(PROJECT_NAME)";
 			};
 			name = Release;
@@ -1445,7 +1395,6 @@
 			baseConfigurationReference = 84BD1E642AAFDFD7004F72DF /* XcodeTestingConfig.xcconfig */;
 			buildSettings = {
 				CONTENTS_FOLDER_PATH = "$(PRODUCT_NAME:c99extidentifier).$(WRAPPER_EXTENSION)/Versions/$(MARKETING_VERSION)";
-				DEAD_CODE_STRIPPING = YES;
 				PRODUCT_NAME = "$(PROJECT_NAME:c99extidentifier)";
 				WRAPPER_EXTENSION = framework;
 				WRAPPER_NAME = "$(PRODUCT_NAME:c99extidentifier).$(WRAPPER_EXTENSION)";
@@ -1457,7 +1406,6 @@
 			baseConfigurationReference = 84BD1E642AAFDFD7004F72DF /* XcodeTestingConfig.xcconfig */;
 			buildSettings = {
 				CONTENTS_FOLDER_PATH = "$(PRODUCT_NAME:c99extidentifier).$(WRAPPER_EXTENSION)/Versions/$(MARKETING_VERSION)";
-				DEAD_CODE_STRIPPING = YES;
 				PRODUCT_NAME = "$(PROJECT_NAME:c99extidentifier)";
 				WRAPPER_EXTENSION = framework;
 				WRAPPER_NAME = "$(PRODUCT_NAME:c99extidentifier).$(WRAPPER_EXTENSION)";
@@ -1468,9 +1416,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 847CEBDD2AB3958800D86C91 /* Debug.xcconfig */;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CODE_SIGN_IDENTITY = "$(RELEASE_CODE_SIGN_IDENTITY)";
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
 				CODE_SIGN_STYLE = Manual;
+				ONLY_ACTIVE_ARCH = YES;
 			};
 			name = Debug;
 		};
@@ -1478,6 +1428,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 847CEBE02AB3970300D86C91 /* Release.xcconfig */;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CODE_SIGN_IDENTITY = "$(RELEASE_CODE_SIGN_IDENTITY)";
 				CODE_SIGN_STYLE = Manual;
 			};

@@ -71,7 +71,6 @@ test -x "$(command -v find)" || exit 126 ;
 test -x "$(command -v git)" || exit 126 ;
 hash -p ./.github/tool_shlock_helper.sh shlock || exit 255 ;
 test -x "$(command -v shlock)" || exit 126 ;
-test -x "$(command -v shellcheck)" || exit 126 ;
 declare -i EXIT_CODE=1 ;
 
 function cleanup() {

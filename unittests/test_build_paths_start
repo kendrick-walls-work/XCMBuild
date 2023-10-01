@@ -77,6 +77,13 @@
 #    even if the above stated remedy fails of its essential purpose.
 ################################################################################
 
-echo "Not Implemented Yet."
+
+test -e "${1}" || exit 2 ;
+test -d "${1}" || test -h "${1}" || test -L "${1}" || exit 3 ;
+test -d "${1}/Versions" || test -h "${1}/Versions" || test -L "${1}/Versions" || exit 4 ;
+file -b --mime "${1}/Versions/Current" 2>/dev/null ;
+test -h "${1}/Versions/Current" || test -L "${1}/Versions/Current" || exit 5 ;
+
+echo "Not Fully Implemented Yet."
 
 exit 0 ;

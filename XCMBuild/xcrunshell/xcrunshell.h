@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @framework XCMBuild.XCRunshell
+ * @framework XCMBuild
  * @version 2.1
  *
  * @abstract

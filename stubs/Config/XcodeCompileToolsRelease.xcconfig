@@ -35,7 +35,7 @@ MODULE_NAME = $(TARGET_NAME:c99extidentifier)
 DEAD_CODE_STRIPPING = $(STRIP_INSTALLED_PRODUCT)
 LINKER_DISPLAYS_MANGLED_NAMES[sdk=macosx*] = !$(DEAD_CODE_STRIPPING)
 OTHER_LDFLAGS = -ObjC -weak_framework CoreFoundation,framework -weak_framework Foundation,framework -framework XCMBuild,framework
-LD_RUNPATH_SEARCH_PATHS = $(inherited) @executable_path/../../../XCMBuild.framework @executable_path/../Frameworks @executable_path/../../../Current @loader_path/Frameworks $(DSTROOT:standardizepath)/$(LOCAL_LIBRARY_DIR:standardizepath)/Frameworks
+LD_RUNPATH_SEARCH_PATHS = $(inherited) @executable_path/../../$(LOCAL_LIBRARY_DIR:standardizepath)/Frameworks/XCMBuild.framework @executable_path/../lib @executable_path/../../../Current @loader_path/Frameworks @loader_path/../Frameworks @loader_path/../lib
 DEFINES_MODULE = YES
 PRODUCT_MODULE_NAME = $(PROJECT_NAME:c99extidentifier).$(PRODUCT_NAME:c99extidentifier)
 PRODUCT_NAME = $(TARGET_NAME:c99extidentifier)

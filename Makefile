@@ -28,11 +28,15 @@
 # THANKS to the user https://stackoverflow.com/users/999943/phyatt
 # For the solid answer to https://stackoverflow.com/a/35320895
 
+ifeq "$(LC_CTYPE)" ""
+	LC_CTYPE="en_US.UTF-8"
+endif
+
 ifneq ($(words $(MAKECMDGOALS)),1) # if no argument was given to make...
 .DEFAULT_GOAL = all # set the default goal to all
 
 ifeq "$(ECHO)" ""
-	ECHO=command -pv echo
+	ECHO=command -p echo
 endif
 
 %:		# define a last resort default rule
@@ -40,19 +44,31 @@ endif
 
 else
 
-
 ifeq "$(SHELL)" ""
 	SHELL=command -pv bash
 endif
 
+ifeq "$(COMMAND)" ""
+	COMMAND_CMD=`command -v xcrun || command which which || command -v which || command -v command`
+	ifeq "$(COMMAND_CMD)" "*xcrun"
+		COMMAND_ARGS=--find
+	endif
+	ifeq "$(COMMAND_CMD)" "*command"
+		COMMAND_ARGS=-pv
+	endif
+	COMMAND=$(COMMAND_CMD) $(COMMAND_ARGS)
+endif
+
 ifeq "$(MAKE)" ""
-	MAKE=command -pv make
+	#  just no cmake please
+	MAKE=$($(COMMAND) make || $(COMMAND) gnumake) -s -j1
 endif
 
 ifndef ECHO
+LOG=no
 T := $(shell $(MAKE) $(MAKECMDGOALS) --no-print-directory \
       -nrRf $(firstword $(MAKEFILE_LIST)) \
-      ECHO="COUNTTHIS" | grep -c "COUNTTHIS" 2>/dev/null)
+      ECHO="COUNTTHIS" | grep -cF "COUNTTHIS" 2>/dev/null)
 N := x
 C = $(words $N)$(eval N := x $N)
 ECHO = echo -ne "\r [`expr $C '*' 100 / $T`%]"
@@ -60,21 +76,31 @@ endif
 
 # end of CC-SA-v3 inpired content 21-61
 
+ifdef "$(ACTION)"
+	SET_FILE_ATTR=$(COMMAND) xattr
+endif
+
+ifdef "$(SET_FILE_ATTR)"
+	CREATEDBYBUILDSYSTEM=-w com.apple.xcode.CreatedByBuildSystem true
+	BSMARK=$(SET_FILE_ATTR) $(CREATEDBYBUILDSYSTEM)
+else
+	BSMARK=$(COMMAND) touch -a
+endif
 
 ifeq "$(ALFW)" ""
 	ALFW=/usr/libexec/ApplicationFirewall/socketfilterfw
 endif
 
 ifeq "$(PFCTL)" ""
-	PFCTL=command -v pfctl
+	PFCTL=$(COMMAND) pfctl
 endif
 
 ifeq "$(LINK)" ""
-	LINK=command -v ln -sf
+	LINK=$(COMMAND) ln -sf
 endif
 
 ifeq "$(GIT)" ""
-	GIT=`command -pv git`
+	GIT=$(COMMAND) git
 endif
 
 ifeq "$(WAIT)" ""
@@ -82,31 +108,31 @@ ifeq "$(WAIT)" ""
 endif
 
 ifeq "$(RM)" ""
-	RM=command -pv rm -f
+	RM=$(COMMAND) rm -f
 endif
 
 ifeq "$(CHMOD)" ""
-	CHMOD=command -pv chmod -v
+	CHMOD=$(COMMAND) chmod -v
 endif
 
 ifeq "$(CHOWN)" ""
-	CHOWN=command -pv chown -v
+	CHOWN=$(COMMAND) chown -v
 endif
 
 ifeq "$(CP)" ""
-	CP=command -pv cp -n
+	CP=$(COMMAND) cp -n
 endif
 
 ifeq "$(MKDIR)" ""
-	MKDIR=command -pv mkdir -m 0755
+	MKDIR=$(COMMAND) mkdir -m 0755
 endif
 
 ifeq "$(RMDIR)" ""
-	RMDIR=$(RM)dR
+	RMDIR=$(RM)Rd
 endif
 
 ifeq "$(INSTALL)" ""
-	INSTALL=xcrun install -M
+	INSTALL=$(COMMAND) install -M
 	ifeq "$(INST_OWN)" ""
 		USER=`id -u`
 	endif
@@ -142,7 +168,16 @@ endif
 
 ifeq "$(LOG)" "no"
 	QUIET=@
+	ifndef DO_FAIL
+		DO_FAIL=$(COMMAND) :
+	endif
+else
+	ifeq "$(DO_FAIL)" ""
+		# any other log mode MAY CAUSE ISSUES with progress logic b/c extra echo in loop
+		DO_FAIL=$(ECHO) "ok"
+	endif
 endif
+
 
 .SUFFIXES: .zip .php .css .html .bash .sh .py .pyc .txt .js .plist .dmg
 
@@ -210,10 +245,11 @@ purge: clean uninstall
 	$(QUIET)$(ECHO) "$@: Done. (Please restart)"
 
 test: cleanup
-	$(QUIET)$(ECHO) "$@: START."
-	$(QUIET)$(GIT) ls-files ./tests/test_*sh 2>/dev/null | xargs -L1 -I{} $(SHELL) -c "({} && echo '{}: Succeded') || echo '{}: FAILURE' >&2 ; " ;
+	$(QUIET)$(ECHO) "$@: START." ;
 	$(QUIET)$(WAIT) ;
-	$(QUIET)$(ECHO) "$@: END."
+	$(QUIET)$(GIT) ls-files ./tests/test_*sh -z 2>/dev/null | xargs -0 -L1 -I{} $(SHELL) -c "({} && echo '{}: Succeded') || echo '{}: FAILURE' >&2 ; " ;
+	$(QUIET)$(WAIT) ;
+	$(QUIET)$(ECHO) "$@: END." ;
 
 test-tox: cleanup
 	$(QUIET)$(ECHO) "$@: N/A."
@@ -243,7 +279,7 @@ cleanup:
 
 clean: cleanup
 	$(QUIET)$(WAIT) ;
-	$(QUIET)$(ECHO) "$@: Done."
+	$(QUIET)$(ECHO) "$@: Done." ;
 
 must_be_root:
 	$(QUIET)runner=`whoami` ; \

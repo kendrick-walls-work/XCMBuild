@@ -20,13 +20,13 @@
 #ifndef XCMBuild_h
 #if defined(__has_include)
 #if __has_include(<XCMBuild/XCMBuild.h>)
-/*! @parseOnly */
+/// Comment: Defined when ``XCMBuildSystem`` re-imports `XCMBuild.h`.
 #define XCMBuild_h "<XCMBuild/XCMBuild.h> (XCMBuildSystem)"
 #import <XCMBuild/XCMBuild.h>
 #endif
 #endif /* !__has_include */
 #ifndef XCMBuild_h
-/*! @parseOnly */
+/// Defined when ``XCMBuildSystem`` includes the `XCMBuild.h` header.
 #define XCMBuild_h "XCMBuild.h (XCMBuildSystem)"
 #import "XCMBuild.h"
 #endif /* XCMBuild_h (inner) */
@@ -35,19 +35,36 @@
 #endif /* !__clang__ */
 #endif /* XCMBuild_h (outer) */
 
-#if TARGET_OS_OSX
 
-@class NSBundle, NSString;
+#if defined(TARGET_OS_OSX) && TARGET_OS_OSX || TARGET_OS_UNIX || TARGET_OS_LINUX
+
+@class NSBundle, NSString, NSObject;
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
-//! XCMBuildSystem allows building projects via makefiles with the targets "build" "install" "clean" "test" "uninstall"
-@interface XCMBuildSystem : NSBundle
+/// XCMBuildSystem allows building projects via makefiles with the targets `build`, `install`, `clean`, `test`, `uninstall`, etc.
+@interface XCMBuildSystem : NSBundle {
+}
+
+/// Returns the string describing the object in the debugger.
+/// See  <doc:NSObject/description> for details.
+/// ``XCMBuildSystem``'s implementation of this method simply prints the name of the class.
+///
+/// - Returns: The <doc:NSString> that represents the contents of the ``XCMBuildSystem`` class.
++ (NSString *)debugDescription;
 
 #if defined(__clang__)
 #pragma mark *** XCMBuildSystem ***
 #endif /* !__clang__ */
 
+/// See <doc:NSBundle/pathForAuxiliaryExecutable:> for Details.
+///
+/// - Parameters:
+///   - executableName: The build system `Action`.
+///     Namely one of `clean`, `build`, `analyze`, `profile`, `test`, `install`, or `archive`.
+///     Optionally prefixed with `un`, `pre-` or `post-`.
+///
+/// - Returns: The <doc:NSString> containing the full path to the requested `excutable` if available; otherwise `nil`.
 - (nullable NSString *)pathForAuxiliaryExecutable:(NSString *)executableName NS_REQUIRES_SUPER;
 
 @end
@@ -55,5 +72,6 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 NS_HEADER_AUDIT_END(nullability, sendability)
 
 #endif /* TARGET_OS_OSX */
+/// Defined whenever the ``XCMBuildSystem`` is loaded.
 #define XCMBuildSystem_h "XCMBuildSystem.h"
 #endif /* XCMBuildSystem_h */

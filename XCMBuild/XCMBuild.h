@@ -15,10 +15,7 @@
  *
  * @framework XCMBuild
  * @version 2.1
- *
- * @abstract
- * TODO
- *
+ * @abstract TODO
  * @discussion
  * It is worth noting: `XCM` (including `XCMBuild`) the unsafe ``TARGET_OS_WIN32`` (and all Windows and/or 32-bit architechtures)
  * for all compat versions 2+ due to the expectation of `64-bit *nix` runtimes.
@@ -28,13 +25,15 @@
 
 #if defined(__is_target_environment)
 #if __is_target_environment(simulator)
+
+//! Defined whenever ``XCMBuild`` is imported.
 #define XCMB_XCMBuild_h "XCMBuild.tbd"
 #error UNSUPPORTED BUILD
 #endif
 #endif
 
 #ifndef XCMB_XCMBuild_h
-/*! @parseOnly */
+//! Defined whenever ``XCMBuild`` is imported.
 #define XCMB_XCMBuild_h "XCMBuild.h"
 
 #if defined(__has_include)
@@ -70,7 +69,12 @@
 #if TARGET_OS_WIN32
 #warning UNSUPPORTED BUILD
 #endif
-/*! @parseOnly */
+/*!
+>Important: ``XCMBuild`` is explicidly incompatible with the target ``TARGET_OS_WIN32``.
+>
+>It is worth noting: `XCM` (including ``XCMBuild``) are incompatible with the unsafe ``TARGET_OS_WIN32`` (and all
+>Windows and/or 32-bit architechtures) for all compat versions 2+ due to the expectation of `64-bit *nix` runtimes.
+*/
 #undef TARGET_OS_WIN32
 #endif
 
@@ -84,9 +88,21 @@
 #import <Foundation/NSFileHandle.h>
 // #import <Foundation/NSBundle.h>
 #import <Foundation/NSTask.h>
-/*! @parseOnly */
+//! @NoParse NSTask_h
 #define NSTask_h "NSTask.h"
 #endif /* NSTask_h */
+
+/** After NSObjeect  **/
+
+#ifndef XCMB_NSDebug_h
+#if defined(__has_include)
+#if __has_include(<Foundation/NSDebug.h>)
+#import <Foundation/NSDebug.h>
+#endif /* !__has_include(<Foundation/NSObjCRuntime.h>) */
+#endif /* !__has_include_Foundation_Debug */
+/*! @NoParse */
+#define XCMB_NSDebug_h (int)(1)
+#endif
 
 #ifndef NSNSBundle_h
 // #import <Foundation/Foundation.h>
@@ -95,7 +111,7 @@
 #import <Foundation/NSProgress.h>
 #import <Foundation/NSNotification.h>
 #import <Foundation/NSBundle.h>
-/*! @parseOnly */
+/*! @NoParse */
 #define NSBundle_h "NSBundle.h"
 #endif /* NSBundle_h */
 
@@ -160,3 +176,20 @@ extern const unsigned char XCMBuildVersionString[];
 
 #endif /* END UMBRELLA include */
 #endif /* !XCMB_XCMBuild_h */
+
+/*!
+ * @abstract This list provides a summary of the guidelines for improving specific aspects of a dynamic library:
+ * Ease of use
+ * @TODO: Reduce the number of symbols a library exports.
+ * @TODO: Provide unique names to public interfaces.
+ * Ease of maintenance
+ * @TODO: Export accessor functions to variables. Don’t export variables.
+ * @TODO: Implement public interfaces as wrappers to internal, private interfaces.
+ * Performance
+ * @TODO: Minimize the number of references to symbols in dependent libraries. Use `dlsym(RTLD_GLOBAL, <symbol_name>)` to obtain the address of symbols exported by dependent libraries when they are needed.
+ * @TODO: Minimize the number of dependent libraries. Consider loading libraries with `dlopen` when absolutely necessary. Remember to close the library with `dlclose` when done.
+ * @TODO: Implement public interfaces as wrappers to internal, private interfaces.
+ * Compatibility
+ * @TODO: Export symbols as weakly linked symbols.
+ * @TODO: Encode a library’s major version number in its filename.
+*/

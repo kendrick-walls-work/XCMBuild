@@ -86,7 +86,13 @@ function safetyCheckSerialized() {
 	else
 		if [[ ( ${SCRIPT_INPUT_FILE_COUNT} -gt 1 ) ]] || [[ ( ${SCRIPT_INPUT_FILE_COUNT} -lt 0 ) ]] ; then
 			echo "${FUNCNAME:-$0}:${BASH_LINENO:-0}: error: failed to validate serialized input. ( unsupported input )" 1>&2 ;
+			if [[ ( ${SCRIPT_INPUT_FILE_COUNT} -lt 0 ) ]] ; then
+				echo "${FUNCNAME:-$0}:${BASH_LINENO:-0}: error: Negitive inputs makes no sense! ( garbage input )" 1>&2 ;
+			fi ;
 			false ;
+			if [[ ( ${SCRIPT_INPUT_FILE_COUNT} -gt 1 ) ]] ; then
+				echo "${FUNCNAME:-$0}:${BASH_LINENO:-0}: warning: No more than a single input was expected. ( input overload )" 1>&2 ;
+			fi ;
 		fi ;
 		if [[ ( ${SCRIPT_OUTPUT_FILE_COUNT} -gt 1 ) ]] || [[ ( ${SCRIPT_OUTPUT_FILE_COUNT} -lt 0 ) ]] ; then
 			echo "${FUNCNAME:-$0}:${BASH_LINENO:-0}: error: failed to validate serialized output. ( unsupported output )" 1>&2 ;
@@ -97,5 +103,37 @@ function safetyCheckSerialized() {
 }
 
 export -f safetyCheckSerialized ;
+
+
+# logic:
+# check if $# is even
+# branch on true and assume (in1,out1 ... in-n,out-n) style
+# on branch TODO ....
+# else if $# is odd check that $1 is a file (abort if missing)
+# branch if $1 is a file
+# on branch run $0 in-n out-n from n=1 until n>($#/2)
+
+function autoSerializeArgsAsToFrom() {
+	if [[ -z ${1} ]] || [[ -z ${2} ]] ; then
+		echo "${FUNCNAME[${BASH_SHLVL:-0}]:-$0}:${BASH_LINENO:-0}: note: expected serialized script mode. ( attempting ${FUNCNAME:-$_} )" 1>&2 ;
+		exec ${SHELL:-/bin/bash} -c "SCRIPT_INPUT_FILE_COUNT=1 ; SCRIPT_OUTPUT_FILE_COUNT=1 ; SCRIPT_INPUT_FILE_0=\${1} ; SCRIPT_OUTPUT_FILE_0=\${2} ; $0 ; exit $? ;" ;
+	else
+		if [[ ( ${SCRIPT_INPUT_FILE_COUNT} -gt 1 ) ]] || [[ ( ${SCRIPT_INPUT_FILE_COUNT} -lt 0 ) ]] ; then
+			echo "${FUNCNAME:-$0}:${BASH_LINENO:-0}: error: failed to validate serialized input. ( unsupported input )" 1>&2 ;
+			if [[ ( ${SCRIPT_INPUT_FILE_COUNT} -lt 0 ) ]] ; then
+				echo "${FUNCNAME:-$0}:${BASH_LINENO:-0}: error: Negitive inputs makes no sense! ( garbage input )" 1>&2 ;
+			fi ;
+			false ;
+			if [[ ( ${SCRIPT_INPUT_FILE_COUNT} -gt 1 ) ]] ; then
+				echo "${FUNCNAME:-$0}:${BASH_LINENO:-0}: warning: No more than a single input was expected. ( input overload )" 1>&2 ;
+			fi ;
+		fi ;
+		if [[ ( ${SCRIPT_OUTPUT_FILE_COUNT} -gt 1 ) ]] || [[ ( ${SCRIPT_OUTPUT_FILE_COUNT} -lt 0 ) ]] ; then
+			echo "${FUNCNAME:-$0}:${BASH_LINENO:-0}: error: failed to validate serialized output. ( unsupported output )" 1>&2 ;
+			false ;
+		fi ;
+		true ;
+	fi ;
+}
 
 # source to include
