@@ -33,7 +33,7 @@
 #define XCMBuild_h "XCMBuild.h (XCRunShell)"
 #import "XCMBuild.h"
 #endif /* XCMBuild_h (inner) */
-#if __clang__
+#if defined(__clang__)
 #pragma clang final(XCMBuild_h)
 #endif /* !__clang__ */
 #endif /* XCMBuild_h (outer) */
@@ -54,7 +54,7 @@ const int XCRS_MINARGS = 1;
 #define XCMShell_h "XCMShell.h (XCRunShell)"
 #import "XCMShell.h"
 #endif /* XCMShell_h (inner) */
-#if __clang__
+#if defined(__clang__)
 #pragma clang final(XCMShell_h)
 #endif /* !__clang__ */
 #endif /* XCMShell_h (outer) */

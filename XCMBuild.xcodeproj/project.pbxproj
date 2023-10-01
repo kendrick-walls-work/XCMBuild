@@ -399,7 +399,7 @@
 		8446EC152A7C849700B93693 /* styletests.sh */ = {isa = PBXFileReference; explicitFileType = text.script.sh; fileEncoding = 4; lineEnding = 0; name = styletests.sh; path = bin/styletests.sh; sourceTree = "<group>"; };
 		84502A772AB8E44300AA5382 /* module.private.modulemap */ = {isa = PBXFileReference; explicitFileType = "sourcecode.module-map"; fileEncoding = 4; lineEnding = 0; name = module.private.modulemap; path = Clang/module.private.modulemap; sourceTree = "<group>"; };
 		8459CF3A2AA125FA00DAFF86 /* xcode_copyfile.bash */ = {isa = PBXFileReference; explicitFileType = text.script.bash; fileEncoding = 4; lastKnownFileType = text.script.sh; name = xcode_copyfile.bash; path = bin/xcode_copyfile.bash; sourceTree = "<group>"; };
-		8459CF3C2AA137E800DAFF86 /* serialized */ = {isa = PBXFileReference; explicitFileType = text.script.bash; fileEncoding = 4; lastKnownFileType = text.script.sh; name = serialized; path = bin/serialized; sourceTree = "<group>"; };
+		8459CF3C2AA137E800DAFF86 /* serialized */ = {isa = PBXFileReference; explicitFileType = text.script.bash; fileEncoding = 4; lastKnownFileType = text.script.sh; name = serialized; path = bin/serialized; sourceTree = SOURCE_ROOT; };
 		845B9CC12AB3EB2600C58987 /* XcodeBuildGlueConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = XcodeBuildGlueConfig.xcconfig; path = Config/XcodeBuildGlueConfig.xcconfig; sourceTree = "<group>"; };
 		845B9CC22AB3ECD900C58987 /* XcodeBuildDebugGlueConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = XcodeBuildDebugGlueConfig.xcconfig; path = Config/XcodeBuildDebugGlueConfig.xcconfig; sourceTree = "<group>"; };
 		845C71132AC2367B00DD9EE9 /* XcodeCompileRunShellDebug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = XcodeCompileRunShellDebug.xcconfig; path = Config/XcodeCompileRunShellDebug.xcconfig; sourceTree = "<group>"; };
@@ -407,6 +407,7 @@
 		845C711A2AC2404500DD9EE9 /* libSystem.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libSystem.tbd; path = usr/lib/libSystem.tbd; sourceTree = SDKROOT; };
 		84619D782A85BCA7009C5753 /* xcrunshell */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = xcrunshell; sourceTree = BUILT_PRODUCTS_DIR; };
 		84619D7A2A85BCA7009C5753 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		846E3C0F2AC91D8200666235 /* snooze */ = {isa = PBXFileReference; explicitFileType = text.script.sh; fileEncoding = 4; lineEnding = 0; name = snooze; path = bin/snooze; sourceTree = SOURCE_ROOT; };
 		847527F42AA150E000B1FDE3 /* apfs_dir_CONFIG_ACLs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; lineEnding = 0; path = apfs_dir_CONFIG_ACLs; sourceTree = "<group>"; };
 		847527F52AA150E000B1FDE3 /* apfs_dir_DEVELOPER_ACLs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = apfs_dir_DEVELOPER_ACLs; sourceTree = "<group>"; };
 		847527F62AA150E000B1FDE3 /* apfs_file_CONFIG_ACLs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = apfs_file_CONFIG_ACLs; sourceTree = "<group>"; };
@@ -584,6 +585,7 @@
 				8446EC112A7C849700B93693 /* prunefile */,
 				8459CF3C2AA137E800DAFF86 /* serialized */,
 				84838D2D2A7D8A46008BC8C1 /* flatten */,
+				846E3C0F2AC91D8200666235 /* snooze */,
 			);
 			name = bin;
 			sourceTree = "<group>";

@@ -16,20 +16,7 @@
 
 // take note to implement __clang_literal_encoding__ checks before clang does.
 
-#ifndef XCMTest_h
-#if defined(__has_include)
-#if __has_include(<XCMBuild/XCMTest.h>)
-#define XCMTest_h "<XCMBuild/XCMTest.h> (XCMTestTool)"
 #import <XCMBuild/XCMTest.h>
-#endif
-#else /* !__has_include */
-#define XCMTest_h "XCMTest.h (XCMTestTool)"
-#import "XCMTest.h"
-#endif /* XCMTest_h (inner) */
-#if defined(__clang__)
-#pragma clang final(XCMTest_h)
-#endif /* !__clang__ */
-#endif /* XCMTest_h (outer) */
 
 #if defined(__has_attribute)
 #if __has_attribute(used)

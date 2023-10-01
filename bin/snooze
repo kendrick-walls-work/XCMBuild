@@ -1,6 +1,6 @@
 #! /bin/bash
 
-# reactive-firewall/XCMBuild Tool
+# reactive-firewall/XCMBuild Snooze Tool
 # ..................................
 # Copyright (c) 2023, Mr. Walls
 # ..................................
@@ -77,68 +77,27 @@
 #    even if the above stated remedy fails of its essential purpose.
 ################################################################################
 
+# see https://github.com/dylanaraps/pure-bash-bible#other
+# ideas from https://blog.dhampir.no/content/sleeping-without-a-subprocess-in-bash-and-how-to-sleep-forever
+# Thier work was based on CC-BY-SA4 from: https://stackoverflow.com/help/licensing
+# source: https://unix.stackexchange.com/questions/68236/avoiding-busy-waiting-in-bash-without-the-sleep-command
+# code: https://unix.stackexchange.com/a/407383
+# author: https://unix.stackexchange.com/users/263036/bolt
+# attribute: https://unix.stackexchange.com/questions/68236/avoiding-busy-waiting-in-bash-without-the-sleep-command
+# Full License details can be found here: https://creativecommons.org/licenses/by-sa/4.0/
+# This implementation is modified and not endorced
 
-function safetyCheckSerialized() {
-	if [[ -z ${SCRIPT_INPUT_FILE_COUNT} ]] || [[ -z ${SCRIPT_OUTPUT_FILE_COUNT} ]] ; then
-		echo "${FUNCNAME:-$0}:${BASH_LINENO:-0}: error: failed to validate serialized script mode. ( unsupported integration )" 1>&2 ;
-		echo "${FUNCNAME:-$0}:${BASH_LINENO:-0}: warning: expected serialized script mode. ( unsupported integration ) Hint: Try 'SCRIPT_INPUT_FILE_COUNT=1 ; SCRIPT_OUTPUT_FILE_COUNT=1 ; SCRIPT_INPUT_FILE_0=\${1} ; SCRIPT_OUTPUT_FILE_0=\${2} ; $0 ;' instead?" 1>&2 ;
-		false ;
-	else
-		if [[ ( ${SCRIPT_INPUT_FILE_COUNT} -gt 1 ) ]] || [[ ( ${SCRIPT_INPUT_FILE_COUNT} -lt 0 ) ]] ; then
-			echo "${FUNCNAME:-$0}:${BASH_LINENO:-0}: error: failed to validate serialized input. ( unsupported input )" 1>&2 ;
-			if [[ ( ${SCRIPT_INPUT_FILE_COUNT} -lt 0 ) ]] ; then
-				echo "${FUNCNAME:-$0}:${BASH_LINENO:-0}: error: Negitive inputs makes no sense! ( garbage input )" 1>&2 ;
-			fi ;
-			false ;
-			if [[ ( ${SCRIPT_INPUT_FILE_COUNT} -gt 1 ) ]] ; then
-				echo "${FUNCNAME:-$0}:${BASH_LINENO:-0}: warning: No more than a single input was expected. ( input overload )" 1>&2 ;
-			fi ;
-		fi ;
-		if [[ ( ${SCRIPT_OUTPUT_FILE_COUNT} -gt 1 ) ]] || [[ ( ${SCRIPT_OUTPUT_FILE_COUNT} -lt 0 ) ]] ; then
-			echo "${FUNCNAME:-$0}:${BASH_LINENO:-0}: error: failed to validate serialized output. ( unsupported output )" 1>&2 ;
-			false ;
-		fi ;
-		true ;
-	fi ;
+function snooze() {
+	local IFS
+	[[ -n "${_snooze_fd:-}" ]] || { exec {_snooze_fd}<> <(:) && read -r -t 0 -u $_snooze_fd; } 2>/dev/null || {
+		# workaround for MacOS and similar systems
+		local fifo
+		fifo=$(mktemp -u)
+		mkfifo -m 700 "$fifo"
+		exec {_snooze_fd}<>"$fifo"
+		rm "$fifo"
+	}
+	read -t "${1:-1}" -u $_snooze_fd || :
 }
 
-export -f safetyCheckSerialized ;
-
-
-# logic:
-# check if $# is even
-# branch on true and assume (in1,out1 ... in-n,out-n) style
-# on branch TODO ....
-# else if $# is odd check that $1 is a file (abort if missing)
-# branch if $1 is a file
-# on branch run $0 in-n out-n from n=1 until n>($#/2)
-# function autoVectorTypeSPMD()
-# usage autoVectorTypeSPMD CMD SRC1 DST1 ...
-
-
-
-
-function autoSerializeArgsAsToFrom() {
-	if [[ ( $# -ne 2 ) ]] || [[ -z ${1} ]] || [[ -z ${2} ]] ; then
-		echo "${FUNCNAME[${BASH_SHLVL:-0}]:-$0}:${BASH_LINENO:-0}: note: expected serialized script mode. ( attempting ${FUNCNAME:-$_} )" 1>&2 ;
-		${SHELL:-/bin/bash} -c "SCRIPT_INPUT_FILE_COUNT=1 ; SCRIPT_OUTPUT_FILE_COUNT=1 ; SCRIPT_INPUT_FILE_0=${1} ; SCRIPT_OUTPUT_FILE_0=${2} ; $0 ; exit $? ;" ; wait ; exit $? ;
-	else
-		if [[ ( ${SCRIPT_INPUT_FILE_COUNT} -gt 1 ) ]] || [[ ( ${SCRIPT_INPUT_FILE_COUNT} -lt 0 ) ]] ; then
-			echo "${FUNCNAME:-$0}:${BASH_LINENO:-0}: error: failed to validate serialized input. ( unsupported input )" 1>&2 ;
-			if [[ ( ${SCRIPT_INPUT_FILE_COUNT} -lt 0 ) ]] ; then
-				echo "${FUNCNAME:-$0}:${BASH_LINENO:-0}: error: Negitive inputs makes no sense! ( garbage input )" 1>&2 ;
-			fi ;
-			false ;
-			if [[ ( ${SCRIPT_INPUT_FILE_COUNT} -gt 1 ) ]] ; then
-				echo "${FUNCNAME:-$0}:${BASH_LINENO:-0}: warning: No more than a single input was expected. ( input overload )" 1>&2 ;
-			fi ;
-		fi ;
-		if [[ ( ${SCRIPT_OUTPUT_FILE_COUNT} -gt 1 ) ]] || [[ ( ${SCRIPT_OUTPUT_FILE_COUNT} -lt 0 ) ]] ; then
-			echo "${FUNCNAME:-$0}:${BASH_LINENO:-0}: error: failed to validate serialized output. ( unsupported output )" 1>&2 ;
-			false ;
-		fi ;
-		true ;
-	fi ;
-}
-
-# source to include
+export -f snooze
