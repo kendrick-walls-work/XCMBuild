@@ -4,7 +4,7 @@
 	@DocumentationExtension(mergeBehavior: append)
 }
 
-@comment {
+@Comment {
 	### License
 
 	Copyright (c) 2014-2023 Mr. Walls

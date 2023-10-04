@@ -105,7 +105,7 @@
 #define NSTask_h "NSTask.h"
 #endif /* NSTask_h */
 
-/** After NSObjeect  **/
+/** After NSObject  **/
 
 #ifndef XCMB_NSDebug_h
 #if defined(__has_include)

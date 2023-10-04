@@ -54,11 +54,11 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 ///
 ///**Usage:**
 ///```objectivec
-/// // set the commandTextToRun ...
-/// NSString * commandTextToRun = @"echo Hello World;";
-/// // ... and run the command and collect the output
-/// BOOL console = [XCMShellTask runCommand:commandTextToRun];
-/// ```
+///// set the commandTextToRun ...
+///NSString * commandTextToRun = @"echo Hello World;";
+///// ... and run the command and collect the output
+///BOOL console = [XCMShellTask runCommand:commandTextToRun];
+///```
 ///
 /// - Parameters:
 ///   - commandToRun: The shell comand text to perform as an `NSString`.
