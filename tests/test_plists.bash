@@ -116,9 +116,9 @@ fi
 
 # THIS IS THE ACTUAL TEST
 _TEST_ROOT_DIR="./stubs" ;
-if [[ -d ../payload ]] ; then
+if [[ -d ../stubs ]] ; then
 	_TEST_ROOT_DIR="../stubs" ;
-elif [[ -d ./payload ]] ; then
+elif [[ -d ./stubs ]] ; then
 	_TEST_ROOT_DIR="./stubs" ;
 elif [[ -d ./.git/ ]] ; then
 	_TEST_ROOT_DIR="./" ;
@@ -128,35 +128,39 @@ else
 fi
 
 for _TEST_DOC in $(find "${_TEST_ROOT_DIR}" \( -iname '*.plist' -o -iname "*.mobileconfig" \) -a -print0 | xargs -0 -L1 -I{} git ls-files "{}" ; wait ;) ; do
-	plutil -lint -- "${_TEST_DOC}" 1>/dev/null 2>&1 || EXIT_CODE=$? ;
-	if [[ (${EXIT_CODE} -ne 0) ]] ; then
-		echo "SKIP: ${_TEST_DOC} is not a valid plist" ;
-	fi
-	xmllint --noout --valid <(plutil -convert xml1 -o - -- "${_TEST_DOC}" ) 1>/dev/null 2>&1 || EXIT_CODE=$? ;
-	if [[ ( ${EXIT_CODE} -ne 0 ) ]] ; then
-		case "$EXIT_CODE" in
-			1) echo "SKIP: Unclassified issue with '${_TEST_DOC}'" ;;
-			2|3|4) echo "FAIL: '${_TEST_DOC}' is invalid." >&2 ;;
-			*) echo "SKIP: Can't check ${_TEST_DOC}" ;;
-		esac
-	fi
-done
-
-for _TEST_DOC in $(find "${_TEST_ROOT_DIR}" -type f -iname '*.xml' -print0 | xargs -0 -L1 -I{} git ls-files "{}" ; wait ;) ; do
-	xmllint --noout --valid "${_TEST_DOC}" 1>/dev/null 2>&1 || EXIT_CODE=$?
-	if [[ ( ${EXIT_CODE} -ne 0 ) ]] ; then
-		case "$EXIT_CODE" in
-			1) echo "SKIP: Unclassified issue with '${_TEST_DOC}'" ;;
-			2|3|4) echo "FAIL: '${_TEST_DOC}' is invalid." >&2 ;;
-			*) echo "SKIP: Can't check ${_TEST_DOC}" ;;
-		esac
+	if [[ (${EXIT_CODE} -eq 0) ]] ; then
+		plutil -lint -- "${_TEST_DOC}" 1>/dev/null 2>&1 || EXIT_CODE=$? ;
+		if [[ (${EXIT_CODE} -ne 0) ]] ; then
+			echo "SKIP: ${_TEST_DOC} is not a valid plist" ;
+		fi
+		xmllint --noout --valid <(plutil -convert xml1 -o - -- "${_TEST_DOC}" ) 1>/dev/null 2>&1 || EXIT_CODE=$? ;
+		if [[ ( ${EXIT_CODE} -ne 0 ) ]] ; then
+			case "$EXIT_CODE" in
+				1) echo "SKIP: Unclassified issue with '${_TEST_DOC}'" ;;
+				2|3|4) echo "FAIL: '${_TEST_DOC}' is invalid." >&2 ;;
+				*) echo "SKIP: Can't check ${_TEST_DOC}" ;;
+			esac
+		fi
 	fi
 done
-
+if [[ (${EXIT_CODE} -eq 0) ]] ; then
+	for _TEST_DOC in $(find "${_TEST_ROOT_DIR}" -type f -iname '*.xml' -print0 | xargs -0 -L1 -I{} git ls-files "{}" ; wait ;) ; do
+		if [[ (${EXIT_CODE} -eq 0) ]] ; then
+			xmllint --noout --valid "${_TEST_DOC}" 1>/dev/null 2>&1 || EXIT_CODE=$?
+			if [[ ( ${EXIT_CODE} -ne 0 ) ]] ; then
+				case "$EXIT_CODE" in
+					1) echo "SKIP: Unclassified issue with '${_TEST_DOC}'" ;;
+					2|3|4) echo "FAIL: '${_TEST_DOC}' is invalid." >&2 ;;
+					*) echo "SKIP: Can't check ${_TEST_DOC}" ;;
+				esac
+			fi
+		fi
+	done
+fi
 unset _TEST_ROOT_DIR 2>/dev/null || true ;
 unset _TEST_DOC 2>/dev/null || true ;
 
-cleanup 2>/dev/null || rm -f ${LOCK_FILE} 2>/dev/null > /dev/null || true ; wait ;
+cleanup 2>/dev/null || rm -f ${LOCK_FILE} 2>/dev/null >/dev/null || true ; wait ;
 
 # goodbye
 exit ${EXIT_CODE:-255} ;

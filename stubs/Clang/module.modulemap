@@ -7,6 +7,7 @@ framework module XCMBuild {
 	export *
 	explicit module XCMShell {
 		requires objc, objc_arc, !cplusplus
+		textual header "XCMShellDelegate.h"
 		textual header "XCMShell.h"
 		export *
 	}

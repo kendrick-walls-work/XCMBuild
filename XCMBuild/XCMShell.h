@@ -57,13 +57,13 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 /// // set the commandTextToRun ...
 /// NSString * commandTextToRun = @"echo Hello World;";
 /// // ... and run the command and collect the output
-/// NSString * console = [XCMShellTask runCommand:commandTextToRun];
+/// BOOL console = [XCMShellTask runCommand:commandTextToRun];
 /// ```
 ///
 /// - Parameters:
 ///   - commandToRun: The shell comand text to perform as an `NSString`.
-/// - Returns: The `standard output` of the resulting `task` as an `NSString`.
-+ (nullable NSString *)runCommand:(NSString *)commandToRun;
+/// - Returns: The `exit code` of the resulting `task` as an `BOOL`.
++ (BOOL)runCommand:(NSString *)commandToRun;
 
 @end
 

@@ -60,7 +60,7 @@
 				return [[NSBundle mainBundle] pathForAuxiliaryExecutable:
 						[NSString stringWithFormat:@"%@/usr/bin/XCM%@",
 						 (NSString *)[self bundlePath],
-						 (NSString *)executableName, nil]];
+						 (NSString *)executableName]];
 			} else {
 				AuxiliaryExecutableChoices = nil;
 				return [super pathForAuxiliaryExecutable:(NSString *)executableName];

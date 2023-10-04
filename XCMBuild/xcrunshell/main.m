@@ -23,6 +23,7 @@
 
 int main(int argc, const char * argv[]) {
 	int exit_code = 1;
+
 	@autoreleasepool {
 #if defined(__has_feature)
 #if __has_feature(thread_sanitizer)
@@ -31,26 +32,18 @@ int main(int argc, const char * argv[]) {
 		if (pid > 0) {
 #endif
 #endif
-
-			NS_VALID_UNTIL_END_OF_SCOPE NSString* console = @"Not Implemented Yet.";
 			if (argc >= XCRS_MINARGS){
 				NSArray *c_argv = [[NSProcessInfo processInfo] arguments];
 				NSArray *args = [c_argv subarrayWithRange:NSMakeRange(1, c_argv.count - 1)];
 				NSString* arguments = [args componentsJoinedByString:@" "];
-				console = [XCMShellTask runCommand:arguments];
-				exit_code = 0;
+				exit_code = (int)[XCMShellTask runCommand:arguments];
 			} else { exit_code = 255; };
-
-			if (exit_code == 0) {
-				NSLog(@"%@", console);
-			};
-
-			console = nil;
 #if defined(__has_feature)
 #if __has_feature(thread_sanitizer)
-		};
+		}; /* if !(pid>0) */
 #endif
 #endif
 	}
+
 	return exit_code;
 }

@@ -1,5 +1,5 @@
 //
-//  Config.xcconfig
+//  XcodeTestingConfig.xcconfig
 //  XCMBuild
 //
 // reactive-firewall/XCMBuild Testing xcconfig
@@ -21,6 +21,11 @@
 // Configuration settings file format documentation can be found at:
 // https://help.apple.com/xcode/#/dev745c5c974
 
+//:configuration = Debug
+#include "XcodeBuildDebugGlueConfig.xcconfig"
+
+//:configuration = Release
+#include "XcodeBuildGlueConfig.xcconfig"
 
 //:completeSettings = Testing
 CURRENT_PROJECT_VERSION = $(PROJECT_VERSION_MAJOR).$(PROJECT_VERSION_MINOR)

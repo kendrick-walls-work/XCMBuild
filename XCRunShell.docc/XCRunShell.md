@@ -4,8 +4,8 @@
 	@DocumentationExtension(mergeBehavior: append)
 }
 
-@comment {
-	### License
+@Comment {
+	License
 
 	Copyright (c) 2014-2023 Mr. Walls
 
@@ -22,7 +22,10 @@
 	limitations under the License.
 }
 
-Developer tool for shell tasks.
+	Developer tool for shell tasks.
+
+<!--@START_MENU_TOKEN@-->Summary<!--@END_MENU_TOKEN@-->
+
 
 ## Overview
 
@@ -36,10 +39,14 @@ see
 > Important: In order to remain portable to MacOS in addition to `*nix` style OSes the on-disk structure is
 intended to follow Apple's Framework structure https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPFrameworks/Concepts/FrameworkAnatomy.html
 
+<!--@START_MENU_TOKEN@-->Text<!--@END_MENU_TOKEN@-->
+
+## Topics
+
 ### <!--@START_MENU_TOKEN@-->Group<!--@END_MENU_TOKEN@-->
 
+- ``XCMBuild.XCMRunner/main()``
+
 - <!--@START_MENU_TOKEN@-->``pruneFile``<!--@END_MENU_TOKEN@-->
-
 - <!--@START_MENU_TOKEN@-->``flatten``<!--@END_MENU_TOKEN@-->
-
 - <!--@START_MENU_TOKEN@-->``runtests``<!--@END_MENU_TOKEN@-->

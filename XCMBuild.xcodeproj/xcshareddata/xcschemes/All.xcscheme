@@ -34,6 +34,20 @@
                ReferencedContainer = "container:XCMBuild.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "NO"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "8486BF432AA67BD9005A02F4"
+               BuildableName = "XCMTest"
+               BlueprintName = "XCMTest"
+               ReferencedContainer = "container:XCMBuild.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -48,22 +62,31 @@
       selectedDebuggerIdentifier = ""
       selectedLauncherIdentifier = "Xcode.IDEFoundation.Launcher.PosixSpawn"
       enableASanStackUseAfterReturn = "YES"
-      enableThreadSanitizer = "YES"
       disableMainThreadChecker = "YES"
       launchStyle = "0"
-      askForAppToLaunch = "Yes"
       useCustomWorkingDirectory = "YES"
       customWorkingDirectory = "$(PROJECT_DIR)"
       ignoresPersistentStateOnLaunch = "YES"
-      debugDocumentVersioning = "YES"
+      debugDocumentVersioning = "NO"
+      debugXPCServices = "NO"
       debugServiceExtension = "internal"
       enableGPUValidationMode = "1"
       allowLocationSimulation = "NO"
       showNonLocalizedStrings = "YES"
-      launchAutomaticallySubstyle = "2"
       viewDebuggingEnabled = "No"
+      queueDebuggingEnabled = "No"
       consoleMode = "0"
       structuredConsoleMode = "2">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
+         <BuildableReference
+            BuildableIdentifier = "XCMTest"
+            BlueprintIdentifier = "8462AFDD2A900F1E001EFB68"
+            BuildableName = "XCMTest"
+            BlueprintName = "All"
+            ReferencedContainer = "container:XCMBuild.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"

@@ -3,29 +3,41 @@ x86_64:XCMBuild.h:_NSLog
 arm64:XCMBuild.h:_NSLog
 arch64:XCMBuild.h:_NSLog
 x86_64:_OBJC_CLASS_$_NSObject
+x86_64:_OBJC_METACLASS_$_NSObject
 x86_64:_OBJC_CLASS_$_NSArray
 x86_64:_OBJC_CLASS_$_NSPipe
+x86_64:_OBJC_CLASS_$_NSNotificationCenter
 x86_64:_OBJC_CLASS_$_NSString
 x86_64:_OBJC_CLASS_$_NSTask
 x86_64:XCMBuild.h:NSTask_h
 x86_64:_OBJC_CLASS_$_NSBundle
+x86_64:_OBJC_METACLASS_$_NSBundle
 x86_64:XCMBuild.h:NSBundle_h
+x86_64:XCMBuild.h:NSPipe_h
 arm64:_OBJC_CLASS_$_NSObject
+arm64:_OBJC_METACLASS_$_NSObject
 arm64:_OBJC_CLASS_$_NSArray
+arm64:_OBJC_CLASS_$_NSNotificationCenter
 arm64:_OBJC_CLASS_$_NSPipe
 arm64:_OBJC_CLASS_$_NSString
 arm64:_OBJC_CLASS_$_NSTask
 arm64:XCMBuild.h:NSTask_h
 arm64:_OBJC_CLASS_$_NSBundle
+arm64:_OBJC_METACLASS_$_NSBundle
 arm64:XCMBuild.h:NSBundle_h
+arm64:XCMBuild.h:NSPipe_h
 arch64:_OBJC_CLASS_$_NSObject
+arch64:_OBJC_METACLASS_$_NSObject
 arch64:_OBJC_CLASS_$_NSArray
+arch64:_OBJC_CLASS_$_NSNotificationCenter
 arch64:_OBJC_CLASS_$_NSPipe
 arch64:_OBJC_CLASS_$_NSString
 arch64:_OBJC_CLASS_$_NSTask
 arch64:XCMBuild.h:NSTask_h
 arch64:_OBJC_CLASS_$_NSBundle
+arch64:_OBJC_METACLASS_$_NSBundle
 arch64:XCMBuild.h:NSBundle_h
+arch64:XCMBuild.h:NSPipe_h
 # XCMShell.o:"+[XCMShellTask runCommand:]"
 # XCMBuildSystem.o:"-[XCMBuildSystem pathForAuxiliaryExecutable:]"
 # XCMTest.h:XCMTestCommandArgumentsString

@@ -33,17 +33,11 @@ NSString * const XCMTestCommandArgumentsString __attribute__ ((used)) = @"/usr/b
 int main(int argc, const char * argv[]) {
 	int exit_code = 1;
 	@autoreleasepool {
-		NSString * arguments = [NSString stringWithString:XCMTestCommandArgumentsString];
-		NS_VALID_UNTIL_END_OF_SCOPE NSString * console = [XCMShellTask runCommand:arguments];
-		if (console != nil){
+		NSString* arguments = [NSString stringWithString:XCMTestCommandArgumentsString];
+		if ([XCMShellTask runCommand:arguments]){
 			exit_code = 0;
 		};
-		if (exit_code == 0) {
-			NSLog(@"%@", console);
-		};
-
 		arguments = nil;
-		console = nil;
 	}
 	return exit_code;
 }

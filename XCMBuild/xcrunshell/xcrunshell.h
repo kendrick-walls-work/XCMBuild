@@ -43,6 +43,22 @@
 const int XCRS_MINARGS = 1;
 #endif
 
+#ifndef XCMShellDelegate_h
+#if defined(__has_include)
+#if __has_include(<XCMBuild/XCMShellDelegate.h>)
+#define XCMShellDelegate_h "<XCMBuild/XCMShellDelegate.h> (XCRunShell)"
+#import <XCMBuild/XCMShellDelegate.h>
+#endif
+#endif /* !__has_include */
+#ifndef XCMShellDelegate_h
+#define XCMShellDelegate_h "XCMShellDelegate.h (XCRunShell)"
+#import "XCMShellDelegate.h"
+#endif /* XCMShellDelegate_h (inner) */
+#if defined(__clang__)
+#pragma clang final(XCMShellDelegate_h)
+#endif /* !__clang__ */
+#endif /* XCMShellDelegate_h (outer) */
+
 #ifndef XCMShell_h
 #if defined(__has_include)
 #if __has_include(<XCMBuild/XCMShell.h>)

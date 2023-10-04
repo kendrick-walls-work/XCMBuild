@@ -70,6 +70,4 @@ Various scripts are available for expanding shellscript run-phases of a build sy
 
 <!--@START_MENU_TOKEN@-->Structure<!--@END_MENU_TOKEN@-->
 
-- ``XCMBuild/XCMBuildSystem``
-- ``XCMBuild/XCMShellTask``
 - ``XCMTestCommandArgumentsString``

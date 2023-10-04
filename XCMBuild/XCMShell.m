@@ -45,14 +45,15 @@ For the solid answer to https://stackoverflow.com/a/12310154
 
 //extern const char* XCMTestCommandArgumentsString __attribute__((weak_import));
 #include "XCMShell.h"
+#include "XCMShellDelegate.h"
 
 @implementation XCMShellTask
 
-+ (nullable NSString *)runCommand:(NSString *)commandToRun
++ (BOOL)runCommand:(NSString *)commandToRun
 {
 	if (commandToRun != nil){
-		NSPipe *pipe = [[NSPipe alloc] init];
-		NSFileHandle *file = [pipe fileHandleForReading];
+		//NSPipe *pipe = [[NSPipe alloc] init];
+		//NSFileHandle *file = [pipe fileHandleForReading];
 		NSTask *task = [[NSTask alloc] init];
 		NSArray *arguments = [NSArray arrayWithObjects:
 					 @"-c", [NSString stringWithFormat:@"%@", commandToRun],
@@ -60,49 +61,35 @@ For the solid answer to https://stackoverflow.com/a/12310154
 		[task setLaunchPath:@"/bin/bash"];
 		[task setArguments:arguments];
 		[task setStandardInput:[NSFileHandle fileHandleWithStandardInput]];
-		[task setStandardOutput:pipe];
-
+		//[task setStandardOutput:pipe];
+		[[XCMShellDelegate new] captureStandardOutput:task];
+#if defined(TARGET_OS_MAC) && TARGET_OS_MAC
+		NSError *bsError;
+		BOOL ready = [task launchAndReturnError:&bsError];
+#else
 		[task launch];
-		NSData *data = [file readDataToEndOfFile];
-		if ([task isRunning])
+		BOOL ready = (BOOL)([task isRunning]);
+#endif
+		//[[XCMShellDelegate new] captureStandardOutput:task];
+		//NSData *data = [file readDataToEndOfFile];
+		if ([task isRunning] && ready == YES)
 			[task waitUntilExit];
 
 		if (![task isRunning]) {
 			int status = [task terminationStatus];
 			if (status == 0) {
-				NSString *output = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-#if defined(TARGET_OS_MAC) && TARGET_OS_MAC
-				NSError *theError;
-				BOOL success = [file closeAndReturnError:&theError];
-
-				if (success == NO) {
-					file = nil;
-					output = @"XCMShellTask Crashed!";
-				}
-#else
-				[file closeFile];
-#endif
-				return output;
+				return YES;
 			} else {
-				return @"XCMShellTask failed.";
+				return NO;
 			}
 			#if __has_builtin(__builtin_unreachable)
 				__builtin_unreachable();
 			#endif
 		} else {
-#if defined(TARGET_OS_MAC) && TARGET_OS_MAC
-			NSError *theError;
-			BOOL success = [file closeAndReturnError:&theError];
-
-			if (success == NO) {
-				file = nil;
-			}
-#else
-			[file closeFile];
-#endif
+			return ready;
 		};
-		return @"XCMShellTask Crashed!";
-	} else { return @"XCRunShell Requires a NON-NULL command!"; }
+		return NO;
+	} else { return NO; }
 }
 
 @end
