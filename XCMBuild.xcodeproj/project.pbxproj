@@ -121,7 +121,6 @@
 		8459CF442AA1485600DAFF86 /* serialized in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8459CF3C2AA137E800DAFF86 /* serialized */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		8459CF452AA1485600DAFF86 /* xcode_copyfile.bash in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8459CF3A2AA125FA00DAFF86 /* xcode_copyfile.bash */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		845C711B2AC2404500DD9EE9 /* libSystem.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 845C711A2AC2404500DD9EE9 /* libSystem.tbd */; platformFilters = (macos, ); settings = {ATTRIBUTES = (Weak, ); }; };
-		84619D5D2A859266009C5753 /* LICENSE-2.0.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8411D9A72A82EB860029B632 /* LICENSE-2.0.txt */; settings = {ASSET_TAGS = (XCMBuild, ); }; };
 		84619D7B2A85BCA7009C5753 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 84619D7A2A85BCA7009C5753 /* main.m */; settings = {COMPILER_FLAGS = "-x objective-c"; }; };
 		8462AFD72A900E69001EFB68 /* xcrunshell in Embed Helper Tools */ = {isa = PBXBuildFile; fileRef = 84619D782A85BCA7009C5753 /* xcrunshell */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		8462AFDB2A900E8A001EFB68 /* prunefile in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8446EC112A7C849700B93693 /* prunefile */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -359,6 +358,7 @@
 		841B5D0B2A89E35100E589BB /* XCMShell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = XCMShell.h; sourceTree = "<group>"; };
 		842858FE2A8AF508002C447C /* orderfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; lineEnding = 0; name = orderfile; path = Clang/orderfile; sourceTree = "<group>"; };
 		8434DD402ACF715A0081E26E /* Icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = Icon.icns; path = Resources/Icon.icns; sourceTree = "<group>"; };
+		8434DD422ACF7E0F0081E26E /* XCMBuild-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.info; name = "XCMBuild-Info.plist"; path = "Resources/XCMBuild-Info.plist"; sourceTree = "<group>"; };
 		843A5AF02AB2542300B52D5B /* Specialized.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Specialized.xcconfig; path = shared/Config/Specialized.xcconfig; sourceTree = SOURCE_ROOT; };
 		843A5AF12AB2806E00B52D5B /* XCMBuildInfo.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = XCMBuildInfo.xcconfig; path = shared/Config/XCMBuildInfo.xcconfig; sourceTree = SOURCE_ROOT; };
 		843C23C82AA9516A00F8F65C /* XCMBuildSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = XCMBuildSystem.h; sourceTree = "<group>"; };
@@ -417,7 +417,6 @@
 		849B23BC2A898A4500962A8A /* test_build_paths_start */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = test_build_paths_start; path = unittests/test_build_paths_start; sourceTree = SOURCE_ROOT; };
 		849B23BD2A89967600962A8A /* XCMShell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XCMShell.m; sourceTree = "<group>"; };
 		849B23C12A89ACD800962A8A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		84A14AD82AAB97E800215F96 /* Base */ = {isa = PBXFileReference; explicitFileType = text.plist.info; fileEncoding = 4; name = Base; path = "Resources/Base.lproj/XCMBuild-Info.plist"; sourceTree = SOURCE_ROOT; };
 		84B1F4A32ACE65AB00DD1513 /* XCRunShell.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = XCRunShell.docc; sourceTree = "<group>"; };
 		84B1F4A52ACE8A4D00DD1513 /* XCMTest.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = XCMTest.docc; sourceTree = "<group>"; };
 		84BD1E632AAFDCB1004F72DF /* CommonConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = CommonConfig.xcconfig; path = shared/Config/CommonConfig.xcconfig; sourceTree = SOURCE_ROOT; };
@@ -539,7 +538,7 @@
 			children = (
 				847A70782ACF6BFC00215F96 /* Icon.iconset */,
 				8434DD402ACF715A0081E26E /* Icon.icns */,
-				84A14AD82AAB97E800E0A2C4 /* XCMBuild-Info.plist */,
+				8434DD422ACF7E0F0081E26E /* XCMBuild-Info.plist */,
 				847A70742ACF6AC900215F96 /* LICENSE-2.0.txt */,
 			);
 			name = Resources;
@@ -928,7 +927,6 @@
 				8423BA8A2AA7D2A800C04732 /* apfs_dir_DEVELOPER_ACLs in Resources */,
 				8423BA8B2AA7D2A800C04732 /* apfs_file_CONFIG_ACLs in Resources */,
 				8434DD412ACF71600081E26E /* Icon.icns in Resources */,
-				84619D5D2A859266009C5753 /* LICENSE-2.0.txt in Resources */,
 				847A70762ACF6AC900215F96 /* LICENSE-2.0.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1228,15 +1226,6 @@
 				847A70792ACF6BFC00215F96 /* Base */,
 			);
 			name = Icon.iconset;
-			sourceTree = "<group>";
-		};
-		84A14AD82AAB97E800E0A2C4 /* XCMBuild-Info.plist */ = {
-			isa = PBXVariantGroup;
-			children = (
-				84A14AD82AAB97E800215F96 /* Base */,
-			);
-			name = "XCMBuild-Info.plist";
-			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
