@@ -18,16 +18,20 @@
 
 test -x "$(command -v grep)" || exit 126 ;
 test -x "$(command -v dirname)" || exit 126 ;
-test -x "$(command -v otool)" || exit 255 ;
+test -x "$(command -v unifdef)" || exit 126 ;
+test -x "$(command -v tr)" || exit 126 ;
+test -x "$(command -v sort)" || exit 126 ;
+test -x "$(command -v uniq)" || exit 126 ;
+test -x "$(command -v cut)" || exit 126 ;
 
-function dump_macos_dylib_search() {
+function dump_macos_unifdef_order() {
 	local JUNK="${*}" ;
-	otool -l ${@} 2>/dev/null | grep -B 1 -A 2 -F "LC_RPATH" 2>/dev/null ; wait ;
+	unifdef -S ${@} 2>/dev/null | sort -d 2>/dev/null | tr -s ' ' | cut -d\  -f3-3 2>/dev/null | uniq 2>/dev/null ; wait ;
 	true ;
 }
 
-export -f dump_macos_dylib_search
+export -f dump_macos_unifdef_order
 
-dump_macos_dylib_search ${@} || false ;
+dump_macos_unifdef_order ${@} || false ;
 
 exit $? ;
