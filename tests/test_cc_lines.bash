@@ -123,7 +123,7 @@ for _TEST_DOC in $(find "${_TEST_ROOT_DIR}" \( -iname '*.py' -o -iname '*.h' -o 
 			EXIT_CODE=127
 		fi
 		if [[ ( $(grep -F "Copyright" "${_TEST_DOC}" 2>&1 | grep -coF "Copyright (c)" 2>&1) -le 0) ]] ; then
-			echo "SKIP: ${_TEST_DOC} is missing a valid copyright line begining with \"Copyright (c)\"" ;
+			echo "SKIP: ${_TEST_DOC} is missing a valid copyright line beginning with \"Copyright (c)\"" ;
 		fi
 		if [[ ( $(grep -F "Copyright (c)" "${_TEST_DOC}" 2>&1 | grep -oE "\d+(-\d+)?" 2>&1 | grep -oE "\d{3,}$" | sort -n | tail -n1) -lt ${_TEST_YEAR}) ]] ; then
 			echo "WARN: ${_TEST_DOC} is out of date without a current copyright (year)" ;

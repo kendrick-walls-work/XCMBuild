@@ -136,6 +136,8 @@
 		8486BF472AA67BD9005A02F4 /* XCMTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8486BF462AA67BD9005A02F4 /* XCMTest.m */; settings = {COMPILER_FLAGS = "-x objective-c"; }; };
 		8489034F2A84535000F5F241 /* XCMBuild.docc in Sources */ = {isa = PBXBuildFile; fileRef = 8489034E2A84535000F5F241 /* XCMBuild.docc */; settings = {COMPILER_FLAGS = "-Wdocumentation"; }; };
 		84B0F88C2AAA6F9E00224163 /* libobjc.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 84CEAD462A8B2A4700EBE49A /* libobjc.tbd */; settings = {ATTRIBUTES = (Weak, ); }; };
+		84B1F4A42ACE65AB00DD1513 /* XCRunShell.docc in Sources */ = {isa = PBXBuildFile; fileRef = 84B1F4A32ACE65AB00DD1513 /* XCRunShell.docc */; };
+		84B1F4A62ACE8A4D00DD1513 /* XCMTest.docc in Sources */ = {isa = PBXBuildFile; fileRef = 84B1F4A52ACE8A4D00DD1513 /* XCMTest.docc */; };
 		84BD1E5D2AAFC465004F72DF /* XCMTest in Embed Helper Tools */ = {isa = PBXBuildFile; fileRef = 8486BF442AA67BD9005A02F4 /* XCMTest */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		84CEAD432A8B290F00EBE49A /* XCMShell.h in Headers */ = {isa = PBXBuildFile; fileRef = 841B5D0B2A89E35100E589BB /* XCMShell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84CEAD452A8B291500EBE49A /* xcrunshell.h in Headers */ = {isa = PBXBuildFile; fileRef = 84E1D7A02A8AB66000779732 /* xcrunshell.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -355,7 +357,7 @@
 		8411D9A72A82EB860029B632 /* LICENSE-2.0.txt */ = {isa = PBXFileReference; explicitFileType = text; fileEncoding = 4; lineEnding = 0; path = "LICENSE-2.0.txt"; sourceTree = SOURCE_ROOT; };
 		8418EDAC2A904C2E00AD07F0 /* Icon.icns */ = {isa = PBXFileReference; explicitFileType = image.icns; path = Icon.icns; sourceTree = "<group>"; };
 		841B5D0B2A89E35100E589BB /* XCMShell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = XCMShell.h; sourceTree = "<group>"; };
-		842858FE2A8AF508002C447C /* orderfile */ = {isa = PBXFileReference; fileEncoding = 4; lineEnding = 0; name = orderfile; path = Clang/orderfile; sourceTree = "<group>"; };
+		842858FE2A8AF508002C447C /* orderfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; lineEnding = 0; name = orderfile; path = Clang/orderfile; sourceTree = "<group>"; };
 		843A5AF02AB2542300B52D5B /* Specialized.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Specialized.xcconfig; path = shared/Config/Specialized.xcconfig; sourceTree = SOURCE_ROOT; };
 		843A5AF12AB2806E00B52D5B /* XCMBuildInfo.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = XCMBuildInfo.xcconfig; path = shared/Config/XCMBuildInfo.xcconfig; sourceTree = SOURCE_ROOT; };
 		843C23C82AA9516A00F8F65C /* XCMBuildSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = XCMBuildSystem.h; sourceTree = "<group>"; };
@@ -402,7 +404,7 @@
 		8486BF442AA67BD9005A02F4 /* XCMTest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = XCMTest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8486BF462AA67BD9005A02F4 /* XCMTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XCMTest.m; sourceTree = "<group>"; };
 		8486BF4B2AA67E36005A02F4 /* XCMTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = XCMTest.h; sourceTree = "<group>"; };
-		8486BF562AA684AC005A02F4 /* XCMTest.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = shared/XCMTest.xctestplan; sourceTree = SOURCE_ROOT; };
+		8486BF562AA684AC005A02F4 /* shared/XCMTest.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = shared/XCMTest.xctestplan; sourceTree = SOURCE_ROOT; };
 		8489034B2A84535000F5F241 /* XCMBuild.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = XCMBuild.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8489034D2A84535000F5F241 /* XCMBuild.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = XCMBuild.h; sourceTree = "<group>"; };
 		8489034E2A84535000F5F241 /* XCMBuild.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = XCMBuild.docc; sourceTree = SOURCE_ROOT; };
@@ -412,6 +414,8 @@
 		849B23BD2A89967600962A8A /* XCMShell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XCMShell.m; sourceTree = "<group>"; };
 		849B23C12A89ACD800962A8A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		84A14AD82AAB97E800E0A2C4 /* XCMBuild-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "XCMBuild-Info.plist"; path = "shared/XCMBuild-Info.plist"; sourceTree = SOURCE_ROOT; };
+		84B1F4A32ACE65AB00DD1513 /* XCRunShell.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = XCRunShell.docc; sourceTree = "<group>"; };
+		84B1F4A52ACE8A4D00DD1513 /* XCMTest.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = XCMTest.docc; sourceTree = "<group>"; };
 		84BD1E632AAFDCB1004F72DF /* CommonConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = CommonConfig.xcconfig; path = shared/Config/CommonConfig.xcconfig; sourceTree = SOURCE_ROOT; };
 		84BD1E642AAFDFD7004F72DF /* XcodeTestingConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = XcodeTestingConfig.xcconfig; path = shared/Config/XcodeTestingConfig.xcconfig; sourceTree = SOURCE_ROOT; };
 		84BF4DF52ABA564D00E33993 /* XcodePreBuildGlueConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = XcodePreBuildGlueConfig.xcconfig; path = shared/Config/XcodePreBuildGlueConfig.xcconfig; sourceTree = SOURCE_ROOT; };
@@ -488,13 +492,13 @@
 				842858FE2A8AF508002C447C /* orderfile */,
 				840745082AA6DAF200D6FDA6 /* module.modulemap */,
 				84502A772AB8E44300AA5382 /* module.private.modulemap */,
-				8486BF562AA684AC005A02F4 /* XCMTest.xctestplan */,
+				8486BF562AA684AC005A02F4 /* shared/XCMTest.xctestplan */,
 				8418EDAC2A904C2E00AD07F0 /* Icon.icns */,
 				848904922ACE4129008CF5F1 /* Security */,
 				8411D9A52A82E9430029B632 /* envs */,
 				84A14AD82AAB97E800E0A2C4 /* XCMBuild-Info.plist */,
 				8496E0242ACB86990009ECC9 /* xcrunshell-Info.plist */,
-				848904902ACE3FCF008CF5F1 /* conf */,
+				848904902ACE3FCF008CF5F1 /* Configuration */,
 			);
 			path = shared;
 			sourceTree = "<group>";
@@ -521,6 +525,8 @@
 			isa = PBXGroup;
 			children = (
 				8489034E2A84535000F5F241 /* XCMBuild.docc */,
+				84B1F4A52ACE8A4D00DD1513 /* XCMTest.docc */,
+				84B1F4A32ACE65AB00DD1513 /* XCRunShell.docc */,
 				8411D9A72A82EB860029B632 /* LICENSE-2.0.txt */,
 			);
 			name = docs;
@@ -588,7 +594,7 @@
 			path = XCMBuild;
 			sourceTree = "<group>";
 		};
-		848904902ACE3FCF008CF5F1 /* conf */ = {
+		848904902ACE3FCF008CF5F1 /* Configuration */ = {
 			isa = PBXGroup;
 			children = (
 				847CEBE02AB3970300D86C91 /* Release.xcconfig */,
@@ -731,8 +737,8 @@
 				84AB43C92AAB900400E24981 /* PBXTargetDependency */,
 			);
 			name = Test;
-			productName = Test;
 			passBuildSettingsInEnvironment = 1;
+			productName = Test;
 			productSettingsXML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
 <!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">
 <plist version=\"1.0\">
@@ -1106,6 +1112,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84B1F4A42ACE65AB00DD1513 /* XCRunShell.docc in Sources */,
 				84619D7B2A85BCA7009C5753 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1115,6 +1122,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8486BF472AA67BD9005A02F4 /* XCMTest.m in Sources */,
+				84B1F4A62ACE8A4D00DD1513 /* XCMTest.docc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

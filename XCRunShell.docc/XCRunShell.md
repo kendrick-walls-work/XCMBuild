@@ -1,4 +1,4 @@
-# ``XCMTest``
+# ``xcrunshell``
 
 @Metadata {
 	@DocumentationExtension(mergeBehavior: append)
@@ -22,14 +22,27 @@
 	limitations under the License.
 }
 
+	Developer tool for shell tasks.
+
 <!--@START_MENU_TOKEN@-->Summary<!--@END_MENU_TOKEN@-->
+
 
 ## Overview
 
-<!--@START_MENU_TOKEN@-->Text<!--@END_MENU_TOKEN@-->
+A tool similar to `xcrun` (xcode) and `command` (posix) that is used to run commands in a
+`bash`-like fashion with little to no refactoring needed to leverage convenience features like path
+resolution and environment abstraction.
+see
 
 ## Topics
 
+> Important: In order to remain portable to MacOS in addition to `*nix` style OSes the on-disk structure is
+intended to follow Apple's Framework structure https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPFrameworks/Concepts/FrameworkAnatomy.html
+
 ### <!--@START_MENU_TOKEN@-->Group<!--@END_MENU_TOKEN@-->
 
-- <!--@START_MENU_TOKEN@-->``Symbol``<!--@END_MENU_TOKEN@-->
+- ``XCMBuild.XCMRunner/main()``
+
+- <!--@START_MENU_TOKEN@-->``pruneFile``<!--@END_MENU_TOKEN@-->
+- <!--@START_MENU_TOKEN@-->``flatten``<!--@END_MENU_TOKEN@-->
+- <!--@START_MENU_TOKEN@-->``runtests``<!--@END_MENU_TOKEN@-->

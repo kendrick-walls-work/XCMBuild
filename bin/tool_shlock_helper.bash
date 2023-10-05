@@ -93,7 +93,7 @@ EXIT_CODE=1 ;
 # exit codes: (caveat: not all implemented here)
 # x000000 = 0 = locked by ${PID_VALUE} ;
 # x000001 = 1 = not-locked by ${PID_VALUE} ; (ie when valid lock file for unknown PID)
-# x000010 = 2 = should be locked by ${PID_VALUE} but some generic error occured ;
+# x000010 = 2 = should be locked by ${PID_VALUE} but some generic error occurred ;
 # x000011 = 3 = could not resolve to locked nor not-locked by ${PID_VALUE} (i.e. 1+2) ;
 # x000100 = 4 = locked by ${PID_VALUE} but looks like ${PID_VALUE} is gone now but still found lock (did you remember to unlock before relocking?)
 # x000101 = 5 = not-locked by ${PID_VALUE} but still found lock at ${LOCK_FILE} (i.e. 1+4)
@@ -145,9 +145,9 @@ else
 		# printf is builtin and often faster than echo but will interpret patterns in variables.
 		# See https://www.shellcheck.net/wiki/SC2059 (In POSIX, you can instead ignore this warning.)
 		# shellcheck disable=SC2059
-		printf $"Error: lock \"${LOCK_FILE}\" for unkown process is invalid.\n" >&2 ;
+		printf $"Error: lock \"${LOCK_FILE}\" for unknown process is invalid.\n" >&2 ;
 	else
-		printf $"Error: Refuse to aquire lock for unkown process %s\n" "${PID_VALUE}" >&2 ;
+		printf $"Error: Refuse to acquire lock for unknown process %s\n" "${PID_VALUE}" >&2 ;
 	fi ;
 fi
 fi ;

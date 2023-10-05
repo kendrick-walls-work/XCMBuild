@@ -48,7 +48,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 #pragma mark *** XCMShellDelegate ***
 #endif /* !__clang__ */
 @property (nullable, readwrite, retain) NSPipe *outputPipe;
-/// Attaches to and captures the `standardOutput` of a given task process. The captured output is printed out asyncronously.
+/// Attaches to and captures the `standardOutput` of a given task process. The captured output is printed out asynchronously.
 /// TODO: Add usage example here.
 /// - Parameter process: An `NSTask` to capture. The given `process` _MUST_ not have been launched or an error will be raised.
 -(void)captureStandardOutput:(NSTask *)process;

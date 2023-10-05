@@ -25,7 +25,7 @@
 
 ## Overview
 
-The ``XCMBuild/XCMBuildSystem`` harnesses the flexability of a `Makefile` based workflow into a simple build system.
+The ``XCMBuild/XCMBuildSystem`` harnesses the flexibility of a `Makefile` based workflow into a simple build system.
 
 
 ## Layout
@@ -81,7 +81,8 @@ Various scripts are available for expanding shellscript run-phases of a build sy
 
 ### Binaries
 
-- ``XCRunShell/xcrunshell``
+- `xcrunshell`
+- `XCMTest`
 
 ## Topics
 
