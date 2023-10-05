@@ -5,7 +5,7 @@
 	@PageImage(purpose: icon, source: Icon.png)
 }
 
-@comment {
+@Comment {
 	### License
 
 	Copyright (c) 2014-2023 Mr. Walls
@@ -25,16 +25,26 @@
 
 ## Overview
 
-The ``XCMBuild/XCMBuildSystem`` harnesses the flexability of a `Makefile` based workflow into a simple build system.
+The ``XCMBuild/XCMBuildSystem`` harnesses the flexibility of a `Makefile` based workflow into a simple build system.
 
 
 ## Layout
 
 ### Scripts
 
-##### usr/bin/
+##### `usr/bin/`
 
 Various scripts are available for expanding shellscript run-phases of a build system.
+
+>flatten: Used to flatten nested filesystem artifacts in the build directories.
+>###### Usage:
+>```console
+>flatten [FILE|DIR] ...
+>```
+>###### Instead of:
+>- `-R`
+>- `--depth`
+>- `globbing of */**`
 
 >pruneFile: Used to purge filesystem artifacts from the build directories.
 >###### Usage:
@@ -52,19 +62,27 @@ Various scripts are available for expanding shellscript run-phases of a build sy
 >rmdir [options] [DIR]
 >```
 
->flatten: Used to flatten nested filesystem artifacts in the build directories.
+>snooze: Used to more efficiently wait a for a given duration than bash's default `sleep`.
+> _see <doc:Acknowledgements> for `LICENSE` of snooze._
 >###### Usage:
 >```console
->flatten [FILE|DIR] ...
+>pruneFile [FILE|DIR] ...
 >```
 >###### Instead of:
->- `-R`
->- `--depth`
->- `globbing of */**`
+>```console
+>rm [options] [FILE]
+>```
+>```console
+>unlink [options] [FILE]
+>```
+>```console
+>rmdir [options] [DIR]
+>```
 
 ### Binaries
 
 - `xcrunshell`
+- `XCMTest`
 
 ## Topics
 

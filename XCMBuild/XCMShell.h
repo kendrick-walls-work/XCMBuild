@@ -42,7 +42,7 @@
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /// Trivial delegate class for `NSTask`s to implement conviance constructors.
-/// ``XCMShellTask`` allows running a subshell as a task, thus simplifing the overhead of trivial invokations of `NSTask`.
+/// ``XCMShellTask`` allows running a subshell as a task, thus simplifing the overhead of trivial invocations of `NSTask`.
 @interface XCMShellTask : NSObject {
 }
 
@@ -54,14 +54,14 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 ///
 ///**Usage:**
 ///```objectivec
-/// // set the commandTextToRun ...
-/// NSString * commandTextToRun = @"echo Hello World;";
-/// // ... and run the command and collect the output
-/// BOOL console = [XCMShellTask runCommand:commandTextToRun];
-/// ```
+///// set the commandTextToRun ...
+///NSString * commandTextToRun = @"echo Hello World;";
+///// ... and run the command and collect the output
+///BOOL console = [XCMShellTask runCommand:commandTextToRun];
+///```
 ///
 /// - Parameters:
-///   - commandToRun: The shell comand text to perform as an `NSString`.
+///   - commandToRun: The shell command text to perform as an `NSString`.
 /// - Returns: The `exit code` of the resulting `task` as an `BOOL`.
 + (BOOL)runCommand:(NSString *)commandToRun;
 

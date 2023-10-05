@@ -17,7 +17,7 @@
  * @version 2.1
  * @abstract TODO
  * @discussion
- * It is worth noting: `XCM` (including `XCMBuild`) the unsafe ``TARGET_OS_WIN32`` (and all Windows and/or 32-bit architechtures)
+ * It is worth noting: `XCM` (including `XCMBuild`) the unsafe ``TARGET_OS_WIN32`` (and all Windows and/or 32-bit architectures)
  * for all compat versions 2+ due to the expectation of `64-bit *nix` runtimes.
  *
 */
@@ -84,7 +84,7 @@
 ///Important: ``XCMBuild`` is explicidly incompatible with the target ``TARGET_OS_WIN32``.
 ///
 ///It is worth noting: `XCM` (including ``XCMBuild``) are incompatible with the unsafe ``TARGET_OS_WIN32`` (and all
-/// Windows and/or 32-bit architechtures) for all compat versions 2+ due to the expectation of `64-bit *nix` runtimes.
+/// Windows and/or 32-bit architectures) for all compat versions 2+ due to the expectation of `64-bit *nix` runtimes.
 #undef TARGET_OS_WIN32
 #endif
 
@@ -105,7 +105,7 @@
 #define NSTask_h "NSTask.h"
 #endif /* NSTask_h */
 
-/** After NSObjeect  **/
+/** After NSObject  **/
 
 #ifndef XCMB_NSDebug_h
 #if defined(__has_include)

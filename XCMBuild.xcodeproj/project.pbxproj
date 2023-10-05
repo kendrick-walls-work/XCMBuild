@@ -102,7 +102,6 @@
 		840745012AA6C37D00D6FDA6 /* XCMBuild.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8489034B2A84535000F5F241 /* XCMBuild.framework */; };
 		840745052AA6C3F700D6FDA6 /* XCMTest.h in Headers */ = {isa = PBXBuildFile; fileRef = 8486BF4B2AA67E36005A02F4 /* XCMTest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8407450B2AA6E00000D6FDA6 /* module.modulemap in Copy Module Map */ = {isa = PBXBuildFile; fileRef = 840745082AA6DAF200D6FDA6 /* module.modulemap */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		841589A62ACE0D480046CCF6 /* XCRunShell.docc in Sources */ = {isa = PBXBuildFile; fileRef = 841589A72ACE0D480046CCF6 /* XCRunShell.docc */; };
 		8418EDAD2A904C2E00AD07F0 /* Icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 8418EDAC2A904C2E00AD07F0 /* Icon.icns */; };
 		841987692AA8054E005F335E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 849B23C12A89ACD800962A8A /* Foundation.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		8423BA892AA7D2A800C04732 /* apfs_dir_CONFIG_ACLs in Resources */ = {isa = PBXBuildFile; fileRef = 847527F42AA150E000B1FDE3 /* apfs_dir_CONFIG_ACLs */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -137,6 +136,8 @@
 		8486BF472AA67BD9005A02F4 /* XCMTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8486BF462AA67BD9005A02F4 /* XCMTest.m */; settings = {COMPILER_FLAGS = "-x objective-c"; }; };
 		8489034F2A84535000F5F241 /* XCMBuild.docc in Sources */ = {isa = PBXBuildFile; fileRef = 8489034E2A84535000F5F241 /* XCMBuild.docc */; settings = {COMPILER_FLAGS = "-Wdocumentation"; }; };
 		84B0F88C2AAA6F9E00224163 /* libobjc.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 84CEAD462A8B2A4700EBE49A /* libobjc.tbd */; settings = {ATTRIBUTES = (Weak, ); }; };
+		84B1F4A42ACE65AB00DD1513 /* XCRunShell.docc in Sources */ = {isa = PBXBuildFile; fileRef = 84B1F4A32ACE65AB00DD1513 /* XCRunShell.docc */; };
+		84B1F4A62ACE8A4D00DD1513 /* XCMTest.docc in Sources */ = {isa = PBXBuildFile; fileRef = 84B1F4A52ACE8A4D00DD1513 /* XCMTest.docc */; };
 		84BD1E5D2AAFC465004F72DF /* XCMTest in Embed Helper Tools */ = {isa = PBXBuildFile; fileRef = 8486BF442AA67BD9005A02F4 /* XCMTest */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		84CEAD432A8B290F00EBE49A /* XCMShell.h in Headers */ = {isa = PBXBuildFile; fileRef = 841B5D0B2A89E35100E589BB /* XCMShell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84CEAD452A8B291500EBE49A /* xcrunshell.h in Headers */ = {isa = PBXBuildFile; fileRef = 84E1D7A02A8AB66000779732 /* xcrunshell.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -347,37 +348,36 @@
 
 /* Begin PBXFileReference section */
 		840745082AA6DAF200D6FDA6 /* module.modulemap */ = {isa = PBXFileReference; explicitFileType = "sourcecode.module-map"; fileEncoding = 4; name = module.modulemap; path = Clang/module.modulemap; sourceTree = "<group>"; };
-		8411D99B2A82E8100029B632 /* test_codecov_config.bash */ = {isa = PBXFileReference; explicitFileType = text.script.bash; fileEncoding = 4; lastKnownFileType = text.script.sh; lineEnding = 0; name = test_codecov_config.bash; path = tests/test_codecov_config.bash; sourceTree = "<group>"; };
-		8411D99D2A82E8100029B632 /* test_plists.bash */ = {isa = PBXFileReference; explicitFileType = text.script.bash; fileEncoding = 4; lastKnownFileType = text.script.sh; lineEnding = 0; name = test_plists.bash; path = tests/test_plists.bash; sourceTree = "<group>"; };
-		8411D99E2A82E8100029B632 /* test_bash_shlock_tool.bash */ = {isa = PBXFileReference; explicitFileType = text.script.bash; fileEncoding = 4; lastKnownFileType = text.script.sh; lineEnding = 0; name = test_bash_shlock_tool.bash; path = tests/test_bash_shlock_tool.bash; sourceTree = "<group>"; };
+		8411D99B2A82E8100029B632 /* test_codecov_config.bash */ = {isa = PBXFileReference; explicitFileType = text.script.bash; fileEncoding = 4; lastKnownFileType = text.script.bash; lineEnding = 0; name = test_codecov_config.bash; path = tests/test_codecov_config.bash; sourceTree = "<group>"; };
+		8411D99D2A82E8100029B632 /* test_plists.bash */ = {isa = PBXFileReference; explicitFileType = text.script.bash; fileEncoding = 4; lastKnownFileType = text.script.bash; lineEnding = 0; name = test_plists.bash; path = tests/test_plists.bash; sourceTree = "<group>"; };
+		8411D99E2A82E8100029B632 /* test_bash_shlock_tool.bash */ = {isa = PBXFileReference; explicitFileType = text.script.bash; fileEncoding = 4; lastKnownFileType = text.script.bash; lineEnding = 0; name = test_bash_shlock_tool.bash; path = tests/test_bash_shlock_tool.bash; sourceTree = "<group>"; };
 		8411D99F2A82E8100029B632 /* test_cc_lines.bash */ = {isa = PBXFileReference; explicitFileType = text.script.bash; fileEncoding = 4; lastKnownFileType = text.script.sh; lineEnding = 0; name = test_cc_lines.bash; path = tests/test_cc_lines.bash; sourceTree = "<group>"; };
-		8411D9A02A82E8100029B632 /* test_spelling.bash */ = {isa = PBXFileReference; explicitFileType = text.script.bash; fileEncoding = 4; lastKnownFileType = text.script.sh; lineEnding = 0; name = test_spelling.bash; path = tests/test_spelling.bash; sourceTree = "<group>"; };
-		8411D9A12A82E8100029B632 /* test_git_config.bash */ = {isa = PBXFileReference; explicitFileType = text.script.bash; fileEncoding = 4; lastKnownFileType = text.script.sh; lineEnding = 0; name = test_git_config.bash; path = tests/test_git_config.bash; sourceTree = "<group>"; };
+		8411D9A02A82E8100029B632 /* test_spelling.bash */ = {isa = PBXFileReference; explicitFileType = text.script.bash; fileEncoding = 4; lastKnownFileType = text.script.bash; lineEnding = 0; name = test_spelling.bash; path = tests/test_spelling.bash; sourceTree = "<group>"; };
+		8411D9A12A82E8100029B632 /* test_git_config.bash */ = {isa = PBXFileReference; explicitFileType = text.script.bash; fileEncoding = 4; lastKnownFileType = text.script.bash; lineEnding = 0; name = test_git_config.bash; path = tests/test_git_config.bash; sourceTree = "<group>"; };
 		8411D9A72A82EB860029B632 /* LICENSE-2.0.txt */ = {isa = PBXFileReference; explicitFileType = text; fileEncoding = 4; lineEnding = 0; path = "LICENSE-2.0.txt"; sourceTree = SOURCE_ROOT; };
-		841589A72ACE0D480046CCF6 /* XCRunShell.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = XCRunShell.docc; sourceTree = "<group>"; };
 		8418EDAC2A904C2E00AD07F0 /* Icon.icns */ = {isa = PBXFileReference; explicitFileType = image.icns; path = Icon.icns; sourceTree = "<group>"; };
 		841B5D0B2A89E35100E589BB /* XCMShell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = XCMShell.h; sourceTree = "<group>"; };
-		842858FE2A8AF508002C447C /* orderfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = orderfile; path = Clang/orderfile; sourceTree = "<group>"; };
-		843A5AF02AB2542300B52D5B /* Specialized.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Specialized.xcconfig; path = Config/Specialized.xcconfig; sourceTree = "<group>"; };
-		843A5AF12AB2806E00B52D5B /* XCMBuildInfo.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = XCMBuildInfo.xcconfig; path = Config/XCMBuildInfo.xcconfig; sourceTree = "<group>"; };
+		842858FE2A8AF508002C447C /* orderfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; lineEnding = 0; name = orderfile; path = Clang/orderfile; sourceTree = "<group>"; };
+		843A5AF02AB2542300B52D5B /* Specialized.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Specialized.xcconfig; path = shared/Config/Specialized.xcconfig; sourceTree = SOURCE_ROOT; };
+		843A5AF12AB2806E00B52D5B /* XCMBuildInfo.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = XCMBuildInfo.xcconfig; path = shared/Config/XCMBuildInfo.xcconfig; sourceTree = SOURCE_ROOT; };
 		843C23C82AA9516A00F8F65C /* XCMBuildSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = XCMBuildSystem.h; sourceTree = "<group>"; };
 		843C23C92AA9516A00F8F65C /* XCMBuildSystem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XCMBuildSystem.m; sourceTree = "<group>"; };
-		843F3C952ABE392600A11150 /* XcodeCompileToolsDebug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = XcodeCompileToolsDebug.xcconfig; path = Config/XcodeCompileToolsDebug.xcconfig; sourceTree = "<group>"; };
-		843F3C962ABE3ECF00A11150 /* XcodeCompileToolsRelease.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = XcodeCompileToolsRelease.xcconfig; path = Config/XcodeCompileToolsRelease.xcconfig; sourceTree = "<group>"; };
-		8446EC0F2A7C849700B93693 /* genmac.sh */ = {isa = PBXFileReference; explicitFileType = text.script; fileEncoding = 4; name = genmac.sh; path = bin/genmac.sh; sourceTree = "<group>"; };
-		8446EC102A7C849700B93693 /* pretests.sh */ = {isa = PBXFileReference; explicitFileType = text.script.sh; fileEncoding = 4; lineEnding = 0; name = pretests.sh; path = bin/pretests.sh; sourceTree = "<group>"; };
+		843F3C952ABE392600A11150 /* XcodeCompileToolsDebug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = XcodeCompileToolsDebug.xcconfig; path = shared/Config/XcodeCompileToolsDebug.xcconfig; sourceTree = SOURCE_ROOT; };
+		843F3C962ABE3ECF00A11150 /* XcodeCompileToolsRelease.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = XcodeCompileToolsRelease.xcconfig; path = shared/Config/XcodeCompileToolsRelease.xcconfig; sourceTree = SOURCE_ROOT; };
+		8446EC0F2A7C849700B93693 /* genmac.sh */ = {isa = PBXFileReference; explicitFileType = text.script; fileEncoding = 4; name = genmac.sh; path = bin/genmac.sh; sourceTree = SOURCE_ROOT; };
+		8446EC102A7C849700B93693 /* pretests.sh */ = {isa = PBXFileReference; explicitFileType = text.script.sh; fileEncoding = 4; lineEnding = 0; name = pretests.sh; path = bin/pretests.sh; sourceTree = SOURCE_ROOT; };
 		8446EC112A7C849700B93693 /* prunefile */ = {isa = PBXFileReference; explicitFileType = text.script.sh; fileEncoding = 4; lineEnding = 0; name = prunefile; path = bin/prunefile; sourceTree = SOURCE_ROOT; };
-		8446EC122A7C849700B93693 /* runtests.sh */ = {isa = PBXFileReference; explicitFileType = text.script.sh; fileEncoding = 4; lineEnding = 0; name = runtests.sh; path = bin/runtests.sh; sourceTree = "<group>"; };
-		8446EC132A7C849700B93693 /* posttests.sh */ = {isa = PBXFileReference; explicitFileType = text.script.sh; fileEncoding = 4; lineEnding = 0; name = posttests.sh; path = bin/posttests.sh; sourceTree = "<group>"; };
-		8446EC142A7C849700B93693 /* tool_shlock_helper.bash */ = {isa = PBXFileReference; explicitFileType = text.script.bash; fileEncoding = 4; lastKnownFileType = text.script.sh; lineEnding = 0; name = tool_shlock_helper.bash; path = bin/tool_shlock_helper.bash; sourceTree = "<group>"; };
-		8446EC152A7C849700B93693 /* styletests.sh */ = {isa = PBXFileReference; explicitFileType = text.script.sh; fileEncoding = 4; lineEnding = 0; name = styletests.sh; path = bin/styletests.sh; sourceTree = "<group>"; };
+		8446EC122A7C849700B93693 /* runtests.sh */ = {isa = PBXFileReference; explicitFileType = text.script.sh; fileEncoding = 4; lineEnding = 0; name = runtests.sh; path = bin/runtests.sh; sourceTree = SOURCE_ROOT; };
+		8446EC132A7C849700B93693 /* posttests.sh */ = {isa = PBXFileReference; explicitFileType = text.script.sh; fileEncoding = 4; lineEnding = 0; name = posttests.sh; path = bin/posttests.sh; sourceTree = SOURCE_ROOT; };
+		8446EC142A7C849700B93693 /* tool_shlock_helper.bash */ = {isa = PBXFileReference; explicitFileType = text.script.bash; fileEncoding = 4; lastKnownFileType = text.script.sh; lineEnding = 0; name = tool_shlock_helper.bash; path = bin/tool_shlock_helper.bash; sourceTree = SOURCE_ROOT; };
+		8446EC152A7C849700B93693 /* styletests.sh */ = {isa = PBXFileReference; explicitFileType = text.script.sh; fileEncoding = 4; lineEnding = 0; name = styletests.sh; path = bin/styletests.sh; sourceTree = SOURCE_ROOT; };
 		84502A772AB8E44300AA5382 /* module.private.modulemap */ = {isa = PBXFileReference; explicitFileType = "sourcecode.module-map"; fileEncoding = 4; lineEnding = 0; name = module.private.modulemap; path = Clang/module.private.modulemap; sourceTree = "<group>"; };
-		8459CF3A2AA125FA00DAFF86 /* xcode_copyfile.bash */ = {isa = PBXFileReference; explicitFileType = text.script.bash; fileEncoding = 4; lastKnownFileType = text.script.sh; name = xcode_copyfile.bash; path = bin/xcode_copyfile.bash; sourceTree = "<group>"; };
+		8459CF3A2AA125FA00DAFF86 /* xcode_copyfile.bash */ = {isa = PBXFileReference; explicitFileType = text.script.bash; fileEncoding = 4; lastKnownFileType = text.script.bash; name = xcode_copyfile.bash; path = bin/xcode_copyfile.bash; sourceTree = SOURCE_ROOT; };
 		8459CF3C2AA137E800DAFF86 /* serialized */ = {isa = PBXFileReference; explicitFileType = text.script.bash; fileEncoding = 4; lastKnownFileType = text.script.sh; name = serialized; path = bin/serialized; sourceTree = SOURCE_ROOT; };
-		845B9CC12AB3EB2600C58987 /* XcodeBuildGlueConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = XcodeBuildGlueConfig.xcconfig; path = Config/XcodeBuildGlueConfig.xcconfig; sourceTree = "<group>"; };
-		845B9CC22AB3ECD900C58987 /* XcodeBuildDebugGlueConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = XcodeBuildDebugGlueConfig.xcconfig; path = Config/XcodeBuildDebugGlueConfig.xcconfig; sourceTree = "<group>"; };
-		845C71132AC2367B00DD9EE9 /* XcodeCompileRunShellDebug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = XcodeCompileRunShellDebug.xcconfig; path = Config/XcodeCompileRunShellDebug.xcconfig; sourceTree = "<group>"; };
-		845C71142AC237E900DD9EE9 /* XcodeCompileRunShell.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = XcodeCompileRunShell.xcconfig; path = Config/XcodeCompileRunShell.xcconfig; sourceTree = "<group>"; };
+		845B9CC12AB3EB2600C58987 /* XcodeBuildGlueConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = XcodeBuildGlueConfig.xcconfig; path = shared/Config/XcodeBuildGlueConfig.xcconfig; sourceTree = SOURCE_ROOT; };
+		845B9CC22AB3ECD900C58987 /* XcodeBuildDebugGlueConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = XcodeBuildDebugGlueConfig.xcconfig; path = shared/Config/XcodeBuildDebugGlueConfig.xcconfig; sourceTree = SOURCE_ROOT; };
+		845C71132AC2367B00DD9EE9 /* XcodeCompileRunShellDebug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = XcodeCompileRunShellDebug.xcconfig; path = shared/Config/XcodeCompileRunShellDebug.xcconfig; sourceTree = SOURCE_ROOT; };
+		845C71142AC237E900DD9EE9 /* XcodeCompileRunShell.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = XcodeCompileRunShell.xcconfig; path = shared/Config/XcodeCompileRunShell.xcconfig; sourceTree = SOURCE_ROOT; };
 		845C711A2AC2404500DD9EE9 /* libSystem.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libSystem.tbd; path = usr/lib/libSystem.tbd; sourceTree = SDKROOT; };
 		84619D782A85BCA7009C5753 /* xcrunshell */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = xcrunshell; sourceTree = BUILT_PRODUCTS_DIR; };
 		84619D7A2A85BCA7009C5753 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -386,46 +386,48 @@
 		847527F42AA150E000B1FDE3 /* apfs_dir_CONFIG_ACLs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; lineEnding = 0; path = apfs_dir_CONFIG_ACLs; sourceTree = "<group>"; };
 		847527F52AA150E000B1FDE3 /* apfs_dir_DEVELOPER_ACLs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = apfs_dir_DEVELOPER_ACLs; sourceTree = "<group>"; };
 		847527F62AA150E000B1FDE3 /* apfs_file_CONFIG_ACLs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = apfs_file_CONFIG_ACLs; sourceTree = "<group>"; };
-		847527FB2AA1546100B1FDE3 /* test_shell_scripts.bash */ = {isa = PBXFileReference; explicitFileType = text.script.bash; fileEncoding = 4; lastKnownFileType = text.script.sh; lineEnding = 0; name = test_shell_scripts.bash; path = tests/test_shell_scripts.bash; sourceTree = "<group>"; usesTabs = 1; };
+		847527FB2AA1546100B1FDE3 /* test_shell_scripts.bash */ = {isa = PBXFileReference; explicitFileType = text.script.bash; fileEncoding = 4; lastKnownFileType = text.script.bash; lineEnding = 0; name = test_shell_scripts.bash; path = tests/test_shell_scripts.bash; sourceTree = SOURCE_ROOT; usesTabs = 1; };
 		8477F5192ACA331000688CF2 /* XCMShellDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCMShellDelegate.h; sourceTree = "<group>"; };
 		8477F51B2ACA363100688CF2 /* XCMShellDelegate.m */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; fileEncoding = 4; lineEnding = 0; path = XCMShellDelegate.m; sourceTree = "<group>"; };
-		847BD0CD2AB02ADF00B0B4EA /* xcrunshell.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = xcrunshell.entitlements; sourceTree = "<group>"; };
-		847CEBDB2AB38E8300D86C91 /* XCMTestRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = XCMTestRelease.entitlements; sourceTree = "<group>"; };
-		847CEBDC2AB3935600D86C91 /* UnSpecialized.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = UnSpecialized.xcconfig; path = Config/UnSpecialized.xcconfig; sourceTree = "<group>"; };
-		847CEBDD2AB3958800D86C91 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Debug.xcconfig; path = Config/Debug.xcconfig; sourceTree = "<group>"; };
-		847CEBDE2AB3963800D86C91 /* DebugConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = DebugConfig.xcconfig; path = Config/DebugConfig.xcconfig; sourceTree = "<group>"; };
-		847CEBDF2AB3967E00D86C91 /* ReleaseConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = ReleaseConfig.xcconfig; path = Config/ReleaseConfig.xcconfig; sourceTree = "<group>"; };
-		847CEBE02AB3970300D86C91 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Release.xcconfig; path = Config/Release.xcconfig; sourceTree = "<group>"; };
-		848312502ACCC53500EBC152 /* XCMBuildRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = XCMBuildRelease.entitlements; sourceTree = "<group>"; };
+		847BD0CD2AB02ADF00B0B4EA /* xcrunshell.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = xcrunshell.entitlements; path = shared/security/entitlements/xcrunshell.entitlements; sourceTree = SOURCE_ROOT; };
+		847CEBDB2AB38E8300D86C91 /* XCMTestRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = XCMTestRelease.entitlements; path = shared/security/entitlements/XCMTestRelease.entitlements; sourceTree = SOURCE_ROOT; };
+		847CEBDC2AB3935600D86C91 /* UnSpecialized.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = UnSpecialized.xcconfig; path = shared/Config/UnSpecialized.xcconfig; sourceTree = SOURCE_ROOT; };
+		847CEBDD2AB3958800D86C91 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Debug.xcconfig; path = shared/Config/Debug.xcconfig; sourceTree = SOURCE_ROOT; };
+		847CEBDE2AB3963800D86C91 /* DebugConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = DebugConfig.xcconfig; path = shared/Config/DebugConfig.xcconfig; sourceTree = SOURCE_ROOT; };
+		847CEBDF2AB3967E00D86C91 /* ReleaseConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = ReleaseConfig.xcconfig; path = shared/Config/ReleaseConfig.xcconfig; sourceTree = SOURCE_ROOT; };
+		847CEBE02AB3970300D86C91 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Release.xcconfig; path = shared/Config/Release.xcconfig; sourceTree = SOURCE_ROOT; };
+		848312502ACCC53500EBC152 /* XCMBuildRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = XCMBuildRelease.entitlements; path = shared/security/entitlements/XCMBuildRelease.entitlements; sourceTree = SOURCE_ROOT; };
 		848312552ACCE00C00EBC152 /* XCMTest_profile */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = XCMTest_profile; sourceTree = BUILT_PRODUCTS_DIR; };
 		848312562ACCE03900EBC152 /* xcrunshell_profile */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = xcrunshell_profile; sourceTree = BUILT_PRODUCTS_DIR; };
-		848312572ACCE0A300EBC152 /* ../Debug/XCMBuild.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ../Debug/XCMBuild.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		84838D2D2A7D8A46008BC8C1 /* flatten */ = {isa = PBXFileReference; explicitFileType = text.script.bash; fileEncoding = 4; lastKnownFileType = text.script.sh; lineEnding = 0; name = flatten; path = bin/flatten; sourceTree = SOURCE_ROOT; };
+		848312572ACCE0A300EBC152 /* XCMBuild.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = XCMBuild.framework; path = build/Debug/XCMBuild.framework; sourceTree = PROJECT_DIR; };
+		84838D2D2A7D8A46008BC8C1 /* flatten */ = {isa = PBXFileReference; explicitFileType = text.script.bash; fileEncoding = 4; lastKnownFileType = text.script.bash; lineEnding = 0; name = flatten; path = bin/flatten; sourceTree = SOURCE_ROOT; };
 		8486BF442AA67BD9005A02F4 /* XCMTest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = XCMTest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8486BF462AA67BD9005A02F4 /* XCMTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XCMTest.m; sourceTree = "<group>"; };
 		8486BF4B2AA67E36005A02F4 /* XCMTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = XCMTest.h; sourceTree = "<group>"; };
-		8486BF562AA684AC005A02F4 /* XCMTest.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = XCMTest.xctestplan; sourceTree = "<group>"; };
+		8486BF562AA684AC005A02F4 /* shared/XCMTest.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = shared/XCMTest.xctestplan; sourceTree = SOURCE_ROOT; };
 		8489034B2A84535000F5F241 /* XCMBuild.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = XCMBuild.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8489034D2A84535000F5F241 /* XCMBuild.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = XCMBuild.h; sourceTree = "<group>"; };
 		8489034E2A84535000F5F241 /* XCMBuild.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = XCMBuild.docc; sourceTree = SOURCE_ROOT; };
-		8496E0242ACB86990009ECC9 /* xcrunshell-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "xcrunshell-Info.plist"; path = "stubs/xcrunshell-Info.plist"; sourceTree = SOURCE_ROOT; };
-		8498B86E2AB108AD001084D8 /* XcodeFrameworkConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = XcodeFrameworkConfig.xcconfig; path = Config/XcodeFrameworkConfig.xcconfig; sourceTree = "<group>"; };
-		849B23BC2A898A4500962A8A /* test_build_paths_start */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = test_build_paths_start; sourceTree = "<group>"; };
+		8496E0242ACB86990009ECC9 /* xcrunshell-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "xcrunshell-Info.plist"; path = "shared/xcrunshell-Info.plist"; sourceTree = SOURCE_ROOT; };
+		8498B86E2AB108AD001084D8 /* XcodeFrameworkConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = XcodeFrameworkConfig.xcconfig; path = shared/Config/XcodeFrameworkConfig.xcconfig; sourceTree = SOURCE_ROOT; };
+		849B23BC2A898A4500962A8A /* test_build_paths_start */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = test_build_paths_start; path = unittests/test_build_paths_start; sourceTree = SOURCE_ROOT; };
 		849B23BD2A89967600962A8A /* XCMShell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XCMShell.m; sourceTree = "<group>"; };
 		849B23C12A89ACD800962A8A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		84A14AD82AAB97E800E0A2C4 /* XCMBuild-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "XCMBuild-Info.plist"; path = "stubs/XCMBuild-Info.plist"; sourceTree = SOURCE_ROOT; };
-		84BD1E632AAFDCB1004F72DF /* CommonConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = CommonConfig.xcconfig; path = Config/CommonConfig.xcconfig; sourceTree = "<group>"; };
-		84BD1E642AAFDFD7004F72DF /* XcodeTestingConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = XcodeTestingConfig.xcconfig; path = Config/XcodeTestingConfig.xcconfig; sourceTree = "<group>"; };
-		84BF4DF52ABA564D00E33993 /* XcodePreBuildGlueConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = XcodePreBuildGlueConfig.xcconfig; path = Config/XcodePreBuildGlueConfig.xcconfig; sourceTree = "<group>"; };
-		84BF4DF62ABA581700E33993 /* XcodePreBuildDebugGlueConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = XcodePreBuildDebugGlueConfig.xcconfig; path = Config/XcodePreBuildDebugGlueConfig.xcconfig; sourceTree = "<group>"; };
+		84A14AD82AAB97E800E0A2C4 /* XCMBuild-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "XCMBuild-Info.plist"; path = "shared/XCMBuild-Info.plist"; sourceTree = SOURCE_ROOT; };
+		84B1F4A32ACE65AB00DD1513 /* XCRunShell.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = XCRunShell.docc; sourceTree = "<group>"; };
+		84B1F4A52ACE8A4D00DD1513 /* XCMTest.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = XCMTest.docc; sourceTree = "<group>"; };
+		84BD1E632AAFDCB1004F72DF /* CommonConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = CommonConfig.xcconfig; path = shared/Config/CommonConfig.xcconfig; sourceTree = SOURCE_ROOT; };
+		84BD1E642AAFDFD7004F72DF /* XcodeTestingConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = XcodeTestingConfig.xcconfig; path = shared/Config/XcodeTestingConfig.xcconfig; sourceTree = SOURCE_ROOT; };
+		84BF4DF52ABA564D00E33993 /* XcodePreBuildGlueConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = XcodePreBuildGlueConfig.xcconfig; path = shared/Config/XcodePreBuildGlueConfig.xcconfig; sourceTree = SOURCE_ROOT; };
+		84BF4DF62ABA581700E33993 /* XcodePreBuildDebugGlueConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = XcodePreBuildDebugGlueConfig.xcconfig; path = shared/Config/XcodePreBuildDebugGlueConfig.xcconfig; sourceTree = SOURCE_ROOT; };
 		84CEAD462A8B2A4700EBE49A /* libobjc.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libobjc.tbd; path = usr/lib/libobjc.tbd; sourceTree = SDKROOT; };
 		84CEAD482A8B2A8A00EBE49A /* libc.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libc.tbd; path = usr/lib/libc.tbd; sourceTree = SDKROOT; };
 		84D3F4523A7C38650022D176 /* Makefile */ = {isa = PBXFileReference; explicitFileType = sourcecode.makefile.make; fileEncoding = 4; lastKnownFileType = sourcecode.make; lineEnding = 0; path = Makefile; sourceTree = SOURCE_ROOT; };
 		84DFD9482A844E190078F7F9 /* .github */ = {isa = PBXFileReference; lastKnownFileType = folder; path = .github; sourceTree = SOURCE_ROOT; };
 		84E1D7A02A8AB66000779732 /* xcrunshell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = xcrunshell.h; sourceTree = "<group>"; };
-		84FADEA02AABBD5400C31C1A /* xcode_run_tests.bash */ = {isa = PBXFileReference; explicitFileType = text.script.bash; fileEncoding = 4; lastKnownFileType = text.script.sh; name = xcode_run_tests.bash; path = bin/xcode_run_tests.bash; sourceTree = "<group>"; };
-		84FADEA12AABBD5400C31C1A /* xcode_run_tool.bash */ = {isa = PBXFileReference; explicitFileType = text.script.bash; fileEncoding = 4; lastKnownFileType = text.script.sh; name = xcode_run_tool.bash; path = bin/xcode_run_tool.bash; sourceTree = "<group>"; };
-		84FADEA82AABEAA200C31C1A /* XCMTest.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = XCMTest.entitlements; sourceTree = "<group>"; };
+		84FADEA02AABBD5400C31C1A /* xcode_run_tests.bash */ = {isa = PBXFileReference; explicitFileType = text.script.bash; fileEncoding = 4; lastKnownFileType = text.script.bash; name = xcode_run_tests.bash; path = bin/xcode_run_tests.bash; sourceTree = SOURCE_ROOT; };
+		84FADEA12AABBD5400C31C1A /* xcode_run_tool.bash */ = {isa = PBXFileReference; explicitFileType = text.script.bash; fileEncoding = 4; lastKnownFileType = text.script.bash; name = xcode_run_tool.bash; path = bin/xcode_run_tool.bash; sourceTree = SOURCE_ROOT; };
+		84FADEA82AABEAA200C31C1A /* XCMTest.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = XCMTest.entitlements; path = shared/security/entitlements/XCMTest.entitlements; sourceTree = SOURCE_ROOT; };
 		84FADEAD2AAC13FB00C31C1A /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		84FD741A2A84425200F72966 /* XcodeKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XcodeKit.framework; path = Library/Frameworks/XcodeKit.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
@@ -484,42 +486,21 @@
 			name = tests;
 			sourceTree = "<group>";
 		};
-		8411D9A22A82E8720029B632 /* stubs */ = {
+		8411D9A22A82E8720029B632 /* shared */ = {
 			isa = PBXGroup;
 			children = (
 				842858FE2A8AF508002C447C /* orderfile */,
 				840745082AA6DAF200D6FDA6 /* module.modulemap */,
 				84502A772AB8E44300AA5382 /* module.private.modulemap */,
-				8486BF562AA684AC005A02F4 /* XCMTest.xctestplan */,
+				8486BF562AA684AC005A02F4 /* shared/XCMTest.xctestplan */,
 				8418EDAC2A904C2E00AD07F0 /* Icon.icns */,
-				8411D9A54F82E9430029B632 /* ACLs */,
+				848904922ACE4129008CF5F1 /* Security */,
 				8411D9A52A82E9430029B632 /* envs */,
-				84FADEA82AABEAA200C31C1A /* XCMTest.entitlements */,
-				847CEBDB2AB38E8300D86C91 /* XCMTestRelease.entitlements */,
-				848312502ACCC53500EBC152 /* XCMBuildRelease.entitlements */,
-				847BD0CD2AB02ADF00B0B4EA /* xcrunshell.entitlements */,
 				84A14AD82AAB97E800E0A2C4 /* XCMBuild-Info.plist */,
 				8496E0242ACB86990009ECC9 /* xcrunshell-Info.plist */,
-				847CEBE02AB3970300D86C91 /* Release.xcconfig */,
-				847CEBDD2AB3958800D86C91 /* Debug.xcconfig */,
-				843A5AF12AB2806E00B52D5B /* XCMBuildInfo.xcconfig */,
-				843A5AF02AB2542300B52D5B /* Specialized.xcconfig */,
-				847CEBDC2AB3935600D86C91 /* UnSpecialized.xcconfig */,
-				84BD1E632AAFDCB1004F72DF /* CommonConfig.xcconfig */,
-				847CEBDF2AB3967E00D86C91 /* ReleaseConfig.xcconfig */,
-				847CEBDE2AB3963800D86C91 /* DebugConfig.xcconfig */,
-				84BD1E642AAFDFD7004F72DF /* XcodeTestingConfig.xcconfig */,
-				845B9CC12AB3EB2600C58987 /* XcodeBuildGlueConfig.xcconfig */,
-				845B9CC22AB3ECD900C58987 /* XcodeBuildDebugGlueConfig.xcconfig */,
-				84BF4DF52ABA564D00E33993 /* XcodePreBuildGlueConfig.xcconfig */,
-				84BF4DF62ABA581700E33993 /* XcodePreBuildDebugGlueConfig.xcconfig */,
-				843F3C952ABE392600A11150 /* XcodeCompileToolsDebug.xcconfig */,
-				845C71132AC2367B00DD9EE9 /* XcodeCompileRunShellDebug.xcconfig */,
-				845C71142AC237E900DD9EE9 /* XcodeCompileRunShell.xcconfig */,
-				843F3C962ABE3ECF00A11150 /* XcodeCompileToolsRelease.xcconfig */,
-				8498B86E2AB108AD001084D8 /* XcodeFrameworkConfig.xcconfig */,
+				848904902ACE3FCF008CF5F1 /* Configuration */,
 			);
-			path = stubs;
+			path = shared;
 			sourceTree = "<group>";
 		};
 		8411D9A52A82E9430029B632 /* envs */ = {
@@ -536,15 +517,17 @@
 				847527F52AA150E000B1FDE3 /* apfs_dir_DEVELOPER_ACLs */,
 				847527F62AA150E000B1FDE3 /* apfs_file_CONFIG_ACLs */,
 			);
-			path = ACLs;
+			name = ACLs;
+			path = security/ACLs;
 			sourceTree = "<group>";
 		};
 		8411D9A62A82EB520029B632 /* docs */ = {
 			isa = PBXGroup;
 			children = (
 				8489034E2A84535000F5F241 /* XCMBuild.docc */,
+				84B1F4A52ACE8A4D00DD1513 /* XCMTest.docc */,
+				84B1F4A32ACE65AB00DD1513 /* XCRunShell.docc */,
 				8411D9A72A82EB860029B632 /* LICENSE-2.0.txt */,
-				841589A72ACE0D480046CCF6 /* XCRunShell.docc */,
 			);
 			name = docs;
 			sourceTree = "<group>";
@@ -611,6 +594,43 @@
 			path = XCMBuild;
 			sourceTree = "<group>";
 		};
+		848904902ACE3FCF008CF5F1 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				847CEBE02AB3970300D86C91 /* Release.xcconfig */,
+				847CEBDD2AB3958800D86C91 /* Debug.xcconfig */,
+				843A5AF12AB2806E00B52D5B /* XCMBuildInfo.xcconfig */,
+				843A5AF02AB2542300B52D5B /* Specialized.xcconfig */,
+				847CEBDC2AB3935600D86C91 /* UnSpecialized.xcconfig */,
+				84BD1E632AAFDCB1004F72DF /* CommonConfig.xcconfig */,
+				847CEBDF2AB3967E00D86C91 /* ReleaseConfig.xcconfig */,
+				847CEBDE2AB3963800D86C91 /* DebugConfig.xcconfig */,
+				84BD1E642AAFDFD7004F72DF /* XcodeTestingConfig.xcconfig */,
+				845B9CC12AB3EB2600C58987 /* XcodeBuildGlueConfig.xcconfig */,
+				845B9CC22AB3ECD900C58987 /* XcodeBuildDebugGlueConfig.xcconfig */,
+				84BF4DF52ABA564D00E33993 /* XcodePreBuildGlueConfig.xcconfig */,
+				84BF4DF62ABA581700E33993 /* XcodePreBuildDebugGlueConfig.xcconfig */,
+				843F3C952ABE392600A11150 /* XcodeCompileToolsDebug.xcconfig */,
+				845C71132AC2367B00DD9EE9 /* XcodeCompileRunShellDebug.xcconfig */,
+				845C71142AC237E900DD9EE9 /* XcodeCompileRunShell.xcconfig */,
+				843F3C962ABE3ECF00A11150 /* XcodeCompileToolsRelease.xcconfig */,
+				8498B86E2AB108AD001084D8 /* XcodeFrameworkConfig.xcconfig */,
+			);
+			name = Configuration;
+			sourceTree = "<group>";
+		};
+		848904922ACE4129008CF5F1 /* Security */ = {
+			isa = PBXGroup;
+			children = (
+				8411D9A54F82E9430029B632 /* ACLs */,
+				84FADEA82AABEAA200C31C1A /* XCMTest.entitlements */,
+				847CEBDB2AB38E8300D86C91 /* XCMTestRelease.entitlements */,
+				848312502ACCC53500EBC152 /* XCMBuildRelease.entitlements */,
+				847BD0CD2AB02ADF00B0B4EA /* xcrunshell.entitlements */,
+			);
+			name = Security;
+			sourceTree = "<group>";
+		};
 		849B23BB2A8989B000962A8A /* unittests */ = {
 			isa = PBXGroup;
 			children = (
@@ -626,7 +646,7 @@
 				8489034C2A84535000F5F241 /* XCMBuild */,
 				84FD74132A84381800F72966 /* XCMClean */,
 				8411D9A62A82EB520029B632 /* docs */,
-				8411D9A22A82E8720029B632 /* stubs */,
+				8411D9A22A82E8720029B632 /* shared */,
 				8411D9982A82E6910029B632 /* tests */,
 				849B23BB2A8989B000962A8A /* unittests */,
 				84D3F45A2A7C38650022D176 /* Products */,
@@ -644,7 +664,7 @@
 				8486BF442AA67BD9005A02F4 /* XCMTest */,
 				848312552ACCE00C00EBC152 /* XCMTest_profile */,
 				848312562ACCE03900EBC152 /* xcrunshell_profile */,
-				848312572ACCE0A300EBC152 /* ../Debug/XCMBuild.framework */,
+				848312572ACCE0A300EBC152 /* XCMBuild.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -912,6 +932,10 @@
 				"$(BUILT_PRODUCTS_DIR)/XCMBuild.framework/Versions/Current/_CodeSignature",
 				"$(BUILT_PRODUCTS_DIR)/XCMBuild.framework/Versions/2.1.6/XCMBuild",
 				"$(BUILT_PRODUCTS_DIR)/XCMBuild.framework/Versions/2.2.5/XCMBuild",
+				"$(BUILT_PRODUCTS_DIR)/XCMBuild.framework/Versions/2.1.6/Modules",
+				"$(BUILT_PRODUCTS_DIR)/XCMBuild.framework/Versions/2.2.5/Modules",
+				"$(BUILT_PRODUCTS_DIR)/XCMBuild.framework/Versions/2.1.6/Modules/**",
+				"$(BUILT_PRODUCTS_DIR)/XCMBuild.framework/Versions/2.2.5/Modules/M",
 			);
 			outputFileListPaths = (
 			);
@@ -934,7 +958,38 @@
 				"$(BUILT_PRODUCTS_DIR:standardizepath)/XCMBuild.framework/Versions/2.1.6/_CodeSignature",
 				"$(BUILT_PRODUCTS_DIR:standardizepath)/XCMBuild.framework/Versions/2.2.5/_CodeSignature",
 				"$(BUILT_PRODUCTS_DIR:standardizepath)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/usr/bin/",
+				"$(DSTROOT:standardizepath)/$(DYLIB_INSTALL_NAME_BASE:standardizepath)/XCMBuild.framework",
+				"$(DSTROOT:standardizepath)/$(DYLIB_INSTALL_NAME_BASE:standardizepath)/XCMBuild.framework/*",
 				"$(DSTROOT:standardizepath)/$(DYLIB_INSTALL_NAME_BASE:standardizepath)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)",
+				"$(DSTROOT:standardizepath)/$(DYLIB_INSTALL_NAME_BASE:standardizepath)/XCMBuild.framework/Versions",
+				"$(DSTROOT:standardizepath)/$(DYLIB_INSTALL_NAME_BASE:standardizepath)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)",
+				"$(DSTROOT:standardizepath)/$(DYLIB_INSTALL_NAME_BASE:standardizepath)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/**",
+				"$(DSTROOT:standardizepath)/$(DYLIB_INSTALL_NAME_BASE:standardizepath)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/Modules",
+				"$(DSTROOT:standardizepath)/$(DYLIB_INSTALL_NAME_BASE:standardizepath)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/Headers",
+				"$(DSTROOT:standardizepath)/$(DYLIB_INSTALL_NAME_BASE:standardizepath)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/PrivateHeaders",
+				"$(DSTROOT:standardizepath)/$(DYLIB_INSTALL_NAME_BASE:standardizepath)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/Resources",
+				"$(DSTROOT:standardizepath)/$(DYLIB_INSTALL_NAME_BASE:standardizepath)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/Library",
+				"$(DSTROOT:standardizepath)/$(DYLIB_INSTALL_NAME_BASE:standardizepath)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/XCMBuild",
+				"$(DSTROOT:standardizepath)/$(DYLIB_INSTALL_NAME_BASE:standardizepath)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/usr",
+				"$(DSTROOT:standardizepath)/$(DYLIB_INSTALL_NAME_BASE:standardizepath)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/usr/bin",
+				"$(DSTROOT:standardizepath)/$(DYLIB_INSTALL_NAME_BASE:standardizepath)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/usr/bin/XCMTest",
+				"$(DSTROOT:standardizepath)/$(DYLIB_INSTALL_NAME_BASE:standardizepath)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/usr/lib",
+				"$(DSTROOT:standardizepath)/$(DYLIB_INSTALL_NAME_BASE:standardizepath)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/_CodeSignature",
+				"$(DSTROOT:standardizepath)/$(DYLIB_INSTALL_NAME_BASE:standardizepath)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/Modules/**",
+				"$(DSTROOT:standardizepath)/$(DYLIB_INSTALL_NAME_BASE:standardizepath)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/Headers/*.h",
+				"$(DSTROOT:standardizepath)/$(DYLIB_INSTALL_NAME_BASE:standardizepath)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/PrivateHeaders/*.h",
+				"$(DSTROOT:standardizepath)/$(DYLIB_INSTALL_NAME_BASE:standardizepath)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/Resources/**",
+				"$(DSTROOT:standardizepath)/$(DYLIB_INSTALL_NAME_BASE:standardizepath)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/Resources/Icon.icns",
+				"$(DSTROOT:standardizepath)/$(DYLIB_INSTALL_NAME_BASE:standardizepath)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/Resources/Info.plst",
+				"$(DSTROOT:standardizepath)/$(DYLIB_INSTALL_NAME_BASE:standardizepath)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/Resources/Base.lproj/**",
+				"$(DSTROOT:standardizepath)/$(DYLIB_INSTALL_NAME_BASE:standardizepath)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/Resources/en.lproj",
+				"$(DSTROOT:standardizepath)/$(DYLIB_INSTALL_NAME_BASE:standardizepath)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/Resources/*.lproj",
+				"$(DSTROOT:standardizepath)/$(DYLIB_INSTALL_NAME_BASE:standardizepath)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/Resources/*.lproj/Documentation/**",
+				"$(DSTROOT:standardizepath)/$(DYLIB_INSTALL_NAME_BASE:standardizepath)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/Resources/**",
+				"$(DSTROOT:standardizepath)/$(DYLIB_INSTALL_NAME_BASE:standardizepath)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/Library/**",
+				"$(DSTROOT:standardizepath)/$(DYLIB_INSTALL_NAME_BASE:standardizepath)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/usr/**",
+				"$(DSTROOT:standardizepath)/$(DYLIB_INSTALL_NAME_BASE:standardizepath)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/usr/bin/**",
+				"$(DSTROOT:standardizepath)/$(DYLIB_INSTALL_NAME_BASE:standardizepath)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/usr/lib/**",
 			);
 			outputFileListPaths = (
 			);
@@ -1028,7 +1083,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"$(SRCROOT:standardizepath)/stubs/Clang/orderfile",
+				"$(SRCROOT:standardizepath)/shared/Clang/orderfile",
 				"$(CONFIGURATION_TEMP_DIR:standardizepath)",
 			);
 			outputFileListPaths = (
@@ -1057,7 +1112,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				841589A62ACE0D480046CCF6 /* XCRunShell.docc in Sources */,
+				84B1F4A42ACE65AB00DD1513 /* XCRunShell.docc in Sources */,
 				84619D7B2A85BCA7009C5753 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1067,6 +1122,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8486BF472AA67BD9005A02F4 /* XCMTest.m in Sources */,
+				84B1F4A62ACE8A4D00DD1513 /* XCMTest.docc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1189,7 +1245,7 @@
 			baseConfigurationReference = 845B9CC22AB3ECD900C58987 /* XcodeBuildDebugGlueConfig.xcconfig */;
 			buildSettings = {
 				APPLY_RULES_IN_COPY_FILES = YES;
-				CODE_SIGN_ENTITLEMENTS = stubs/XCMTest.entitlements;
+				CODE_SIGN_ENTITLEMENTS = shared/security/entitlements/XCMTest.entitlements;
 				CONTENTS_FOLDER_PATH = "$(PRODUCT_NAME:c99extidentifier).$(WRAPPER_EXTENSION)/Versions/$(MARKETING_VERSION)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(LOCAL_LIBRARY_DIR:standardizepath)",
@@ -1209,7 +1265,7 @@
 			baseConfigurationReference = 845B9CC12AB3EB2600C58987 /* XcodeBuildGlueConfig.xcconfig */;
 			buildSettings = {
 				APPLY_RULES_IN_COPY_FILES = YES;
-				CODE_SIGN_ENTITLEMENTS = stubs/XCMBuildRelease.entitlements;
+				CODE_SIGN_ENTITLEMENTS = shared/security/entitlements/XCMBuildRelease.entitlements;
 				CONTENTS_FOLDER_PATH = "$(PRODUCT_NAME:c99extidentifier).$(WRAPPER_EXTENSION)/Versions/$(MARKETING_VERSION)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(LOCAL_LIBRARY_DIR:standardizepath)",
@@ -1247,7 +1303,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 845B9CC12AB3EB2600C58987 /* XcodeBuildGlueConfig.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = stubs/XCMBuildRelease.entitlements;
+				CODE_SIGN_ENTITLEMENTS = shared/security/entitlements/XCMBuildRelease.entitlements;
 				CODE_SIGN_IDENTITY = FC31A4A7C4E85B713A881BB85755FD9C7799B2F9;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
@@ -1275,7 +1331,7 @@
 				DEAD_CODE_STRIPPING = YES;
 				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				ONLY_ACTIVE_ARCH = NO;
-				ORDER_FILE = stubs/Clang/orderfile;
+				ORDER_FILE = shared/Clang/orderfile;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.adhoc.dt.orderfile.$(PROJECT:c99extidentifier)";
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				TARGET_TEMP_DIR = "$(PROJECT_TEMP_DIR:standardizepath)/Cache/$(PROJECT_NAME).tmp";
@@ -1295,7 +1351,7 @@
 				);
 				DEAD_CODE_STRIPPING = YES;
 				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
-				ORDER_FILE = stubs/Clang/orderfile;
+				ORDER_FILE = shared/Clang/orderfile;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.adhoc.dt.orderfile.$(PROJECT:c99extidentifier)";
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SUPPORTED_PLATFORMS = "watchsimulator watchos macosx iphonesimulator iphoneos driverkit appletvsimulator appletvos";

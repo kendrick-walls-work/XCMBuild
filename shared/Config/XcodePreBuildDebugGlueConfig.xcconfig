@@ -21,13 +21,13 @@
 // Configuration settings file format documentation can be found at:
 // https://help.apple.com/xcode/#/dev745c5c974
 
-#include "XcodeBuildGlueConfig.xcconfig"
+#include "XcodeBuildDebugGlueConfig.xcconfig"
 
 //:completeSettings = XcodePreBuildGlueConfig
 SUPPORTED_PLATFORMS = macosx
 BUILD_VARIANTS = profile normal debug
 DEAD_CODE_STRIPPING = YES
-ORDER_FILE = stubs/Clang/orderfile
+ORDER_FILE = shared/Clang/orderfile
 PRODUCT_BUNDLE_IDENTIFIER = $(PRODUCT_ORG_IDENTIFIER)orderfile.$(PROJECT:c99extidentifier)
 PRODUCT_MODULE_NAME = $(TARGET_NAME:c99extidentifier)
 PRODUCT_NAME = $(PROJECT_NAME:c99extidentifier)-order-$(CURRENT_VARRIANT)-$(CURRENT_ARCH).txt

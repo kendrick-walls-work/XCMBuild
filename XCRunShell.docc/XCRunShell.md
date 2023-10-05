@@ -5,7 +5,7 @@
 }
 
 @Comment {
-	License
+	### License
 
 	Copyright (c) 2014-2023 Mr. Walls
 
@@ -30,7 +30,7 @@
 ## Overview
 
 A tool similar to `xcrun` (xcode) and `command` (posix) that is used to run commands in a
-`bash`-like fashion with little to no refactoring needed to leverage convience features like path
+`bash`-like fashion with little to no refactoring needed to leverage convenience features like path
 resolution and environment abstraction.
 see
 
@@ -38,10 +38,6 @@ see
 
 > Important: In order to remain portable to MacOS in addition to `*nix` style OSes the on-disk structure is
 intended to follow Apple's Framework structure https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPFrameworks/Concepts/FrameworkAnatomy.html
-
-<!--@START_MENU_TOKEN@-->Text<!--@END_MENU_TOKEN@-->
-
-## Topics
 
 ### <!--@START_MENU_TOKEN@-->Group<!--@END_MENU_TOKEN@-->
 

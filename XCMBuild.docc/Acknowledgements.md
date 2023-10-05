@@ -2,7 +2,7 @@
 
 Copyright (c) 2014-2023 Mr. Walls
 
-### License
+### <!--@START_MENU_TOKEN@-->License<!--@END_MENU_TOKEN@-->
 
 	Licensed under the Apache License, Version 2.0 (the "License");
 	you may not use this file except in compliance with the License.
@@ -17,12 +17,14 @@ Copyright (c) 2014-2023 Mr. Walls
 	limitations under the License.
 
 
-## Overview
+## <!--@START_MENU_TOKEN@-->Attributions<!--@END_MENU_TOKEN@-->
 
-<!--@START_MENU_TOKEN@-->Text<!--@END_MENU_TOKEN@-->
+> Like most modern software ``XCMBuild`` is _in part_ humbaly built upon the work of those who came before it.
 
-### Bash Bible
+``XCMBuild`` includes portions of code inspired or derived from the following _un-afiliated_ projects:
 
-MIT Licence
+### <!--@START_MENU_TOKEN@-->Bash Bible<!--@END_MENU_TOKEN@-->
+
+[MIT Licence](https://raw.githubusercontent.com/dylanaraps/pure-bash-bible/8c19d0b482b04d8d50fb72b4c5148b41ce605c6d/LICENSE.md)
 
 [pure-bash-bible](https://github.com/dylanaraps/pure-bash-bible/commit/8c19d0b482b04d8d50fb72b4c5148b41ce605c6d)

@@ -2,9 +2,10 @@
 
 @Metadata {
 	@DocumentationExtension(mergeBehavior: append)
+	@PageImage(purpose: icon, source: Icon.png)
 }
 
-@comment {
+@Comment {
 	### License
 
 	Copyright (c) 2014-2023 Mr. Walls
@@ -20,7 +21,7 @@
 	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 	See the License for the specific language governing permissions and
 	limitations under the License.
-}
+	}
 
 <!--@START_MENU_TOKEN@-->Summary<!--@END_MENU_TOKEN@-->
 

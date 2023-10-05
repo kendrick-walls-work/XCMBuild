@@ -1,8 +1,8 @@
 //
-//  XcodeCompileRunShellDebug.xcconfig
+//  XcodeCompileRunShell.xcconfig
 //  XCMBuild
 //
-// reactive-firewall/XCMBuild XcodeCompileRunShellDebug xcconfig
+// reactive-firewall/XCMBuild XcodeCompileRunShell xcconfig
 // ..................................
 // Copyright (c) 2023, Mr. Walls
 // ..................................
@@ -21,21 +21,20 @@
 // Configuration settings file format documentation can be found at:
 // https://help.apple.com/xcode/#/dev745c5c974
 
-#include "XcodeCompileToolsDebug.xcconfig"
+#include "XcodeCompileToolsRelease.xcconfig"
 
-//:completeSettings = XcodeCompileRunShellDebug
+//:completeSettings = XcodeCompileRunShell
 EXCLUDED_ARCHS = $(ARCHS_STANDARD_32_BIT) undefined_arch
 ON_DEMAND_RESOURCES_INITIAL_INSTALL_TAGS = XCMRunner
-BUILD_VARIANTS = profile normal
+ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES
 VALIDATE_PRODUCT = YES
-LD_EXPORT_SYMBOLS = $(inhereted)
-LINKER_DISPLAYS_MANGLED_NAMES[sdk=macosx*][arch=x86_64] = YES
+LD_EXPORT_SYMBOLS = NO
 OTHER_LDFLAGS = -ObjC -weak_framework Foundation,framework -framework XCMBuild,framework
 SEPARATE_SYMBOL_EDIT = YES
-MODULEMAP_PRIVATE_FILE = stubs/Clang/module.private.modulemap
+MODULEMAP_PRIVATE_FILE = shared/Clang/module.private.modulemap
 PRODUCT_MODULE_NAME = $(PROJECT_NAME:c99extidentifier).$(ON_DEMAND_RESOURCES_INITIAL_INSTALL_TAGS:c99extidentifier)
 PRODUCT_NAME = $(TARGET_NAME:c99extidentifier)
-CODE_SIGN_ENTITLEMENTS = stubs/xcrunshell.entitlements
+CODE_SIGN_ENTITLEMENTS = shared/security/entitlements/xcrunshell.entitlements
 TAPI_EXCLUDE_PROJECT_HEADERS = XCMTest.h
 TAPI_EXTRA_PRIVATE_HEADERS = xcrunshell.h
 TAPI_EXTRA_PROJECT_HEADERS = XCMShellDelegate.h XCMShell.h

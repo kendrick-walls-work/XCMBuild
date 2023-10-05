@@ -115,11 +115,11 @@ fi
 # this is how test files are found:
 
 # THIS IS THE ACTUAL TEST
-_TEST_ROOT_DIR="./stubs" ;
-if [[ -d ../stubs ]] ; then
-	_TEST_ROOT_DIR="../stubs" ;
-elif [[ -d ./stubs ]] ; then
-	_TEST_ROOT_DIR="./stubs" ;
+_TEST_ROOT_DIR="./shared" ;
+if [[ -d ../shared ]] ; then
+	_TEST_ROOT_DIR="../shared" ;
+elif [[ -d ./shared ]] ; then
+	_TEST_ROOT_DIR="./shared" ;
 elif [[ -d ./.git/ ]] ; then
 	_TEST_ROOT_DIR="./" ;
 else
