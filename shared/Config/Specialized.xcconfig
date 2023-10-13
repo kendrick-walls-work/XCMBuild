@@ -24,7 +24,6 @@
 
 //:configuration = Release
 SUPPORTED_PLATFORMS = macosx
-SDKROOT = macosx
 ARCHS = $(ARCHS_STANDARD)
 ONLY_ACTIVE_ARCH = NO
 INCLUDED_ARCHS = $(ARCHS_STANDARD_64_BIT)$(inhereted)

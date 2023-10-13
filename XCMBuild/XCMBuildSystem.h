@@ -30,12 +30,12 @@
 #define XCMBuild_h "XCMBuild.h (XCMBuildSystem)"
 #import "XCMBuild.h"
 #endif /* XCMBuild_h (inner) */
-#if defined(__clang__)
+#if defined(__clang__) && __clang__
 #pragma clang final(XCMBuild_h)
 #endif /* !__clang__ */
 #endif /* XCMBuild_h (outer) */
 
-#if defined(TARGET_OS_OSX) && TARGET_OS_OSX || TARGET_OS_UNIX || TARGET_OS_LINUX
+#if defined(TARGET_OS_OSX) && TARGET_OS_OSX || (defined(TARGET_OS_UNIX) && TARGET_OS_UNIX) || defined(TARGET_OS_LINUX) && TARGET_OS_LINUX
 
 @class NSMethodSignature, NSInvocation, NSArray<ObjectType>, NSDictionary<KeyType, ObjectType>, NSString, NSObject, NSBundle;
 
@@ -44,8 +44,8 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 /// XCMBuildSystem allows building projects via makefiles with the targets `build`, `install`, `clean`, `test`, `uninstall`, etc.
 @interface XCMBuildSystem: NSBundle {
 }
-#if defined(__clang__)
-#pragma mark *** XCMBuildSystem ***
+#if defined(__clang__) && __clang__
+#pragma mark - XCMBuildSystem
 #endif /* !__clang__ */
 /// Returns the string describing the object in the debugger.
 /// See  `NSObject/description` for details.

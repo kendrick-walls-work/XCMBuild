@@ -33,34 +33,27 @@
 #endif
 
 #ifndef XCMB_XCMBuild_h
-#if defined(__clang__)
-#pragma mark *** XCMBuildHeader ***
+#if defined(__clang__) && __clang__
+#pragma mark - XCMBuildHeader
 #endif /* !__clang__ */
 ///Defined whenever ``XCMBuild`` is imported.
 #define XCMB_XCMBuild_h "XCMBuild.h"
 
-#if defined(__has_include)
-#if __has_include(<objc/objc.h>)
-#import <objc/objc.h>
-#if __has_include(<objc/NSObject.h>)
-#import <objc/NSObject.h>
-#endif /* !__has_include(<objc/NSObject.h>) */
-#if __has_include(<objc/Object.h>)
-#import <objc/Object.h>
-#endif /* !__has_include(<objc/Object.h>) */
-#if __has_include(<objc/NSObjCRuntime.h>)
-#import <objc/NSObjCRuntime.h>
-#endif /* !__has_include(<objc/NSObjCRuntime.h>) */
-#endif /* !__has_include(<objc/objc.h>) */
-#endif /* !__has_include_ObjC */
+#pragma mark - Imports
 
 #if defined(__has_include)
+#if __has_include(<XCMBuild/Compat.h>)
+#import <XCMBuild/Compat.h>
+#elif __has_include("Compat.h")
+#import "Compat.h"
+#else /* !__has_include(<XCMBuild/Compat.h>) */
 #if __has_include(<stdio.h>)
 #import <stdio.h>
 #if __has_include(<stdlib.h>)
 #import <stdlib.h>
 #endif /* !__has_include(<stdlib.h>) */
 #endif /* !__has_include(<stdio.h>) */
+#endif /* NO Compat.h */
 #endif /* !__has_include_C */
 
 #if defined(__has_include)
@@ -77,19 +70,8 @@
 #endif /* !__has_include_Foundation_ObjC */
 #endif /* !NSLog */
 
-#ifdef TARGET_OS_WIN32
-#if TARGET_OS_WIN32
-#warning UNSUPPORTED BUILD
-#endif
-///Important: ``XCMBuild`` is explicidly incompatible with the target ``TARGET_OS_WIN32``.
-///
-///It is worth noting: `XCM` (including ``XCMBuild``) are incompatible with the unsafe ``TARGET_OS_WIN32`` (and all
-/// Windows and/or 32-bit architectures) for all compat versions 2+ due to the expectation of `64-bit *nix` runtimes.
-#undef TARGET_OS_WIN32
-#endif
-
-#if defined(__clang__)
-#pragma mark *** XCMBuild ***
+#if defined(__clang__) && __clang__
+#pragma mark - XCMBuild
 #endif /* !__clang__ */
 
 #ifndef NSTask_h
@@ -128,6 +110,11 @@
 #define NSBundle_h "NSBundle.h"
 #endif /* NSBundle_h */
 
+#if defined(__DARWIN_ONLY_UNIX_CONFORMANCE) && __DARWIN_ONLY_UNIX_CONFORMANCE
+__COPYRIGHT("Copyright (c) 2023 Mr.Walls - Licensed under the Apache License, Version 2.0.");
+__PROJECT_VERSION("2.2.6");
+#endif
+
 #if defined(FOUNDATION_EXPORT)
 /// Project version number for ``XCMBuild``.
 FOUNDATION_EXPORT double XCMBuildVersionNumber;
@@ -149,6 +136,12 @@ __END_DECLS
 #if __has_include(<Foundation/NSException.h>)
 #import <Foundation/NSException.h>
 #endif /* !__has_include(<Foundation/NSException.h>) */
+#if __has_include(<Foundation/NSProgress.h>)
+#import <Foundation/NSProgress.h>
+#endif /* !__has_include(<Foundation/NSProgress.h>) */
+#if __has_include(<Foundation/NSOperation.h>)
+#import <Foundation/NSOperation.h>
+#endif /* !__has_include(<Foundation/NSOperation.h>) */
 #if __has_include(<Foundation/NSNotification.h>)
 #import <Foundation/NSNotification.h>
 #endif /* !__has_include(<Foundation/NSNotification.h>) */
@@ -163,8 +156,8 @@ __END_DECLS
 #define NSPipe_h "NSPipe.h"
 #endif
 // In this header, you should import all the public headers of your framework using statements like #import <XCMBuild/PublicHeader.h>
-#if defined(__clang__)
-#pragma mark *** XCMBuild Framework ***
+#if defined(__clang__) && __clang__
+#pragma mark - XCMBuild Framework
 #endif /* !__clang__ */
 // To avoid problem with non-clang compilers not having this macro.
 #if defined(__has_include)

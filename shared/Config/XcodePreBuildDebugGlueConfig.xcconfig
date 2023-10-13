@@ -31,3 +31,6 @@ ORDER_FILE = shared/Clang/orderfile
 PRODUCT_BUNDLE_IDENTIFIER = $(PRODUCT_ORG_IDENTIFIER)orderfile.$(PROJECT:c99extidentifier)
 PRODUCT_MODULE_NAME = $(TARGET_NAME:c99extidentifier)
 PRODUCT_NAME = $(PROJECT_NAME:c99extidentifier)-order-$(CURRENT_VARRIANT)-$(CURRENT_ARCH).txt
+PRODUCT_NAME_profile = $(PROJECT_NAME:c99extidentifier)-order-profile-$(CURRENT_ARCH).txt
+PRODUCT_NAME_debug = $(PROJECT_NAME:c99extidentifier)-order-debug-$(CURRENT_ARCH).txt
+PRODUCT_NAME_normal = $(PROJECT_NAME:c99extidentifier)-order-normal-$(CURRENT_ARCH).txt

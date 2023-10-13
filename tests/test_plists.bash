@@ -78,7 +78,7 @@
 ################################################################################
 
 ulimit -t 600
-PATH="/bin:/sbin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin"
+PATH="/bin:/sbin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin:${PATH}"
 umask 137
 
 LOCK_FILE="/tmp/plist_test_script_lock"
@@ -88,6 +88,7 @@ test -x "$(command -v git)" || exit 126 ;
 hash -p ./.github/tool_shlock_helper.sh shlock || exit 255 ;
 test -x "$(command -v shlock)" || exit 126 ;
 test -x "$(command -v xargs)" || exit 126 ;
+test -x "$(command -v plutil)" || exit 126 ;
 test -x "$(command -v xmllint)" || exit 126 ;
 declare -i EXIT_CODE=1 ;
 
@@ -120,14 +121,14 @@ if [[ -d ../shared ]] ; then
 	_TEST_ROOT_DIR="../shared" ;
 elif [[ -d ./shared ]] ; then
 	_TEST_ROOT_DIR="./shared" ;
-elif [[ -d ./.git/ ]] ; then
-	_TEST_ROOT_DIR="./" ;
+elif [[ ( -d $(git rev-parse --show-toplevel 2>/dev/null) ) ]] ; then
+	_TEST_ROOT_DIR="$(git rev-parse --show-toplevel 2>/dev/null)" ;
 else
 	echo "FAIL: missing valid app or file"
 	EXIT_CODE=1
 fi
 
-for _TEST_DOC in $(find "${_TEST_ROOT_DIR}" \( -iname '*.plist' -o -iname "*.mobileconfig" \) -a -print0 | xargs -0 -L1 -I{} git ls-files "{}" ; wait ;) ; do
+for _TEST_DOC in $(find "${_TEST_ROOT_DIR}" \( -iname '*.plist' -o -iname "*.mobileconfig" -o -iname "*.entitlements" \) -a -print0 | xargs -0 -L1 -I{} git ls-files "{}" ; wait ;) ; do
 	if [[ (${EXIT_CODE} -eq 0) ]] ; then
 		plutil -lint -- "${_TEST_DOC}" 1>/dev/null 2>&1 || EXIT_CODE=$? ;
 		if [[ (${EXIT_CODE} -ne 0) ]] ; then

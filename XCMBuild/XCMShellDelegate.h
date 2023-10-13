@@ -31,27 +31,40 @@
 #define XCMBuild_h "XCMBuild.h (XCMShellDelegate)"
 #import "XCMBuild.h"
 #endif /* XCMBuild_h (inner) */
-#if defined(__clang__)
+#if defined(__clang__) && __clang__
 #pragma clang final(XCMBuild_h)
 #endif /* !__clang__ */
 #endif /* XCMBuild_h (outer) */
 
-#if defined(TARGET_OS_OSX) && TARGET_OS_OSX || TARGET_OS_UNIX || TARGET_OS_LINUX
+#if defined(TARGET_OS_OSX) && TARGET_OS_OSX || (defined(TARGET_OS_UNIX) && TARGET_OS_UNIX) || (defined(TARGET_OS_LINUX) && TARGET_OS_LINUX)
 
-@class NSMethodSignature, NSInvocation, NSArray<ObjectType>, NSDictionary<KeyType, ObjectType>, NSTask, NSString, NSObject, NSPipe;
+@class NSMethodSignature, NSInvocation, NSArray<ObjectType>, NSDictionary<KeyType, ObjectType>, NSSet, NSTask, NSString, NSObject, NSPipe;
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @interface XCMShellDelegate: NSObject {
 }
-#if defined(__clang__)
-#pragma mark *** XCMShellDelegate ***
+#if defined(__clang__) && __clang__
+#pragma mark - XCMShellDelegate
 #endif /* !__clang__ */
 @property (nullable, readwrite, retain) NSPipe *outputPipe;
+@property (nullable, readwrite, retain) NSPipe *errorPipe;
+
+@property (nullable, readwrite, strong) id<NSObject> outputHandler;
+@property (nullable, readwrite, strong) id<NSObject> errorHandler;
 /// Attaches to and captures the `standardOutput` of a given task process. The captured output is printed out asynchronously.
 /// TODO: Add usage example here.
 /// - Parameter process: An `NSTask` to capture. The given `process` _MUST_ not have been launched or an error will be raised.
 -(void)captureStandardOutput:(NSTask *)process;
+/// Attaches to and captures the `standardError` of a given task process. The captured output is printed out asynchronously.
+/// TODO: Add usage example here.
+/// - Parameter process: An `NSTask` to capture. The given `process` _MUST_ not have been launched or an error will be raised.
+-(void)captureStandardError:(NSTask *)process;
+
+-(void)removeOutputCaptures;
+-(void)removeErrorCaptures;
+-(void)removeAllCaptures;
+
 @end
 
 NS_HEADER_AUDIT_END(nullability, sendability)

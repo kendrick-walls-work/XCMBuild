@@ -21,19 +21,19 @@
 // Configuration settings file format documentation can be found at:
 // https://help.apple.com/xcode/#/dev745c5c974
 
+//:configuration = Debug
 #include "XcodeBuildDebugGlueConfig.xcconfig"
-
-//:completeSettings = XcodeCompileToolsDebug
 ON_DEMAND_RESOURCES_INITIAL_INSTALL_TAGS = XCMHelper
 ON_DEMAND_RESOURCES_PREFETCH_ORDER = XCMBuild
 BUILD_VARIANTS = profile normal
 DEPLOYMENT_LOCATION = YES
 DEPLOYMENT_POSTPROCESSING = $(DEPLOYMENT_LOCATION)
-INSTALL_PATH = $(CONTENTS_FOLDER_PATH)/usr/bin
+INSTALL_PATH = $(LOCAL_LIBRARY_DIR:standardizepath)/Frameworks/$(CONTENTS_FOLDER_PATH)/usr/bin
 STRIP_INSTALLED_PRODUCT = NO
 MACOSX_DEPLOYMENT_TARGET = 13.3
 MACOSX_DEPLOYMENT_TARGET[arch=arm64e] = 13.3
 MACOSX_DEPLOYMENT_TARGET[arch=arm64] = 13.3
+MACH_O_TYPE = mh_execute
 MODULE_NAME = $(TARGET_NAME:c99extidentifier)
 DEAD_CODE_STRIPPING = $(STRIP_INSTALLED_PRODUCT)
 LD_EXPORT_SYMBOLS = $(inhereted)
@@ -41,18 +41,21 @@ LINKER_DISPLAYS_MANGLED_NAMES[sdk=macosx*] = !$(DEAD_CODE_STRIPPING)
 OTHER_LDFLAGS = -ObjC -weak_framework CoreFoundation,framework -weak_framework Foundation,framework -framework XCMBuild,framework
 LD_RUNPATH_SEARCH_PATHS = $(inherited) @executable_path/../../$(LOCAL_LIBRARY_DIR:standardizepath)/Frameworks/XCMBuild.framework @executable_path/../lib @executable_path/../../../Current @loader_path/Frameworks @loader_path/../Frameworks @loader_path/../lib
 DEFINES_MODULE = YES
-EXECUTABLE_EXTENSION = -$(CURRENT_VARIANT)
+CREATE_INFOPLIST_SECTION_IN_BINARY = YES
+EXECUTABLE_EXTENSION_profile = -profile
+EXECUTABLE_EXTENSION_debug = -debug
+EXECUTABLE_EXTENSION = $(inhereted)
 PRODUCT_MODULE_NAME = $(PROJECT_NAME:c99extidentifier).$(PRODUCT_NAME:c99extidentifier)
 PRODUCT_NAME = $(TARGET_NAME:c99extidentifier)
 CODE_SIGN_ENTITLEMENTS = shared/security/entitlements/$(PRODUCT_NAME:c99extidentifier).entitlements
 CODE_SIGN_STYLE = Manual
 ENABLE_HARDENED_RUNTIME = YES
 TAPI_EXCLUDE_PROJECT_HEADERS = xcrunshell.h
-TAPI_EXTRA_PROJECT_HEADERS = XCMBuild.h XCMShellDelegate.h XCMShell.h
+TAPI_EXTRA_PROJECT_HEADERS = Compat.h XCMBuild.h XCMShellDelegate.h XCMShell.h
 TAPI_EXTRA_PUBLIC_HEADERS = $(PRODUCT_NAME:c99extidentifier).h
 GCC_INPUT_FILETYPE = sourcecode.c.objc
-CLANG_MODULES_AUTOLINK = YES
+CLANG_MODULES_AUTOLINK = $(DEFINES_MODULE)
 ENABLE_MODULE_VERIFIER = $(DEFINES_MODULE)
-CONTENTS_FOLDER_PATH = $(PROJECT_NAME:c99extidentifier).framework/Versions/$(MARKETING_VERSION)
+CONTENTS_FOLDER_PATH = $(PROJECT_NAME:c99extidentifier).framework/Versions/$(FRAMEWORK_VERSION)
 
 // CLANG_TIDY_MISC_REDUNDANT_EXPRESSION = NO

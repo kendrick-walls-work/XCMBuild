@@ -3,6 +3,16 @@
 <plist version="1.0">
 <dict>
 	<key>com.apple.security.application-groups</key>
-	<string>org.pak.dt</string>
+	<array>
+		<string>org.pak.dt</string>
+		<string>org.pak.dt.XCMBuild</string>
+		<string>org.pak.dt.XCMBuild.XCMBuild</string>
+		<string>org.pak.dt.XCMBuild.XCMTest</string>
+		<string>org.pak.dt.XCMBuild.XCRunner</string>
+		<string>org.pak.dt.xcrunshell</string>
+		<string>org.pak.dt.XCMBuild.xcrunshell</string>
+	</array>
+	<key>com.apple.security.files.user-selected.executable</key>
+	<true/>
 </dict>
 </plist>

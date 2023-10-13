@@ -50,33 +50,83 @@
 @implementation XCMShellDelegate
 
 @synthesize outputPipe;
+@synthesize outputHandler;
+@synthesize errorPipe;
+@synthesize errorHandler;
 
 -(void)captureStandardOutput:(NSTask *)process {
 	if (process != nil) {
-		[self setOutputPipe:[NSPipe new]];
+		[self setOutputPipe:[NSPipe pipe]];
 		[process setStandardOutput:[self outputPipe]];
 		//listen for data available
 		[[[self outputPipe] fileHandleForReading] waitForDataInBackgroundAndNotify];
-		[[NSNotificationCenter defaultCenter] addObserverForName:NSFileHandleDataAvailableNotification
-														object:[[self outputPipe] fileHandleForReading]
-														queue:nil
-														usingBlock:^(NSNotification * _Nonnull note) {
+		[self setOutputHandler:[[NSNotificationCenter defaultCenter] addObserverForName:NSFileHandleDataAvailableNotification
+																		object:[[self outputPipe] fileHandleForReading]
+																		queue:[NSOperationQueue currentQueue]
+																		usingBlock:^(NSNotification * _Nonnull note) {
 
 			NSData *output = [[[self outputPipe] fileHandleForReading] availableData];
-			NSString * outputString = [[NSString alloc] initWithData:output
-														encoding:NSUTF8StringEncoding];
-
-			dispatch_async(dispatch_get_main_queue(), ^{
-				// do something with the string chunk that has been received
-				if (outputString != nil)
-					printf("%s", [outputString cStringUsingEncoding:NSUTF8StringEncoding]);
-			});
+			if (output != nil) {
+				NSString * outputString = [[NSString alloc] initWithData:output
+															encoding:NSUTF8StringEncoding];
+				dispatch_async(dispatch_get_main_queue(), ^{
+					// do something with the string chunk that has been received
+					if (outputString != nil)
+						printf("%s", [outputString cStringUsingEncoding:NSUTF8StringEncoding]);
+				});
+			};
 
 			//listen again...
 			[[[self outputPipe] fileHandleForReading] waitForDataInBackgroundAndNotify];
 
-		}];
+		}]];
 	};
+}
+
+
+-(void)captureStandardError:(NSTask *)process {
+	if (process != nil) {
+		[self setErrorPipe:[NSPipe pipe]];
+		[process setStandardError:[self errorPipe]];
+		//listen for data available
+		[[[self errorPipe] fileHandleForReading] waitForDataInBackgroundAndNotify];
+		[self setErrorHandler:[[NSNotificationCenter defaultCenter] addObserverForName:NSFileHandleDataAvailableNotification
+																			object:[[self errorPipe] fileHandleForReading]
+																				queue:nil
+																		usingBlock:^(NSNotification * _Nonnull note) {
+
+			NSData *error = [[[self errorPipe] fileHandleForReading] availableData];
+			NSString * errorString = [[NSString alloc] initWithData:error
+														encoding:NSUTF8StringEncoding];
+
+			dispatch_async(dispatch_get_main_queue(), ^{
+				// do something with the string chunk that has been received
+				if (errorString != nil)
+					fprintf(stderr, "%s", [errorString cStringUsingEncoding:NSUTF8StringEncoding]);
+			});
+
+			//listen again...
+			[[[self errorPipe] fileHandleForReading] waitForDataInBackgroundAndNotify];
+
+		}]];
+	};
+}
+
+- (void)removeOutputCaptures {
+	[[NSNotificationCenter defaultCenter] removeObserver:[self outputHandler] name:NSFileHandleDataAvailableNotification object:[[self outputPipe] fileHandleForReading]];
+	[self setOutputHandler:nil];
+	[self setOutputPipe:nil];
+}
+
+- (void)removeErrorCaptures {
+	[[NSNotificationCenter defaultCenter] removeObserver:[self errorHandler] name:NSFileHandleDataAvailableNotification object:[[self errorPipe] fileHandleForReading]];
+	[self setErrorHandler:nil];
+	[self setErrorPipe:nil];
+}
+
+- (void)removeAllCaptures {
+	[self removeOutputCaptures];
+	[self removeErrorCaptures];
 }
 
 @end

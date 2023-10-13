@@ -47,7 +47,7 @@
 + (NSString *)debugDescription
 {
 	//return [(NSBundle *)([XCMBuildSystem superclass]) debugDescription];
-	return (NSConstantString *)@"<XCMBuildSystem>";
+	return (NSConstantString *)@"<XCMBuild/XCMBuildSystem>";
 }
 
 - (nullable NSString *)pathForAuxiliaryExecutable:(NSString *)executableName

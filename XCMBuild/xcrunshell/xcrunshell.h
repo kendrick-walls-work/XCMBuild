@@ -33,7 +33,7 @@
 #define XCMBuild_h "XCMBuild.h (XCRunShell)"
 #import "XCMBuild.h"
 #endif /* XCMBuild_h (inner) */
-#if defined(__clang__)
+#if defined(__clang__) && __clang__
 #pragma clang final(XCMBuild_h)
 #endif /* !__clang__ */
 #endif /* XCMBuild_h (outer) */
@@ -54,7 +54,7 @@ const int XCRS_MINARGS = 1;
 #define XCMShellDelegate_h "XCMShellDelegate.h (XCRunShell)"
 #import "XCMShellDelegate.h"
 #endif /* XCMShellDelegate_h (inner) */
-#if defined(__clang__)
+#if defined(__clang__) && __clang__
 #pragma clang final(XCMShellDelegate_h)
 #endif /* !__clang__ */
 #endif /* XCMShellDelegate_h (outer) */
@@ -70,7 +70,20 @@ const int XCRS_MINARGS = 1;
 #define XCMShell_h "XCMShell.h (XCRunShell)"
 #import "XCMShell.h"
 #endif /* XCMShell_h (inner) */
-#if defined(__clang__)
+#if defined(__clang__) && __clang__
 #pragma clang final(XCMShell_h)
 #endif /* !__clang__ */
 #endif /* XCMShell_h (outer) */
+
+#if defined(XCRS_RUNSHELL_MAIN_MARK)
+#if XCRS_RUNSHELL_MAIN_MARK < __INCLUDE_LEVEL__ && XCRS_RUNSHELL_MAIN_MARK < 1 && __INCLUDE_LEVEL__ <= 2
+
+/// Used to handle the testing of a project built with the `XCMBuild` system. Namely runs the equivalent of `make test`
+///
+/// - Returns: `0` (exit-code of zero) if the test reported back without errors. Otherwise Returns a value greater than `0` in the case
+/// - Parameters:
+///   - argc: main argument count input. Ignored here.
+///   - argv: main arguments from input. Ignored here.
+int main(int argc, const char * argv[]);
+#endif
+#endif

@@ -30,12 +30,12 @@
 #define XCMBuild_h "XCMBuild.h (XCMShellTask)"
 #import "XCMBuild.h"
 #endif /* XCMBuild_h (inner) */
-#if defined(__clang__)
+#if defined(__clang__) && __clang__
 #pragma clang final(XCMBuild_h)
 #endif /* !__clang__ */
 #endif /* XCMBuild_h (outer) */
 
-#if defined(TARGET_OS_OSX) && TARGET_OS_OSX || TARGET_OS_UNIX || TARGET_OS_LINUX
+#if defined(TARGET_OS_OSX) && TARGET_OS_OSX || (defined(TARGET_OS_UNIX) && TARGET_OS_UNIX) || (defined(TARGET_OS_LINUX) && TARGET_OS_LINUX)
 
 @class NSArray<ObjectType>, NSDictionary<KeyType, ObjectType>, NSTask, NSString, NSObject;
 
@@ -46,7 +46,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 @interface XCMShellTask : NSObject {
 }
 
-#if defined(__clang__)
+#if defined(__clang__) && __clang__
 #pragma mark *** XCMShellTask ***
 #endif /* !__clang__ */
 

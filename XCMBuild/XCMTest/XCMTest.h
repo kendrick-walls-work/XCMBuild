@@ -37,31 +37,42 @@
 #define XCMBuild_h "XCMBuild.h (XCMBuildSystem)"
 #import "XCMBuild.h"
 #endif /* XCMBuild_h (inner) */
-#if defined(__clang__)
+#if defined(__clang__) && __clang__
 #pragma clang final(XCMBuild_h)
 #endif /* !__clang__ */
 #endif /* XCMBuild_h (outer) */
 
-#if TARGET_OS_OSX
+#if defined(TARGET_OS_OSX) && TARGET_OS_OSX || (defined(TARGET_OS_UNIX) && TARGET_OS_UNIX) || (defined(TARGET_OS_LINUX) && TARGET_OS_LINUX)
 
 #if defined(__has_attribute)
 #if __has_attribute(used)
+#if __has_attribute(weak_import)
 #ifndef XCMTestCommandArgumentsString
+/// Use this to Makefile Testing cmdline string for XCMTest.
+extern NSString * const XCMTestCommandArgumentsString __attribute__((weak_import));
+#endif /* !XCMTestCommandArgumentsString */
+#else /* !__attribute__ ((weak_import)) */
+#ifndef XCMTestCommandArgumentsString
+#warning No support for weak import of XCMTest
 /// Use this to Makefile Testing cmdline string for XCMTest.
 extern NSString * const XCMTestCommandArgumentsString;
 #endif /* !XCMTestCommandArgumentsString */
+#endif /* END ((weak_import)) */
 #endif /* !__attribute__ ((used)) */
 #endif /* !__has_attribute */
 
+#if defined(XCRS_RUNSHELL_MAIN_MARK)
+#if XCRS_RUNSHELL_MAIN_MARK < __INCLUDE_LEVEL__ && XCRS_RUNSHELL_MAIN_MARK < 1 && __INCLUDE_LEVEL__ <= 2
 
-/// Used to handle the testing of a project built with the ``XCMBuild`` system. Namely runs the equivalent of `make test`
+/// Used to handle the testing of a project built with the `XCMBuild` system. Namely runs the equivalent of `make test`
 ///
 /// - Returns: `0` (exit-code of zero) if the test reported back without errors. Otherwise Returns a value greater than `0` in the case
 /// - Parameters:
 ///   - argc: main argument count input. Ignored here.
 ///   - argv: main arguments from input. Ignored here.
 int main(int argc, const char * argv[]);
-
+#endif
+#endif
 /*! @parseOnly */
 #define XCMTest_h "XCMTest.h"
 

@@ -1,8 +1,8 @@
-#! /bin/bash
-#
-# reactive-firewall/XCMBuild shellscript linter Test
+#! /bin/bash --posix
+
+# reactive-firewall/posix-run Tool
 # ..................................
-# Copyright (c) 2023, Mr. Walls
+# Copyright (c) 2017-2023, Mr. Walls
 # ..................................
 # Licensed under APACHE-2 (the "License");
 # you may not use this file except in compliance with the License.
@@ -77,95 +77,37 @@
 #    even if the above stated remedy fails of its essential purpose.
 ################################################################################
 
-ulimit -t 600
-PATH="/bin:/sbin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin:${PATH}"
-#umask 137
+#	usage:
+#		$0 Cmd [args ...]
+#
 
-LOCK_FILE="/tmp/shellscript_test_script.lock"
-test -x "$(command -v grep)" || exit 126 ;
-test -x "$(command -v xargs)" || exit 126 ;
-test -x "$(command -v find)" || exit 126 ;
-test -x "$(command -v git)" || exit 126 ;
-hash -p ./.github/tool_shlock_helper.sh shlock || exit 255 ;
-test -x "$(command -v shlock)" || exit 126 ;
-test -x "$(command -v shellcheck)" || echo "$0: Will SKIP Missing TOOL" ;
-test -x "$(command -v shellcheck)" || exit 0 ;
-declare -i EXIT_CODE=1 ;
-
-function cleanup() {
-	rm -f "${LOCK_FILE}" 2>/dev/null || true ; wait ;
-	hash -d shlock 2>/dev/null > /dev/null || true ;
+function fn_do_cmd() {
+	# setup
+	local SUB_TOOL_RESULT=0 ;
+	local OLDUMASK=$(umask) ;
+	local ACTION=${ACTION:-"run"}
+	cd $(pwd) 2>/dev/null ; # initialize OLDPWD = PWD
+	# do the work
+	( command ${@:1:$#} ) || false ;
+	SUB_TOOL_RESULT=$?
+	wait ;
+	# revert umask
+	umask "$OLDUMASK" ;
+	# return to start path
+	test $(pwd) -ef ${OLDPWD} || cd "${OLDPWD}" 2>/dev/null ;
+	# cleanup
+	unset OLDUMASK 2>/dev/null ;
+	unset ACTION 2>/dev/null ;
+	# report back
+	return ${SUB_TOOL_RESULT:-126} ;
 }
 
-if [[ ( $(shlock -f ${LOCK_FILE} -p $$ ) -eq 0 ) ]] ; then
-		EXIT_CODE=0
-		trap 'cleanup 2>/dev/null || rm -f ${LOCK_FILE} 2>/dev/null > /dev/null || true ; wait ; exit 1 ;' SIGHUP || EXIT_CODE=3
-		trap 'cleanup 2>/dev/null || rm -f ${LOCK_FILE} 2>/dev/null > /dev/null || true ; wait ; exit 1 ;' SIGTERM || EXIT_CODE=4
-		trap 'cleanup 2>/dev/null || rm -f ${LOCK_FILE} 2>/dev/null > /dev/null || true ; wait ; exit 1 ;' SIGQUIT || EXIT_CODE=5
-		#trap 'cleanup 2>/dev/null || rm -f ${LOCK_FILE} 2>/dev/null > /dev/null || true ; wait ; exit 1 ;' SIGSTOP || EXIT_CODE=7
-		trap 'cleanup 2>/dev/null || rm -f ${LOCK_FILE} 2>/dev/null > /dev/null || true ; wait ; exit 1 ;' SIGINT || EXIT_CODE=8
-		trap 'cleanup 2>/dev/null || rm -f ${LOCK_FILE} 2>/dev/null > /dev/null || true || true ; wait ; exit 1 ;' SIGABRT || EXIT_CODE=9
-		trap 'cleanup 2>/dev/null || rm -f ${LOCK_FILE} 2>/dev/null > /dev/null || true ; wait ; exit ${EXIT_CODE} ;' EXIT || EXIT_CODE=1
-else
-		# shellcheck disable=SC2046
-		echo "Test already in progress by "$(head "${LOCK_FILE}") ;
-		false ;
-		exit 255 ;
-fi
+export -f fn_do_cmd ;
 
-# this is how test files are found:
-
-# THIS IS THE ACTUAL TEST
-_TEST_ROOT_DIR=$(git rev-parse --show-toplevel 2>/dev/null) ;
-if [[ -d ../.git ]] ; then
-	_TEST_ROOT_DIR="../" ;
-elif [[ -d ./.git ]] ; then
-	_TEST_ROOT_DIR=$(pwd) ;
-elif [[ ( -d $(git rev-parse --show-toplevel 2>/dev/null) ) ]] ; then
-	_TEST_ROOT_DIR=$(git rev-parse --show-toplevel 2>/dev/null) ;
-else
-	echo "FAIL: missing valid repository or source structure" >&2 ;
-	EXIT_CODE=40
-fi
-
-if [[ ( ${EXIT_CODE} -ne 0 ) ]] ; then
-	echo "SKIP: Can't check ${_TEST_ROOT_DIR}" ;
-else
-	for _TEST_DOC in $(find "${_TEST_ROOT_DIR}" -type f -iname '*.sh' -print0 2>/dev/null | xargs -0 -L1 -I{} git ls-files "{}" 2>/dev/null ) ; do
-		if [[ ( ${EXIT_CODE} -ne 0 ) ]] ; then continue ; else
-			shellcheck -a --shell=sh --color=auto "${_TEST_DOC}" || EXIT_CODE=$? ;
-			if [[ ( ${EXIT_CODE} -ne 0 ) ]] ; then
-				case "$EXIT_CODE" in
-					1) echo "SKIP: Unclassified issue with '${_TEST_DOC}'" ;;
-					2|3|4) echo "FAIL: '${_TEST_DOC}' is invalid." >&2 ;;
-					*) echo "SKIP: Can't check '${_TEST_DOC}'" ;;
-				esac
-			fi ;
-		fi ;
-	done
-
-	for _TEST_SCRIPT in $(find "${_TEST_ROOT_DIR}" -type f \( -iname '*.bash' -o -iname '*.command' -o -ipath './bin/*' \) -a -print0 2>/dev/null | xargs -0 -L1 -I{} git ls-files "{}" 2>/dev/null ) ; do
-		if [[ ( ${EXIT_CODE} -ne 0 ) ]] ; then continue ; else
-				shellcheck -a --shell=bash --color=auto "${_TEST_SCRIPT}" || EXIT_CODE=$? ;
-			if [[ ( ${EXIT_CODE} -ne 0 ) ]] ; then
-				case "$EXIT_CODE" in
-					1) echo "SKIP: Unclassified issue with '${_TEST_SCRIPT}'" ;;
-					2|3|4) echo "FAIL: '${_TEST_SCRIPT}' is invalid." >&2 ;;
-					*) echo "SKIP: Can't check '${_TEST_SCRIPT}'" ;;
-				esac
-			fi ;
-		fi ;
-	done
-
-	unset _TEST_ROOT_DIR 2>/dev/null || true ;
-	unset _TEST_DOC 2>/dev/null || true ;
-	unset _TEST_SCRIPT 2>/dev/null || true ;
-
-fi ;
-
-cleanup 2>/dev/null || rm -f "${LOCK_FILE}" 2>/dev/null > /dev/null || true ; wait ;
-
-unset LOCK_FILE 2>/dev/null || true ;
-
-# goodbye
-exit ${EXIT_CODE:-255} ;
+if [[ "${0}" == *posix_run_tool ]] ; then
+	EXIT_CODE=0 ;
+	# force if / test behavior to work for caller
+	(( fn_do_cmd ${@:1:$#} ) && true) || EXIT_CODE=$? ; false ;
+	wait ; ( sync || true ) 2>/dev/null;
+	exit ${EXIT_CODE:-127};
+fi ;  # else import as source

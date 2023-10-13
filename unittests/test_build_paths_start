@@ -81,9 +81,14 @@
 test -e "${1}" || exit 2 ;
 test -d "${1}" || test -h "${1}" || test -L "${1}" || exit 3 ;
 test -d "${1}/Versions" || test -h "${1}/Versions" || test -L "${1}/Versions" || exit 4 ;
-file -b --mime "${1}/Versions/Current" 2>/dev/null ;
 test -h "${1}/Versions/Current" || test -L "${1}/Versions/Current" || exit 5 ;
+for FRWK_INNER_DIR in "Headers" "Modules" "PrivateHeaders" "Resources" ; do
+	test -h "${1}/${FRWK_INNER_DIR}" || test -L "${1}/${FRWK_INNER_DIR}" || exit 6 ;
+	test -d "${1}/Versions/Current/${FRWK_INNER_DIR}" || test -h "${1}/Versions/Current/${FRWK_INNER_DIR}" || test -L "${1}/Versions/Current/${FRWK_INNER_DIR}" || exit 6 ;
+	#TODO: check codesign rules for links to only point inward
+done ;
 
+#TODO: There may not be any content in the top level of a bundle. In other words, if a bundle has a Contents or Versions directory at its top level, there may be no other files or directories alongside them. The one exception is that alongside Versions, there may be symlinks to files in Versions/Current.
 echo "Not Fully Implemented Yet."
 
 exit 0 ;

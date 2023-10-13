@@ -24,7 +24,6 @@
 #include "Release.xcconfig"
 
 //:configuration = Release
-PRODUCT_MODULE_NAME = $(PROJECT_NAME:c99extidentifier)
 PRODUCT_NAME = $(PROJECT_NAME:c99extidentifier)
 PLIST_FILE_OUTPUT_FORMAT = XML
 APPLY_RULES_IN_COPY_FILES = YES

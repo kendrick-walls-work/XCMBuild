@@ -1,4 +1,7 @@
 # order file
+x86_64:XCMBuild.h:XCMBuild_h
+arm64:XCMBuild.h:XCMBuild_h
+arch64:XCMBuild.h:XCMBuild_h
 x86_64:XCMBuild.h:_NSLog
 arm64:XCMBuild.h:_NSLog
 arch64:XCMBuild.h:_NSLog
@@ -53,6 +56,15 @@ arm64:XCMBuild_vers.o:_PAK_XCMBuildVersionString
 arch64:xcrunshell_vers.o:_PAK_xcrunshellVersionString
 arch64:XCMTest_vers.o:_PAK_XCMTestVersionString
 arch64:XCMBuild_vers.o:_PAK_XCMBuildVersionString
+# x86_64:XCMB_XCMShellDelegate_h
+# arm64:XCMB_XCMShellDelegate_h
+# arch64:XCMB_XCMShellDelegate_h
+# x86_64:XCMB_XCMShell_h
+# arm64:XCMB_XCMShell_h
+# arch64:XCMB_XCMShell_h
+# x86_64:XCMB_XCMBuildSystem_h
+# arm64:XCMB_XCMBuildSystem_h
+# arch64:XCMB_XCMBuildSystem_h
 # skip x86_64:main.o:XCRS_MINARGS
 # skip arm64:main.o:XCRS_MINARGS
 # skip arch64:main.o:XCRS_MINARGS

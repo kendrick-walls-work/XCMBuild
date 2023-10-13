@@ -2,6 +2,7 @@ framework module XCMBuild {
 	requires objc, objc_arc, !cplusplus
 	umbrella header "XCMBuild.h"
 	config_macros DEBUG
+	header "Compat.h"
 	use Foundation
 	exclude header "xcrunshell.h"
 	export *
@@ -9,6 +10,7 @@ framework module XCMBuild {
 		requires objc, objc_arc, !cplusplus
 		textual header "XCMShellDelegate.h"
 		textual header "XCMShell.h"
+		textual header "XCMProcesses.h"
 		export *
 	}
 	use XCMBuild.XCMShell

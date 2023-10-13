@@ -21,9 +21,8 @@
 // Configuration settings file format documentation can be found at:
 // https://help.apple.com/xcode/#/dev745c5c974
 
+//:configuration = Release
 #include "XcodeCompileToolsRelease.xcconfig"
-
-//:completeSettings = XcodeCompileRunShell
 EXCLUDED_ARCHS = $(ARCHS_STANDARD_32_BIT) undefined_arch
 ON_DEMAND_RESOURCES_INITIAL_INSTALL_TAGS = XCMRunner
 ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES
@@ -37,5 +36,5 @@ PRODUCT_NAME = $(TARGET_NAME:c99extidentifier)
 CODE_SIGN_ENTITLEMENTS = shared/security/entitlements/xcrunshell.entitlements
 TAPI_EXCLUDE_PROJECT_HEADERS = XCMTest.h
 TAPI_EXTRA_PRIVATE_HEADERS = xcrunshell.h
-TAPI_EXTRA_PROJECT_HEADERS = XCMShellDelegate.h XCMShell.h
+TAPI_EXTRA_PROJECT_HEADERS = Compat.h XCMShellDelegate.h XCMShell.h XCMProcesses.h
 TAPI_EXTRA_PUBLIC_HEADERS = XCMBuild.h
