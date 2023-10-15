@@ -1,0 +1,43 @@
+//
+//  XcodePackagingConfig.xcconfig
+//  XCMBuild
+//
+// reactive-firewall/XCMBuild Packaging xcconfig
+// ..................................
+// Copyright (c) 2023, Mr. Walls
+// ..................................
+// Licensed under APACHE-2 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// ..........................................
+// http://www.apache.org/licenses/LICENSE-2.0
+// ..........................................
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+
+//:completeSettings = Installer
+COPY_PHASE_STRIP = YES
+GENERATE_INFOPLIST_FILE = NO
+DONT_GENERATE_INFOPLIST_FILE = YES
+CREATE_INFOPLIST_SECTION_IN_BINARY = $(GENERATE_INFOPLIST_FILE)
+APPLY_RULES_IN_COPY_FILES = YES
+INFOPLIST_EXPAND_BUILD_SETTINGS = NO
+INFOPLIST_OUTPUT_FORMAT = same-as-input
+BUILD_VARIANTS = normal
+WRAPPER_EXTENSION = pkg
+STRINGS_FILE_INFOPLIST_RENAME = NO
+PRODUCT_BUNDLE_IDENTIFIER = $(PRODUCT_ORG_IDENTIFIER)$(PRODUCT_MODULE_NAME).Installer
+OTHER_CODE_SIGN_FLAGS = $(inhereted) --prefix=$(PRODUCT_ORG_IDENTIFIER) --preserve-metadata=identifier,entitlements,flags --identifier=$(PRODUCT_BUNDLE_IDENTIFIER) -o hard --generate-entitlement-der
+PRODUCT_NAME = $(PROJECT_NAME) $(MARKETING_VERSION) $(TARGET_NAME)
+WRAPPER_NAME = $(PRODUCT_NAME).$(WRAPPER_EXTENSION)
+DEAD_CODE_STRIPPING = YES
+ENABLE_TESTABILITY = YES
+ONLY_ACTIVE_ARCH = NO
+COMBINE_HIDPI_IMAGES = YES

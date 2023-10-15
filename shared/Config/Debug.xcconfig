@@ -21,10 +21,8 @@
 // Configuration settings file format documentation can be found at:
 // https://help.apple.com/xcode/#/dev745c5c974
 
-#include "DebugConfig.xcconfig"
-
-
 //:configuration = Debug
+#include "DebugConfig.xcconfig"
 PRODUCT_ORG_IDENTIFIER = org.adhoc.dt.
 ONLY_ACTIVE_ARCH = NO
 ALLOW_TARGET_PLATFORM_SPECIALIZATION = !$(ONLY_ACTIVE_ARCH)
@@ -43,10 +41,11 @@ INFOPLIST_OUTPUT_FORMAT = XML
 PRODUCT_NAME = $(TARGET_NAME:c99extidentifier)
 PLIST_FILE_OUTPUT_FORMAT = XML
 ALWAYS_SEARCH_USER_PATHS = NO
-// CODE_SIGN_IDENTITY = Apple Development
+//CODE_SIGN_IDENTITY = $(inhereted)
 DEVELOPMENT_TEAM = $(inhereted)
 DEVELOPMENT_TEAM[sdk=macosx*] = $(inhereted)
 ENABLE_HARDENED_RUNTIME = !$(SKIP_INSTALL)
+OTHER_CFLAGS = $(inhereted) -greproducible
 OTHER_CODE_SIGN_FLAGS = $(inhereted) --prefix=$(PRODUCT_ORG_IDENTIFIER)
 GENERATE_TEXT_BASED_STUBS[sdk=macosx*] = $(SKIP_INSTALL)
 TAPI_ENABLE_PROJECT_HEADERS[sdk=macosx*] = $(GENERATE_TEXT_BASED_STUBS)

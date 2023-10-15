@@ -21,10 +21,8 @@
 // Configuration settings file format documentation can be found at:
 // https://help.apple.com/xcode/#/dev745c5c974
 
-#include "ReleaseConfig.xcconfig"
-
-
 //:configuration = Release
+#include "ReleaseConfig.xcconfig"
 PRODUCT_ORG_IDENTIFIER = org.pak.dt.
 DEBUG_INFORMATION_FORMAT = dwarf-with-dsym
 VALIDATE_PRODUCT = YES
@@ -48,8 +46,11 @@ GENERATE_INFOPLIST_FILE = YES
 PRODUCT_NAME = $(TARGET_NAME:c99extidentifier)
 ALWAYS_SEARCH_USER_PATHS = NO
 FRAMEWORK_SEARCH_PATHS[sdk=macosx*] = $(inhereted) $(LOCAL_SYSTEM_LIBRARY) $(BUILT_PRODUCTS_DIR:standardizepath)
-// CODE_SIGN_IDENTITY = Apple Development
+//CODE_SIGN_IDENTITY = $(inhereted)
+DEVELOPMENT_TEAM = $(inhereted)
+DEVELOPMENT_TEAM[sdk=macosx*] = $(inhereted)
 ENABLE_HARDENED_RUNTIME = YES
+OTHER_CFLAGS = $(inhereted)
 OTHER_CODE_SIGN_FLAGS = $(inhereted) --prefix=$(PRODUCT_ORG_IDENTIFIER)
 GENERATE_TEXT_BASED_STUBS = $(SKIP_INSTALL)
 TAPI_ENABLE_PROJECT_HEADERS[sdk=macosx*] = $(GENERATE_TEXT_BASED_STUBS) && $(EAGER_LINKING)

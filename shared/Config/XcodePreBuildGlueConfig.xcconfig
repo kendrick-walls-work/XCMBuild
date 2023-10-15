@@ -21,9 +21,8 @@
 // Configuration settings file format documentation can be found at:
 // https://help.apple.com/xcode/#/dev745c5c974
 
+//:configuration = Release
 #include "XcodeBuildGlueConfig.xcconfig"
-
-//:completeSettings = XcodePreBuildGlueConfig
 SUPPORTED_PLATFORMS = macosx
 BUILD_VARIANTS = profile normal
 DEAD_CODE_STRIPPING = YES

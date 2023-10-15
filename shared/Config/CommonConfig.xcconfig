@@ -22,6 +22,15 @@
 // https://help.apple.com/xcode/#/dev745c5c974
 
 
+//:configuration = Release
+
+
+//:configuration = Debug
+
+
+//:configuration = Profile
+
+
 //:completeSettings = Default
 CURRENT_PROJECT_VERSION = $(PROJECT_VERSION_MAJOR).$(PROJECT_VERSION_MINOR)
 DYLIB_COMPATIBILITY_VERSION = $(PROJECT_VERSION_MAJOR)
@@ -36,6 +45,8 @@ VERSIONS_FOLDER_PATH = $(WRAPPER_NAME)/Versions
 VERSIONS_FOLDER_PATH_SHALLOW_BUNDLE_NO = $(WRAPPER_NAME)/Versions
 VERSIONS_FOLDER_PATH_SHALLOW_BUNDLE_YES = $(WRAPPER_NAME)
 SDKROOT = macosx
+BUILD_DIR = build
+BUILD_ROOT = $(PROJECT_DIR:standardizepath)/$(BUILD_DIR)
 SYMROOT = $(PROJECT_DIR:standardizepath)/$(BUILD_DIR)/$(CONFIGURATION)
 // SYSTEM_LIBRARY_DIR = defaults to /System/Library
 // SYSTEM_DOCUMENTATION_DIR = defaults to /Library/Documentation
@@ -46,8 +57,6 @@ TARGET_TEMP_DIR = $(PROJECT_TEMP_DIR:standardizepath)/Cache/$(TARGET_NAME).tmp
 //TEMP_FILE_DIR
 REZ_COLLECTOR_DIR = $(TARGET_TEMP_DIR:standardizepath)/ResourceManagerResources
 SHARED_DERIVED_FILE_DIR = $(OBJROOT:standardizepath)/SharedDerivedSources
-BUILD_DIR = build
-BUILD_ROOT = $(PROJECT_DIR:standardizepath)/$(BUILD_DIR)
 //UNINSTALLED_PRODUCTS_DIR
 CONFIGURATION_BUILD_DIR = $(BUILD_ROOT:standardizepath)/$(CONFIGURATION) // defaults to $(BUILD_DIR)/$(CONFIGURATION)
 SHARED_PRECOMPS_DIR = $(OBJROOT:standardizepath)/SharedPrecompiledHeaders
@@ -56,7 +65,7 @@ SHARED_PRECOMPS_DIR = $(OBJROOT:standardizepath)/SharedPrecompiledHeaders
 INSTALL_PATH = $(LOCAL_LIBRARY_DIR:standardizepath)/Frameworks
 DYLIB_INSTALL_NAME_BASE = $(INSTALL_PATH:standardizepath)
 DEVELOPMENT_ASSET_PATHS = .github .git $(inhereted)
-FRAMEWORK_SEARCH_PATHS = $(LOCAL_LIBRARY_DIR:standardizepath)/Frameworks $(DYLIB_INSTALL_NAME_BASE:standardizepath)/** $(BUILT_PRODUCTS_DIR:standardizepath)/$(DYLIB_INSTALL_NAME_BASE:standardizepath) $(inhereted)
+FRAMEWORK_SEARCH_PATHS = $(LOCAL_LIBRARY_DIR:standardizepath)/Frameworks $(DYLIB_INSTALL_NAME_BASE:standardizepath)/** $(BUILT_PRODUCTS_DIR:standardizepath)/$(DYLIB_INSTALL_NAME_BASE:standardizepath)/** $(inhereted)
 CONTENTS_FOLDER_PATH = $(VERSIONS_FOLDER_PATH:standardizepath)/$(FRAMEWORK_VERSION)
 DEAD_CODE_STRIPPING = YES
 BUNDLE_CONTENTS_FOLDER_PATH = $(inhereted)
@@ -96,3 +105,4 @@ GENERATE_PKGINFO_FILE = NO
 INFOPLIST_PREPROCESS = $(GENERATE_INFOPLIST_FILE)
 ASSETCATALOG_COMPILER_GENERATE_ASSET_SYMBOLS = $(DOCC_EXTRACT_EXTENSION_SYMBOLS)
 ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = $(ASSETCATALOG_COMPILER_GENERATE_ASSET_SYMBOLS)
+OTHER_CFLAGS = $(inhereted)

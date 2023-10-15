@@ -21,9 +21,8 @@
 // Configuration settings file format documentation can be found at:
 // https://help.apple.com/xcode/#/dev745c5c974
 
-#include "Release.xcconfig"
-
 //:configuration = Release
+#include "Release.xcconfig"
 PRODUCT_NAME = $(PROJECT_NAME:c99extidentifier)
 PLIST_FILE_OUTPUT_FORMAT = XML
 APPLY_RULES_IN_COPY_FILES = YES

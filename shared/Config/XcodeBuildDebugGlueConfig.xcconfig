@@ -21,9 +21,8 @@
 // Configuration settings file format documentation can be found at:
 // https://help.apple.com/xcode/#/dev745c5c974
 
-#include "Debug.xcconfig"
-
 //:configuration = Debug
+#include "Debug.xcconfig"
 PRODUCT_NAME = $(PROJECT_NAME:c99extidentifier)
 PLIST_FILE_OUTPUT_FORMAT = XML
 STRINGS_FILE_OUTPUT_ENCODING = UTF-8
@@ -32,6 +31,5 @@ PRODUCT_MODULE_NAME = $(PROJECT_NAME:c99extidentifier).$(PRODUCT_NAME:c99extiden
 LD_RUNPATH_SEARCH_PATHS = $(inherited) @executable_path/../Frameworks @executable_path/../../../Current @loader_path/Frameworks
 //OTHER_CODE_SIGN_FLAGS = $(inhereted) --prefix=$(PRODUCT_ORG_IDENTIFIER) --preserve-metadata -o hard
 OTHER_CODE_SIGN_FLAGS = $(inhereted) --prefix=$(PRODUCT_ORG_IDENTIFIER) --preserve-metadata=identifier,entitlements,flags --identifier=$(PRODUCT_ORG_IDENTIFIER)$(PROJECT_NAME) -o hard --generate-entitlement-der
-
 //CONTENTS_FOLDER_PATH = <Multiple values>
 WRAPPER_NAME = $(PRODUCT_NAME:c99extidentifier).$(WRAPPER_EXTENSION)
