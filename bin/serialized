@@ -119,8 +119,12 @@ function autoSerializeArgsAsToFrom() {
 	false;
 	return ;
 	if [[ ( $# -ne 2 ) ]] || [[ -z ${1} ]] || [[ -z ${2} ]] ; then
+	# if -z $1 && -n $SCRIPT_INPUT_FILE_0 then RECURSION_a
+	# elif -z $2 && -n $SCRIPT_INPUT_FILE_0 && (basename $1) != (basename $SCRIPT_INPUT_FILE_0) then RECURSION_b
+	# elif -z $2 && -n $SCRIPT_INPUT_FILE_0 && -n $SCRIPT_INPUT_FILE_1 && (basename $1) == (basename $SCRIPT_INPUT_FILE_0) then RECURSION_b_a
+	# elif $# -ge 2 -n $SCRIPT_INPUT_FILE_0 && -z $SCRIPT_OUTPUT_FILE_0 && (basename $1) == (basename $SCRIPT_INPUT_FILE_0) then RECURSION_c (one in to many out )
 		echo "${FUNCNAME[${BASH_SHLVL:-0}]:-$0}:${BASH_LINENO:-0}: note: expected serialized script mode. ( attempting ${FUNCNAME:-$_} )" 1>&2 ;
-		fn_do_cmd "SCRIPT_INPUT_FILE_COUNT=1 ; SCRIPT_OUTPUT_FILE_COUNT=1 ; SCRIPT_INPUT_FILE_0=${1} ; SCRIPT_OUTPUT_FILE_0=${2} ; $0 ; exit $? ;" ; wait ; exit $? ;
+		fn_do_cmd "SCRIPT_INPUT_FILE_COUNT=1 ; SCRIPT_OUTPUT_FILE_COUNT=1 ; SCRIPT_INPUT_FILE_0=${1} ; SCRIPT_OUTPUT_FILE_0=${2} ; ${0} ; exit $? ;" ; wait ; exit $? ;
 	else
 		if [[ ( ${SCRIPT_INPUT_FILE_COUNT} -gt 1 ) ]] || [[ ( ${SCRIPT_INPUT_FILE_COUNT} -lt 0 ) ]] ; then
 			echo "${FUNCNAME:-$0}:${BASH_LINENO:-0}: error: failed to validate serialized input. ( unsupported input )" 1>&2 ;
