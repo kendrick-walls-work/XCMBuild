@@ -1,4 +1,3 @@
-*~
 .DS_Store
 
 # C extensions
@@ -14,7 +13,11 @@ dist/
 downloads/
 lib/
 lib64/
-.cache
+# Cache and Temps
+*~
+*.tmp
+.[Cc]ache
+Traces/
 *.log
 # don't store keychains
 trustdb.gpg
