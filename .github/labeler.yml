@@ -1,0 +1,51 @@
+# Add 'XCMBuild' label to any root file changes
+XCMBuild:
+- any:
+  - changed-files:
+    - any-glob-to-any-file: ['XCMBuild/*.h', 'XCMBuild/*.m']
+
+# Add 'XCRunShell' label to any XCRunShell tool file changes
+XCRunShell:
+- any:
+  - changed-files:
+    - any-glob-to-any-file: ['XCMBuild/xcrunshell/*.h', 'XCMBuild/xcrunshell/*.m']
+
+# Add 'XCMTest' label to any XCMTest tool  file changes
+XCMTest:
+- any:
+  - changed-files:
+    - any-glob-to-any-file: ['XCMBuild/XCMTest/*.h', 'XCMBuild/XCMTest/*.m']
+
+# Add 'Documentation' label to any doc file changes
+Documentation:
+- any:
+  - changed-files:
+    - any-glob-to-any-file: ['docs/*', '*.docc', '*.docc/*', '*.md', '*.txt']
+
+# Add 'Lint' label to any lint file changes
+Linter:
+- any:
+  - changed-files:
+    - any-glob-to-any-file: ['.stickler.yml', '.hound.yml', '.yamllint.conf', '.flake8.ini', '.deepsource.toml', 'tests/check_*']
+
+# Add 'Config' label to any configuration file changes
+Configs:
+- any:
+  - changed-files:
+    - any-glob-to-any-file: ['*.yml', '**/*.yml', '*.ini', '*.toml', '*.cfg', 'requirements.txt', '*.xcodeproj', '*.xcodeconfig', 'orderfile']
+
+# Add 'test' label
+Testing:
+- any:
+  - changed-files:
+    - any-glob-to-any-file: ['tests/**/*.py', 'tests/*', '.circleci/*', 'bin/xcode_run_tests.bash', 'bin/posix_run_tests.bash', 'bin/run_tests.bash']
+
+CI:
+- any:
+  - changed-files:
+    - any-glob-to-any-file: ['tests/test_*', '.circleci/*', 'bin/xcode_run_tests.bash', 'bin/posix_run_tests.bash', 'bin/run_tests.bash', '.stickler.yml', '.hound.yml', '.travis.yml', '.appveyor.yml', '.github/workflows/*', 'bitbucket-pipelines.yml', 'unittests/*']
+
+Github:
+- any:
+  - changed-files:
+    - any-glob-to-any-file: ['.github/**/*', './.github/*', './README.md']
