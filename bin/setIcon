@@ -1,0 +1,195 @@
+#! /bin/bash
+
+# reactive-firewall/XCMBuild setIcon Tool
+# ..................................
+# Copyright (c) 2023, Mr. Walls
+# ..................................
+# Licensed under APACHE-2 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+# ..........................................
+# http://www.apache.org/licenses/LICENSE-2.0
+# ..........................................
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# Disclaimer of Warranties.
+# A. YOU EXPRESSLY ACKNOWLEDGE AND AGREE THAT, TO THE EXTENT PERMITTED BY
+#    APPLICABLE LAW, USE OF THIS SHELL SCRIPT AND ANY SERVICES PERFORMED
+#    BY OR ACCESSED THROUGH THIS SHELL SCRIPT IS AT YOUR SOLE RISK AND
+#    THAT THE ENTIRE RISK AS TO SATISFACTORY QUALITY, PERFORMANCE, ACCURACY AND
+#    EFFORT IS WITH YOU.
+#
+# B. TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, THIS SHELL SCRIPT
+#    AND SERVICES ARE PROVIDED "AS IS" AND "AS AVAILABLE", WITH ALL FAULTS AND
+#    WITHOUT WARRANTY OF ANY KIND, AND THE AUTHOR OF THIS SHELL SCRIPT'S LICENSORS
+#    (COLLECTIVELY REFERRED TO AS "THE AUTHOR" FOR THE PURPOSES OF THIS DISCLAIMER)
+#    HEREBY DISCLAIM ALL WARRANTIES AND CONDITIONS WITH RESPECT TO THIS SHELL SCRIPT
+#    SOFTWARE AND SERVICES, EITHER EXPRESS, IMPLIED OR STATUTORY, INCLUDING, BUT
+#    NOT LIMITED TO, THE IMPLIED WARRANTIES AND/OR CONDITIONS OF
+#    MERCHANTABILITY, SATISFACTORY QUALITY, FITNESS FOR A PARTICULAR PURPOSE,
+#    ACCURACY, QUIET ENJOYMENT, AND NON-INFRINGEMENT OF THIRD PARTY RIGHTS.
+#
+# C. THE AUTHOR DOES NOT WARRANT AGAINST INTERFERENCE WITH YOUR ENJOYMENT OF THE
+#    THE AUTHOR's SOFTWARE AND SERVICES, THAT THE FUNCTIONS CONTAINED IN, OR
+#    SERVICES PERFORMED OR PROVIDED BY, THIS SHELL SCRIPT WILL MEET YOUR
+#    REQUIREMENTS, THAT THE OPERATION OF THIS SHELL SCRIPT OR SERVICES WILL
+#    BE UNINTERRUPTED OR ERROR-FREE, THAT ANY SERVICES WILL CONTINUE TO BE MADE
+#    AVAILABLE, THAT THIS SHELL SCRIPT OR SERVICES WILL BE COMPATIBLE OR
+#    WORK WITH ANY THIRD PARTY SOFTWARE, APPLICATIONS OR THIRD PARTY SERVICES,
+#    OR THAT DEFECTS IN THIS SHELL SCRIPT OR SERVICES WILL BE CORRECTED.
+#    INSTALLATION OF THIS THE AUTHOR SOFTWARE MAY AFFECT THE USABILITY OF THIRD
+#    PARTY SOFTWARE, APPLICATIONS OR THIRD PARTY SERVICES.
+#
+# D. YOU FURTHER ACKNOWLEDGE THAT THIS SHELL SCRIPT AND SERVICES ARE NOT
+#    INTENDED OR SUITABLE FOR USE IN SITUATIONS OR ENVIRONMENTS WHERE THE FAILURE
+#    OR TIME DELAYS OF, OR ERRORS OR INACCURACIES IN, THE CONTENT, DATA OR
+#    INFORMATION PROVIDED BY THIS SHELL SCRIPT OR SERVICES COULD LEAD TO
+#    DEATH, PERSONAL INJURY, OR SEVERE PHYSICAL OR ENVIRONMENTAL DAMAGE,
+#    INCLUDING WITHOUT LIMITATION THE OPERATION OF NUCLEAR FACILITIES, AIRCRAFT
+#    NAVIGATION OR COMMUNICATION SYSTEMS, AIR TRAFFIC CONTROL, LIFE SUPPORT OR
+#    WEAPONS SYSTEMS.
+#
+# E. NO ORAL OR WRITTEN INFORMATION OR ADVICE GIVEN BY THE AUTHOR
+#    SHALL CREATE A WARRANTY. SHOULD THIS SHELL SCRIPT OR SERVICES PROVE DEFECTIVE,
+#    YOU ASSUME THE ENTIRE COST OF ALL NECESSARY SERVICING, REPAIR OR CORRECTION.
+#
+#    Limitation of Liability.
+# F. TO THE EXTENT NOT PROHIBITED BY APPLICABLE LAW, IN NO EVENT SHALL THE AUTHOR
+#    BE LIABLE FOR PERSONAL INJURY, OR ANY INCIDENTAL, SPECIAL, INDIRECT OR
+#    CONSEQUENTIAL DAMAGES WHATSOEVER, INCLUDING, WITHOUT LIMITATION, DAMAGES
+#    FOR LOSS OF PROFITS, CORRUPTION OR LOSS OF DATA, FAILURE TO TRANSMIT OR
+#    RECEIVE ANY DATA OR INFORMATION, BUSINESS INTERRUPTION OR ANY OTHER
+#    COMMERCIAL DAMAGES OR LOSSES, ARISING OUT OF OR RELATED TO YOUR USE OR
+#    INABILITY TO USE THIS SHELL SCRIPT OR SERVICES OR ANY THIRD PARTY
+#    SOFTWARE OR APPLICATIONS IN CONJUNCTION WITH THIS SHELL SCRIPT OR
+#    SERVICES, HOWEVER CAUSED, REGARDLESS OF THE THEORY OF LIABILITY (CONTRACT,
+#    TORT OR OTHERWISE) AND EVEN IF THE AUTHOR HAS BEEN ADVISED OF THE
+#    POSSIBILITY OF SUCH DAMAGES. SOME JURISDICTIONS DO NOT ALLOW THE EXCLUSION
+#    OR LIMITATION OF LIABILITY FOR PERSONAL INJURY, OR OF INCIDENTAL OR
+#    CONSEQUENTIAL DAMAGES, SO THIS LIMITATION MAY NOT APPLY TO YOU. In no event
+#    shall THE AUTHOR's total liability to you for all damages (other than as may
+#    be required by applicable law in cases involving personal injury) exceed
+#    the amount of five dollars ($5.00). The foregoing limitations will apply
+#    even if the above stated remedy fails of its essential purpose.
+################################################################################
+
+# See http://www.cocoadev.com/index.pl?HowToSetACustomIconWithRez (sorry this is the link circa 2008)
+# Ideas from "fromassigniconscript.20.hasseg@spamgourmet.com"
+# Their work was presumably based on apple's developer code in 2007 (namely requiring "Rez").
+# That work was credited as such:
+#
+# > (c) Ali Rantakari, 2007
+# >     http://hasseg.org
+# >     fromassigniconscript.20.hasseg@spamgourmet.com
+#
+# This implementation however is from after reading about the idea (including code) but is seperate
+# and furthure is/was NOT endorced by "Ali Rantakari, 2007" however as a fellow computer scientist,
+# this note here is included as a best effort nod (preverbial) to those who came before in the
+# field.
+PATH=${PATH:-"/bin:/sbin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin"} ;
+umask 0112
+
+test -x "$(command -v dirname)" || exit 126 ;
+test -x "$(command -v file)" || exit 126 ;
+test -x "$(command -v osascript)" || exit 126 ;
+test -x "$(command -v Rez)" || exit 126 ;
+test -x "$(command -v SetFile)" || exit 126 ;
+test -x "$(command -v xcrun)" || exit 126 ;
+export LANG=en_US.${STRINGS_FILE_OUTPUT_ENCODING:-"UTF-8"} ;
+# shellcheck disable=SC2155,SC2046
+export __CF_USER_TEXT_ENCODING=$( printf "%s" $( printf "%s\n" "${__CF_USER_TEXT_ENCODING:-0x0}" | cut -d : -f 1 ):0x08000100:0x0 )
+export SHELL=${SHELL:-$(xcrun --sdk macosx --find bash)} ;
+export SETFILE=${SETFILE:-$(xcrun --sdk macosx --find SetFile)} ;
+export REZ=${REZ:-$(xcrun --sdk macosx --find Rez)} ;
+export SCRIPTS_FOLDER_PATH="${SCRIPTS_FOLDER_PATH:-$(dirname ${0})}" ;
+hash -p "${SCRIPTS_FOLDER_PATH%%/}/tool_shlock_helper.bash" shlock || test -x "$(command -v shlock)" || exit 255 ;
+test -x "$(command -v shlock)" || exit 126 ;
+# shellcheck disable=SC2086
+test -x "${SCRIPTS_FOLDER_PATH}/serialized" || exit 126 ;
+# shellcheck disable=SC2086,SC1091
+source "${SCRIPTS_FOLDER_PATH}/serialized" || exit 40 ;
+declare -ir MINPARAMS=2 ;  # also is the MAX
+declare LOCK_FILE="${TMPDIR:-/tmp}/org.pak.dt.XCMBuild.SetIcon.lock" ;
+declare -i PID_VALUE="${PPID:-$$}" ;
+declare -i EXIT_CODE=1 ;
+
+function cleanup() {
+	rm -f "${LOCK_FILE}" 2>/dev/null || true ; wait ;
+	hash -d shlock 2>/dev/null > /dev/null || : ;
+}
+
+#shellcheck disable=SC2078
+if [[ ( ${#} -lt $MINPARAMS ) ]] ; then
+	if [[ ( ${#} -ge 1 ) ]] && [[ ( -e "${1}" ) ]] && [[ ( "${1}" -ef "${SCRIPT_INPUT_FILE_0}" ) ]] ; then
+		if [[ -n "${SCRIPT_OUTPUT_FILE_0}" ]] ; then
+			exec "${0} ${SCRIPT_INPUT_FILE_0} ${SCRIPT_OUTPUT_FILE_0}" ;
+		fi ;
+		if [[ ${VERBOSE_PBXCP} == *YES ]] ; then printf "%s\n" "${FUNCNAME:-$0}:${BASH_LINENO:-0}: error: Invalid internal State! (Unexpected)" >&2 ; exit 41; fi ;
+	elif [[ ( ${#} -ge 1 ) ]] && [[ ! ( -e "${1}" ) ]] ; then
+		EXIT_CODE=99 ;
+		if [[ ${VERBOSE_PBXCP} == *YES ]] ; then printf "%s\n" "${FUNCNAME:-$0}:${BASH_LINENO:-0}: error: Invalid internal State! (Unexpected)" >&2 ; exit 45; fi ;
+	elif [[ ( ${#} -lt 1 ) ]] && [[ ( -e "${SCRIPT_INPUT_FILE_0}" ) ]] ; then
+		if [[ -e "${SCRIPT_OUTPUT_FILE_0}" ]] ; then
+			if [[ -d "${SCRIPT_OUTPUT_FILE_0}" ]] ; then
+				exec "${0} ${SCRIPT_INPUT_FILE_0} ${SCRIPT_OUTPUT_FILE_0}" ;
+			else EXIT_CODE=97 ; fi ;
+		else EXIT_CODE=97 ; fi ;
+		if [[ ${VERBOSE_PBXCP} == *YES ]] ; then printf "%s\n" "${FUNCNAME:-$0}:${BASH_LINENO:-0}: error: Invalid internal State! (Unexpected)" >&2 ; exit 44; fi ;
+	#elif [[ ( ${#} -ge 1 ) ]] && [[ !( -e "${1}" ) ]] ; then also [[ !( -e "${SCRIPT_INPUT_FILE_0}" ) ]] therefore fallthrough (is missing src OR is missing Dest OR is missing both)
+	elif [[ ( ${#} -lt 1 ) ]] ; then
+		# reduces to
+		if [[ ${VERBOSE_PBXCP} == *YES ]] ; then printf "%s\n" "${FUNCNAME:-$0}:${BASH_LINENO:-0}: error: Invalid internal State! (Ambiguous)" >&2 ; exit 43; fi ;
+	else
+		if [[ ${VERBOSE_PBXCP} == *YES ]] ; then printf "%s\n" "${FUNCNAME:-$0}:${BASH_LINENO:-0}: error: Invalid internal State! (BUG)" >&2 ; exit 43; fi ;
+	fi;
+elif [[ ( ${#} -gt $MINPARAMS ) ]] ; then
+	if [[ ${VERBOSE_PBXCP} == *YES ]] ; then printf "%s\n" "${FUNCNAME:-$0}:${BASH_LINENO:-0}: error: Invalid internal State! (Parse Error)" >&2 ; fi ;
+	# need to filter args and then just exec "${0} ${SCRIPT_INPUT_FILE_0} ${SCRIPT_OUTPUT_FILE_0}" ;
+elif [[ ( ${#} -eq $MINPARAMS ) ]] ; then
+	# overwrite with CLI input
+	export SCRIPT_INPUT_FILE_0=${SCRIPT_INPUT_FILE_0:-${1}};
+	export SCRIPT_INPUT_FILE_1=${SCRIPT_INPUT_FILE_1:-${2}};
+	export SCRIPT_INPUT_FILE_COUNT=2;
+	export SCRIPT_OUTPUT_FILE_0=${SCRIPT_OUTPUT_FILE_0:-${2:-${1}}};
+	export SCRIPT_OUTPUT_FILE_COUNT=1;
+else
+	EXIT_CODE=95 ;
+fi ;
+
+if [[ ( $(shlock -f ${LOCK_FILE} -p ${PID_VALUE:-$$} ) -eq 0 ) ]] ; then
+	EXIT_CODE=0
+	trap 'cleanup ; wait ; exit 3 ;' SIGHUP || EXIT_CODE=3
+	trap 'cleanup ; wait ; exit 4 ;' SIGTERM || EXIT_CODE=4
+	trap 'cleanup ; wait ; exit 5 ;' SIGQUIT || EXIT_CODE=5
+	# SC2173 - https://github.com/koalaman/shellcheck/wiki/SC2173
+	# trap 'rm -f ${LOCK_FILE} 2>/dev/null || true ; wait ; exit 1 ;' SIGSTOP || EXIT_CODE=7
+	trap 'cleanup ; wait ; exit 7 ;' SIGXCPU || EXIT_CODE=7
+	trap 'cleanup ; wait ; exit 8 ;' SIGINT || EXIT_CODE=8
+	trap 'cleanup ; wait ; exit 9 ;' SIGABRT || EXIT_CODE=9
+	trap 'cleanup ; wait ; exit ${EXIT_CODE:-1} ;' EXIT || EXIT_CODE=1
+else
+	printf "FAIL\n" >&2 ;
+	false ;
+	EXIT_CODE=127 ;
+fi ;
+
+if [[ ( $EXIT_CODE -lt $MINPARAMS ) ]] ; then
+	# see if parameters are set
+	if [[ -n "${SCRIPT_INPUT_FILE_0}" ]] || [[ -n "${SCRIPT_INPUT_FILE_1}" ]] ; then
+		if [[ `file -b ${SCRIPT_INPUT_FILE_1}` == "directory" ]] ; then
+			printf "%s\n" "read 'icns' (-16455) \"$SCRIPT_INPUT_FILE_0\";" | $REZ -o "`printf "${SCRIPT_INPUT_FILE_1}/Icon\r"`" 2>/dev/null ;
+		else
+			printf "%s\n" "read 'icns' (-16455) \"$SCRIPT_INPUT_FILE_0\";" | $REZ -o "${SCRIPT_INPUT_FILE_1}" 2>/dev/null;
+		fi ;
+		$SETFILE -a "C" "${SCRIPT_INPUT_FILE_1}"
+		osascript -e "tell application \"Finder\" to update POSIX file \"${SCRIPT_OUTPUT_FILE_0}\"" 2>/dev/null & true;
+	fi
+fi ;
+{ cleanup || rm -f "${LOCK_FILE}" 2>/dev/null > /dev/null ;} || true ; wait ;
+
+# goodbye
+exit "${EXIT_CODE:-255}" ;
