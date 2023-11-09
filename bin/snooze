@@ -79,7 +79,7 @@
 
 # see https://github.com/dylanaraps/pure-bash-bible#other
 # ideas from https://blog.dhampir.no/content/sleeping-without-a-subprocess-in-bash-and-how-to-sleep-forever
-# Thier work was based on CC-BY-SA4 from: https://stackoverflow.com/help/licensing
+# Their work was based on CC-BY-SA4 from: https://stackoverflow.com/help/licensing
 # source: https://unix.stackexchange.com/questions/68236/avoiding-busy-waiting-in-bash-without-the-sleep-command
 # code: https://unix.stackexchange.com/a/407383
 # author: https://unix.stackexchange.com/users/263036/bolt
@@ -87,8 +87,8 @@
 # Full License details can be found here: https://creativecommons.org/licenses/by-sa/4.0/
 # This implementation is modified and not endorced
 
-# The following implementation of the `snooze` `BASH` `function` verbatum without its file header and footer,
-# is hereby acknowledged to be specificly release under the [CC-BY-SA-4](https://creativecommons.org/licenses/by-sa/4.0/).
+# The following implementation of the `snooze` `BASH` `function` verbatim without its file header and footer,
+# is hereby acknowledged to be specifically release under the [CC-BY-SA-4](https://creativecommons.org/licenses/by-sa/4.0/).
 function snooze() {
 	local IFS
 	[[ -n "${_snooze_fd:-}" ]] || { exec {_snooze_fd}<> <(:) && read -r -t 0 -u $_snooze_fd; } 2>/dev/null || {
@@ -101,7 +101,7 @@ function snooze() {
 	}
 	read -t "${1:-1}" -u $_snooze_fd || :
 }
-# The imediatly preceeding implementation of the `snooze` `BASH` `function` verbatum without its file header and footer,
-# is hereby acknowledged to be specificly release under the [CC-BY-SA-4](https://creativecommons.org/licenses/by-sa/4.0/).
+# The immediately proceeding implementation of the `snooze` `BASH` `function` verbatim without its file header and footer,
+# is hereby acknowledged to be specifically release under the [CC-BY-SA-4](https://creativecommons.org/licenses/by-sa/4.0/).
 
 export -f snooze
