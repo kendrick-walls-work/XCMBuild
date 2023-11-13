@@ -17,6 +17,7 @@
 # limitations under the License.
 
 test -x "$(command -v rm)" || exit 126 ;
+test -x "$(command -v rmdir)" || exit 126 ;
 test -x "$(command -v find)" || exit 126 ;
 test -x "$(command -v unlink)" || exit 126 ;
 test -x "$(command -v dirname)" || exit 126 ;
@@ -25,11 +26,30 @@ test -x "$(dirname ${0})/flatten" || exit 126 ;
 # shellcheck disable=SC2086,SC1091
 source "$(dirname ${0})/flatten" || exit 126 ;
 
+declare XCMB_PRUNE_ARGS=${XCMB_PRUNE_ARGS:-""};
+
+function wrappedFind() {
+	local JUNK="${1}" ;
+	local JUNK_ARGS="${*}" ;
+	if [[ ( -e "${JUNK}" ) ]] ; then
+		if [[ ( -d "${JUNK}") ]] ; then
+			{ find ${JUNK_ARGS} ;} || false ;
+		else
+			return ;
+		fi
+	fi
+	unset JUNK 2>/dev/null || : ;
+	unset JUNK_ARGS 2>/dev/null || : ;
+	true ;
+}
+
+export -f wrappedFind ;
+
 # basic logic:
 # if file exists then un-exist it
 # if it is a file or directory then
 # check if we have a .Trash special directory, and move it there
-# either way if it is a directory attempt to remove any nested hiarchy as well
+# either way if it is a directory attempt to remove any nested hierarchy as well
 # eitherway remove the file or directory
 # otherwise try to unlink the file-descriptor at the given path
 # cleanup and return
@@ -39,25 +59,26 @@ function destroy() {
 	if [[ ( -e "${JUNK}" ) ]] ; then
 		if [[ ( -f "${JUNK}" ) ]] || [[ ( -d "${JUNK}" ) ]] ; then
 			if [[ ( -d "${JUNK}") ]] ; then
-				( flatten "${JUNK}" && \
-				find "${JUNK}" -mindepth 1 -type l -exec unlink '{}' ';' && \
-				find "${JUNK}" -mindepth 1 -type f -exec rm -vf '{}' ';' && \
-				find "${JUNK}" -type d -exec rmdir -v '{}' ';' ) || false ;
+				{ { flatten "${JUNK}" ; wait ;} && \
+				( wrappedFind "${JUNK}" -mindepth 1 -type l -exec unlink '{}' ';' && \
+				wrappedFind "${JUNK}" -mindepth 1 -type f -exec rm ${XCMB_PRUNE_ARGS} -f '{}' ';' ) && \
+				rmdir ${XCMB_PRUNE_ARGS} "${JUNK}" ;} || false ;
 			else
-				rm -vf "${JUNK}" || false ;
+				rm ${XCMB_PRUNE_ARGS} -f "${JUNK}" || false ;
 			fi
 		else
 			unlink "${JUNK}" || false ;
 		fi
 	fi
-	unset JUNK || true ;
+	unset JUNK 2>/dev/null || : ;
 	true ;
 }
 
 export -f destroy ;
 
 if [[ $0 == *prunefile ]] ; then
-	( destroy "${*}" && true ) || false ;
+	while [[ ( ${1} == -* ) ]] ; do if [[ ( ${1} == -v* ) ]] ; then XCMB_PRUNE_ARGS="-v"; fi ; shift ; done ; # ignore options
+	{ destroy "${*}" && true ;} || false ;
 	wait ; sync ;
 	exit 0;
 fi ;  # else import as source
