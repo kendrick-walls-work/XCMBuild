@@ -25,14 +25,12 @@
 #include "XcodeCompileToolsRelease.xcconfig"
 EXCLUDED_ARCHS = $(ARCHS_STANDARD_32_BIT) undefined_arch
 ON_DEMAND_RESOURCES_INITIAL_INSTALL_TAGS = XCMRunner
-ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES
 VALIDATE_PRODUCT = YES
 LD_EXPORT_SYMBOLS = NO
 OTHER_LDFLAGS = -ObjC -weak_framework Foundation,framework -framework XCMBuild,framework
 SEPARATE_SYMBOL_EDIT = YES
 MODULEMAP_PRIVATE_FILE = shared/Clang/module.private.modulemap
 PRODUCT_MODULE_NAME = $(PROJECT_NAME:c99extidentifier).$(ON_DEMAND_RESOURCES_INITIAL_INSTALL_TAGS:c99extidentifier)
-PRODUCT_NAME = $(TARGET_NAME:c99extidentifier)
 CODE_SIGN_ENTITLEMENTS = shared/security/entitlements/xcrunshell.entitlements
 TAPI_EXCLUDE_PROJECT_HEADERS = XCMTest.h
 TAPI_EXTRA_PRIVATE_HEADERS = xcrunshell.h
