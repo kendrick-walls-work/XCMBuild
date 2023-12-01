@@ -25,9 +25,11 @@
 #if defined(__is_target_environment)
 #if __is_target_environment(simulator)
 #if defined(__clang_tapi__) && __clang_tapi__
+#ifndef XCMB_XCMBuild_h
 ///Defined whenever ``XCMBuild`` is imported.
 #define XCMB_XCMBuild_h "XCMBuild.tbd"
 #error UNSUPPORTED BUILD
+#endif /* !XCMB_XCMBuild_h */
 #endif /* !__clang_tapi__ */
 #endif /* !simulator */
 #endif
@@ -39,28 +41,21 @@
 ///Defined whenever ``XCMBuild`` is imported.
 #define XCMB_XCMBuild_h "XCMBuild.h"
 
+#if defined(__clang__) && __clang__
 #pragma mark - Imports
+#endif /* !__clang__ */
 
+#ifndef Compat_h
 #if defined(__has_include)
 #if __has_include(<XCMBuild/Compat.h>)
 #import <XCMBuild/Compat.h>
 #elif __has_include("Compat.h")
 #import "Compat.h"
-#else /* !__has_include(<XCMBuild/Compat.h>) */
-#if __has_include(<stdio.h>)
-#import <stdio.h>
-#if __has_include(<stdlib.h>)
-#import <stdlib.h>
-#endif /* !__has_include(<stdlib.h>) */
-#endif /* !__has_include(<stdio.h>) */
 #endif /* NO Compat.h */
 #endif /* !__has_include_C */
-
-#if defined(__has_include)
-#if __has_include(<CoreFoundation/CoreFoundation.h>)
-#import <CoreFoundation/CoreFoundation.h>
-#endif /* !__has_include(<CoreFoundation/CoreFoundation.h>) */
-#endif /* !__has_include_Core */
+#else
+#error UNSUPPORTED SYSTEM
+#endif
 
 #ifndef NSLog
 #if defined(__has_include)
@@ -80,6 +75,8 @@
 #import <Foundation/NSData.h>
 #import <Foundation/NSString.h>
 #import <Foundation/NSArray.h>
+#import <Foundation/NSNotification.h>
+#import <Foundation/NSDate.h>
 #import <Foundation/NSProcessInfo.h>
 #import <Foundation/NSFileHandle.h>
 #import <Foundation/NSTask.h>
@@ -104,29 +101,33 @@
 #import <Foundation/NSDictionary.h>
 #import <Foundation/NSSet.h>
 #import <Foundation/NSProgress.h>
-#import <Foundation/NSNotification.h>
 #import <Foundation/NSBundle.h>
 /// Defined whenever `<Foundation/NSBundle.h>` is imported.
 #define NSBundle_h "NSBundle.h"
 #endif /* NSBundle_h */
+
+#if defined(MAC_OS_X_VERSION_MAX_ALLOWED) && MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_13
+#if defined(__has_include)
+#if __has_include(<Foundation/NSURL.h>)
+#ifndef XCMB_USE_NSURL
+#define XCMB_USE_NSURL YES
+#import <Foundation/NSURL.h>
+#endif /* !XCMB_USE_NSURL */
+#endif /* !__has_include(<Foundation/NSURL.h>) */
+#endif /* !__has_include_Foundation_URL */
+#else
+#ifndef XCMB_USE_NSURL
+#define XCMB_USE_NSURL NO
+#endif /* !XCMB_USE_NSURL */
+#endif /* !MAC_OS_X_VERSION_10_13 */
 
 #if defined(__DARWIN_ONLY_UNIX_CONFORMANCE) && __DARWIN_ONLY_UNIX_CONFORMANCE
 __COPYRIGHT("Copyright (c) 2023 Mr.Walls - Licensed under the Apache License, Version 2.0.");
 __PROJECT_VERSION("2.2.6");
 #endif
 
-#if defined(FOUNDATION_EXPORT)
-/// Project version number for ``XCMBuild``.
-FOUNDATION_EXPORT double XCMBuildVersionNumber;
-
-/// Project version string for ``XCMBuild``.
-FOUNDATION_EXPORT const unsigned char XCMBuildVersionString[];
-#else
-__BEGIN_DECLS
-extern double XCMBuildVersionNumber;
-extern const unsigned char XCMBuildVersionString[];
-__END_DECLS
-#endif /* end DECLS */
+XCMB_IMPORT double PAK_XCMBuildVersionNumber;
+XCMB_IMPORT const unsigned char PAK_XCMBuildVersionString[];
 
 #ifndef NSPipe_h
 #if defined(__has_include)
@@ -178,7 +179,7 @@ __END_DECLS
 #endif /* !XCMB_XCMShell_h */
 #endif
 
-#if __has_include(<XCMBuild/XCMBuildSystem>)
+#if __has_include(<XCMBuild/XCMBuildSystem.h>)
 #ifndef XCMB_XCMBuildSystem_h
 /// Defined whenever `<XCMBuild/XCMBuildSystem.h>` is imported from the umbrella header.
 #define XCMB_XCMBuildSystem_h "<XCMBuild/XCMBuildSystem.h> (XCMBuild Core)"

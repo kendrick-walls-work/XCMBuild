@@ -18,16 +18,32 @@
 
 
 #include "XCMProcesses.h"
-#ifndef XCMB_OS_ACTIVITY_ENABLED
+
+#ifndef XCMProcesses_h
+#if !defined(XCMB_OS_ACTIVITY_ENABLED)
 #if defined(__has_include)
 #if __has_include(<os/activity.h>)
 #define XCMB_OS_ACTIVITY_ENABLED YES
-#include <os/activity.h>
+#import <os/activity.h>
 #else /* !os/activity */
 #define XCMB_OS_ACTIVITY_ENABLED NO
+#error Failed to link OS activity features
 #endif /* !XCMB_OS_ACTIVITY_ENABLED (inner) */
 #endif /* !__has_include */
+#elif defined(XCMB_OS_ACTIVITY_ENABLED) && XCMB_OS_ACTIVITY_ENABLED
+XCMB_IMPORT void os_activity_scope_enter(os_activity_t activity, os_activity_scope_state_t state);
+XCMB_IMPORT void os_activity_scope_leave(os_activity_scope_state_t state);
 #endif /* !XCMB_OS_ACTIVITY_ENABLED (outer) */
+
+#if !defined(NSActivityOptions)
+#if defined(__has_include)
+#if __has_include(<Foundation/NSProcessInfo.h>)
+#import <Foundation/NSProcessInfo.h>
+#else /* !Foundation/ProcessInfo (inner) */
+#error Failed to link NSActivityOptions features
+#endif /* !Foundation/ProcessInfo (outer) */
+#endif /* !__has_include */
+#endif/* !ProcessInfo */
 
 #if defined(__has_attribute)
 #if __has_attribute(used)
@@ -56,17 +72,20 @@ NSString * const XCMProcessesDispatchReasonString __attribute__ ((used)) = @"XCM
 #endif /* !__attribute__ ((used)) */
 #endif /* !__has_attribute */
 
+#if defined(__clang__) && __clang__
+#pragma mark - XCMProcessesDispatch Functions
+#endif
+
 #if defined(__has_attribute)
 #if __has_attribute(blocks)
 
 #if defined(MAC_OS_X_VERSION_MAX_ALLOWED) && MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_9
-#pragma mark - XCMProcessesDispatch Functions
 
 id beginXCMProcActivity(NSString * const reason) {
 	__block id callerProc;
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_VERSION_13_0
+#if defined(MAC_OS_X_VERSION_MAX_ALLOWED) && MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_VERSION_13_0
 	__block NSActivityOptions options = NSActivityAutomaticTerminationDisabled | NSActivityTrackingEnabled;
-#elif MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_VERSION_10_9
+#elif defined(MAC_OS_X_VERSION_MAX_ALLOWED) && MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_VERSION_10_9
 	__block NSActivityOptions options = NSActivityAutomaticTerminationDisabled;
 #else
 #error Building for Intel with Mac OS X Deployment Target < 10.8 is invalid.
@@ -102,6 +121,7 @@ void endXCMProcActivity(id<NSObject> callerProc) {
 }
 #endif
 #else /* !__attribute__ (blocks) */
+
 id beginXCMProcActivity(NSString * const reason) {
 #if defined(MAC_OS_X_VERSION_MAX_ALLOWED) && MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_9
 	NSActivityOptions options = NSActivityAutomaticTerminationDisabled;
@@ -119,3 +139,6 @@ void endXCMProcActivity(id<NSObject> callerProc) {
 
 #endif
 #endif /* !__has_attribute */
+/// Defined whenever the ``XCMProcesses`` is loaded.
+#define XCMProcesses_h "XCMProcesses.h"
+#endif /* !XCMProcesses_h */

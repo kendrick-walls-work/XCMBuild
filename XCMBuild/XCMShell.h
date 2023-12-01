@@ -17,39 +17,35 @@
 //   limitations under the License.
 
 #ifndef XCMShell_h
-#ifndef XCMBuild_h
+#ifndef XCMB_XCMBuild_h
 #if defined(__has_include)
 #if __has_include(<XCMBuild/XCMBuild.h>)
-/*! @parseOnly */
+///Defined when ``XCMShellTask`` re-imports `XCMBuild.h`.
 #define XCMBuild_h "<XCMBuild/XCMBuild.h> (XCMShellTask)"
 #import <XCMBuild/XCMBuild.h>
 #endif
 #endif /* !__has_include */
-#ifndef XCMBuild_h
-/*! @parseOnly */
-#define XCMBuild_h "XCMBuild.h (XCMShellTask)"
+#ifndef XCMB_XCMBuild_h
+///Defined when ``XCMShellTask`` includes the `XCMBuild.h` header.
+#define XCMB_XCMBuild_h "XCMBuild.h (XCMShellTask)"
 #import "XCMBuild.h"
-#endif /* XCMBuild_h (inner) */
+#endif /* XCMB_XCMBuild_h (inner) */
 #if defined(__clang__) && __clang__
-#pragma clang final(XCMBuild_h)
+#pragma clang final(XCMB_XCMBuild_h)
 #endif /* !__clang__ */
-#endif /* XCMBuild_h (outer) */
+#endif /* XCMB_XCMBuild_h (outer) */
 
-#if defined(TARGET_OS_OSX) && TARGET_OS_OSX || (defined(TARGET_OS_UNIX) && TARGET_OS_UNIX) || (defined(TARGET_OS_LINUX) && TARGET_OS_LINUX)
+#if defined(TARGET_OS_OSX) && TARGET_OS_OSX || (defined(TARGET_OS_UNIX) && TARGET_OS_UNIX) || defined(TARGET_OS_LINUX) && TARGET_OS_LINUX
 
-@class NSArray<ObjectType>, NSDictionary<KeyType, ObjectType>, NSTask, NSString, NSObject;
+@class NSMethodSignature, NSInvocation, NSArray<ObjectType>, NSDictionary<KeyType, ObjectType>, NSString, NSObject;
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
+#if !defined(XCMShellTask)
 /// Trivial delegate class for `NSTask`s to implement conviance constructors.
 /// ``XCMShellTask`` allows running a subshell as a task, thus simplifing the overhead of trivial invocations of `NSTask`.
-@interface XCMShellTask : NSObject {
+@interface XCMShellTask: NSObject {
 }
-
-#if defined(__clang__) && __clang__
-#pragma mark *** XCMShellTask ***
-#endif /* !__clang__ */
-
 /// At the core of the ``XCMShellTask`` is the ability to spawn subtasks to use various system tools like `make`
 ///
 ///**Usage:**
@@ -64,8 +60,8 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 ///   - commandToRun: The shell command text to perform as an `NSString`.
 /// - Returns: The `exit code` of the resulting `task` as an `BOOL`.
 + (BOOL)runCommand:(NSString *)commandToRun;
-
 @end
+#endif
 
 NS_HEADER_AUDIT_END(nullability, sendability)
 

@@ -18,39 +18,40 @@
 // CC-BY-SA4: https://stackoverflow.com/questions/45196857/run-a-shell-command-on-objective-c-and-simultaneously-get-output?rq=3
 
 #ifndef XCMShellDelegate_h
-#ifndef XCMBuild_h
+#ifndef XCMB_XCMBuild_h
 #if defined(__has_include)
 #if __has_include(<XCMBuild/XCMBuild.h>)
-///Defined when XCMBuild is Linked
+///Defined when ``XCMShellDelegate`` re-imports `XCMBuild.h`.
 #define XCMBuild_h "<XCMBuild/XCMBuild.h> (XCMShellDelegate)"
 #import <XCMBuild/XCMBuild.h>
 #endif
 #endif /* !__has_include */
-#ifndef XCMBuild_h
-///Defined when XCMBuild.h is imported
-#define XCMBuild_h "XCMBuild.h (XCMShellDelegate)"
+#ifndef XCMB_XCMBuild_h
+///Defined when ``XCMShellDelegate`` includes the `XCMBuild.h` header.
+#define XCMB_XCMBuild_h "XCMBuild.h (XCMShellDelegate)"
 #import "XCMBuild.h"
-#endif /* XCMBuild_h (inner) */
+#endif /* XCMB_XCMBuild_h (inner) */
 #if defined(__clang__) && __clang__
-#pragma clang final(XCMBuild_h)
+#pragma clang final(XCMB_XCMBuild_h)
 #endif /* !__clang__ */
-#endif /* XCMBuild_h (outer) */
+#endif /* XCMB_XCMBuild_h (outer) */
 
-#if defined(TARGET_OS_OSX) && TARGET_OS_OSX || (defined(TARGET_OS_UNIX) && TARGET_OS_UNIX) || (defined(TARGET_OS_LINUX) && TARGET_OS_LINUX)
+#if defined(TARGET_OS_OSX) && TARGET_OS_OSX || (defined(TARGET_OS_UNIX) && TARGET_OS_UNIX) || defined(TARGET_OS_LINUX) && TARGET_OS_LINUX
 
-@class NSMethodSignature, NSInvocation, NSArray<ObjectType>, NSDictionary<KeyType, ObjectType>, NSSet, NSTask, NSString, NSObject, NSPipe;
+@class NSMethodSignature, NSInvocation, NSArray<ObjectType>, NSDictionary<KeyType, ObjectType>, NSSet, NSTask, NSPipe, NSString, NSObject;
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
+#if !defined(XCMShellDelegate)
 @interface XCMShellDelegate: NSObject {
 }
-#if defined(__clang__) && __clang__
-#pragma mark - XCMShellDelegate
-#endif /* !__clang__ */
+/// The output capture `NSPipe`.`
 @property (nullable, readwrite, retain) NSPipe *outputPipe;
+/// The error capture `NSPipe`.`
 @property (nullable, readwrite, retain) NSPipe *errorPipe;
-
+/// The output capture handler block.
 @property (nullable, readwrite, strong) id<NSObject> outputHandler;
+/// The error capture handler block.
 @property (nullable, readwrite, strong) id<NSObject> errorHandler;
 /// Attaches to and captures the `standardOutput` of a given task process. The captured output is printed out asynchronously.
 /// TODO: Add usage example here.
@@ -61,15 +62,18 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 /// - Parameter process: An `NSTask` to capture. The given `process` _MUST_ not have been launched or an error will be raised.
 -(void)captureStandardError:(NSTask *)process;
 
+/// Removes the ``outputHandler`` from the current ``outputPipe``.
 -(void)removeOutputCaptures;
+/// Removes the ``errorHandler`` from the current ``errorPipe``.
 -(void)removeErrorCaptures;
 -(void)removeAllCaptures;
 
 @end
-
+#endif
 NS_HEADER_AUDIT_END(nullability, sendability)
 
 #endif /* !TARGET_OS_OSX */
+
 /// Defined whenever the ``XCMShellDelegate`` is loaded.
 #define XCMShellDelegate_h "XCMShellDelegate.h"
 #endif /* XCMShellDelegate_h */

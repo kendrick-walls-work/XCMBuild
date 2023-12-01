@@ -45,9 +45,12 @@ For the solid answer to https://stackoverflow.com/a/12310154
 // see https://clang.llvm.org/docs/LanguageExtensions.html#builtin-unpredictable
 
 //extern const char* XCMTestCommandArgumentsString __attribute__((weak_import));
-#include "XCMShell.h"
-#include "XCMShellDelegate.h"
-#include "XCMProcesses.h"
+#ifndef XCMShell_h
+#import "XCMShell.h"
+#endif
+#ifndef XCMProcesses_h
+#import "XCMProcesses.h"
+#endif
 
 @implementation XCMShellTask
 
@@ -63,7 +66,11 @@ For the solid answer to https://stackoverflow.com/a/12310154
 		NSArray *arguments = [NSArray arrayWithObjects:
 					 @"-c", [NSString stringWithFormat:@"%@", commandToRun],
 					 nil];
+#if defined(MAC_OS_X_VERSION_MAX_ALLOWED) && MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_13
+		[task setExecutableURL:[[NSURL alloc] initFileURLWithPath:@"/bin/bash" isDirectory:NO]];
+#else
 		[task setLaunchPath:@"/bin/bash"];
+#endif
 		[task setArguments:arguments];
 		[task setStandardInput:[NSFileHandle fileHandleWithStandardInput]];
 		//[task setStandardOutput:pipe];
