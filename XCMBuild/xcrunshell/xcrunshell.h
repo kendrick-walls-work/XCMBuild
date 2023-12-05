@@ -25,11 +25,13 @@
 #ifndef XCMBuild_h
 #if defined(__has_include)
 #if __has_include(<XCMBuild/XCMBuild.h>)
+/*! @parseOnly */
 #define XCMBuild_h "<XCMBuild/XCMBuild.h> (XCRunShell)"
 #import <XCMBuild/XCMBuild.h>
 #endif
 #endif /* !__has_include */
 #ifndef XCMBuild_h
+/*! @parseOnly */
 #define XCMBuild_h "XCMBuild.h (XCRunShell)"
 #import "XCMBuild.h"
 #endif /* XCMBuild_h (inner) */
