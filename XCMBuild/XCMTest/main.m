@@ -39,7 +39,7 @@ int main(int argc, const char * argv[]) {
 	int exit_code = 1;
 	@autoreleasepool {
 		NSString* arguments = [NSString stringWithString:XCMTestCommandArgumentsString];
-		if ([XCMShellTask runCommand:arguments]){
+		if (known_unpredictable([XCMShellTask runCommand:arguments])){
 			exit_code = 0;
 		} else { __builtin_assume(exit_code == 1); };
 		arguments = nil;
