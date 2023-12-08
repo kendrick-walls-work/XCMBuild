@@ -2,7 +2,14 @@
   "configurations" : [
     {
       "id" : "26D975EF-3D62-430A-8704-A14D94C9C8F9",
-      "name" : "Configuration 1",
+      "name" : "debug",
+      "options" : {
+
+      }
+    },
+    {
+      "id" : "C38A38E8-1CE5-436B-B1C5-1E68B7A94E99",
+      "name" : "normal",
       "options" : {
 
       }

@@ -28,6 +28,7 @@
 #include "XcodeBuildGlueConfig.xcconfig"
 
 //:completeSettings = Testing
+ACTION = test
 PRODUCT_NAME = $(PROJECT_NAME:c99extidentifier)
 WRAPPER_EXTENSION = framework
 WRAPPER_NAME = $(PRODUCT_NAME:c99extidentifier).$(WRAPPER_EXTENSION)

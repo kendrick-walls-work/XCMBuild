@@ -70,9 +70,9 @@ THECOUNT=$( (wc -l "${THE_TEMP_FILE}" 2>/dev/null || echo 0) | cut -d\  -f 1 ) ;
 EXIT_CODE=${THECOUNT} ;
 if [[ ("${THECOUNT}" -le 1) ]] ; then
 	EXIT_CODE=0 ;
-	echo "OK: Found no detected spelling errors." ;
+	printf "\t%s\n" "OK: Found no detected spelling errors." ;
 else
-	echo "FAIL: Found ${THECOUNT:-many} spelling errors." ;
+	printf "\t%s\n" "FAIL: Found ${THECOUNT:-many} spelling errors." ;
 fi
 rm -f ${THE_TEMP_FILE} 2>/dev/null >> /dev/null || true ;
 wait ;

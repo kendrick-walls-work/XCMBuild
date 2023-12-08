@@ -19,10 +19,8 @@
 #ifndef XCRS_RUNSHELL_MAIN_MARK
 #define XCRS_RUNSHELL_MAIN_MARK __INCLUDE_LEVEL__
 #endif
-
-#ifndef XCRS_MINARGS
 #import "xcrunshell.h"
-#endif
+
 #if __INCLUDE_LEVEL__ < 1
 int main(int argc, const char * argv[]) {
 	int exit_code = 1;

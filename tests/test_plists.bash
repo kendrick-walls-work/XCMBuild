@@ -81,7 +81,7 @@ ulimit -t 600
 PATH="/bin:/sbin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin:${PATH}"
 umask 137
 
-LOCK_FILE="/tmp/plist_test_script_lock"
+LOCK_FILE="/tmp/org.pak.dt.test-plist-lint-script.lock"
 test -x "$(command -v find)" || exit 126 ;
 test -x "$(command -v head)" || exit 126 ;
 test -x "$(command -v git)" || exit 126 ;
@@ -124,7 +124,7 @@ elif [[ -d ./shared ]] ; then
 elif [[ ( -d $(git rev-parse --show-toplevel 2>/dev/null) ) ]] ; then
 	_TEST_ROOT_DIR="$(git rev-parse --show-toplevel 2>/dev/null)" ;
 else
-	echo "FAIL: missing valid app or file"
+	printf "\t%s\n" "FAIL: missing valid app or file"
 	EXIT_CODE=1
 fi
 
@@ -132,14 +132,14 @@ for _TEST_DOC in $(find "${_TEST_ROOT_DIR}" \( -iname '*.plist' -o -iname "*.mob
 	if [[ (${EXIT_CODE} -eq 0) ]] ; then
 		plutil -lint -- "${_TEST_DOC}" 1>/dev/null 2>&1 || EXIT_CODE=$? ;
 		if [[ (${EXIT_CODE} -ne 0) ]] ; then
-			echo "SKIP: ${_TEST_DOC} is not a valid plist" ;
+			printf "\t%s\n" "SKIP: ${_TEST_DOC} is not a valid plist" ;
 		fi
 		xmllint --noout --valid <(plutil -convert xml1 -o - -- "${_TEST_DOC}" ) 1>/dev/null 2>&1 || EXIT_CODE=$? ;
 		if [[ ( ${EXIT_CODE} -ne 0 ) ]] ; then
 			case "$EXIT_CODE" in
-				1) echo "SKIP: Unclassified issue with '${_TEST_DOC}'" ;;
-				2|3|4) echo "FAIL: '${_TEST_DOC}' is invalid." >&2 ;;
-				*) echo "SKIP: Can't check ${_TEST_DOC}" ;;
+				1) printf "\t%s\n" "SKIP: Unclassified issue with '${_TEST_DOC}'" ;;
+				2|3|4) printf "\t%s\n" "FAIL: '${_TEST_DOC}' is invalid." >&2 ;;
+				*) printf "\t%s\n" "SKIP: Can't check ${_TEST_DOC}" ;;
 			esac
 		fi
 	fi
@@ -150,9 +150,9 @@ if [[ (${EXIT_CODE} -eq 0) ]] ; then
 			xmllint --noout --valid "${_TEST_DOC}" 1>/dev/null 2>&1 || EXIT_CODE=$?
 			if [[ ( ${EXIT_CODE} -ne 0 ) ]] ; then
 				case "$EXIT_CODE" in
-					1) echo "SKIP: Unclassified issue with '${_TEST_DOC}'" ;;
-					2|3|4) echo "FAIL: '${_TEST_DOC}' is invalid." >&2 ;;
-					*) echo "SKIP: Can't check ${_TEST_DOC}" ;;
+					1) printf "\t%s\n" "SKIP: Unclassified issue with '${_TEST_DOC}'" ;;
+					2|3|4) printf "\t%s\n" "FAIL: '${_TEST_DOC}' is invalid." >&2 ;;
+					*) printf "\t%s\n" "SKIP: Can't check ${_TEST_DOC}" ;;
 				esac
 			fi
 		fi

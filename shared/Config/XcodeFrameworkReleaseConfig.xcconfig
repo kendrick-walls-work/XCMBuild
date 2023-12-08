@@ -1,0 +1,66 @@
+//
+//  Config.xcconfig
+//  XCMBuild
+//
+// reactive-firewall/XCMBuild Repo xcconfig
+// ..................................
+// Copyright (c) 2023, Mr. Walls
+// ..................................
+// Licensed under APACHE-2 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// ..........................................
+// http://www.apache.org/licenses/LICENSE-2.0
+// ..........................................
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+//:configuration = Release
+APPLY_RULES_IN_COPY_FILES = YES
+BUILD_LIBRARY_FOR_DISTRIBUTION = YES
+CLANG_ANALYZER_GCD_PERFORMANCE = YES
+CLANG_ANALYZER_SECURITY_FLOATLOOPCOUNTER = YES
+CLANG_ANALYZER_SECURITY_INSECUREAPI_RAND = YES
+CLANG_ANALYZER_SECURITY_INSECUREAPI_STRCPY = YES
+CLANG_LINK_OBJC_RUNTIME = YES
+CLANG_TIDY_BUGPRONE_REDUNDANT_BRANCH_CONDITION = YES
+CLANG_TIDY_MISC_REDUNDANT_EXPRESSION = YES
+CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = $(RUN_CLANG_STATIC_ANALYZER)
+COMBINE_HIDPI_IMAGES = YES
+DEFINES_MODULE = YES
+DEPLOYMENT_LOCATION = YES
+DOCC_EXTRACT_SWIFT_INFO_FOR_OBJC_SYMBOLS = $(DOCC_EXTRACT_EXTENSION_SYMBOLS)
+DONT_GENERATE_INFOPLIST_FILE = NO
+ENABLE_HARDENED_RUNTIME = YES
+ENABLE_MODULE_VERIFIER = YES
+GCC_INPUT_FILETYPE = sourcecode.c.objc
+GCC_WARN_STRICT_SELECTOR_MATCH = YES
+GCC_WARN_UNKNOWN_PRAGMAS = YES
+GENERATE_INFOPLIST_FILE = YES
+//GENERATE_MASTER_OBJECT_FILE = NO
+GENERATE_TEXT_BASED_STUBS = NO
+MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = $(inhereted) c17 gnu11 gnu++20
+MODULE_VERIFIER_SUPPORTED_LANGUAGES = objective-c
+OSACOMPILE_EXECUTE_ONLY = YES
+RUN_CLANG_STATIC_ANALYZER = YES
+RUN_DOCUMENTATION_COMPILER = YES
+SECTORDER_FLAGS = -Xlinker -no_order_inits
+SKIP_INSTALL[sdk=macosx*] = NO
+STRIP_PNG_TEXT = YES
+SUPPORTS_MACCATALYST = YES
+TAPI_EXTRA_PRIVATE_HEADERS = xcrunshell.h
+TAPI_EXTRA_PROJECT_HEADERS = Compat.h
+TAPI_EXTRA_PUBLIC_HEADERS = XCMTest.h
+TAPI_VERIFY_MODE = ErrorsAndWarnings
+TREAT_MISSING_BASELINES_AS_TEST_FAILURES = YES
+VALIDATE_PRODUCT = YES
+MACOSX_DEPLOYMENT_TARGET = $(inhereted)
+MACOSX_DEPLOYMENT_TARGET[arch=i386] = $(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)
+#include "NoTAPIConfig.xcconfig"
+#include "XcodeFrameworkConfig.xcconfig"

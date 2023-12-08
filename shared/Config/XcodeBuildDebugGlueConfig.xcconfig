@@ -23,7 +23,6 @@
 
 //:configuration = Debug
 #include "Debug.xcconfig"
-PRODUCT_NAME = $(PROJECT_NAME:c99extidentifier)
 PLIST_FILE_OUTPUT_FORMAT = XML
 STRINGS_FILE_OUTPUT_ENCODING = UTF-8
 WRAPPER_EXTENSION = framework

@@ -93,7 +93,7 @@ if [[ ( $(shlock -f "${LOCK_FILE}" -p $$ ) -eq 0 ) ]] ; then
 		trap 'cleanup ; wait ; exit ${EXIT_CODE} ;' EXIT || EXIT_CODE=1
 else
 		# shellcheck disable=SC2046
-		echo "Check for Copyright lines already in progress by "$(head "${LOCK_FILE}") ;
+		printf "\t%s\n" "Check for Copyright lines already in progress by "$(head "${LOCK_FILE}") ;
 		false ;
 		exit 126 ;
 fi
@@ -107,7 +107,7 @@ if [[ -d ./.git ]] ; then
 elif [[ -d ./tests ]] ; then
 	_TEST_ROOT_DIR="./" ;
 else
-	echo "FAIL: missing valid folder or file"
+	printf "\t%s\n" "FAIL: missing valid folder or file" >&2 ;
 	EXIT_CODE=1
 fi
 
@@ -115,18 +115,18 @@ _TEST_YEAR=$(date -j "+%C%y" 2>/dev/null ;)
 
 for _TEST_DOC in $(find "${_TEST_ROOT_DIR}" \( -iname '*.py' -o -iname '*.h' -o -ipath './bin/*' -o -iname '*.txt' -o -iname '*.md' \) -a -print0 | xargs -0 -L1 -I{} git ls-files "{}" 2>/dev/null; wait ;) ; do
 	if [[ ($(grep -cF 'Disclaimer' "${_TEST_DOC}" 2>&1 ;) -ne 0) ]] ; then
-		echo "SKIP: ${_TEST_DOC} is disclaimed." ;
+		printf "\t%s\n" "SKIP: ${_TEST_DOC} is disclaimed." ;
 		if [[ ( ${EXIT_CODE} -le 0 ) ]] ; then EXIT_CODE=126 ; fi ;
 	else
 		if [[ ($(grep -cF "Copyright" "${_TEST_DOC}" 2>&1 ;) -le 0) ]] ; then
-			echo "FAIL: ${_TEST_DOC} is missing a copyright line" >&2 ;
+			printf "\t%s\n" "FAIL: ${_TEST_DOC} is missing a copyright line" >&2 ;
 			EXIT_CODE=127
 		fi
 		if [[ ( $(grep -F "Copyright" "${_TEST_DOC}" 2>&1 | grep -coF "Copyright (c)" 2>&1) -le 0) ]] ; then
-			echo "SKIP: ${_TEST_DOC} is missing a valid copyright line beginning with \"Copyright (c)\"" ;
+			printf "\t%s\n" "SKIP: ${_TEST_DOC} is missing a valid copyright line beginning with \"Copyright (c)\"" ;
 		fi
 		if [[ ( $(grep -F "Copyright (c)" "${_TEST_DOC}" 2>&1 | grep -oE "\d+(-\d+)?" 2>&1 | grep -oE "\d{3,}$" | sort -n | tail -n1) -lt ${_TEST_YEAR}) ]] ; then
-			echo "WARN: ${_TEST_DOC} is out of date without a current copyright (year)" ;
+			printf "\t%s\n" "WARN: ${_TEST_DOC} is out of date without a current copyright (year)" >&2 ;
 		fi
 	fi
 done
@@ -135,7 +135,7 @@ if [[ ( ${EXIT_CODE} -ne 0 ) ]] ; then
 	case "$EXIT_CODE" in
 		0|126) true && EXIT_CODE=0 ;;
 		127) false ;;
-		*) echo "SKIP: Unclassified issue." ;;
+		*) printf "\t%s\n" "SKIP: Unclassified issue." ;;
 	esac
 fi
 

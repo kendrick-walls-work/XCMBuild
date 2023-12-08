@@ -45,7 +45,9 @@
 // see __has_builtin(__builtin_unpredictable) for sub-calls
 
 //extern const char* XCMTestCommandArgumentsString __attribute__((weak_import));
-#include "XCMShellDelegate.h"
+#ifndef XCMXCMShellDelegate_h
+#import "XCMShellDelegate.h"
+#endif
 
 @implementation XCMShellDelegate
 

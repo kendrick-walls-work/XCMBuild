@@ -16,6 +16,9 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
+#ifndef Compat_h
+#define Compat_h "Compat.h"
+
 ///>important
 ///> The `Compat.h` file contains code that is under the LLVM APACHE Licence, As described here:
 ///> https://www.llvm.org/docs/DeveloperPolicy.html#new-llvm-project-license-framework
@@ -25,9 +28,6 @@
 #if defined(__clang__) && __clang__
 #pragma mark - Compatibility
 #endif /* !__clang__ */
-
-#ifndef Compat_h
-#define Compat_h
 
 #if defined(__clang__) && __clang__
 #ifndef __has_builtin
@@ -68,6 +68,23 @@
 #define NO_ANSI_KEYWORDS 1
 #endif /* !__clang__ */
 
+#if defined(__has_attribute)
+#if __has_attribute(used)
+#if __has_attribute(weak_import)
+#ifndef XCMHELPER_NEEDED
+/// Use this to declare `__attribute__((weak_import))` when available.
+#define XCMHELPER_NEEDED __attribute__((weak_import))
+#endif /* !XCMHELPER_NEEDED */
+#else /* !__attribute__ ((weak_import)) */
+#ifndef XCMHELPER_NEEDED
+#warning No support for weak imports
+/// Use this to declare `__attribute__((weak_import))` when available.
+#define XCMHELPER_NEEDED
+#endif /* !XCMHELPER_NEEDED */
+#endif /* END ((weak_import)) */
+#endif /* !__attribute__ ((used)) */
+#endif /* !__has_attribute */
+
 #if !defined(known_unpredictable)
 #if __has_builtin(__builtin_unpredictable)
 #define known_unpredictable(A) __builtin_unpredictable(A)
@@ -80,15 +97,51 @@
 #endif /* !__builtin_unpredictable */
 #endif /* known_unpredictable */
 
+#if !defined(XCMB_EXTERN)
+#if defined(__cplusplus)
+#define XCMB_EXTERN extern "C"
+#warning Something is wrong. Non Obj-C Configuration/Target unsupported.
+#else /* !__cplusplus (inner) */
+#define XCMB_EXTERN extern
+#endif /* !__cplusplus (outer) */
+#endif /* !XCMB_EXTERN */
+
+#if !defined(XCMB_VISIBLE)
+#define XCMB_VISIBLE  __attribute__((visibility("default")))
+#endif /* !XCMB_VISIBLE */
+
+#if !defined(XCMB_EXPORT)
+#define XCMB_EXPORT  XCMB_EXTERN XCMB_VISIBLE
+#endif /* !XCMB_EXPORT */
+
+#if !defined(XCMB_IMPORT)
+#define XCMB_IMPORT  extern
+#endif /* !XCMB_IMPORT */
+
+#endif /* Compat_h */
+
 #if defined(__has_include)
 #if defined(__clang__) && __clang__
 #pragma mark - Imports
 #endif /* !__clang__ */
+
 #if __has_include(<stdio.h>)
+#ifndef XCMB_USE_STD_LOG
+#define XCMB_USE_STD_LOG YES
 #import <stdio.h>
 #if __has_include(<stdlib.h>)
+#ifndef XCMB_USE_STD_LIB
+#define XCMB_USE_STD_LIB YES
 #import <stdlib.h>
+#else
+#warning Use of stdio without stdlib is unusual. Compiler Gods Help You.
+#define XCMB_USE_STD_LIB NO
+#endif /* !XCMB_USE_STD_LIB */
 #endif /* !__has_include(<stdlib.h>) */
+#else
+#define XCMB_USE_STD_LOG NO
+#define XCMB_USE_STD_LIB NO
+#endif /* !XCMB_USE_STD_LOG */
 #endif /* !__has_include(<stdio.h>) */
 
 #if __has_include(<objc/objc.h>)
@@ -103,6 +156,10 @@
 #import <objc/NSObjCRuntime.h>
 #endif /* !__has_include(<objc/NSObjCRuntime.h>) */
 #endif /* !__has_include(<objc/objc.h>) */
-#endif /* !__has_include_ObjC */
 
-#endif /* Compat_h */
+#if __has_include(<CoreFoundation/CoreFoundation.h>)
+#if !defined(__COREFOUNDATION__)
+#import <CoreFoundation/CoreFoundation.h>
+#endif /* defined(__COREFOUNDATION__) */
+#endif /* !__has_include(<CoreFoundation/CoreFoundation.h>) */
+#endif /* !__has_include_Compat */

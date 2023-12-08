@@ -16,7 +16,9 @@
  */
 
 //extern const char* XCMTestCommandArgumentsString __attribute__((weak_import));
-#include "XCMBuildSystem.h"
+#ifndef XCMBuildSystem_h
+#import "XCMBuildSystem.h"
+#endif
 
 #ifndef XCMB_FWD_INVOKE_ENABLED
 #if defined(__has_include)

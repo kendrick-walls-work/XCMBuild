@@ -44,22 +44,10 @@
 
 #if defined(TARGET_OS_OSX) && TARGET_OS_OSX || (defined(TARGET_OS_UNIX) && TARGET_OS_UNIX) || (defined(TARGET_OS_LINUX) && TARGET_OS_LINUX)
 
-#if defined(__has_attribute)
-#if __has_attribute(used)
-#if __has_attribute(weak_import)
 #ifndef XCMTestCommandArgumentsString
 /// Use this to Makefile Testing cmdline string for XCMTest.
-extern NSString * const XCMTestCommandArgumentsString __attribute__((weak_import));
+extern NSString * const XCMTestCommandArgumentsString XCMHELPER_NEEDED;
 #endif /* !XCMTestCommandArgumentsString */
-#else /* !__attribute__ ((weak_import)) */
-#ifndef XCMTestCommandArgumentsString
-#warning No support for weak import of XCMTest
-/// Use this to Makefile Testing cmdline string for XCMTest.
-extern NSString * const XCMTestCommandArgumentsString;
-#endif /* !XCMTestCommandArgumentsString */
-#endif /* END ((weak_import)) */
-#endif /* !__attribute__ ((used)) */
-#endif /* !__has_attribute */
 
 #if defined(XCRS_RUNSHELL_MAIN_MARK)
 #if XCRS_RUNSHELL_MAIN_MARK < __INCLUDE_LEVEL__ && XCRS_RUNSHELL_MAIN_MARK < 1 && __INCLUDE_LEVEL__ <= 2

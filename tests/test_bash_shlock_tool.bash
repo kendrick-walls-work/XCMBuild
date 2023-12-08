@@ -77,7 +77,7 @@ test -x "$(command -v shlock)" || exit 126 ;
 
 function cleanup() {
 	rm -f "${LOCK_FILE}" 2>/dev/null || true ; wait ;
-	hash -d shlock 2>/dev/null > /dev/null || true ;
+	hash -d shlock 2>/dev/null > /dev/null || : ;
 }
 
 
@@ -90,11 +90,12 @@ if [[ ( $(./.github/tool_shlock_helper.sh -f ${LOCK_FILE} -p $$ ) -eq 0 ) ]] ; t
 		trap 'cleanup ; wait ; exit 5 ;' SIGQUIT || EXIT_CODE=5
 		# SC2173 - https://github.com/koalaman/shellcheck/wiki/SC2173
 		# trap 'rm -f ${LOCK_FILE} 2>/dev/null || true ; wait ; exit 1 ;' SIGSTOP || EXIT_CODE=7
+		trap 'cleanup ; wait ; exit 7 ;' SIGXCPU || EXIT_CODE=7
 		trap 'cleanup ; wait ; exit 8 ;' SIGINT || EXIT_CODE=8
 		trap 'cleanup ; wait ; exit 9 ;' SIGABRT || EXIT_CODE=9
-		trap 'cleanup ; wait ; exit ${EXIT_CODE} ;' EXIT || EXIT_CODE=1
+		trap 'cleanup ; wait ; exit ${EXIT_CODE:-1} ;' EXIT || EXIT_CODE=1
 else
-		echo "FAIL" >&2 ;
+		printf "\t%s\n" "FAIL\n" >&2 ;
 		false ;
 		EXIT_CODE=127 ;
 fi
@@ -102,8 +103,8 @@ fi
 if [[ ( ${EXIT_CODE} -ne 0 ) ]] ; then
 	case "$EXIT_CODE" in
 		0) true ;; #  dead-code
-		127) false ;;
-		*) echo "SKIP: Unclassified issue with '${_TEST_DOC}'" ;;
+		7|127) false ;;
+		*) printf "\t%s\n" "SKIP: Unclassified issue with 'tool_shlock_helper'" ;;
 	esac
 fi
 

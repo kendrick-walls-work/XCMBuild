@@ -23,7 +23,6 @@
 
 //:configuration = Release
 #include "Release.xcconfig"
-PRODUCT_NAME = $(PROJECT_NAME:c99extidentifier)
 PLIST_FILE_OUTPUT_FORMAT = XML
 APPLY_RULES_IN_COPY_FILES = YES
 STRINGS_FILE_OUTPUT_ENCODING = UTF-8

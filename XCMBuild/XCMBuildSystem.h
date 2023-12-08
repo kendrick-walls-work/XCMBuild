@@ -17,7 +17,7 @@
 //   limitations under the License.
 
 #ifndef XCMBuildSystem_h
-#ifndef XCMBuild_h
+#ifndef XCMB_XCMBuild_h
 #if defined(__has_include)
 #if __has_include(<XCMBuild/XCMBuild.h>)
 ///Defined when ``XCMBuildSystem`` re-imports `XCMBuild.h`.
@@ -25,34 +25,31 @@
 #import <XCMBuild/XCMBuild.h>
 #endif
 #endif /* !__has_include */
-#ifndef XCMBuild_h
+#ifndef XCMB_XCMBuild_h
 ///Defined when ``XCMBuildSystem`` includes the `XCMBuild.h` header.
-#define XCMBuild_h "XCMBuild.h (XCMBuildSystem)"
+#define XCMB_XCMBuild_h "XCMBuild.h (XCMBuildSystem)"
 #import "XCMBuild.h"
-#endif /* XCMBuild_h (inner) */
+#endif /* XCMB_XCMBuild_h (inner) */
 #if defined(__clang__) && __clang__
-#pragma clang final(XCMBuild_h)
+#pragma clang final(XCMB_XCMBuild_h)
 #endif /* !__clang__ */
-#endif /* XCMBuild_h (outer) */
+#endif /* XCMB_XCMBuild_h (outer) */
 
 #if defined(TARGET_OS_OSX) && TARGET_OS_OSX || (defined(TARGET_OS_UNIX) && TARGET_OS_UNIX) || defined(TARGET_OS_LINUX) && TARGET_OS_LINUX
 
 @class NSMethodSignature, NSInvocation, NSArray<ObjectType>, NSDictionary<KeyType, ObjectType>, NSString, NSObject, NSBundle;
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
-
+#if !defined(XCMBuildSystem)
 /// XCMBuildSystem allows building projects via makefiles with the targets `build`, `install`, `clean`, `test`, `uninstall`, etc.
 @interface XCMBuildSystem: NSBundle {
 }
-#if defined(__clang__) && __clang__
-#pragma mark - XCMBuildSystem
-#endif /* !__clang__ */
 /// Returns the string describing the object in the debugger.
 /// See  `NSObject/description` for details.
 /// ``XCMBuildSystem``'s implementation of this method simply prints the name of the class.
 ///
 /// - Returns: The `NSString` that represents the contents of the ``XCMBuildSystem`` class.
-+ (NSString *)debugDescription;
++ (NSString *_Null_unspecified)debugDescription;
 /// See `NSBundle/pathForAuxiliaryExecutable:` for Details.
 ///
 /// - Parameters:
@@ -61,8 +58,9 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 ///     Optionally prefixed with `un`, `pre-` or `post-`.
 ///
 /// - Returns: The `NSString` containing the full path to the requested `excutable` if available; otherwise `nil`.
-- (nullable NSString *)pathForAuxiliaryExecutable:(NSString *)executableName NS_REQUIRES_SUPER;
+- (nullable NSString *)pathForAuxiliaryExecutable:(NSString *_Null_unspecified)executableName NS_REQUIRES_SUPER;
 @end
+#endif
 
 NS_HEADER_AUDIT_END(nullability, sendability)
 

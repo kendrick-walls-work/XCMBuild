@@ -1,0 +1,254 @@
+#! /bin/bash
+#
+# reactive-firewall/XCMBuild cp-like Clone Tool
+# ..................................
+# Copyright (c) 2023, Mr. Walls
+# ..................................
+# Licensed under APACHE-2 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+# ..........................................
+# http://www.apache.org/licenses/LICENSE-2.0
+# ..........................................
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# Disclaimer of Warranties.
+# A. YOU EXPRESSLY ACKNOWLEDGE AND AGREE THAT, TO THE EXTENT PERMITTED BY
+#    APPLICABLE LAW, USE OF THIS SHELL SCRIPT AND ANY SERVICES PERFORMED
+#    BY OR ACCESSED THROUGH THIS SHELL SCRIPT IS AT YOUR SOLE RISK AND
+#    THAT THE ENTIRE RISK AS TO SATISFACTORY QUALITY, PERFORMANCE, ACCURACY AND
+#    EFFORT IS WITH YOU.
+#
+# B. TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, THIS SHELL SCRIPT
+#    AND SERVICES ARE PROVIDED "AS IS" AND "AS AVAILABLE", WITH ALL FAULTS AND
+#    WITHOUT WARRANTY OF ANY KIND, AND THE AUTHOR OF THIS SHELL SCRIPT'S LICENSORS
+#    (COLLECTIVELY REFERRED TO AS "THE AUTHOR" FOR THE PURPOSES OF THIS DISCLAIMER)
+#    HEREBY DISCLAIM ALL WARRANTIES AND CONDITIONS WITH RESPECT TO THIS SHELL SCRIPT
+#    SOFTWARE AND SERVICES, EITHER EXPRESS, IMPLIED OR STATUTORY, INCLUDING, BUT
+#    NOT LIMITED TO, THE IMPLIED WARRANTIES AND/OR CONDITIONS OF
+#    MERCHANTABILITY, SATISFACTORY QUALITY, FITNESS FOR A PARTICULAR PURPOSE,
+#    ACCURACY, QUIET ENJOYMENT, AND NON-INFRINGEMENT OF THIRD PARTY RIGHTS.
+#
+# C. THE AUTHOR DOES NOT WARRANT AGAINST INTERFERENCE WITH YOUR ENJOYMENT OF THE
+#    THE AUTHOR's SOFTWARE AND SERVICES, THAT THE FUNCTIONS CONTAINED IN, OR
+#    SERVICES PERFORMED OR PROVIDED BY, THIS SHELL SCRIPT WILL MEET YOUR
+#    REQUIREMENTS, THAT THE OPERATION OF THIS SHELL SCRIPT OR SERVICES WILL
+#    BE UNINTERRUPTED OR ERROR-FREE, THAT ANY SERVICES WILL CONTINUE TO BE MADE
+#    AVAILABLE, THAT THIS SHELL SCRIPT OR SERVICES WILL BE COMPATIBLE OR
+#    WORK WITH ANY THIRD PARTY SOFTWARE, APPLICATIONS OR THIRD PARTY SERVICES,
+#    OR THAT DEFECTS IN THIS SHELL SCRIPT OR SERVICES WILL BE CORRECTED.
+#    INSTALLATION OF THIS THE AUTHOR SOFTWARE MAY AFFECT THE USABILITY OF THIRD
+#    PARTY SOFTWARE, APPLICATIONS OR THIRD PARTY SERVICES.
+#
+# D. YOU FURTHER ACKNOWLEDGE THAT THIS SHELL SCRIPT AND SERVICES ARE NOT
+#    INTENDED OR SUITABLE FOR USE IN SITUATIONS OR ENVIRONMENTS WHERE THE FAILURE
+#    OR TIME DELAYS OF, OR ERRORS OR INACCURACIES IN, THE CONTENT, DATA OR
+#    INFORMATION PROVIDED BY THIS SHELL SCRIPT OR SERVICES COULD LEAD TO
+#    DEATH, PERSONAL INJURY, OR SEVERE PHYSICAL OR ENVIRONMENTAL DAMAGE,
+#    INCLUDING WITHOUT LIMITATION THE OPERATION OF NUCLEAR FACILITIES, AIRCRAFT
+#    NAVIGATION OR COMMUNICATION SYSTEMS, AIR TRAFFIC CONTROL, LIFE SUPPORT OR
+#    WEAPONS SYSTEMS.
+#
+# E. NO ORAL OR WRITTEN INFORMATION OR ADVICE GIVEN BY THE AUTHOR
+#    SHALL CREATE A WARRANTY. SHOULD THIS SHELL SCRIPT OR SERVICES PROVE DEFECTIVE,
+#    YOU ASSUME THE ENTIRE COST OF ALL NECESSARY SERVICING, REPAIR OR CORRECTION.
+#
+#    Limitation of Liability.
+# F. TO THE EXTENT NOT PROHIBITED BY APPLICABLE LAW, IN NO EVENT SHALL THE AUTHOR
+#    BE LIABLE FOR PERSONAL INJURY, OR ANY INCIDENTAL, SPECIAL, INDIRECT OR
+#    CONSEQUENTIAL DAMAGES WHATSOEVER, INCLUDING, WITHOUT LIMITATION, DAMAGES
+#    FOR LOSS OF PROFITS, CORRUPTION OR LOSS OF DATA, FAILURE TO TRANSMIT OR
+#    RECEIVE ANY DATA OR INFORMATION, BUSINESS INTERRUPTION OR ANY OTHER
+#    COMMERCIAL DAMAGES OR LOSSES, ARISING OUT OF OR RELATED TO YOUR USE OR
+#    INABILITY TO USE THIS SHELL SCRIPT OR SERVICES OR ANY THIRD PARTY
+#    SOFTWARE OR APPLICATIONS IN CONJUNCTION WITH THIS SHELL SCRIPT OR
+#    SERVICES, HOWEVER CAUSED, REGARDLESS OF THE THEORY OF LIABILITY (CONTRACT,
+#    TORT OR OTHERWISE) AND EVEN IF THE AUTHOR HAS BEEN ADVISED OF THE
+#    POSSIBILITY OF SUCH DAMAGES. SOME JURISDICTIONS DO NOT ALLOW THE EXCLUSION
+#    OR LIMITATION OF LIABILITY FOR PERSONAL INJURY, OR OF INCIDENTAL OR
+#    CONSEQUENTIAL DAMAGES, SO THIS LIMITATION MAY NOT APPLY TO YOU. In no event
+#    shall THE AUTHOR's total liability to you for all damages (other than as may
+#    be required by applicable law in cases involving personal injury) exceed
+#    the amount of five dollars ($5.00). The foregoing limitations will apply
+#    even if the above stated remedy fails of its essential purpose.
+################################################################################
+PATH=${PATH:-"/bin:/sbin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin"} ;
+umask 0112
+
+test -x "$(command -v head)" || exit 126 ;
+test -x "$(command -v sync)" || exit 126 ;
+test -x "$(command -v grep)" || exit 126 ;
+test -x "$(command -v curl)" || exit 126 ;
+test -x "$(command -v find)" || exit 126 ;
+test -x "$(command -v git)" || exit 126 ;
+test -x "$(command -v curl)" || exit 126 ;
+test -x "$(command -v dirname)" || exit 126 ;
+export LANG=en_US.${STRINGS_FILE_OUTPUT_ENCODING:-"UTF-8"} ;
+# shellcheck disable=SC2155,SC2046
+export __CF_USER_TEXT_ENCODING=$( printf "%s" $( printf "%s\n" "${__CF_USER_TEXT_ENCODING:-0x0}" | cut -d : -f 1 ):0x08000100:0x0 )
+export SHELL=${SHELL:-$(xcrun --sdk macosx --find bash)} ;
+export SCRIPTS_FOLDER_PATH="${SCRIPTS_FOLDER_PATH:-$(dirname ${0})}" ;
+hash -p "${SCRIPTS_FOLDER_PATH%%/}/tool_shlock_helper.bash" shlock || test -x "$(command -v shlock)" || exit 255 ;
+test -x "$(command -v shlock)" || exit 126 ;
+# shellcheck disable=SC2086
+test -x "${SCRIPTS_FOLDER_PATH}/serialized" || exit 126 ;
+# shellcheck disable=SC2086,SC1091
+source "${SCRIPTS_FOLDER_PATH}/serialized" || exit 40 ;
+declare -ir MINPARAMS=2 ;
+declare LOCK_FILE="${TMPDIR:-/tmp}/org.pak.dt.XCMBuild.XCMCopy.lock" ;
+declare -i PID_VALUE="${PPID:-$$}" ;
+declare -i XCMB_COPY_NO_STRIP=${XCMB_COPY_NO_STRIP:-0} ;
+declare -i XCMB_COPY_FORCE=${XCMB_COPY_FORCE:-0} ;
+declare -i XCMB_COPY_VERBOSE=${XCMB_COPY_VERBOSE:-0} ;
+declare -i XCMB_COPY_USE_TAR_BUILTIN=${XCMB_COPY_USE_TAR_BUILTIN:-0} ;
+declare -i EXIT_CODE=1 ;
+
+function cleanup() {
+	rm -f "${LOCK_FILE}" 2>/dev/null || true ; wait ;
+	hash -d shlock 2>/dev/null > /dev/null || : ;
+}
+
+#declare -i VERSION=20231017
+
+export XPC_SERVICE_NAME="clonefile" ;
+if [[ ( $# -ge $MINPARAMS ) ]] ; then
+	while [[ ( $# -gt $MINPARAMS ) ]] ; do  # Until only last two are left
+		case "${1}" in
+			-p|--no-strip) export XCMB_COPY_NO_STRIP=2 ;; # last one wins
+			-f|--force) export XCMB_COPY_FORCE=1 ;; # last one wins
+			-n|--no-force) export XCMB_COPY_FORCE=0 ;; # last one wins
+			-v|--verbose) export XCMB_COPY_VERBOSE=1 ;;
+			-a) : ;;  # not implemented yet - reserved for XCMB_COPY_USE_TAR_BUILTIN=1
+			-x) : ;;  # not implemented yet - reserved for XCMB_COPY_ONE_FS=1
+			-R) : ;;  # not implemented yet - reserved for XCMB_COPY_RECURSE=1
+			-P) : ;;  # not implemented yet - reserved for XCMB_COPY_NO_FOLLOW_LINKS=1
+			-X) : ; export XCMB_COPY_NO_STRIP=1 ;; # last one wins
+			--strip) : ; export XCMB_COPY_NO_STRIP=0 ;; # last one wins
+			*) printf "%b: \"%s\" Argument Unrecognized!\n" "$0" "${1}" >&2 ; EXIT_CODE=3 ;;
+		esac ;  # Check next set of parameters.
+		shift ;
+	done ;
+fi ;
+if [[ ( ${EXIT_CODE} -eq 0 ) ]] ; then
+	export XCMB_COPY_NO_STRIP ;
+	export XCMB_COPY_FORCE ;
+	export XCMB_COPY_VERBOSE ;
+	export XCMB_COPY_USE_TAR_BUILTIN ;
+	export SCRIPTS_FOLDER_PATH="${SCRIPTS_FOLDER_PATH:-$(dirname ${0})}" ;
+	if [[ ${VERBOSE_PBXCP:-NO} == *NO ]] && [[ (${XCMB_COPY_VERBOSE:-0} -lt 1) ]] ; then
+		: ;
+	else
+		export VERBOSE_PBXCP=YES;
+	fi ;
+	if [[ ${COPY_PHASE_STRIP:-NO} == *NO ]] && [[ (${XCMB_COPY_NO_STRIP:-0} -ge 2) ]] ; then
+		export COPY_PHASE_STRIP=NO;
+	else
+		export COPY_PHASE_STRIP=YES;
+	fi ;
+	if [[ ${STRIP_INSTALLED_PRODUCT:-NO} == *NO ]] && [[ (${XCMB_COPY_NO_STRIP:-0} -ge 1) ]] ; then
+		export STRIP_INSTALLED_PRODUCT=NO;
+	elif [[ (${XCMB_COPY_NO_STRIP:-0} -lt 2) ]] ; then
+		export STRIP_INSTALLED_PRODUCT=${STRIP_INSTALLED_PRODUCT:-${COPY_PHASE_STRIP:-YES}};
+	fi ;
+	if [[ ${COPYING_PRESERVES_HFS_DATA:-NO} == *NO ]] && [[ (${XCMB_COPY_NO_STRIP:-0} -lt 2) ]] ; then
+		export COPYING_PRESERVES_HFS_DATA=NO;
+	elif [[ (${XCMB_COPY_NO_STRIP:-0} -gt 1) ]] ; then
+		export COPYING_PRESERVES_HFS_DATA=YES;
+	fi ;
+fi ;
+if [[ ( $EXIT_CODE -lt $MINPARAMS ) ]] ; then
+	#shellcheck disable=SC2078
+	if [[ safetyCheckSerialized ]] ; then
+		if [[ ( ${#} -lt 2 ) ]] ; then
+			if [[ ( ${#} -ge 1 ) ]] && [[ ( -e "${1}" ) ]] && [[ ( "${1}" -ef "${SCRIPT_INPUT_FILE_0}" ) ]] ; then
+				if [[ -n "${SCRIPT_OUTPUT_FILE_0}" ]] ; then
+					exec "${0} ${SCRIPT_INPUT_FILE_0} ${SCRIPT_OUTPUT_FILE_0}" ;
+				fi ;
+				if [[ ${VERBOSE_PBXCP} == *YES ]] ; then printf "%s\n" "${FUNCNAME:-$0}:${BASH_LINENO:-0}: error: Invalid internal State! (Unexpected)" >&2 ; exit 41; fi ;
+			elif [[ ( ${#} -ge 1 ) ]] && [[ ! ( -e "${1}" ) ]] && [[ ( -e "${SCRIPT_INPUT_FILE_0}" ) ]] ; then
+				if [[ -z ${SCRIPT_OUTPUT_FILE_0} ]] ; then
+					export -x SCRIPT_OUTPUT_FILE_0="${1}";
+					export SCRIPT_OUTPUT_FILE_COUNT=1 ;
+					exec "${0} ${SCRIPT_INPUT_FILE_0} ${1}" ;
+				fi ;
+				if [[ ${VERBOSE_PBXCP} == *YES ]] ; then printf "%s\n" "${FUNCNAME:-$0}:${BASH_LINENO:-0}: error: Invalid internal State! (Unexpected)" >&2 ; exit 45; fi ;
+			elif [[ ( ${#} -lt 1 ) ]] && [[ ( -e "${SCRIPT_INPUT_FILE_0}" ) ]] ; then
+				if [[ -n "${SCRIPT_OUTPUT_FILE_0}" ]] ; then
+					exec "${0} ${SCRIPT_INPUT_FILE_0} ${SCRIPT_OUTPUT_FILE_0}" ;
+				fi ;
+				if [[ ${VERBOSE_PBXCP} == *YES ]] ; then printf "%s\n" "${FUNCNAME:-$0}:${BASH_LINENO:-0}: error: Invalid internal State! (Unexpected)" >&2 ; exit 44; fi ;
+			#elif [[ ( ${#} -ge 1 ) ]] && [[ !( -e "${1}" ) ]] ; then also [[ !( -e "${SCRIPT_INPUT_FILE_0}" ) ]] therefore fallthrough (is missing src OR is missing Dest OR is missing both)
+			elif [[ ( ${#} -lt 1 ) ]] ; then
+				# reduces to
+				if [[ ${VERBOSE_PBXCP} == *YES ]] ; then printf "%s\n" "${FUNCNAME:-$0}:${BASH_LINENO:-0}: error: Invalid internal State! (Ambiguous)" >&2 ; exit 43; fi ;
+			fi;
+			if [[ ${VERBOSE_PBXCP} == *YES ]] ; then printf "%s\n" "${FUNCNAME:-$0}:${BASH_LINENO:-0}: error: Invalid internal State! (BUG)" >&2 ; exit 43; fi ;
+		elif [[ ( ${#} -gt 2 ) ]] ; then
+			if [[ ${VERBOSE_PBXCP} == *YES ]] ; then printf "%s\n" "${FUNCNAME:-$0}:${BASH_LINENO:-0}: error: Invalid internal State! (Parse Error)" >&2 ; fi ;			# need to filter args and then just exec "${0} ${SCRIPT_INPUT_FILE_0} ${SCRIPT_OUTPUT_FILE_0}" ;
+			exit 2 ;
+		elif [[ ( ${#} -eq 2 ) ]] ; then
+			# overwrite with CLI input
+			export SCRIPT_INPUT_FILE_0=${SCRIPT_INPUT_FILE_0:-${1}};
+			export SCRIPT_INPUT_FILE_COUNT=1;
+			export SCRIPT_OUTPUT_FILE_0=${SCRIPT_OUTPUT_FILE_0:-${2:-${1}}};
+			export SCRIPT_OUTPUT_FILE_COUNT=1;
+		fi ;
+		# Else SHOULD be all good if NOT sandboxed
+	elif [[ ( ${#} -eq 2 ) ]] ; then
+			# overwrite with CLI input
+			export SCRIPT_INPUT_FILE_0=${SCRIPT_INPUT_FILE_0:-${1}};
+			export SCRIPT_INPUT_FILE_COUNT=1;
+			export SCRIPT_OUTPUT_FILE_0=${SCRIPT_OUTPUT_FILE_0:-${2:-${1}}};
+			export SCRIPT_OUTPUT_FILE_COUNT=1;
+	else
+		if [[ ${VERBOSE_PBXCP} == *YES ]] ; then printf "%s\n" "${FUNCNAME:-$0}:${BASH_LINENO:-0}: error: Invalid internal State! (Parse Error)" >&2 ; fi ;			# need to filter args and then just exec "${0} ${SCRIPT_INPUT_FILE_0} ${SCRIPT_OUTPUT_FILE_0}" ;
+		exit 2 ;
+	fi ;
+fi;
+if [[ ( $(shlock -f ${LOCK_FILE} -p ${PID_VALUE:-$$} ) -eq 0 ) ]] ; then
+	EXIT_CODE=0
+	trap 'cleanup ; wait ; exit 3 ;' SIGHUP || EXIT_CODE=3
+	trap 'cleanup ; wait ; exit 4 ;' SIGTERM || EXIT_CODE=4
+	trap 'cleanup ; wait ; exit 5 ;' SIGQUIT || EXIT_CODE=5
+	# SC2173 - https://github.com/koalaman/shellcheck/wiki/SC2173
+	# trap 'rm -f ${LOCK_FILE} 2>/dev/null || true ; wait ; exit 1 ;' SIGSTOP || EXIT_CODE=7
+	trap 'cleanup ; wait ; exit 7 ;' SIGXCPU || EXIT_CODE=7
+	trap 'cleanup ; wait ; exit 8 ;' SIGINT || EXIT_CODE=8
+	trap 'cleanup ; wait ; exit 9 ;' SIGABRT || EXIT_CODE=9
+	trap 'cleanup ; wait ; exit ${EXIT_CODE:-1} ;' EXIT || EXIT_CODE=1
+else
+	printf "FAIL\n" >&2 ;
+	false ;
+	EXIT_CODE=127 ;
+fi ;
+if [[ ( $EXIT_CODE -eq 0 ) ]] ; then
+	printf "\n${ACTION:-'XCRunShellExternalTool'} target ${TARGET_NAME:-unknown} of project ${PROJECT_NAME:-unknown} with configuration ${CONFIGURATION:-default}\n" || EXIT_CODE=1
+	printf "\nExternalBuildToolExecution ${TASK:-XCMBCopy} (in target '${TARGET_NAME:-unknown}' from project '${PROJECT_NAME:-unknown}')\n"
+	printf "Start %b\n" "$0" ;
+	#if [[ ( ${TASK:-XCMBCopy} == *copy ) ]] && [[ ( ${TASK:-} != *clean* ) ]] ; then
+		printf "Start XCMBCopy\n" || EXIT_CODE=11 ;
+		# shellcheck disable=SC2086
+		test -x "${SCRIPTS_FOLDER_PATH}/xcode_clonefile.bash" || EXIT_CODE=126 ;
+		"${SCRIPTS_FOLDER_PATH}/xcode_clonefile.bash" "${SCRIPT_INPUT_FILE_0}" "${SCRIPT_OUTPUT_FILE_0}"
+		EXIT_CODE=${?} ;
+#		#EXCLUDED_SOURCE_FILE_NAMES
+		if [[ ${COMPILER_INDEX_STORE_ENABLE:-NO} != *NO ]] ; then
+			wait ; sync ;
+		fi ;
+		printf "\nEnd XCMBCopy\n\n" || EXIT_CODE=12 ;
+	#fi ;
+	unset XCMB_COPY_NO_STRIP 2>/dev/null >/dev/null || : ;
+	unset XCMB_COPY_FORCE 2>/dev/null >/dev/null || : ;
+	unset XCMB_COPY_VERBOSE 2>/dev/null >/dev/null || : ;
+	unset XCMB_COPY_USE_TAR_BUILTIN 2>/dev/null >/dev/null || : ;
+	printf "End %b\n\n\n" "$0" || EXIT_CODE=1 ;
+	#exit ${EXIT_CODE:-255}
+fi ;
+{ cleanup || rm -f "${LOCK_FILE}" 2>/dev/null > /dev/null ;} || true ; wait ;
+
+# goodbye
+exit "${EXIT_CODE:-255}" ;
