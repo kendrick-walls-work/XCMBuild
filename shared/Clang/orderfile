@@ -1,49 +1,64 @@
 # order file
 x86_64:XCMBuild.h:XCMBuild_h
+x86_64:XCMB_USE_STD_LOG
+x86_64:XCMB_USE_STD_LIB
 arm64:XCMBuild.h:XCMBuild_h
+arm64:XCMB_USE_STD_LOG
+arm64:XCMB_USE_STD_LIB
 arch64:XCMBuild.h:XCMBuild_h
+arch64:XCMB_USE_STD_LOG
+arch64:XCMB_USE_STD_LIB
 x86_64:XCMBuild.h:_NSLog
 arm64:XCMBuild.h:_NSLog
 arch64:XCMBuild.h:_NSLog
 x86_64:_OBJC_CLASS_$_NSObject
 x86_64:_OBJC_METACLASS_$_NSObject
 x86_64:_OBJC_CLASS_$_NSArray
-x86_64:_OBJC_CLASS_$_NSPipe
 x86_64:_OBJC_CLASS_$_NSNotificationCenter
+x86_64:_OBJC_CLASS_$_NSProcessInfo
+x86_64:_OBJC_CLASS_$_NSPipe
 x86_64:_OBJC_CLASS_$_NSString
+x86_64:_OBJC_CLASS_$_NSURL
 x86_64:_OBJC_CLASS_$_NSTask
 x86_64:XCMBuild.h:NSTask_h
 x86_64:_OBJC_CLASS_$_NSBundle
 x86_64:_OBJC_METACLASS_$_NSBundle
 x86_64:XCMBuild.h:NSBundle_h
+x86_64:XCMBuild.h:_copyright
+x86_64:XCMBuild.h:_project_version
 x86_64:XCMBuild.h:NSPipe_h
 arm64:_OBJC_CLASS_$_NSObject
 arm64:_OBJC_METACLASS_$_NSObject
 arm64:_OBJC_CLASS_$_NSArray
 arm64:_OBJC_CLASS_$_NSNotificationCenter
+arm64:_OBJC_CLASS_$_NSProcessInfo
 arm64:_OBJC_CLASS_$_NSPipe
 arm64:_OBJC_CLASS_$_NSString
+arm64:_OBJC_CLASS_$_NSURL
 arm64:_OBJC_CLASS_$_NSTask
 arm64:XCMBuild.h:NSTask_h
 arm64:_OBJC_CLASS_$_NSBundle
 arm64:_OBJC_METACLASS_$_NSBundle
 arm64:XCMBuild.h:NSBundle_h
+arm64:XCMBuild.h:_copyright
+arm64:XCMBuild.h:_project_version
 arm64:XCMBuild.h:NSPipe_h
 arch64:_OBJC_CLASS_$_NSObject
 arch64:_OBJC_METACLASS_$_NSObject
 arch64:_OBJC_CLASS_$_NSArray
 arch64:_OBJC_CLASS_$_NSNotificationCenter
+arch64:_OBJC_CLASS_$_NSProcessInfo
 arch64:_OBJC_CLASS_$_NSPipe
 arch64:_OBJC_CLASS_$_NSString
+arch64:_OBJC_CLASS_$_NSURL
 arch64:_OBJC_CLASS_$_NSTask
 arch64:XCMBuild.h:NSTask_h
 arch64:_OBJC_CLASS_$_NSBundle
 arch64:_OBJC_METACLASS_$_NSBundle
 arch64:XCMBuild.h:NSBundle_h
+arch64:XCMBuild.h:_copyright
+arch64:XCMBuild.h:_project_version
 arch64:XCMBuild.h:NSPipe_h
-# XCMShell.o:"+[XCMShellTask runCommand:]"
-# XCMBuildSystem.o:"-[XCMBuildSystem pathForAuxiliaryExecutable:]"
-# XCMTest.h:XCMTestCommandArgumentsString
 XCMTest_vers.o:_PAK_XCMTestVersionNumber
 xcrunshell_vers.o:_PAK_xcrunshellVersionNumber
 XCMBuild_vers.o:_PAK_XCMBuildVersionNumber
@@ -56,15 +71,18 @@ arm64:XCMBuild_vers.o:_PAK_XCMBuildVersionString
 arch64:xcrunshell_vers.o:_PAK_xcrunshellVersionString
 arch64:XCMTest_vers.o:_PAK_XCMTestVersionString
 arch64:XCMBuild_vers.o:_PAK_XCMBuildVersionString
-# x86_64:XCMB_XCMShellDelegate_h
-# arm64:XCMB_XCMShellDelegate_h
-# arch64:XCMB_XCMShellDelegate_h
-# x86_64:XCMB_XCMShell_h
-# arm64:XCMB_XCMShell_h
-# arch64:XCMB_XCMShell_h
-# x86_64:XCMB_XCMBuildSystem_h
-# arm64:XCMB_XCMBuildSystem_h
-# arch64:XCMB_XCMBuildSystem_h
+# x86_64:+[XCMBuildSystem debugDescription]
+# x86_64:"-[XCMBuildSystem pathForAuxiliaryExecutable:]"
+# arm64:+[XCMBuildSystem debugDescription]
+# arm64:"-[XCMBuildSystem pathForAuxiliaryExecutable:]"
+# arch64:+[XCMBuildSystem debugDescription]
+# arch64:"-[XCMBuildSystem pathForAuxiliaryExecutable:]"
+# x86_64:XCMProcesses.o:_beginXCMProcActivity
+# x86_64:XCMProcesses.o:_endXCMProcActivity
+# arm64:XCMProcesses.o:_beginXCMProcActivity
+# arm64:XCMProcesses.o:_endXCMProcActivity
+# arch64:XCMProcesses.o:_beginXCMProcActivity
+# arch64:XCMProcesses.o:_endXCMProcActivity
 # skip x86_64:main.o:XCRS_MINARGS
 # skip arm64:main.o:XCRS_MINARGS
 # skip arch64:main.o:XCRS_MINARGS
