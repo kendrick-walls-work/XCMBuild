@@ -28,13 +28,13 @@
 #if defined(__has_include)
 #if __has_include(<XCMBuild/XCMBuild.h>)
 /*! @parseOnly */
-#define XCMBuild_h "<XCMBuild/XCMBuild.h> (XCMBuildSystem)"
+#define XCMBuild_h "<XCMBuild/XCMBuild.h> (XCMTest)"
 #import <XCMBuild/XCMBuild.h>
 #endif
 #endif /* !__has_include */
 #ifndef XCMBuild_h
 /*! @parseOnly */
-#define XCMBuild_h "XCMBuild.h (XCMBuildSystem)"
+#define XCMBuild_h "XCMBuild.h (XCMTest)"
 #import "XCMBuild.h"
 #endif /* XCMBuild_h (inner) */
 #if defined(__clang__) && __clang__
