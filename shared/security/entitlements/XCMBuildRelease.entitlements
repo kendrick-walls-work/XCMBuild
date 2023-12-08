@@ -10,6 +10,7 @@
 		<string>org.pak.dt</string>
 		<string>org.pak.dt.XCMBuild</string>
 		<string>org.pak.dt.XCMBuild.XCMTest</string>
+		<string>org.pak.dt.XCMBuild.XCRunner</string>
 		<string>org.pak.dt.xcrunshell</string>
 	</array>
 	<key>com.apple.security.app-sandbox</key>

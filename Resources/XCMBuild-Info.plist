@@ -2,6 +2,32 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>en</string>
+	<key>CFBundleIdentifier</key>
+	<string>$(PRODUCT_IDENTIFIER)</string>
+	<key>CFBundleDisplayName</key>
+	<string>$(INFOPLIST_KEY_CFBundleDisplayName)</string>
+	<key>CFBundleName</key>
+	<string>XCMBuild</string>
+	<key>CFBundleExecutable</key>
+	<string>XCMBuild</string>
+	<key>CFBundleIconFile</key>
+	<string>Icon</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundlePackageType</key>
+	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
+	<key>CFBundleShortVersionString</key>
+	<string>$(MARKETING_VERSION)</string>
+	<key>CFBundleSupportedPlatforms</key>
+	<array>
+		<string>MacOSX</string>
+	</array>
+	<key>CFBundleVersion</key>
+	<string>$(DYLIB_COMPATIBILITY_VERSION)</string>
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.developer-tools</string>
 	<key>LSArchitecturePriority</key>
 	<array>
 		<string>x86_64</string>
@@ -14,7 +40,11 @@
 		<string>arm64</string>
 		<string>arch64</string>
 	</array>
-	<key>CFBundleIconFile</key>
-	<string>Icon</string>
+	<key>LSMinimumSystemVersion</key>
+	<string>$(INFOPLIST_KEY_LSMinimumSystemVersion)</string>
+	<key>NSHumanReadableCopyright</key>
+	<string>$(INFOPLIST_KEY_NSHumanReadableCopyright)</string>
+	<key>NSPrincipalClass</key>
+	<string>$(INFOPLIST_KEY_NSPrincipalClass)</string>
 </dict>
 </plist>
