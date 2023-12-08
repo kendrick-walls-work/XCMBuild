@@ -81,7 +81,7 @@ ulimit -t 600
 PATH="/bin:/sbin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin:${PATH}"
 #umask 137
 
-LOCK_FILE="/tmp/shellscript_test_script.lock"
+LOCK_FILE="/tmp/org.pak.dt.test-shellscript-lint-script.lock"
 test -x "$(command -v grep)" || exit 126 ;
 test -x "$(command -v xargs)" || exit 126 ;
 test -x "$(command -v find)" || exit 126 ;
@@ -108,7 +108,7 @@ if [[ ( $(shlock -f ${LOCK_FILE} -p $$ ) -eq 0 ) ]] ; then
 		trap 'cleanup 2>/dev/null || rm -f ${LOCK_FILE} 2>/dev/null > /dev/null || true ; wait ; exit ${EXIT_CODE} ;' EXIT || EXIT_CODE=1
 else
 		# shellcheck disable=SC2046
-		echo "Test already in progress by "$(head "${LOCK_FILE}") ;
+		printf "\t%s\n" "Test already in progress by "$(head "${LOCK_FILE}") ;
 		false ;
 		exit 255 ;
 fi
@@ -124,21 +124,21 @@ elif [[ -d ./.git ]] ; then
 elif [[ ( -d $(git rev-parse --show-toplevel 2>/dev/null) ) ]] ; then
 	_TEST_ROOT_DIR=$(git rev-parse --show-toplevel 2>/dev/null) ;
 else
-	echo "FAIL: missing valid repository or source structure" >&2 ;
+	printf "\t%s\n" "FAIL: missing valid repository or source structure" >&2 ;
 	EXIT_CODE=40
 fi
 
 if [[ ( ${EXIT_CODE} -ne 0 ) ]] ; then
-	echo "SKIP: Can't check ${_TEST_ROOT_DIR}" ;
+	printf "\t%s\n" "SKIP: Can't check ${_TEST_ROOT_DIR}" ;
 else
 	for _TEST_DOC in $(find "${_TEST_ROOT_DIR}" -type f -iname '*.sh' -print0 2>/dev/null | xargs -0 -L1 -I{} git ls-files "{}" 2>/dev/null ) ; do
 		if [[ ( ${EXIT_CODE} -ne 0 ) ]] ; then continue ; else
 			shellcheck -a --shell=sh --color=auto "${_TEST_DOC}" || EXIT_CODE=$? ;
 			if [[ ( ${EXIT_CODE} -ne 0 ) ]] ; then
 				case "$EXIT_CODE" in
-					1) echo "SKIP: Unclassified issue with '${_TEST_DOC}'" ;;
+					1) printf "\t%s\n" "SKIP: Unclassified issue with '${_TEST_DOC}'" ;;
 					2|3|4) echo "FAIL: '${_TEST_DOC}' is invalid." >&2 ;;
-					*) echo "SKIP: Can't check '${_TEST_DOC}'" ;;
+					*) printf "\t%s\n" "SKIP: Can't check '${_TEST_DOC}'" ;;
 				esac
 			fi ;
 		fi ;
@@ -149,9 +149,9 @@ else
 				shellcheck -a --shell=bash --color=auto "${_TEST_SCRIPT}" || EXIT_CODE=$? ;
 			if [[ ( ${EXIT_CODE} -ne 0 ) ]] ; then
 				case "$EXIT_CODE" in
-					1) echo "SKIP: Unclassified issue with '${_TEST_SCRIPT}'" ;;
+					1) printf "\t%s\n" "SKIP: Unclassified issue with '${_TEST_SCRIPT}'" ;;
 					2|3|4) echo "FAIL: '${_TEST_SCRIPT}' is invalid." >&2 ;;
-					*) echo "SKIP: Can't check '${_TEST_SCRIPT}'" ;;
+					*) printf "\t%s\n" "SKIP: Can't check '${_TEST_SCRIPT}'" ;;
 				esac
 			fi ;
 		fi ;

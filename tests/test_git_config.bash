@@ -89,7 +89,7 @@ if [[ ( $(shlock -f "${LOCK_FILE}" -p $$ ) -eq 0 ) ]] ; then
 		trap 'cleanup 2>/dev/null || rm -f ${LOCK_FILE} 2>/dev/null > /dev/null || true ; wait ; exit ${EXIT_CODE} ;' EXIT || EXIT_CODE=1
 else
 		# shellcheck disable=SC2046
-		echo "Test already in progress by "$(head "${LOCK_FILE}") >&2 ;
+		printf "\t%s\n" "Test already in progress by "$(head "${LOCK_FILE}") >&2 ;
 		false ;
 		exit 255 ;
 fi
@@ -102,7 +102,7 @@ elif [[ ( -f ./.git/config ) ]] ; then
 elif [[ ( -d $(git rev-parse --show-toplevel 2>/dev/null) ) ]] ; then
 	git config -f "$(git rev-parse --show-toplevel 2>/dev/null)/.git/config" --list --name-only 1>/dev/null 2>&1 || EXIT_CODE=1 ;
 else
-	echo "FAIL: missing git config file" >&2 ;
+	printf "\t%s\n" "FAIL: missing git config file" >&2 ;
 	EXIT_CODE=1 ;
 fi
 
