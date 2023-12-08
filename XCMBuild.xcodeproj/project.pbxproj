@@ -71,6 +71,7 @@
 				84BD1E622AAFD54A004F72DF /* ShellScript */,
 			);
 			dependencies = (
+				8493A7CE2B23C6B20000F3B1 /* PBXTargetDependency */,
 				843C23CE2AA963F900F8F65C /* PBXTargetDependency */,
 				8462AFD22A900E69001EFB68 /* PBXTargetDependency */,
 			);
@@ -186,6 +187,15 @@
 		847A70762ACF6AC900215F96 /* LICENSE-2.0.txt in Resources */ = {isa = PBXBuildFile; fileRef = 847A70742ACF6AC900215F96 /* LICENSE-2.0.txt */; };
 		8486BF472AA67BD9005A02F4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8486BF462AA67BD9005A02F4 /* main.m */; settings = {COMPILER_FLAGS = "-x objective-c"; }; };
 		8489034F2A84535000F5F241 /* XCMBuild.docc in Sources */ = {isa = PBXBuildFile; fileRef = 8489034E2A84535000F5F241 /* XCMBuild.docc */; settings = {COMPILER_FLAGS = "-Wdocumentation --output-dir $(DOCUMENTATION_FOLDER_PATH)"; }; };
+		8493A7C12B23C5E10000F3B1 /* libobjc.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 84CEAD462A8B2A4700EBE49A /* libobjc.tbd */; settings = {ATTRIBUTES = (Weak, ); }; };
+		8493A7C22B23C5E10000F3B1 /* XCMBuild.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8489034B2A84535000F5F241 /* XCMBuild.framework */; };
+		8493A7C32B23C5E10000F3B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 849B23C12A89ACD800962A8A /* Foundation.framework */; };
+		8493A7C42B23C5E10000F3B1 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84FADEAD2AAC13FB00C31C1A /* CoreFoundation.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		8493A7C52B23C5E10000F3B1 /* libc.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 84CEAD482A8B2A8A00EBE49A /* libc.tbd */; settings = {ATTRIBUTES = (Weak, ); }; };
+		8493A7C62B23C5E10000F3B1 /* libdispatch.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8493C1412AEB2429009C7188 /* libdispatch.tbd */; settings = {ATTRIBUTES = (Weak, ); }; };
+		8493A7CC2B23C66E0000F3B1 /* XCMClean in Embed Helper Tools */ = {isa = PBXBuildFile; fileRef = 8493A7CB2B23C5E10000F3B1 /* XCMClean */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		8493A7D12B23C7670000F3B1 /* XCMClean.h in Headers */ = {isa = PBXBuildFile; fileRef = 8493A7CF2B23C7660000F3B1 /* XCMClean.h */; };
+		8493A7D22B23C7670000F3B1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8493A7D02B23C7670000F3B1 /* main.m */; settings = {COMPILER_FLAGS = "-x objective-c"; }; };
 		8493C1422AEB243D009C7188 /* libdispatch.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8493C1412AEB2429009C7188 /* libdispatch.tbd */; platformFilters = (macos, ); settings = {ATTRIBUTES = (Weak, ); }; };
 		8493C1442AEB247E009C7188 /* libdispatch.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8493C1412AEB2429009C7188 /* libdispatch.tbd */; settings = {ATTRIBUTES = (Weak, ); }; };
 		8493C1452AEB2481009C7188 /* libdispatch.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8493C1412AEB2429009C7188 /* libdispatch.tbd */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -314,6 +324,20 @@
 			remoteGlobalIDString = 8498B8702AB147B8001084D8;
 			remoteInfo = "Audit Core Codesign";
 		};
+		8493A7BA2B23C5E10000F3B1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84D3F4512A7C38650022D176 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8498B8702AB147B8001084D8;
+			remoteInfo = "Audit Core Codesign";
+		};
+		8493A7CD2B23C6B20000F3B1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84D3F4512A7C38650022D176 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8493A7B82B23C5E10000F3B1;
+			remoteInfo = XCMClean;
+		};
 		8498B8742AB147C8001084D8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 84D3F4512A7C38650022D176 /* Project object */;
@@ -403,6 +427,7 @@
 			dstPath = "$(CONTENTS_FOLDER_PATH)/usr/bin";
 			dstSubfolderSpec = 16;
 			files = (
+				8493A7CC2B23C66E0000F3B1 /* XCMClean in Embed Helper Tools */,
 				84BD1E5D2AAFC465004F72DF /* XCMTest in Embed Helper Tools */,
 				8462AFD72A900E69001EFB68 /* xcrunshell in Embed Helper Tools */,
 			);
@@ -432,6 +457,15 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		8486BF422AA67BD9005A02F4 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		8493A7C72B23C5E10000F3B1 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = /usr/share/man/man1/;
@@ -532,6 +566,10 @@
 		8489034B2A84535000F5F241 /* XCMBuild.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = XCMBuild.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8489034D2A84535000F5F241 /* XCMBuild.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = XCMBuild.h; sourceTree = "<group>"; };
 		8489034E2A84535000F5F241 /* XCMBuild.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = XCMBuild.docc; sourceTree = SOURCE_ROOT; };
+		8493A7CB2B23C5E10000F3B1 /* XCMClean */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = XCMClean; sourceTree = BUILT_PRODUCTS_DIR; };
+		8493A7CF2B23C7660000F3B1 /* XCMClean.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCMClean.h; sourceTree = "<group>"; };
+		8493A7D02B23C7670000F3B1 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = main.m; sourceTree = "<group>"; usesTabs = 1; };
+		8493A7D32B23C88D0000F3B1 /* XCMClean-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "XCMClean-Info.plist"; sourceTree = "<group>"; };
 		8493C1412AEB2429009C7188 /* libdispatch.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libdispatch.tbd; path = usr/lib/system/libdispatch.tbd; sourceTree = SDKROOT; };
 		849621C72B058B7C00D61662 /* test_shell_script_xcode_run_tool.bash */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; lineEnding = 0; name = test_shell_script_xcode_run_tool.bash; path = tests/test_shell_script_xcode_run_tool.bash; sourceTree = SOURCE_ROOT; usesTabs = 1; };
 		8496E0242ACB86990009ECC9 /* xcrunshell-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "xcrunshell-Info.plist"; path = "shared/xcrunshell-Info.plist"; sourceTree = SOURCE_ROOT; };
@@ -560,6 +598,8 @@
 		84C78FF02AF46D9C0036B2D8 /* genversc.bash */ = {isa = PBXFileReference; explicitFileType = text.script.sh; fileEncoding = 4; lineEnding = 0; name = genversc.bash; path = bin/genversc.bash; sourceTree = SOURCE_ROOT; usesTabs = 1; };
 		84CEAD462A8B2A4700EBE49A /* libobjc.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libobjc.tbd; path = usr/lib/libobjc.tbd; sourceTree = SDKROOT; };
 		84CEAD482A8B2A8A00EBE49A /* libc.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libc.tbd; path = usr/lib/libc.tbd; sourceTree = SDKROOT; };
+		84D12C322B23C99300E7B4DF /* XCMClean.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = XCMClean.entitlements; path = security/entitlements/XCMClean.entitlements; sourceTree = "<group>"; };
+		84D12C332B23CAB700E7B4DF /* XCMClean.make */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; lineEnding = 0; name = XCMClean.make; path = includes/XCMClean.make; sourceTree = "<group>"; usesTabs = 1; };
 		84D3F4523A7C38650022D176 /* Makefile */ = {isa = PBXFileReference; explicitFileType = sourcecode.makefile.make; fileEncoding = 4; lastKnownFileType = sourcecode.make; lineEnding = 0; path = Makefile; sourceTree = SOURCE_ROOT; };
 		84DCECF32B0BF91000B7626A /* stemname */ = {isa = PBXFileReference; explicitFileType = text.script.sh; fileEncoding = 4; lineEnding = 0; name = stemname; path = bin/stemname; sourceTree = SOURCE_ROOT; usesTabs = 1; };
 		84DFD9482A844E190078F7F9 /* .github */ = {isa = PBXFileReference; lastKnownFileType = folder; path = .github; sourceTree = SOURCE_ROOT; };
@@ -614,6 +654,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8493A7C02B23C5E10000F3B1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8493A7C12B23C5E10000F3B1 /* libobjc.tbd in Frameworks */,
+				8493A7C22B23C5E10000F3B1 /* XCMBuild.framework in Frameworks */,
+				8493A7C32B23C5E10000F3B1 /* Foundation.framework in Frameworks */,
+				8493A7C42B23C5E10000F3B1 /* CoreFoundation.framework in Frameworks */,
+				8493A7C52B23C5E10000F3B1 /* libc.tbd in Frameworks */,
+				8493A7C62B23C5E10000F3B1 /* libdispatch.tbd in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -647,6 +700,7 @@
 				8411D9A52A82E9430029B632 /* envs */,
 				8496E0242ACB86990009ECC9 /* xcrunshell-Info.plist */,
 				8404B6992AD4FF670050DF38 /* XCMTest-Info.plist */,
+				8493A7D32B23C88D0000F3B1 /* XCMClean-Info.plist */,
 				84E3F7AA2AD7CA0000E7DB40 /* XCMBuild-Components.plist */,
 				848904902ACE3FCF008CF5F1 /* Configuration */,
 			);
@@ -688,6 +742,7 @@
 			isa = PBXGroup;
 			children = (
 				840558872AD89B6B00FFFBAC /* Compat.h */,
+				84FD74132A84381800F72966 /* XCMClean */,
 				8486BF3F2AA67B6D005A02F4 /* XCMTest */,
 				84619D792A85BCA7009C5753 /* xcrunshell */,
 			);
@@ -704,6 +759,7 @@
 				8476C8502AFDC1EE009F1995 /* XCMBuild.make */,
 				84101C8F2B0AC95E00F4E97B /* XCRunShell.make */,
 				84F6B2172B193B7C00A9750E /* XCMTest.make */,
+				84D12C332B23CAB700E7B4DF /* XCMClean.make */,
 				84AFD86E2AFAF37B00FB9CC7 /* resources.make */,
 				84AFD86F2AFB01DC00FB9CC7 /* headers.make */,
 				842EF5C72AE368960071992D /* tools.make */,
@@ -831,6 +887,7 @@
 			children = (
 				8411D9A54F82E9430029B632 /* ACLs */,
 				84FADEA82AABEAA200C31C1A /* XCMTest.entitlements */,
+				84D12C322B23C99300E7B4DF /* XCMClean.entitlements */,
 				847CEBDB2AB38E8300D86C91 /* XCMTestRelease.entitlements */,
 				848312502ACCC53500EBC152 /* XCMBuildRelease.entitlements */,
 				847BD0CD2AB02ADF00B0B4EA /* xcrunshell.entitlements */,
@@ -852,7 +909,6 @@
 			children = (
 				8446EC0E2A7C846000B93693 /* bin */,
 				8489034C2A84535000F5F241 /* XCMBuild */,
-				84FD74132A84381800F72966 /* XCMClean */,
 				8431A07B2ACF68C1003F2F53 /* Resources */,
 				8411D9A62A82EB520029B632 /* docs */,
 				8411D9A22A82E8720029B632 /* shared */,
@@ -877,6 +933,7 @@
 				849C3D252AEA09CE007989BA /* XCMTest_debug */,
 				848312552ACCE00C00EBC152 /* XCMTest_profile */,
 				849C3D272AEA0A4B007989BA /* XCMBuild 2.2.6 Installer.pkg */,
+				8493A7CB2B23C5E10000F3B1 /* XCMClean */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -884,6 +941,8 @@
 		84FD74132A84381800F72966 /* XCMClean */ = {
 			isa = PBXGroup;
 			children = (
+				8493A7CF2B23C7660000F3B1 /* XCMClean.h */,
+				8493A7D02B23C7670000F3B1 /* main.m */,
 			);
 			path = XCMClean;
 			sourceTree = "<group>";
@@ -926,6 +985,14 @@
 				847031362AD11D6300386F22 /* XCMProcesses.h in Headers */,
 				843C23CA2AA9516A00F8F65C /* XCMBuildSystem.h in Headers */,
 				84CEAD452A8B291500EBE49A /* xcrunshell.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8493A7BB2B23C5E10000F3B1 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8493A7D12B23C7670000F3B1 /* XCMClean.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1049,6 +1116,25 @@
 			productReference = 8489034B2A84535000F5F241 /* XCMBuild.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		8493A7B82B23C5E10000F3B1 /* XCMClean */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8493A7C82B23C5E10000F3B1 /* Build configuration list for PBXNativeTarget "XCMClean" */;
+			buildPhases = (
+				8493A7BB2B23C5E10000F3B1 /* Headers */,
+				8493A7BD2B23C5E10000F3B1 /* Sources */,
+				8493A7C02B23C5E10000F3B1 /* Frameworks */,
+				8493A7C72B23C5E10000F3B1 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8493A7B92B23C5E10000F3B1 /* PBXTargetDependency */,
+			);
+			name = XCMClean;
+			productName = XCMTest;
+			productReference = 8493A7CB2B23C5E10000F3B1 /* XCMClean */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -1117,6 +1203,7 @@
 				8498B8702AB147B8001084D8 /* Audit Core Codesign */,
 				84619D772A85BCA7009C5753 /* xcrunshell */,
 				8486BF432AA67BD9005A02F4 /* XCMTest */,
+				8493A7B82B23C5E10000F3B1 /* XCMClean */,
 				847517542A9006BE00C93D65 /* Combine Prune Scripts */,
 				8459CF3E2AA1485600DAFF86 /* Combine Copy Scripts */,
 				8477F50B2ACA206600688CF2 /* Combine Snooze Script */,
@@ -1376,6 +1463,7 @@
 				"$(DSTROOT:standardizepath)/$(DYLIB_INSTALL_NAME_BASE:standardizepath)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/usr",
 				"$(DSTROOT:standardizepath)/$(DYLIB_INSTALL_NAME_BASE:standardizepath)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/usr/bin",
 				"$(DSTROOT:standardizepath)/$(DYLIB_INSTALL_NAME_BASE:standardizepath)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/usr/bin/XCMTest",
+				"$(DSTROOT:standardizepath)/$(DYLIB_INSTALL_NAME_BASE:standardizepath)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/usr/bin/XCMClean",
 				"$(DSTROOT:standardizepath)/$(DYLIB_INSTALL_NAME_BASE:standardizepath)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/usr/lib",
 				"$(DSTROOT:standardizepath)/$(DYLIB_INSTALL_NAME_BASE:standardizepath)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/_CodeSignature",
 				"$(DSTROOT:standardizepath)/$(DYLIB_INSTALL_NAME_BASE:standardizepath)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/Modules/**",
@@ -1444,6 +1532,7 @@
 				"$(DSTROOT:standardizepath)/$(DYLIB_INSTALL_NAME_BASE:standardizepath)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/usr",
 				"$(DSTROOT:standardizepath)/$(DYLIB_INSTALL_NAME_BASE:standardizepath)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/usr/bin",
 				"$(DSTROOT:standardizepath)/$(DYLIB_INSTALL_NAME_BASE:standardizepath)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/usr/bin/XCMTest",
+				"$(DSTROOT:standardizepath)/$(DYLIB_INSTALL_NAME_BASE:standardizepath)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/usr/bin/XCMClean",
 				"$(DSTROOT:standardizepath)/$(DYLIB_INSTALL_NAME_BASE:standardizepath)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/usr/lib",
 				"$(DSTROOT:standardizepath)/$(DYLIB_INSTALL_NAME_BASE:standardizepath)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/_CodeSignature",
 				"$(DSTROOT:standardizepath)/$(DYLIB_INSTALL_NAME_BASE:standardizepath)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/Modules/**",
@@ -1483,6 +1572,8 @@
 			inputPaths = (
 				"$(BUILT_PRODUCTS_DIR:standardizepath)/XCMTest_profile",
 				"$(BUILT_PRODUCTS_DIR:standardizepath)/XCMTest_debug",
+				"$(BUILT_PRODUCTS_DIR:standardizepath)/XCMClean_profile",
+				"$(BUILT_PRODUCTS_DIR:standardizepath)/XCMClean_debug",
 				"$(BUILT_PRODUCTS_DIR:standardizepath)/xcrunshell_profile",
 				"$(BUILT_PRODUCTS_DIR:standardizepath)/xcrunshell_debug",
 			);
@@ -1623,6 +1714,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8493A7BD2B23C5E10000F3B1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8493A7D22B23C7670000F3B1 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1690,6 +1789,16 @@
 			isa = PBXTargetDependency;
 			target = 8498B8702AB147B8001084D8 /* Audit Core Codesign */;
 			targetProxy = 8477F50D2ACA206600688CF2 /* PBXContainerItemProxy */;
+		};
+		8493A7B92B23C5E10000F3B1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8498B8702AB147B8001084D8 /* Audit Core Codesign */;
+			targetProxy = 8493A7BA2B23C5E10000F3B1 /* PBXContainerItemProxy */;
+		};
+		8493A7CE2B23C6B20000F3B1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8493A7B82B23C5E10000F3B1 /* XCMClean */;
+			targetProxy = 8493A7CD2B23C6B20000F3B1 /* PBXContainerItemProxy */;
 		};
 		8498B8752AB147C8001084D8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2070,6 +2179,32 @@
 			};
 			name = Release;
 		};
+		8493A7C92B23C5E10000F3B1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 843F3C952ABE392600A11150 /* XcodeCompileToolsDebug.xcconfig */;
+			buildSettings = {
+				INFOPLIST_FILE = "XCMClean-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/usr/lib/system",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		8493A7CA2B23C5E10000F3B1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 843F3C962ABE3ECF00A11150 /* XcodeCompileToolsRelease.xcconfig */;
+			buildSettings = {
+				INFOPLIST_FILE = "XCMClean-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/usr/lib/system",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		8498B8722AB147B9001084D8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 840C0E222AE4C83D00EEAA73 /* XcodeFrameworkDebugConfig.xcconfig */;
@@ -2240,6 +2375,15 @@
 			buildConfigurations = (
 				848903522A84535000F5F241 /* Debug */,
 				848903532A84535000F5F241 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		8493A7C82B23C5E10000F3B1 /* Build configuration list for PBXNativeTarget "XCMClean" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8493A7C92B23C5E10000F3B1 /* Debug */,
+				8493A7CA2B23C5E10000F3B1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
