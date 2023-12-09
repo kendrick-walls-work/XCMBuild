@@ -21,6 +21,18 @@
 #endif
 #import "xcrunshell.h"
 
+#if defined(__has_attribute)
+#if __has_attribute(used)
+#ifndef _XCMB_IFS
+#define _XCMB_IFS " "
+NSString * const XCMB_IFS __attribute__ ((used)) = @" ";
+#if defined(__clang__) && __clang__
+#pragma clang final(_XCMB_IFS)
+#endif /* !__clang__ */
+#endif /* hasXCMB_IFS */
+#endif /* !__attribute__ ((used)) */
+#endif /* !__has_attribute */
+
 #if __INCLUDE_LEVEL__ < 1
 int main(int argc, const char * argv[]) {
 	int exit_code = 1;
@@ -35,8 +47,8 @@ int main(int argc, const char * argv[]) {
 			if (argc >= XCRS_MINARGS){
 				NSArray *c_argv = [[NSProcessInfo processInfo] arguments];
 				NSArray *args = [c_argv subarrayWithRange:NSMakeRange(1, c_argv.count - 1)];
-				NSString* arguments = [args componentsJoinedByString:@" "];
-				if ([XCMShellTask runCommand:arguments]){
+				NSString* arguments = [args componentsJoinedByString:XCMB_IFS];
+				if (known_unpredictable([XCMShellTask runCommand:arguments])) {
 					exit_code = (int)(0);
 				} else { exit_code = (int)(2); };
 			} else { exit_code = (int)(255); };

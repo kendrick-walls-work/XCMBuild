@@ -38,14 +38,14 @@ $(BUILD_ROOT)/$(CONFIGURATION)/%.framework/Versions/$(FRAMEWORK_VERSION)/Private
 $(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/Headers/%.h: XCMBuild/xcrunshell/%.h |$(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/Headers
 	$(QUIET)$(TEST) -f "$<" || DO_FAIL="exit 2" ;
 	$(DO_FAIL) ;
-	$(QUIET)$(CP) "$<" "$@" || DO_FAIL="exit 2" ; ## BUG IS HERE
+	$(QUIET)$(CP) "$<" "$@" || DO_FAIL="exit 2" ;
 	$(DO_FAIL) ;
 	$(QUIET)$(ECHO) "$< Injected." ;
 
 $(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/Headers/%.h: XCMBuild/XCMTest/%.h |$(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/Headers
 	$(QUIET)$(TEST) -f "$<" || DO_FAIL="exit 2" ;
 	$(DO_FAIL) ;
-	$(QUIET)$(CP) "$<" "$@" || DO_FAIL="exit 2" ; ## BUG IS HERE
+	$(QUIET)$(CP) "$<" "$@" || DO_FAIL="exit 2" ;
 	$(DO_FAIL) ;
 	$(QUIET)$(ECHO) "$< Injected." ;
 
@@ -57,6 +57,13 @@ $(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/
 	$(QUIET)$(ECHO) "$< Injected." ;
 
 $(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/PrivateHeaders/%.h: XCMBuild/XCMTest/%.h |$(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/PrivateHeaders $(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/Headers $(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/PrivateHeaders
+	$(QUIET)$(TEST) -f "$<" || DO_FAIL="exit 2" ;
+	$(DO_FAIL) ;
+	$(QUIET)$(CP) "$<" "$@" || DO_FAIL="exit 2" ;
+	$(DO_FAIL) ;
+	$(QUIET)$(ECHO) "$< Injected." ;
+
+$(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/PrivateHeaders/%.h: XCMBuild/XCMClean/%.h |$(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/PrivateHeaders $(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/Headers $(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/PrivateHeaders
 	$(QUIET)$(TEST) -f "$<" || DO_FAIL="exit 2" ;
 	$(DO_FAIL) ;
 	$(QUIET)$(CP) "$<" "$@" || DO_FAIL="exit 2" ;
@@ -89,10 +96,18 @@ XCMBuild-XCMShell-headers: $(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/Ver
 XCMBuild-XCMTest-headers: $(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/Headers/XCMTest.h |XCMBuild-System-headers
 	$(DO_FAIL) ;
 
+XCMBuild-XCMClean-headers: $(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/PrivateHeaders/XCMClean.h |$(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/PrivateHeaders XCMBuild-System-headers
+	$(DO_FAIL) ;
+
 XCMBuild-xcrunshell-headers: $(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/PrivateHeaders/xcrunshell.h |$(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/PrivateHeaders XCMBuild-XCMShell-headers
 	$(DO_FAIL) ;
 
 XCMBuild/XCMTest/: |init-start
+	$(QUIET)$(TEST) -d $@ || DO_FAIL="exit 2" ;
+	$(DO_FAIL) ;
+	$(QUIET)$(ECHO) "$@: Available." ;
+
+XCMBuild/XCMClean/: |init-start
 	$(QUIET)$(TEST) -d $@ || DO_FAIL="exit 2" ;
 	$(DO_FAIL) ;
 	$(QUIET)$(ECHO) "$@: Available." ;

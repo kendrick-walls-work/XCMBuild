@@ -131,9 +131,9 @@ if [[ ( ${EXIT_CODE} -ne 0 ) ]] ; then
 else
 	for XCMT_UNIT_TEST_SCRIPT in $(git ls-files "${XCMT_UNIT_TEST_ROOT_DIR}/bin/xcode_run_tool.bash" 2>/dev/null ) ; do
 		if [[ ( ${EXIT_CODE} -ne 0 ) ]] ; then continue ; else
-			"${XCMT_UNIT_TEST_SCRIPT}" test -r "${XCMT_UNIT_TEST_SCRIPT}" || EXIT_CODE=1 ;
-			"${XCMT_UNIT_TEST_SCRIPT}" test -x "${XCMT_UNIT_TEST_SCRIPT}" || EXIT_CODE=2 ;
-			"${XCMT_UNIT_TEST_SCRIPT}" test -d "${XCMT_UNIT_TEST_SCRIPT}" && EXIT_CODE=3 ;
+			"${XCMT_UNIT_TEST_SCRIPT}" test -r "${XCMT_UNIT_TEST_SCRIPT}" 2>/dev/null >/dev/null || EXIT_CODE=1 ;
+			"${XCMT_UNIT_TEST_SCRIPT}" test -x "${XCMT_UNIT_TEST_SCRIPT}" 2>/dev/null >/dev/null || EXIT_CODE=2 ;
+			"${XCMT_UNIT_TEST_SCRIPT}" test -d "${XCMT_UNIT_TEST_SCRIPT}" 2>/dev/null >/dev/null && EXIT_CODE=3 ;
 			if [[ ( ${EXIT_CODE} -ne 0 ) ]] ; then
 				case "$EXIT_CODE" in
 					1|2|3) echo "FAIL: '${XCMT_UNIT_TEST_SCRIPT}' is invalid." >&2 ;;

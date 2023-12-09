@@ -45,6 +45,12 @@
 const int XCRS_MINARGS = 1;
 #endif
 
+#ifndef _XCMB_IFS
+#define _XCMB_IFS
+/// Internal Feild Seporator for xcrunshell.
+extern NSString * const XCMB_IFS XCMHELPER_NEEDED;
+#endif /* !XCMB_IFS */
+
 #ifndef XCMShellDelegate_h
 #if defined(__has_include)
 #if __has_include(<XCMBuild/XCMShellDelegate.h>)
