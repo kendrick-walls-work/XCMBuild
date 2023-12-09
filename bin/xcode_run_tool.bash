@@ -118,9 +118,9 @@ function fn_do_xc_cmd() {
 	printf "\n%s\n" "ExternalRunToolExecution ${TASK} (in target '${TARGET_NAME:-unknown}' from project '${PROJECT_NAME:-unknown}')" ;
 	printf "%s\n" "Start ${TASK}\n" ;} ;
 	# shellcheck disable=SC2145
-	( "xcrun --sdk ${SDKROOT:-macosx} --run ${@:1:$#}" ) || false ; # do the work
+	( xcrun --sdk "${SDKROOT:-macosx}" --run "${@:1:$#}" ) || false ;	# do the work
 	SUB_TOOL_RESULT=$?
-	printf "\n%s\n\n\n" "End ${TASK}" || SUB_TOOL_RESULT=1 ;
+	printf "\n%s\n\n\n" "End ${TASK}" ;
 	# revert umask
 	umask "$OLDUMASK" ;
 	# unwind and return to old path
@@ -144,13 +144,13 @@ function fn_do_xc_cmd() {
 
 export -f fn_do_xc_cmd ;
 
-if [[ "${0}" == *xcode_run_tool ]] ; then
+if [[ "${0}" == *xcode_run_tool* ]] ; then
 	EXIT_CODE=0 ;
 	# shellcheck disable=SC2086
 	export SCRIPTS_FOLDER_PATH="${SCRIPTS_FOLDER_PATH:-$(dirname ${0})}" ;
 	# force if / test behavior to work for caller
 	# shellcheck disable=SC2068
-	( ( fn_do_xc_cmd ${@:1:$#} ) && true) || EXIT_CODE=$? ; false ; # no quotes to force re-spliting
+	( ( fn_do_xc_cmd ${@:1:$#}) && true) || EXIT_CODE=$? ; false ; # no quotes to force re-spliting
 	wait ; ( sync || true ) 2>/dev/null;
 	exit ${EXIT_CODE:-127};
 fi ;  # else import as source
