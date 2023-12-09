@@ -186,7 +186,7 @@ endif
 
 .PHONY: all clean init init-start must_be_root bootstrap cleanup cleanup_DS_Store cleanup_temps cleanup_tmp_obj checkin install uninstall test
 
-all:: init build XCMBuild-framework bootstrap xcrunshell-cli XCMTest-cli install test
+all:: init build XCMBuild-framework bootstrap xcrunshell-cli XCMTest-cli XCMClean-cli install test
 	$(QUITE)$(DO_FAIL) ;
 	$(QUIET)$(ECHO) "$@: Done."
 
@@ -626,6 +626,12 @@ $(BUILD_ROOT)/XCMTest_vers.c: |build
 	$(QUIET)$(WAIT) ;
 	$(DO_FAIL) ;
 
+$(BUILD_ROOT)/XCMClean_vers.c: |build
+	$(QUIET)$(ECHO) "Generating Version Source: $@ ( XCMClean )" ;
+	$(QUIET)$(XCMB_GEN_VER_SRC_BUILD_TOOL) XCMClean $(CURRENT_PROJECT_VERSION) >"$@" || DO_FAIL="exit 2" ;
+	$(QUIET)$(WAIT) ;
+	$(DO_FAIL) ;
+
 $(BUILD_ROOT)/xcrunshell_vers.c: |build
 	$(QUIET)$(ECHO) "Generating Version Source: $@ ( xcrunshell )" ;
 	$(QUIET)$(XCMB_GEN_VER_SRC_BUILD_TOOL) xcrunshell $(CURRENT_PROJECT_VERSION) >"$@" || DO_FAIL="exit 2" ;
@@ -841,6 +847,92 @@ $(TARGET_TEMP_DIR)/build/Object-arm64-normal/arm64/XCMTest_vers.o:: $(BUILD_ROOT
 	$(QUIET)$(BSMARK) $@ || DO_FAIL="exit 2" ;
 	$(DO_FAIL) ;
 
+
+$(TARGET_TEMP_DIR)/build/Object-x86_64-normal/x86_64/XCMClean/main.o: XCMBuild/XCMClean/main.m XCMBuild/XCMClean/XCMClean.h $(TARGET_TEMP_DIR)/build/Object-x86_64-normal/x86_64/XCMClean_vers.o |$(TARGET_TEMP_DIR)/build/Object-x86_64-normal/x86_64/XCMClean
+	$(QUIET)$(ECHO) "Compile XCMClean: $@ (x86_64)" ;
+	$(QUIET)$(CLANG) -x objective-c -target x86_64-apple-macos$(MACOSX_DEPLOYMENT_TARGET) \
+	$(CLANG_FLAGS_ALL) -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit\=0 \
+	$(CLANG_OBJC_ARC_FLAGS) $(CLANG_OBJC_BLOCKS_FLAGS) -fobjc-weak \
+	-fbuild-session-file\=$(BUILD_ROOT)/XCMClean_vers.c \
+	-fmodules -gmodules \
+	-mincremental-linker-compatible \
+	-O0 -flto\=thin -fno-common -isysroot $(SDKROOT) $(CCFLAGS_DARWIN) \
+	-I$(PROJECT_ROOT)/XCMBuild/XCMClean -I$(PROJECT_ROOT)/XCMBuild \
+	-I$(TARGET_TEMP_DIR)/build/Object-x86_64-normal/x86_64/XCMClean \
+	-F/$(DYLIB_INSTALL_NAME_BASE) \
+	-iframeworkwithsysroot $(DYLIB_INSTALL_NAME_BASE) \
+	-iframeworkwithsysroot usr/lib \
+	-iframeworkwithsysroot usr/lib/System \
+	-F/$(DYLIB_INSTALL_NAME_BASE)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION) \
+	-MMD -MT dependencies -MF $(TARGET_TEMP_DIR)/build/Object-x86_64-normal/x86_64/XCMClean.d \
+	-c $< -o $@ || DO_FAIL="exit 2" ;
+	$(QUIET)$(BSMARK) $@ || DO_FAIL="exit 2" ;
+	$(DO_FAIL) ;
+
+$(TARGET_TEMP_DIR)/build/Object-x86_64-normal/x86_64/XCMClean_vers.o:: $(BUILD_ROOT)/XCMClean_vers.c $(TARGET_TEMP_DIR)/build/Object-x86_64-normal/x86_64 |build
+	$(QUIET)$(ECHO) "Compile Version Header: $@ (x86_64)" ;
+	$(QUIET)$(CLANG) -target x86_64-apple-macos$(MACOSX_DEPLOYMENT_TARGET) \
+	$(CLANG_FLAGS_ALL) -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit\=0 \
+	$(CLANG_OBJC_ARC_FLAGS) $(CLANG_OBJC_BLOCKS_FLAGS) -fobjc-weak \
+	-fbuild-session-file\=$(BUILD_ROOT)/XCMClean_vers.c \
+	-fmodules -gmodules \
+	-mincremental-linker-compatible \
+	-O0 -flto\=thin -fno-common -isysroot $(SDKROOT) $(CCFLAGS_DARWIN) \
+	-F/$(DYLIB_INSTALL_NAME_BASE) \
+	-iframeworkwithsysroot $(DYLIB_INSTALL_NAME_BASE) \
+	-iframeworkwithsysroot usr/lib \
+	-iframeworkwithsysroot usr/lib/System \
+	-F/$(DYLIB_INSTALL_NAME_BASE)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION) \
+	-iframeworkwithsysroot /$(DYLIB_INSTALL_NAME_BASE)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION) \
+	-x objective-c \
+	-MMD -MT dependencies -MF $(TARGET_TEMP_DIR)/build/Object-x86_64-normal/x86_64/XCMClean_vers.d \
+	-c $< -o $@ || DO_FAIL="exit 2" ;
+	$(QUIET)$(BSMARK) $@ || DO_FAIL="exit 2" ;
+	$(DO_FAIL) ;
+
+$(TARGET_TEMP_DIR)/build/Object-arm64-normal/arm64/XCMClean/main.o: XCMBuild/XCMClean/main.m XCMBuild/XCMClean/XCMClean.h $(TARGET_TEMP_DIR)/build/Object-arm64-normal/arm64/XCMClean_vers.o |$(TARGET_TEMP_DIR)/build/Object-arm64-normal/arm64/XCMClean
+	$(QUIET)$(ECHO) "Compile XCMClean: $@ (arm64)" ;
+	$(QUIET)$(CLANG) -x objective-c -target arm64-apple-macos$(MACOSX_DEPLOYMENT_TARGET) \
+	$(CLANG_FLAGS_ALL) -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit\=0 \
+	$(CLANG_OBJC_ARC_FLAGS) $(CLANG_OBJC_BLOCKS_FLAGS) -fobjc-weak \
+	-fbuild-session-file\=$(BUILD_ROOT)/XCMClean_vers.c \
+	-fmodules -gmodules \
+	-mincremental-linker-compatible \
+	-O0 -flto\=thin -fno-common -isysroot $(SDKROOT) $(CCFLAGS_DARWIN) \
+	-I$(PROJECT_ROOT)/XCMBuild/XCMClean -I$(PROJECT_ROOT)/XCMBuild \
+	-I$(TARGET_TEMP_DIR)/build/Object-arm64-normal/arm64/XCMClean \
+	-F/$(DYLIB_INSTALL_NAME_BASE) \
+	-iframeworkwithsysroot $(DYLIB_INSTALL_NAME_BASE) \
+	-iframeworkwithsysroot usr/lib \
+	-iframeworkwithsysroot usr/lib/System \
+	-F/$(DYLIB_INSTALL_NAME_BASE)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION) \
+	-MMD -MT dependencies -MF $(TARGET_TEMP_DIR)/build/Object-arm64-normal/arm64/XCMClean.d \
+	-c $< -o $@ || DO_FAIL="exit 2" ;
+	$(QUIET)$(BSMARK) $@ || DO_FAIL="exit 2" ;
+	$(DO_FAIL) ;
+
+$(TARGET_TEMP_DIR)/build/Object-arm64-normal/arm64/XCMClean_vers.o:: $(BUILD_ROOT)/XCMClean_vers.c $(TARGET_TEMP_DIR)/build/Object-arm64-normal/arm64 |build
+	$(QUIET)$(ECHO) "Compile Version Header: $@ (arm64)" ;
+	$(QUIET)$(CLANG) -target arm64-apple-macos$(MACOSX_DEPLOYMENT_TARGET) \
+	$(CLANG_FLAGS_ALL) -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit\=0 \
+	$(CLANG_OBJC_ARC_FLAGS) $(CLANG_OBJC_BLOCKS_FLAGS) -fobjc-weak \
+	-fbuild-session-file\=$(BUILD_ROOT)/XCMClean_vers.c \
+	-fmodules -gmodules \
+	-mincremental-linker-compatible \
+	-O0 -flto\=thin -fno-common -isysroot $(SDKROOT) $(CCFLAGS_DARWIN) \
+	-F/$(DYLIB_INSTALL_NAME_BASE) \
+	-iframeworkwithsysroot /$(DYLIB_INSTALL_NAME_BASE) \
+	-iframeworkwithsysroot usr/lib \
+	-iframeworkwithsysroot usr/lib/System \
+	-F/$(DYLIB_INSTALL_NAME_BASE)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION) \
+	-iframeworkwithsysroot /$(DYLIB_INSTALL_NAME_BASE)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION) \
+	-x objective-c \
+	-MMD -MT dependencies -MF $(TARGET_TEMP_DIR)/build/Object-arm64-normal/arm64/XCMClean_vers.d \
+	-c $< -o $@ || DO_FAIL="exit 2" ;
+	$(QUIET)$(BSMARK) $@ || DO_FAIL="exit 2" ;
+	$(DO_FAIL) ;
+
+
 $(TARGET_TEMP_DIR)/build/Object-x86_64-debug/x86_64/xcrunshell/main.o: XCMBuild/xcrunshell/main.m XCMBuild/xcrunshell/xcrunshell.h $(TARGET_TEMP_DIR)/build/Object-x86_64-debug/x86_64/xcrunshell_vers.o |$(TARGET_TEMP_DIR)/build/Object-x86_64-debug/x86_64/xcrunshell
 	$(QUIET)$(ECHO) "Compile Run-Tool: $@ (x86_64)" ;
 	$(QUIET)$(CLANG) -x objective-c -target x86_64-apple-macos$(MACOSX_DEPLOYMENT_TARGET) \
@@ -1023,6 +1115,94 @@ $(TARGET_TEMP_DIR)/build/Object-arm64-debug/arm64/XCMTest_vers.o:: $(BUILD_ROOT)
 	$(DO_FAIL) ;
 
 
+$(TARGET_TEMP_DIR)/build/Object-x86_64-debug/x86_64/XCMClean/main.o: XCMBuild/XCMClean/main.m XCMBuild/XCMClean/XCMClean.h $(TARGET_TEMP_DIR)/build/Object-x86_64-debug/x86_64/XCMClean_vers.o |$(TARGET_TEMP_DIR)/build/Object-x86_64-debug/x86_64/XCMClean
+	$(QUIET)$(ECHO) "Compile XCMClean: $@ (x86_64)" ;
+	$(QUIET)$(CLANG) -x objective-c -target x86_64-apple-macos$(MACOSX_DEPLOYMENT_TARGET) \
+	$(CLANG_FLAGS_ALL) -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit\=0 \
+	$(CLANG_OBJC_ARC_FLAGS) $(CLANG_OBJC_BLOCKS_FLAGS) -fobjc-weak \
+	-fbuild-session-file\=$(BUILD_ROOT)/XCMClean_vers.c \
+	-fmodules -gmodules -greproducible \
+	-mincremental-linker-compatible \
+	-Xpreprocessor -DDEBUG\=1 \
+	-O0 -flto\=thin -fno-common -isysroot $(SDKROOT) $(CCFLAGS_DARWIN) \
+	-I$(PROJECT_ROOT)/XCMBuild/XCMClean -I$(PROJECT_ROOT)/XCMBuild \
+	-I$(TARGET_TEMP_DIR)/build/Object-x86_64-debug/x86_64/XCMClean \
+	-F/$(DYLIB_INSTALL_NAME_BASE) \
+	-iframeworkwithsysroot $(DYLIB_INSTALL_NAME_BASE) \
+	-iframeworkwithsysroot usr/lib \
+	-iframeworkwithsysroot usr/lib/System \
+	-F/$(DYLIB_INSTALL_NAME_BASE)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION) \
+	-MMD -MT dependencies -MF $(TARGET_TEMP_DIR)/build/Object-x86_64-debug/x86_64/XCMClean.d \
+	-c $< -o $@ || DO_FAIL="exit 2" ;
+	$(QUIET)$(BSMARK) $@ || DO_FAIL="exit 2" ;
+	$(DO_FAIL) ;
+
+$(TARGET_TEMP_DIR)/build/Object-x86_64-debug/x86_64/XCMClean_vers.o:: $(BUILD_ROOT)/XCMClean_vers.c $(TARGET_TEMP_DIR)/build/Object-x86_64-debug/x86_64 |build
+	$(QUIET)$(ECHO) "Compile Version Header: $@ (x86_64)" ;
+	$(QUIET)$(CLANG) -target x86_64-apple-macos$(MACOSX_DEPLOYMENT_TARGET) \
+	$(CLANG_FLAGS_ALL) -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit\=0 \
+	$(CLANG_OBJC_ARC_FLAGS) $(CLANG_OBJC_BLOCKS_FLAGS) -fobjc-weak \
+	-fbuild-session-file\=$(BUILD_ROOT)/XCMClean_vers.c \
+	-fmodules -gmodules	-greproducible \
+	-mincremental-linker-compatible \
+	-Xpreprocessor -DDEBUG\=1 \
+	-O0 -flto\=thin -fno-common -isysroot $(SDKROOT) $(CCFLAGS_DARWIN) \
+	-F/$(DYLIB_INSTALL_NAME_BASE) \
+	-iframeworkwithsysroot $(DYLIB_INSTALL_NAME_BASE) \
+	-iframeworkwithsysroot usr/lib \
+	-iframeworkwithsysroot usr/lib/System \
+	-F/$(DYLIB_INSTALL_NAME_BASE)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION) \
+	-iframeworkwithsysroot /$(DYLIB_INSTALL_NAME_BASE)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION) \
+	-x objective-c \
+	-MMD -MT dependencies -MF $(TARGET_TEMP_DIR)/build/Object-x86_64-debug/x86_64/XCMClean_vers.d \
+	-c $< -o $@ || DO_FAIL="exit 2" ;
+	$(QUIET)$(BSMARK) $@ || DO_FAIL="exit 2" ;
+	$(DO_FAIL) ;
+
+$(TARGET_TEMP_DIR)/build/Object-arm64-debug/arm64/XCMClean/main.o: XCMBuild/XCMClean/main.m XCMBuild/XCMClean/XCMClean.h $(TARGET_TEMP_DIR)/build/Object-arm64-debug/arm64/XCMClean_vers.o |$(TARGET_TEMP_DIR)/build/Object-arm64-debug/arm64/XCMClean
+	$(QUIET)$(ECHO) "Compile XCMClean: $@ (arm64)" ;
+	$(QUIET)$(CLANG) -x objective-c -target arm64-apple-macos$(MACOSX_DEPLOYMENT_TARGET) \
+	$(CLANG_FLAGS_ALL) -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit\=0 \
+	$(CLANG_OBJC_ARC_FLAGS) $(CLANG_OBJC_BLOCKS_FLAGS) -fobjc-weak \
+	-fbuild-session-file\=$(BUILD_ROOT)/XCMClean_vers.c \
+	-fmodules -gmodules -greproducible \
+	-mincremental-linker-compatible \
+	-Xpreprocessor -DDEBUG\=1 \
+	-O0 -flto\=thin -fno-common -isysroot $(SDKROOT) $(CCFLAGS_DARWIN) \
+	-I$(PROJECT_ROOT)/XCMBuild/XCMClean -I$(PROJECT_ROOT)/XCMBuild \
+	-I$(TARGET_TEMP_DIR)/build/Object-arm64-debug/arm64/XCMClean \
+	-F/$(DYLIB_INSTALL_NAME_BASE) \
+	-iframeworkwithsysroot $(DYLIB_INSTALL_NAME_BASE) \
+	-iframeworkwithsysroot usr/lib \
+	-iframeworkwithsysroot usr/lib/System \
+	-F/$(DYLIB_INSTALL_NAME_BASE)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION) \
+	-MMD -MT dependencies -MF $(TARGET_TEMP_DIR)/build/Object-arm64-debug/arm64/XCMClean.d \
+	-c $< -o $@ || DO_FAIL="exit 2" ;
+	$(QUIET)$(BSMARK) $@ || DO_FAIL="exit 2" ;
+	$(DO_FAIL) ;
+
+$(TARGET_TEMP_DIR)/build/Object-arm64-debug/arm64/XCMClean_vers.o:: $(BUILD_ROOT)/XCMClean_vers.c $(TARGET_TEMP_DIR)/build/Object-arm64-debug/arm64 |build
+	$(QUIET)$(ECHO) "Compile Version Header: $@ (arm64)" ;
+	$(QUIET)$(CLANG) -target arm64-apple-macos$(MACOSX_DEPLOYMENT_TARGET) \
+	$(CLANG_FLAGS_ALL) -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit\=0 \
+	$(CLANG_OBJC_ARC_FLAGS) $(CLANG_OBJC_BLOCKS_FLAGS) -fobjc-weak \
+	-fbuild-session-file\=$(BUILD_ROOT)/XCMClean_vers.c \
+	-fmodules -gmodules	-greproducible -fmodule-name\=XCMBuild.XCMClean \
+	-mincremental-linker-compatible \
+	-Xpreprocessor -DDEBUG\=1 \
+	-O0 -flto\=thin -fno-common -isysroot $(SDKROOT) $(CCFLAGS_DARWIN) \
+	-F/$(DYLIB_INSTALL_NAME_BASE) \
+	-iframeworkwithsysroot $(DYLIB_INSTALL_NAME_BASE) \
+	-iframeworkwithsysroot usr/lib \
+	-iframeworkwithsysroot usr/lib/System \
+	-F/$(DYLIB_INSTALL_NAME_BASE)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION) \
+	-iframeworkwithsysroot /$(DYLIB_INSTALL_NAME_BASE)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION) \
+	-x objective-c \
+	-MMD -MT dependencies -MF $(TARGET_TEMP_DIR)/build/Object-arm64-debug/arm64/XCMClean_vers.d \
+	-c $< -o $@ || DO_FAIL="exit 2" ;
+	$(QUIET)$(BSMARK) $@ || DO_FAIL="exit 2" ;
+	$(DO_FAIL) ;
+
 $(TARGET_TEMP_DIR)/build/Object-x86_64-normal/x86_64/%_vers.o:: $(BUILD_ROOT)/%_vers.c $(TARGET_TEMP_DIR)/build/Object-x86_64-normal/x86_64 |build
 	$(QUIET)$(ECHO) "Compile Version Header: $@ (x86_64)" ;
 	$(QUIET)$(CLANG) -x objective-c -target x86_64-apple-macos$(MACOSX_DEPLOYMENT_TARGET) \
@@ -1203,6 +1383,7 @@ include shared/includes/headers.make
 include shared/includes/resources.make
 include shared/includes/XCRunShell.make
 include shared/includes/XCMTest.make
+include shared/includes/XCMClean.make
 
 
 $(TARGET_TEMP_DIR)/build/Object-x86_64-normal/x86_64/Binary/%: $(TARGET_TEMP_DIR)/build/Object-x86_64-normal/x86_64/%.o $(TARGET_TEMP_DIR)/build/Object-x86_64-normal/x86_64/%.LinkFileList shared/%-Info.plist |XCMBuild-dynamic-library
