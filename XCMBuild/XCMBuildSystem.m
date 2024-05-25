@@ -1,6 +1,6 @@
 /*!
  * @file XCMBuildSystem.m
- * @copyright Copyright (c) 2023 Mr.Walls
+ * @copyright Copyright (c) 2023-2024 Mr.Walls
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -54,15 +54,14 @@
 
 - (nullable NSString *)pathForAuxiliaryExecutable:(NSString *)executableName
 {
-	if (executableName != nil) {
+	if ((executableName != nil) && ([self bundlePath] != nil)) {
 			NSArray *AuxiliaryExecutableChoices = [NSArray arrayWithObjects:
 													@"Clean", @"Build", @"Test",
 													nil];
 			if ([AuxiliaryExecutableChoices containsObject:(NSString *)executableName]) {
-				return [[NSBundle mainBundle] pathForAuxiliaryExecutable:
-						[NSString stringWithFormat:@"%@/usr/bin/XCM%@",
+				return [NSString stringWithFormat:@"%@/Versions/Current/usr/bin/XCM%@",
 						 (NSString *)[self bundlePath],
-						 (NSString *)executableName]];
+						 (NSString *)executableName];
 			} else {
 				AuxiliaryExecutableChoices = nil;
 				return [super pathForAuxiliaryExecutable:(NSString *)executableName];

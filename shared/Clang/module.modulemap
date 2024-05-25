@@ -1,12 +1,11 @@
-framework module XCMBuild {
+framework module XCMBuild [extern_c] {
 	requires objc, objc_arc, !cplusplus
 	umbrella header "XCMBuild.h"
 	textual header "Compat.h"
 	exclude header "xcrunshell.h"
-	config_macros DEBUG
-	config_macros XCMB_OS_ACTIVITY_ENABLED
-	use Foundation
-	export *
+	exclude header "XCMProcesses.h"
+	exclude header "XCMShellDelegate.h"
+	exclude header "XCMShell.h"
 	explicit module XCMShell {
 		requires objc, objc_arc, !cplusplus
 		textual header "XCMShellDelegate.h"
@@ -23,5 +22,15 @@ framework module XCMBuild {
 		link framework "XCMBuild"
 		export *
 	}
+	config_macros DEBUG
+	config_macros XCMB_OS_ACTIVITY_ENABLED
+	use Darwin.cdefs
+	use POSIX
+	use ObjectiveC
+	use CoreFoundation
+	use Foundation
+	export *
+	link "libobjc"
+	link framework "CoreFoundation"
 	link framework "Foundation"
 }

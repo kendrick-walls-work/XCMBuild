@@ -1411,7 +1411,7 @@ $(TARGET_TEMP_DIR)/build/Object-x86_64-normal/x86_64/Binary/%: $(TARGET_TEMP_DIR
 unbuild/%::
 	$(QUIET)$(ECHO) "Removing $% from buildroot ..." ;
 	$(QUIET)$(RMDIR) $(BUILD_ROOT)/$% 2>/dev/null || true ;
-	$(QUITE)$(DO_FAIL) ;
+	$(DO_FAIL) ;
 
 unbin/%: $(TARGET_TEMP_DIR)/build/bin/%
 	$(QUIET)$(ECHO) "Removing $< from build-cache ..." ;
@@ -1451,8 +1451,9 @@ purge: clean uninstall-resources uninstall-tool-dir uninstall
 test:: init cleanup
 	$(QUIET)$(ECHO) "$@: START." ;
 	$(QUIET)$(WAIT) ;
-	$(QUIET)$(GIT) ls-files ./tests/test_*sh -z 2>/dev/null | xargs -0 -L1 -I{} $(SHELL) -c "({} && echo -e '\t{}: Succeded') || echo -e '\t{}: FAILURE' >&2 ; " ;
+	$(QUIET)$(GIT) ls-files ./tests/test_*sh -z 2>/dev/null | xargs -0 -L1 -I{} $(SHELL) -c "({} && echo -e '\t{}: Succeded') || (echo -e '\t{}: FAILURE' >&2 && false ) " || DO_FAIL="exit 2" ;
 	$(QUIET)$(WAIT) ;
+	$(DO_FAIL) ;
 	$(QUIET)$(ECHO) "$@: END." ;
 
 test-tox: cleanup
