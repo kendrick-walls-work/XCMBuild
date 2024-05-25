@@ -1,6 +1,6 @@
 /*!
  * @file XCMBuild.h
- * @copyright Copyright (c) 2023 Mr.Walls
+ * @copyright Copyright (c) 2023-2024 Mr.Walls
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -122,8 +122,8 @@
 #endif /* !MAC_OS_X_VERSION_10_13 */
 
 #if defined(__DARWIN_ONLY_UNIX_CONFORMANCE) && __DARWIN_ONLY_UNIX_CONFORMANCE
-__COPYRIGHT("Copyright (c) 2023 Mr.Walls - Licensed under the Apache License, Version 2.0.");
-__PROJECT_VERSION("2.2.6");
+__COPYRIGHT("Copyright (c) 2023-2024 Mr.Walls - Licensed under the Apache License, Version 2.0.");
+__PROJECT_VERSION("2.3.3");
 #endif
 
 XCMB_IMPORT double PAK_XCMBuildVersionNumber;

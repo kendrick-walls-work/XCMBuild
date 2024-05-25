@@ -1,6 +1,6 @@
 /*!
  * @file xcrunshell/xcrunshell.h
- * @copyright Copyright (c) 2023 Mr.Walls
+ * @copyright Copyright (c) 2023-2024 Mr.Walls
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,13 +42,13 @@
 
 #ifndef _XCRS_MINARGS
 #define _XCRS_MINARGS
+/// Minimum arguments expected.
 const int XCRS_MINARGS = 1;
 #endif
 
 #ifndef _XCMB_IFS
-#define _XCMB_IFS
 /// Internal Feild Seporator for xcrunshell.
-extern NSString * const XCMB_IFS XCMHELPER_NEEDED;
+XCMB_IMPORT NSString * const XCMB_IFS XCMHELPER_NEEDED;
 #endif /* !XCMB_IFS */
 
 #ifndef XCMShellDelegate_h

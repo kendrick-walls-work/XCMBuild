@@ -2,7 +2,7 @@
 //  main.m
 //  xcrunshell
 //
-//	Copyright (c) 2023 Mr.Walls
+//	Copyright (c) 2023-2024 Mr.Walls
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@
 
 #if defined(__has_attribute)
 #if __has_attribute(used)
-#ifndef _XCMB_IFS
+#ifndef XCMB_IFS
 #define _XCMB_IFS " "
 NSString * const XCMB_IFS __attribute__ ((used)) = @" ";
 #if defined(__clang__) && __clang__

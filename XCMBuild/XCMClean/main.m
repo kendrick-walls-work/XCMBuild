@@ -1,6 +1,6 @@
 /*!
  * @file XCMClean/XCMClean.m
- * @copyright Copyright (c) 2023 Mr.Walls
+ * @copyright Copyright (c) 2023-2024 Mr.Walls
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,6 +26,7 @@
 #if __has_attribute(used)
 #ifndef _XCMCleanCommandArgumentsString
 #define _XCMCleanCommandArgumentsString "make -f Makefile clean"
+XCMB_EXPORT __kindof NSString * const XCMCleanCommandArgumentsString;
 NSString * const XCMCleanCommandArgumentsString __attribute__ ((used)) = @"/usr/bin/command -p make -f Makefile clean";
 #if defined(__clang__) && __clang__
 #pragma clang final(_XCMCleanCommandArgumentsString)

@@ -1,6 +1,6 @@
 /*!
  * @file XCMTest/XCMTest.h
- * @copyright Copyright (c) 2023 Mr.Walls
+ * @copyright Copyright (c) 2023-2024 Mr.Walls
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -46,7 +46,7 @@
 
 #ifndef XCMTestCommandArgumentsString
 /// Use this to Makefile Testing cmdline string for XCMTest.
-extern NSString * const XCMTestCommandArgumentsString XCMHELPER_NEEDED;
+XCMB_IMPORT __kindof NSString * const XCMTestCommandArgumentsString XCMHELPER_NEEDED;
 #endif /* !XCMTestCommandArgumentsString */
 
 #if defined(XCRS_RUNSHELL_MAIN_MARK)

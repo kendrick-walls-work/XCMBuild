@@ -2,7 +2,7 @@
 //  XCMProcesses.h
 //  XCMBuild
 //
-//	Copyright (c) 2023 Mr.Walls
+//	Copyright (c) 2023-2024 Mr.Walls
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -50,6 +50,7 @@ XCMB_IMPORT void os_activity_scope_leave(os_activity_scope_state_t state);
 #pragma mark - XCMProcessesDispatch Constants
 #ifndef _XCMProcessesDispatchReasonString
 #define _XCMProcessesDispatchReasonString "XCMProcesses Control Active"
+XCMB_EXPORT __kindof NSString * const XCMProcessesDispatchReasonString;
 NSString * const XCMProcessesDispatchReasonString __attribute__ ((used)) = @"XCMProcesses Control Active";
 #if defined(__clang__) && __clang__
 #pragma clang final(_XCMProcessesDispatchReasonString)

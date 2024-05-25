@@ -2,7 +2,7 @@
 //  XCMShellDelegate.h
 //  XCMBuild
 //
-//	Copyright (c) 2023 Mr.Walls
+//	Copyright (c) 2023-2024 Mr.Walls
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -43,6 +43,8 @@
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 #if !defined(XCMShellDelegate)
+
+XCMB_EXPORT
 @interface XCMShellDelegate: NSObject {
 }
 /// The output capture `NSPipe`.`

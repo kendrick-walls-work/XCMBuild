@@ -2,7 +2,7 @@
 //  XCMShell.h
 //  XCMShellTask
 //
-//	Copyright (c) 2023 Mr.Walls
+//	Copyright (c) 2023-2024 Mr.Walls
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -42,6 +42,7 @@
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 #if !defined(XCMShellTask)
+XCMB_EXPORT
 /// Trivial delegate class for `NSTask`s to implement conviance constructors.
 /// ``XCMShellTask`` allows running a subshell as a task, thus simplifing the overhead of trivial invocations of `NSTask`.
 @interface XCMShellTask: NSObject {
