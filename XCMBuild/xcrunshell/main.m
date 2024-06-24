@@ -33,6 +33,29 @@ NSString * const XCMB_IFS __attribute__ ((used)) = @" ";
 #endif /* !__attribute__ ((used)) */
 #endif /* !__has_attribute */
 
+
+XCMB_EXPORT
+NSString *parseArguments(NSArray *argsv) {
+	NSString *command = nil;
+	if ((argsv != nil) && (argsv.count > 0)) command = [argsv firstObject];
+	NSString* arguments = nil;
+	if ((command != nil) && ([command length] > 0)) {
+		if ([XCMBuildSystem pathForAuxiliaryExecutable:command] != nil) {
+			NSArray *old_args = [NSArray arrayWithArray:[argsv copy]];
+			argsv = [NSArray arrayWithObject:[XCMBuildSystem pathForAuxiliaryExecutable:command]];
+			argsv = [[argsv copy] arrayByAddingObjectsFromArray:old_args];
+			arguments = [argsv componentsJoinedByString:XCMB_IFS];
+		} else {
+#if (defined(DEBUG) && DEBUG)
+			arguments = [argsv componentsJoinedByString:XCMB_IFS];
+#else
+			arguments = nil;
+#endif
+		}
+	}
+	return arguments;
+}
+
 #if __INCLUDE_LEVEL__ < 1
 int main(int argc, const char * argv[]) {
 	int exit_code = 1;
@@ -47,7 +70,7 @@ int main(int argc, const char * argv[]) {
 			if (argc >= XCRS_MINARGS){
 				NSArray *c_argv = [[NSProcessInfo processInfo] arguments];
 				NSArray *args = [c_argv subarrayWithRange:NSMakeRange(1, c_argv.count - 1)];
-				NSString* arguments = [args componentsJoinedByString:XCMB_IFS];
+				NSString *arguments = parseArguments(args);
 				if (known_unpredictable([XCMShellTask runCommand:arguments])) {
 					exit_code = (int)(0);
 				} else { exit_code = (int)(2); };

@@ -21,7 +21,7 @@
 
 ifndef BUILD_ROOT
 
-.PHONY: all init test clean XCMBuild-public-headers XCMBuild-private-headers XCMBuild-all-headers
+.PHONY: all init test clean install archive analyze docbuild ake XCMBuild-public-headers XCMBuild-private-headers XCMBuild-all-headers
 
 else
 
@@ -70,6 +70,41 @@ $(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/
 	$(DO_FAIL) ;
 	$(QUIET)$(ECHO) "$< Injected." ;
 
+$(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/PrivateHeaders/%.h: XCMBuild/XCMake/%.h |$(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/PrivateHeaders $(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/Headers $(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/PrivateHeaders
+	$(QUIET)$(TEST) -f "$<" || DO_FAIL="exit 2" ;
+	$(DO_FAIL) ;
+	$(QUIET)$(CP) "$<" "$@" || DO_FAIL="exit 2" ;
+	$(DO_FAIL) ;
+	$(QUIET)$(ECHO) "$< Injected." ;
+
+$(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/PrivateHeaders/%.h: XCMBuild/XCMAnalyze/%.h |$(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/PrivateHeaders $(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/Headers $(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/PrivateHeaders
+	$(QUIET)$(TEST) -f "$<" || DO_FAIL="exit 2" ;
+	$(DO_FAIL) ;
+	$(QUIET)$(CP) "$<" "$@" || DO_FAIL="exit 2" ;
+	$(DO_FAIL) ;
+	$(QUIET)$(ECHO) "$< Injected." ;
+
+$(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/PrivateHeaders/%.h: XCMBuild/XCMArchive/%.h |$(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/PrivateHeaders $(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/Headers $(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/PrivateHeaders
+	$(QUIET)$(TEST) -f "$<" || DO_FAIL="exit 2" ;
+	$(DO_FAIL) ;
+	$(QUIET)$(CP) "$<" "$@" || DO_FAIL="exit 2" ;
+	$(DO_FAIL) ;
+	$(QUIET)$(ECHO) "$< Injected." ;
+
+$(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/PrivateHeaders/%.h: XCMBuild/XCMInstall/%.h |$(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/PrivateHeaders $(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/Headers $(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/PrivateHeaders
+	$(QUIET)$(TEST) -f "$<" || DO_FAIL="exit 2" ;
+	$(DO_FAIL) ;
+	$(QUIET)$(CP) "$<" "$@" || DO_FAIL="exit 2" ;
+	$(DO_FAIL) ;
+	$(QUIET)$(ECHO) "$< Injected." ;
+
+$(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/PrivateHeaders/%.h: XCMBuild/XCMDocBuild/%.h |$(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/PrivateHeaders $(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/Headers $(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/PrivateHeaders
+	$(QUIET)$(TEST) -f "$<" || DO_FAIL="exit 2" ;
+	$(DO_FAIL) ;
+	$(QUIET)$(CP) "$<" "$@" || DO_FAIL="exit 2" ;
+	$(DO_FAIL) ;
+	$(QUIET)$(ECHO) "$< Injected." ;
+
 $(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/Headers/%.h: XCMBuild/%.h $(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/Headers
 	$(QUIET)$(TEST) -f "$<" || DO_FAIL="exit 2" ;
 	$(DO_FAIL) ;
@@ -99,6 +134,21 @@ XCMBuild-XCMTest-headers: $(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/Vers
 XCMBuild-XCMClean-headers: $(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/PrivateHeaders/XCMClean.h |$(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/PrivateHeaders XCMBuild-System-headers
 	$(DO_FAIL) ;
 
+XCMBuild-XCMake-headers: $(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/PrivateHeaders/XCMake.h |$(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/PrivateHeaders XCMBuild-System-headers
+	$(DO_FAIL) ;
+
+XCMBuild-XCAnalyze-headers: $(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/PrivateHeaders/XCAnalyze.h |$(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/PrivateHeaders XCMBuild-System-headers
+	$(DO_FAIL) ;
+
+XCMBuild-XCMArchive-headers: $(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/PrivateHeaders/XCArchive.h |$(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/PrivateHeaders XCMBuild-System-headers
+	$(DO_FAIL) ;
+
+XCMBuild-XCMInstall-headers: $(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/PrivateHeaders/XCMInstall.h |$(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/PrivateHeaders XCMBuild-System-headers
+	$(DO_FAIL) ;
+
+XCMBuild-XCMDocBuild-headers: $(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/PrivateHeaders/XCMDocBuild.h |$(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/PrivateHeaders XCMBuild-System-headers
+	$(DO_FAIL) ;
+
 XCMBuild-xcrunshell-headers: $(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/PrivateHeaders/xcrunshell.h |$(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/PrivateHeaders XCMBuild-XCMShell-headers
 	$(DO_FAIL) ;
 
@@ -108,6 +158,31 @@ XCMBuild/XCMTest/: |init-start
 	$(QUIET)$(ECHO) "$@: Available." ;
 
 XCMBuild/XCMClean/: |init-start
+	$(QUIET)$(TEST) -d $@ || DO_FAIL="exit 2" ;
+	$(DO_FAIL) ;
+	$(QUIET)$(ECHO) "$@: Available." ;
+
+XCMBuild/XCMake/: |init-start
+	$(QUIET)$(TEST) -d $@ || DO_FAIL="exit 2" ;
+	$(DO_FAIL) ;
+	$(QUIET)$(ECHO) "$@: Available." ;
+
+XCMBuild/XCMAnalyze/: |init-start
+	$(QUIET)$(TEST) -d $@ || DO_FAIL="exit 2" ;
+	$(DO_FAIL) ;
+	$(QUIET)$(ECHO) "$@: Available." ;
+
+XCMBuild/XCMArchive/: |init-start
+	$(QUIET)$(TEST) -d $@ || DO_FAIL="exit 2" ;
+	$(DO_FAIL) ;
+	$(QUIET)$(ECHO) "$@: Available." ;
+
+XCMBuild/XCMDocBuild/: |init-start
+	$(QUIET)$(TEST) -d $@ || DO_FAIL="exit 2" ;
+	$(DO_FAIL) ;
+	$(QUIET)$(ECHO) "$@: Available." ;
+
+XCMBuild/XCMInstall/: |init-start
 	$(QUIET)$(TEST) -d $@ || DO_FAIL="exit 2" ;
 	$(DO_FAIL) ;
 	$(QUIET)$(ECHO) "$@: Available." ;

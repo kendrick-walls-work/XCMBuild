@@ -166,6 +166,10 @@ ifeq "$(MV)" ""
 	endif
 endif
 
+ifeq "$(PRODUCT_ORG_IDENTIFIER)" ""
+	PRODUCT_ORG_IDENTIFIER="org.adhoc.dt."
+endif
+
 ifeq "$(PRINT)" ""
 	PRINT=printf
 endif

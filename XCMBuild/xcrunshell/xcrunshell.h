@@ -48,7 +48,7 @@ const int XCRS_MINARGS = 1;
 
 #ifndef _XCMB_IFS
 /// Internal Feild Seporator for xcrunshell.
-XCMB_IMPORT NSString * const XCMB_IFS XCMHELPER_NEEDED;
+XCMB_IMPORT NSString *_Null_unspecified const XCMB_IFS XCMHELPER_NEEDED;
 #endif /* !XCMB_IFS */
 
 #ifndef XCMShellDelegate_h
@@ -82,6 +82,12 @@ XCMB_IMPORT NSString * const XCMB_IFS XCMHELPER_NEEDED;
 #pragma clang final(XCMShell_h)
 #endif /* !__clang__ */
 #endif /* XCMShell_h (outer) */
+
+XCMB_IMPORT
+/// Parse comandline arguments for the given command.
+/// - Parameters:
+///   - argsv: the NSArray of  non-zero index arguments from `[[NSProcessInfo processInfo] arguments]
+NSString *_Nullable parseArguments(NSArray *_Nullable argsv);
 
 #if defined(XCRS_RUNSHELL_MAIN_MARK)
 #if XCRS_RUNSHELL_MAIN_MARK < __INCLUDE_LEVEL__ && XCRS_RUNSHELL_MAIN_MARK < 1 && __INCLUDE_LEVEL__ <= 2

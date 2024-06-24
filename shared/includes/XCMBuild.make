@@ -140,7 +140,7 @@ $(TARGET_TEMP_DIR)/build/Object-x86_64-normal/x86_64/Binary/XCMBuild.dylib: $(TA
 	-Xlinker -keep_private_externs \
 	-Xlinker -no_adhoc_codesign -compatibility_version $(DYLIB_COMPATIBILITY_VERSION) \
 	-current_version $(DYLIB_CURRENT_VERSION) -Xlinker -dependency_info \
-	-Xlinker $(TARGET_TEMP_DIR)/Object-x86_64-normal/x86_64/XCMBuild_dependency_info.dat -o $@ ;
+	-Xlinker $(TARGET_TEMP_DIR)/build/Object-x86_64-normal/x86_64/XCMBuild_dependency_info.dat -o $@ ;
 	$(QUIET)$(ECHO) "Compiled Dynamic Libarary ($@)" || DO_FAIL="exit 2" ;
 	$(DO_FAIL) ;
 	$(QUIET)$(BSMARK) $@ || DO_FAIL="exit 2" ;
@@ -163,7 +163,7 @@ $(TARGET_TEMP_DIR)/build/Object-arm64-normal/arm64/Binary/XCMBuild.dylib: $(TARG
 	-Xlinker -keep_private_externs \
 	-Xlinker -no_adhoc_codesign -compatibility_version $(DYLIB_COMPATIBILITY_VERSION) \
 	-current_version $(DYLIB_CURRENT_VERSION) -Xlinker -dependency_info \
-	-Xlinker $(TARGET_TEMP_DIR)/Object-arm64-normal/arm64/XCMBuild_dependency_info.dat -o $@ ;
+	-Xlinker $(TARGET_TEMP_DIR)/build/Object-arm64-normal/arm64/XCMBuild_dependency_info.dat -o $@ ;
 	$(QUIET)$(ECHO) "Compiled Dynamic Libarary ($@)" || DO_FAIL="exit 2" ;
 	$(DO_FAIL) ;
 	$(QUIET)$(BSMARK) $@ || DO_FAIL="exit 2" ;
@@ -186,7 +186,7 @@ $(TARGET_TEMP_DIR)/build/Object-arch64-normal/arch64/Binary/XCMBuild.dylib: $(TA
 	-Xlinker -keep_private_externs \
 	-Xlinker -no_adhoc_codesign -compatibility_version $(DYLIB_COMPATIBILITY_VERSION) \
 	-current_version $(DYLIB_CURRENT_VERSION) -Xlinker -dependency_info \
-	-Xlinker $(TARGET_TEMP_DIR)/Object-arch64-normal/arch64/XCMBuild_dependency_info.dat -o $@ ;
+	-Xlinker $(TARGET_TEMP_DIR)/build/Object-arch64-normal/arch64/XCMBuild_dependency_info.dat -o $@ ;
 	$(QUIET)$(ECHO) "Compiled Dynamic Libarary ($@)" || DO_FAIL="exit 2" ;
 	$(DO_FAIL) ;
 	$(QUIET)$(BSMARK) $@ || DO_FAIL="exit 2" ;
@@ -238,7 +238,7 @@ $(TARGET_TEMP_DIR)/build/Object-x86_64-debug/x86_64/Binary/XCMBuild.dylib: $(TAR
 	-Xlinker -keep_private_externs \
 	-Xlinker -no_adhoc_codesign -compatibility_version $(DYLIB_COMPATIBILITY_VERSION) \
 	-current_version $(DYLIB_CURRENT_VERSION) -Xlinker -dependency_info \
-	-Xlinker $(TARGET_TEMP_DIR)/Object-x86_64-debug/x86_64/XCMBuild_dependency_info.dat -o $@ ;
+	-Xlinker $(TARGET_TEMP_DIR)/build/Object-x86_64-debug/x86_64/XCMBuild_dependency_info.dat -o $@ ;
 	$(QUIET)$(ECHO) "Compiled Dynamic Libarary ($@ Debug)" || DO_FAIL="exit 2" ;
 	$(DO_FAIL) ;
 	$(QUIET)$(BSMARK) $@ || DO_FAIL="exit 2" ;
@@ -261,7 +261,7 @@ $(TARGET_TEMP_DIR)/build/Object-arm64-debug/arm64/Binary/XCMBuild.dylib: $(TARGE
 	-Xlinker -keep_private_externs \
 	-Xlinker -no_adhoc_codesign -compatibility_version $(DYLIB_COMPATIBILITY_VERSION) \
 	-current_version $(DYLIB_CURRENT_VERSION) -Xlinker -dependency_info \
-	-Xlinker $(TARGET_TEMP_DIR)/Object-arm64-debug/arm64/XCMBuild_dependency_info.dat -o $@ ;
+	-Xlinker $(TARGET_TEMP_DIR)/build/Object-arm64-debug/arm64/XCMBuild_dependency_info.dat -o $@ ;
 	$(QUIET)$(ECHO) "Compiled Dynamic Libarary ($@ Debug)" || DO_FAIL="exit 2" ;
 	$(DO_FAIL) ;
 	$(QUIET)$(BSMARK) $@ || DO_FAIL="exit 2" ;
@@ -284,7 +284,7 @@ $(TARGET_TEMP_DIR)/build/Object-arch64-debug/arch64/Binary/XCMBuild.dylib: $(TAR
 	-Xlinker -keep_private_externs \
 	-Xlinker -no_adhoc_codesign -compatibility_version $(DYLIB_COMPATIBILITY_VERSION) \
 	-current_version $(DYLIB_CURRENT_VERSION) -Xlinker -dependency_info \
-	-Xlinker $(TARGET_TEMP_DIR)/Object-arch64-debug/arch64/XCMBuild_dependency_info.dat -o $@ ;
+	-Xlinker $(TARGET_TEMP_DIR)/build/Object-arch64-debug/arch64/XCMBuild_dependency_info.dat -o $@ ;
 	$(QUIET)$(ECHO) "Compiled Dynamic Libarary ($@ Debug)" || DO_FAIL="exit 2" ;
 	$(DO_FAIL) ;
 	$(QUIET)$(BSMARK) $@ || DO_FAIL="exit 2" ;

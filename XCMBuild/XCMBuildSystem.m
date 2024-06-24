@@ -15,10 +15,18 @@
  *
  */
 
-//extern const char* XCMTestCommandArgumentsString __attribute__((weak_import));
 #ifndef XCMBuildSystem_h
 #import "XCMBuildSystem.h"
 #endif
+
+#if !defined(XCMBuildSystemBundleIDString)
+XCMB_EXPORT __kindof NSString *_Nonnull const XCMBuildSystemBundleIDString;
+#if (defined(DEBUG) && DEBUG)
+NSString *_Nonnull const XCMBuildSystemBundleIDString __attribute__ ((used)) = @"org.adhoc.dt.XCMBuild";
+#else
+NSConstantString *_Nonnull const XCMBuildSystemBundleIDString __attribute__ ((used)) = (NSConstantString *)(@"org.pak.dt.XCMBuild");
+#endif
+#endif /* !XCMBuildSystemBundleIDString */
 
 #ifndef XCMB_FWD_INVOKE_ENABLED
 #if defined(__has_include)
@@ -46,25 +54,56 @@
 }
 #endif
 
++ (__kindof NSBundle *)bundleForClass:(Class)aClass
+{
+	if (aClass != nil)
+	{
+		if ([aClass isKindOfClass:[XCMBuildSystem class]]) {
+			return (XCMBuildSystem *)[XCMBuildSystem bundleWithIdentifier:XCMBuildSystemBundleIDString];
+		}
+		else if ([[[NSBundle bundleForClass:aClass] bundleIdentifier] isEqualToString:XCMBuildSystemBundleIDString])
+		{
+			return (XCMBuildSystem *)[XCMBuildSystem bundleWithIdentifier:XCMBuildSystemBundleIDString];
+		} else return [NSBundle bundleForClass:aClass];
+	} else return [NSBundle bundleForClass:aClass];
+}
+
++ (nullable __kindof NSBundle *)bundleWithIdentifier:(NSString *)identifier
+{
+	if ((identifier != nil) && ([identifier isEqualToString:XCMBuildSystemBundleIDString]))
+	{
+		XCMBuildSystem *_new_bundle = (XCMBuildSystem *)[NSBundle bundleWithIdentifier:XCMBuildSystemBundleIDString];
+		return (XCMBuildSystem *)_new_bundle;
+	} else return [NSBundle bundleWithIdentifier:identifier];
+}
+
 + (NSString *)debugDescription
 {
 	//return [(NSBundle *)([XCMBuildSystem superclass]) debugDescription];
 	return (NSConstantString *)@"<XCMBuild/XCMBuildSystem>";
 }
 
-- (nullable NSString *)pathForAuxiliaryExecutable:(NSString *)executableName
+- (nullable instancetype)initWithPath:(NSString *)path
 {
-	if ((executableName != nil) && ([self bundlePath] != nil)) {
+	self = [super initWithPath:path];
+	if ([[self bundleIdentifier] isEqualToString:XCMBuildSystemBundleIDString]) return self;
+	else return nil;
+}
+
++ (nullable NSString *)pathForAuxiliaryExecutable:(NSString *)executableName
+{
+	NSString *_my_path = [(XCMBuildSystem *)[XCMBuildSystem bundleWithIdentifier:XCMBuildSystemBundleIDString] bundlePath];
+	if ((executableName != nil) && (_my_path != nil)) {
 			NSArray *AuxiliaryExecutableChoices = [NSArray arrayWithObjects:
-													@"Clean", @"Build", @"Test",
+												   @"Analyze", @"Archive", @"Clean", @"DocBuild", @"Install", @"Build", @"Test",
 													nil];
 			if ([AuxiliaryExecutableChoices containsObject:(NSString *)executableName]) {
 				return [NSString stringWithFormat:@"%@/Versions/Current/usr/bin/XCM%@",
-						 (NSString *)[self bundlePath],
+						 (NSString *)_my_path,
 						 (NSString *)executableName];
 			} else {
 				AuxiliaryExecutableChoices = nil;
-				return [super pathForAuxiliaryExecutable:(NSString *)executableName];
+				return [[XCMBuildSystem bundleWithIdentifier:XCMBuildSystemBundleIDString] pathForAuxiliaryExecutable:(NSString *)executableName];
 			};
 	} else {
 		return nil;
