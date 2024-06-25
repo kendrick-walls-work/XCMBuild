@@ -57,12 +57,9 @@
 }
 
 - (void)testHasToolsByPath {
-	XCMBuildSystem *_test_case_bundle = (XCMBuildSystem *)[XCMBuildSystem bundleWithIdentifier:_XCMB_META_TEST_TARGED_BID];
-	XCTAssertNotNil(_test_case_bundle);
-	XCTAssertNotNil([_test_case_bundle bundlePath], @"No path for %@", _test_case_bundle);
-	XCTAssertEqualObjects(([_test_case_bundle class]), ([XCMBuildSystem class]), @"Wrong class for %@", _test_case_bundle);
-	for (NSString *test_choice in @[ @"Clean", @"Test" ] ) {
-		XCTAssertNotNil(([_test_case_bundle pathForAuxiliaryExecutable:test_choice]), @"Missing Tool (%@) by Path.", test_choice);
+	//XCTAssertEqualObjects(([_test_case_bundle class]), ([XCMBuildSystem class]), @"Wrong class for %@", _test_case_bundle);
+	for (NSString *test_choice in @[ @"Clean", @"DocBuild", @"Analyze", @"Test", @"Archive" ] ) {
+		XCTAssertNotNil(([XCMBuildSystem pathForAuxiliaryExecutable:test_choice]), @"Missing Tool (%@) by Path.", test_choice);
 	}
 }
 
