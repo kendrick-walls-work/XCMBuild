@@ -4,7 +4,7 @@
 //
 // reactive-firewall/XCMBuild XcodeCompileToolsRelease xcconfig
 // ..................................
-// Copyright (c) 2023, Mr. Walls
+// Copyright (c) 2023-2024, Mr. Walls
 // ..................................
 // Licensed under APACHE-2 (the "License");
 // you may not use this file except in compliance with the License.
@@ -30,7 +30,7 @@ DEPLOYMENT_LOCATION = YES
 DEPLOYMENT_POSTPROCESSING = $(DEPLOYMENT_LOCATION)
 INSTALL_PATH = $(LOCAL_LIBRARY_DIR:standardizepath)/Frameworks/$(CONTENTS_FOLDER_PATH:standardizepath)/usr/bin
 STRIP_INSTALLED_PRODUCT = $(DEPLOYMENT_LOCATION)
-MODULE_NAME = $(TARGET_NAME:c99extidentifier)
+MODULE_NAME = $(TARGET_NAME:c17extidentifier)
 MACH_O_TYPE = mh_execute
 DEAD_CODE_STRIPPING = $(STRIP_INSTALLED_PRODUCT)
 LINKER_DISPLAYS_MANGLED_NAMES[sdk=macosx*] = !$(DEAD_CODE_STRIPPING)
@@ -46,19 +46,19 @@ LLVM_LTO[sdk=macosx*][arch=arch64] = YES_THIN
 EXECUTABLE_EXTENSION_profile = -profile
 EXECUTABLE_EXTENSION_debug = -debug
 EXECUTABLE_EXTENSION = $(inhereted)
-PRODUCT_MODULE_NAME = $(PROJECT_NAME:c99extidentifier).$(PRODUCT_NAME:c99extidentifier)
+PRODUCT_MODULE_NAME = $(PROJECT_NAME:c17extidentifier).$(PRODUCT_NAME:c17extidentifier)
 CREATE_INFOPLIST_SECTION_IN_BINARY = YES
-PRODUCT_NAME = $(TARGET_NAME:c99extidentifier)
+PRODUCT_NAME = $(TARGET_NAME:c17extidentifier)
 CODE_SIGN_ENTITLEMENTS = shared/security/entitlements/XCMTestRelease.entitlements
 //CODE_SIGN_STYLE = $(inhereted)
 ENABLE_HARDENED_RUNTIME = YES
 TAPI_EXCLUDE_PROJECT_HEADERS = xcrunshell.h
 TAPI_EXTRA_PROJECT_HEADERS = Compat.h XCMBuild.h XCMShellDelegate.h XCMShell.h XCMProcesses.h
-TAPI_EXTRA_PUBLIC_HEADERS = $(PRODUCT_NAME:c99extidentifier).h
+TAPI_EXTRA_PUBLIC_HEADERS = $(PRODUCT_NAME:c17extidentifier).h
 GCC_INPUT_FILETYPE = sourcecode.c.objc
 CLANG_MODULES_AUTOLINK = YES
 ENABLE_MODULE_VERIFIER = $(DEFINES_MODULE)
-CONTENTS_FOLDER_PATH = $(PROJECT_NAME:c99extidentifier).framework/Versions/$(FRAMEWORK_VERSION)
+CONTENTS_FOLDER_PATH = $(PROJECT_NAME:c17extidentifier).framework/Versions/$(FRAMEWORK_VERSION)
 DEAD_CODE_STRIPPING = YES
 LD_RUNPATH_SEARCH_PATHS = $(inherited) @executable_path/../../../XCMBuild.framework @executable_path/../Frameworks @executable_path/../../../Current @loader_path/Frameworks
 OTHER_CODE_SIGN_FLAGS = $(inhereted) --prefix=$(PRODUCT_ORG_IDENTIFIER) --preserve-metadata -o library,hard

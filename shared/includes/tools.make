@@ -2,7 +2,7 @@
 
 # reactive-firewall/XCMB Extra Tools Makefile
 # ..................................
-# Copyright (c) 2007-2023, Mr. Walls
+# Copyright (c) 2007-2024, Mr. Walls
 # ..................................
 # Licensed under APACHE-2 (the "License");
 # you may not use this file except in compliance with the License.

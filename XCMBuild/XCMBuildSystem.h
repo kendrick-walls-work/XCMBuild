@@ -2,7 +2,7 @@
 //  XCMBuildSystem.h
 //  XCMBuild
 //
-//	Copyright (c) 2023 Mr.Walls
+//	Copyright (c) 2023-2024 Mr.Walls
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -37,13 +37,32 @@
 
 #if defined(TARGET_OS_OSX) && TARGET_OS_OSX || (defined(TARGET_OS_UNIX) && TARGET_OS_UNIX) || defined(TARGET_OS_LINUX) && TARGET_OS_LINUX
 
-@class NSMethodSignature, NSInvocation, NSArray<ObjectType>, NSDictionary<KeyType, ObjectType>, NSString, NSObject, NSBundle;
+@class NSBundle;
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
+
+#if !defined(XCMBuildSystemBundleIDString)
+/// Defined when supporting XCMBuildSystem bundles.
+XCMB_IMPORT __kindof NSString * const XCMBuildSystemBundleIDString XCMHELPER_NEEDED;
+#endif /* !XCMBuildSystemBundleIDString */
+
 #if !defined(XCMBuildSystem)
+XCMB_EXPORT
 /// XCMBuildSystem allows building projects via makefiles with the targets `build`, `install`, `clean`, `test`, `uninstall`, etc.
 @interface XCMBuildSystem: NSBundle {
 }
+
+/// Overloaded to return a ``XCMBuildSystem`` when the resulting NSBundle is _also_ a ``XCMBuildSystem``.
+/// - Parameter aClass: A class.
+/// - Returns:The ``XCMBuildSystem`` if the identifier matches otherwise the NSBundle object from calling `[NSBundle bundleForClass:aClass]`.
++ (__kindof NSBundle *)bundleForClass:(Class)aClass;
+
+/// Overloaded to return a ``XCMBuildSystem`` when the resulting NSBundle is _also_ a ``XCMBuildSystem``.
+/// - Parameter identifier: The identifier for an existing NSBundle instance.
+/// - Returns:The ``XCMBuildSystem`` if the identifier matches otherwise the NSBundle object with the bundle identifier
+///  identifier, or nil if the requested bundle is not found on the system.
++ (nullable __kindof NSBundle *)bundleWithIdentifier:(NSString *)identifier;
+
 /// Returns the string describing the object in the debugger.
 /// See  `NSObject/description` for details.
 /// ``XCMBuildSystem``'s implementation of this method simply prints the name of the class.
@@ -58,7 +77,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 ///     Optionally prefixed with `un`, `pre-` or `post-`.
 ///
 /// - Returns: The `NSString` containing the full path to the requested `excutable` if available; otherwise `nil`.
-- (nullable NSString *)pathForAuxiliaryExecutable:(NSString *_Null_unspecified)executableName NS_REQUIRES_SUPER;
++ (nullable NSString *)pathForAuxiliaryExecutable:(NSString *_Null_unspecified)executableName;
 @end
 #endif
 

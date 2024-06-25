@@ -1,6 +1,6 @@
 /*!
  * @file XCMClean/XCMClean.h
- * @copyright Copyright (c) 2023 Mr.Walls
+ * @copyright Copyright (c) 2023-2024 Mr.Walls
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,7 +43,7 @@
 
 #ifndef XCMCleanCommandArgumentsString
 /// Use this as the ' make clean' cmdline string for XCMClean.
-extern NSString * const XCMCleanCommandArgumentsString XCMHELPER_NEEDED;
+XCMB_IMPORT NSString * const XCMCleanCommandArgumentsString XCMHELPER_NEEDED;
 #endif /* !XCMCleanCommandArgumentsString */
 
 #if defined(XCRS_RUNSHELL_MAIN_MARK)

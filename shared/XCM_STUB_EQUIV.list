@@ -1,0 +1,5 @@
+make -f Makefile -j1 clean
+make -f Makefile analyze
+make -f Makefile archive
+make -f Makefile install
+make -f Makefile docs

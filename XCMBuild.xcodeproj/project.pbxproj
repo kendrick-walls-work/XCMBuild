@@ -71,7 +71,11 @@
 				84BD1E622AAFD54A004F72DF /* ShellScript */,
 			);
 			dependencies = (
+				84AE0C5F2C264B930088BE6C /* PBXTargetDependency */,
+				84AE0C612C264B930088BE6C /* PBXTargetDependency */,
+				84AE0C632C264B930088BE6C /* PBXTargetDependency */,
 				8493A7CE2B23C6B20000F3B1 /* PBXTargetDependency */,
+				843AC0202C2244D800B93C62 /* PBXTargetDependency */,
 				843C23CE2AA963F900F8F65C /* PBXTargetDependency */,
 				8462AFD22A900E69001EFB68 /* PBXTargetDependency */,
 			);
@@ -140,6 +144,18 @@
 			name = "Audit Core Codesign";
 			productName = "Audit Core Codesign";
 		};
+		84B1ECE02C23CA870095FC99 /* Enumerate Helper Headers */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 84B1ECE12C23CA870095FC99 /* Build configuration list for PBXAggregateTarget "Enumerate Helper Headers" */;
+			buildPhases = (
+				84B1ECE62C23CAA60095FC99 /* Generate Source Files */,
+			);
+			dependencies = (
+				84AE0C102C2643B60088BE6C /* PBXTargetDependency */,
+			);
+			name = "Enumerate Helper Headers";
+			productName = "Enumerate Helper Headers";
+		};
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
@@ -158,6 +174,15 @@
 		842858FD2A8AF508002C447C /* orderfile in Generate Order-files */ = {isa = PBXBuildFile; fileRef = 842858FE2A8AF508002C447C /* orderfile */; };
 		8432BC422AA7FC3C008F67E2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 849B23C12A89ACD800962A8A /* Foundation.framework */; };
 		8434DD412ACF71600081E26E /* Icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 8434DD402ACF715A0081E26E /* Icon.icns */; };
+		843AC0132C22439400B93C62 /* libobjc.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 84CEAD462A8B2A4700EBE49A /* libobjc.tbd */; settings = {ATTRIBUTES = (Weak, ); }; };
+		843AC0142C22439400B93C62 /* XCMBuild.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8489034B2A84535000F5F241 /* XCMBuild.framework */; };
+		843AC0152C22439400B93C62 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 849B23C12A89ACD800962A8A /* Foundation.framework */; };
+		843AC0162C22439400B93C62 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84FADEAD2AAC13FB00C31C1A /* CoreFoundation.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		843AC0172C22439400B93C62 /* libc.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 84CEAD482A8B2A8A00EBE49A /* libc.tbd */; settings = {ATTRIBUTES = (Weak, ); }; };
+		843AC0182C22439400B93C62 /* libdispatch.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8493C1412AEB2429009C7188 /* libdispatch.tbd */; settings = {ATTRIBUTES = (Weak, ); }; };
+		843AC01E2C2244B500B93C62 /* XCMAnalyze in Embed Helper Tools */ = {isa = PBXBuildFile; fileRef = 843AC01D2C22439400B93C62 /* XCMAnalyze */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		843AC02A2C2253BA00B93C62 /* XCMAnalyze.h in Headers */ = {isa = PBXBuildFile; fileRef = 843AC0282C2253BA00B93C62 /* XCMAnalyze.h */; };
+		843AC02B2C2253BA00B93C62 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 843AC0292C2253BA00B93C62 /* main.m */; settings = {COMPILER_FLAGS = "-x objective-c"; }; };
 		843C23C12AA9367C00F8F65C /* libc.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 84CEAD482A8B2A8A00EBE49A /* libc.tbd */; settings = {ATTRIBUTES = (Weak, ); }; };
 		843C23C22AA936C700F8F65C /* libobjc.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 84CEAD462A8B2A4700EBE49A /* libobjc.tbd */; settings = {ATTRIBUTES = (Weak, ); }; };
 		843C23C32AA9373000F8F65C /* libobjc.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 84CEAD462A8B2A4700EBE49A /* libobjc.tbd */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -200,6 +225,33 @@
 		8493C1442AEB247E009C7188 /* libdispatch.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8493C1412AEB2429009C7188 /* libdispatch.tbd */; settings = {ATTRIBUTES = (Weak, ); }; };
 		8493C1452AEB2481009C7188 /* libdispatch.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8493C1412AEB2429009C7188 /* libdispatch.tbd */; settings = {ATTRIBUTES = (Weak, ); }; };
 		8493C1462AEB2503009C7188 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84FADEAD2AAC13FB00C31C1A /* CoreFoundation.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		84AE0C1D2C2643F90088BE6C /* libobjc.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 84CEAD462A8B2A4700EBE49A /* libobjc.tbd */; settings = {ATTRIBUTES = (Weak, ); }; };
+		84AE0C1E2C2643F90088BE6C /* XCMBuild.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8489034B2A84535000F5F241 /* XCMBuild.framework */; };
+		84AE0C1F2C2643F90088BE6C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 849B23C12A89ACD800962A8A /* Foundation.framework */; };
+		84AE0C202C2643F90088BE6C /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84FADEAD2AAC13FB00C31C1A /* CoreFoundation.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		84AE0C212C2643F90088BE6C /* libc.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 84CEAD482A8B2A8A00EBE49A /* libc.tbd */; settings = {ATTRIBUTES = (Weak, ); }; };
+		84AE0C222C2643F90088BE6C /* libdispatch.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8493C1412AEB2429009C7188 /* libdispatch.tbd */; settings = {ATTRIBUTES = (Weak, ); }; };
+		84AE0C292C26443D0088BE6C /* XCMArchive.h in Headers */ = {isa = PBXBuildFile; fileRef = 84AE0C282C26443D0088BE6C /* XCMArchive.h */; };
+		84AE0C2C2C2644BD0088BE6C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AE0C2B2C2644BC0088BE6C /* main.m */; settings = {COMPILER_FLAGS = "-x objective-c"; }; };
+		84AE0C352C26458F0088BE6C /* libobjc.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 84CEAD462A8B2A4700EBE49A /* libobjc.tbd */; settings = {ATTRIBUTES = (Weak, ); }; };
+		84AE0C362C26458F0088BE6C /* XCMBuild.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8489034B2A84535000F5F241 /* XCMBuild.framework */; };
+		84AE0C372C26458F0088BE6C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 849B23C12A89ACD800962A8A /* Foundation.framework */; };
+		84AE0C382C26458F0088BE6C /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84FADEAD2AAC13FB00C31C1A /* CoreFoundation.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		84AE0C392C26458F0088BE6C /* libc.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 84CEAD482A8B2A8A00EBE49A /* libc.tbd */; settings = {ATTRIBUTES = (Weak, ); }; };
+		84AE0C3A2C26458F0088BE6C /* libdispatch.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8493C1412AEB2429009C7188 /* libdispatch.tbd */; settings = {ATTRIBUTES = (Weak, ); }; };
+		84AE0C412C2645E90088BE6C /* XCMInstall.h in Headers */ = {isa = PBXBuildFile; fileRef = 84AE0C402C2645E90088BE6C /* XCMInstall.h */; };
+		84AE0C432C2646020088BE6C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AE0C422C2646020088BE6C /* main.m */; settings = {COMPILER_FLAGS = "-x objective-c"; }; };
+		84AE0C512C264B150088BE6C /* libobjc.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 84CEAD462A8B2A4700EBE49A /* libobjc.tbd */; settings = {ATTRIBUTES = (Weak, ); }; };
+		84AE0C522C264B150088BE6C /* XCMBuild.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8489034B2A84535000F5F241 /* XCMBuild.framework */; };
+		84AE0C532C264B150088BE6C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 849B23C12A89ACD800962A8A /* Foundation.framework */; };
+		84AE0C542C264B150088BE6C /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84FADEAD2AAC13FB00C31C1A /* CoreFoundation.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		84AE0C552C264B150088BE6C /* libc.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 84CEAD482A8B2A8A00EBE49A /* libc.tbd */; settings = {ATTRIBUTES = (Weak, ); }; };
+		84AE0C562C264B150088BE6C /* libdispatch.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8493C1412AEB2429009C7188 /* libdispatch.tbd */; settings = {ATTRIBUTES = (Weak, ); }; };
+		84AE0C5C2C264B2E0088BE6C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AE0C472C2646BB0088BE6C /* main.m */; settings = {COMPILER_FLAGS = "-x objective-c"; }; };
+		84AE0C5D2C264B3F0088BE6C /* XCMDocBuild.h in Headers */ = {isa = PBXBuildFile; fileRef = 84AE0C462C2646BB0088BE6C /* XCMDocBuild.h */; };
+		84AE0C642C264BB90088BE6C /* XCMArchive in Embed Helper Tools */ = {isa = PBXBuildFile; fileRef = 84AE0C272C2643F90088BE6C /* XCMArchive */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		84AE0C652C264BB90088BE6C /* XCMInstall in Embed Helper Tools */ = {isa = PBXBuildFile; fileRef = 84AE0C3F2C26458F0088BE6C /* XCMInstall */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		84AE0C662C264BB90088BE6C /* XCMDocBuild in Embed Helper Tools */ = {isa = PBXBuildFile; fileRef = 84AE0C5B2C264B150088BE6C /* XCMDocBuild */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		84B0D58B2ADF3B4A00C9C5D2 /* clonefile in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84B0D58A2ADF3B4A00C9C5D2 /* clonefile */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		84B0F88C2AAA6F9E00224163 /* libobjc.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 84CEAD462A8B2A4700EBE49A /* libobjc.tbd */; settings = {ATTRIBUTES = (Weak, ); }; };
 		84B1F4A42ACE65AB00DD1513 /* XCRunShell.docc in Sources */ = {isa = PBXBuildFile; fileRef = 84B1F4A32ACE65AB00DD1513 /* XCRunShell.docc */; settings = {COMPILER_FLAGS = "--output-dir $(DOCUMENTATION_FOLDER_PATH)"; }; };
@@ -207,6 +259,8 @@
 		84BD1E5D2AAFC465004F72DF /* XCMTest in Embed Helper Tools */ = {isa = PBXBuildFile; fileRef = 8486BF442AA67BD9005A02F4 /* XCMTest */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		84CEAD432A8B290F00EBE49A /* XCMShell.h in Headers */ = {isa = PBXBuildFile; fileRef = 841B5D0B2A89E35100E589BB /* XCMShell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84CEAD452A8B291500EBE49A /* xcrunshell.h in Headers */ = {isa = PBXBuildFile; fileRef = 84E1D7A02A8AB66000779732 /* xcrunshell.h */; platformFilters = (macos, ); settings = {ATTRIBUTES = (Private, ); }; };
+		84D44CF42C01A29700591F3A /* XCMBuildMetaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D44CF32C01A29700591F3A /* XCMBuildMetaTests.m */; };
+		84D44CF52C01A29700591F3A /* XCMBuild.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8489034B2A84535000F5F241 /* XCMBuild.framework */; platformFilters = (macos, ); };
 		84E1D7A22A8ABA3700779732 /* xcrunshell.h in Headers */ = {isa = PBXBuildFile; fileRef = 84E1D7A02A8AB66000779732 /* xcrunshell.h */; settings = {COMPILER_FLAGS = "-S -x objective-c"; }; };
 		84FADEA22AABBD5400C31C1A /* xcode_run_tests.bash in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84FADEA02AABBD5400C31C1A /* xcode_run_tests.bash */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		84FADEAB2AABF3EA00C31C1A /* libc.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 84CEAD482A8B2A8A00EBE49A /* libc.tbd */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -282,6 +336,13 @@
 			remoteGlobalIDString = 841FB8D52AD645FE00C70DBD;
 			remoteInfo = "Inject Shell Tools";
 		};
+		843AC01F2C2244D800B93C62 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84D3F4512A7C38650022D176 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 843AC00B2C22439400B93C62;
+			remoteInfo = XCMAnalyze;
+		};
 		843C23CD2AA963F900F8F65C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 84D3F4512A7C38650022D176 /* Project object */;
@@ -324,13 +385,6 @@
 			remoteGlobalIDString = 8498B8702AB147B8001084D8;
 			remoteInfo = "Audit Core Codesign";
 		};
-		8493A7BA2B23C5E10000F3B1 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 84D3F4512A7C38650022D176 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 8498B8702AB147B8001084D8;
-			remoteInfo = "Audit Core Codesign";
-		};
 		8493A7CD2B23C6B20000F3B1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 84D3F4512A7C38650022D176 /* Project object */;
@@ -346,6 +400,76 @@
 			remoteInfo = XCMBuild;
 		};
 		84AB43C82AAB900400E24981 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84D3F4512A7C38650022D176 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8462AFDD2A900F1E001EFB68;
+			remoteInfo = All;
+		};
+		84AE0C0F2C2643B60088BE6C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84D3F4512A7C38650022D176 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8498B8702AB147B8001084D8;
+			remoteInfo = "Audit Core Codesign";
+		};
+		84AE0C112C2643C00088BE6C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84D3F4512A7C38650022D176 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 84B1ECE02C23CA870095FC99;
+			remoteInfo = "Enumerate Helper Headers";
+		};
+		84AE0C132C2643CD0088BE6C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84D3F4512A7C38650022D176 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 84B1ECE02C23CA870095FC99;
+			remoteInfo = "Enumerate Helper Headers";
+		};
+		84AE0C172C2643F90088BE6C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84D3F4512A7C38650022D176 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 84B1ECE02C23CA870095FC99;
+			remoteInfo = "Enumerate Helper Headers";
+		};
+		84AE0C2F2C26458F0088BE6C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84D3F4512A7C38650022D176 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 84B1ECE02C23CA870095FC99;
+			remoteInfo = "Enumerate Helper Headers";
+		};
+		84AE0C4B2C264B150088BE6C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84D3F4512A7C38650022D176 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 84B1ECE02C23CA870095FC99;
+			remoteInfo = "Enumerate Helper Headers";
+		};
+		84AE0C5E2C264B930088BE6C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84D3F4512A7C38650022D176 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 84AE0C152C2643F90088BE6C;
+			remoteInfo = XCMArchive;
+		};
+		84AE0C602C264B930088BE6C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84D3F4512A7C38650022D176 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 84AE0C492C264B150088BE6C;
+			remoteInfo = XCMDocBuild;
+		};
+		84AE0C622C264B930088BE6C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84D3F4512A7C38650022D176 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 84AE0C2D2C26458F0088BE6C;
+			remoteInfo = XCMInstall;
+		};
+		84D44CFF2C01AA3900591F3A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 84D3F4512A7C38650022D176 /* Project object */;
 			proxyType = 1;
@@ -376,6 +500,15 @@
 				840E89962B044F53008A6A1E /* xcode_run_tool.bash in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
+		};
+		843AC0192C22439400B93C62 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
 		};
 		84502A792AB8E4D900AA5382 /* Copy Private Module Map */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -427,7 +560,11 @@
 			dstPath = "$(CONTENTS_FOLDER_PATH)/usr/bin";
 			dstSubfolderSpec = 16;
 			files = (
+				84AE0C642C264BB90088BE6C /* XCMArchive in Embed Helper Tools */,
+				84AE0C652C264BB90088BE6C /* XCMInstall in Embed Helper Tools */,
+				84AE0C662C264BB90088BE6C /* XCMDocBuild in Embed Helper Tools */,
 				8493A7CC2B23C66E0000F3B1 /* XCMClean in Embed Helper Tools */,
+				843AC01E2C2244B500B93C62 /* XCMAnalyze in Embed Helper Tools */,
 				84BD1E5D2AAFC465004F72DF /* XCMTest in Embed Helper Tools */,
 				8462AFD72A900E69001EFB68 /* xcrunshell in Embed Helper Tools */,
 			);
@@ -474,6 +611,33 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
+		84AE0C232C2643F90088BE6C /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		84AE0C3B2C26458F0088BE6C /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		84AE0C572C264B150088BE6C /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -487,7 +651,7 @@
 		840E89952B0443B5008A6A1E /* xcode_build_tool.bash */ = {isa = PBXFileReference; explicitFileType = text.script.sh; fileEncoding = 4; lineEnding = 0; name = xcode_build_tool.bash; path = bin/xcode_build_tool.bash; sourceTree = SOURCE_ROOT; usesTabs = 1; };
 		840E89982B04503A008A6A1E /* test_shell_script_posix_run_tool.bash */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = test_shell_script_posix_run_tool.bash; path = tests/test_shell_script_posix_run_tool.bash; sourceTree = SOURCE_ROOT; };
 		840E89992B0450EB008A6A1E /* setIcon */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = setIcon; path = bin/setIcon; sourceTree = SOURCE_ROOT; };
-		84101C8F2B0AC95E00F4E97B /* XCRunShell.make */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; name = XCRunShell.make; path = includes/XCRunShell.make; sourceTree = "<group>"; };
+		84101C8F2B0AC95E00F4E97B /* XCRunShell.make */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; fileEncoding = 4; lineEnding = 0; name = XCRunShell.make; path = includes/XCRunShell.make; sourceTree = "<group>"; };
 		8411D99B2A82E8100029B632 /* test_codecov_config.bash */ = {isa = PBXFileReference; explicitFileType = text.script.bash; fileEncoding = 4; lastKnownFileType = text.script.bash; lineEnding = 0; name = test_codecov_config.bash; path = tests/test_codecov_config.bash; sourceTree = "<group>"; };
 		8411D99D2A82E8100029B632 /* test_plists.bash */ = {isa = PBXFileReference; explicitFileType = text.script.bash; fileEncoding = 4; lastKnownFileType = text.script.bash; lineEnding = 0; name = test_plists.bash; path = tests/test_plists.bash; sourceTree = "<group>"; };
 		8411D99E2A82E8100029B632 /* test_bash_shlock_tool.bash */ = {isa = PBXFileReference; explicitFileType = text.script.bash; fileEncoding = 4; lastKnownFileType = text.script.bash; lineEnding = 0; name = test_bash_shlock_tool.bash; path = tests/test_bash_shlock_tool.bash; sourceTree = "<group>"; };
@@ -507,6 +671,16 @@
 		8434DD422ACF7E0F0081E26E /* XCMBuild-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.info; name = "XCMBuild-Info.plist"; path = "Resources/XCMBuild-Info.plist"; sourceTree = "<group>"; };
 		843A5AF02AB2542300B52D5B /* Specialized.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Specialized.xcconfig; path = shared/Config/Specialized.xcconfig; sourceTree = SOURCE_ROOT; };
 		843A5AF12AB2806E00B52D5B /* XCMBuildInfo.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = XCMBuildInfo.xcconfig; path = shared/Config/XCMBuildInfo.xcconfig; sourceTree = SOURCE_ROOT; };
+		843AC01D2C22439400B93C62 /* XCMAnalyze */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = XCMAnalyze; sourceTree = BUILT_PRODUCTS_DIR; };
+		843AC0212C22477B00B93C62 /* XCMAnalyze-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "XCMAnalyze-Info.plist"; sourceTree = "<group>"; };
+		843AC0222C22480D00B93C62 /* XCM_STUBNAME_.make.m4 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; lineEnding = 0; name = XCM_STUBNAME_.make.m4; path = includes/XCM_STUBNAME_.make.m4; sourceTree = "<group>"; };
+		843AC0232C22481800B93C62 /* XCMake.make */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; fileEncoding = 4; lineEnding = 0; name = XCMake.make; path = includes/XCMake.make; sourceTree = "<group>"; };
+		843AC0242C22498500B93C62 /* XCMAnalyze.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; name = XCMAnalyze.entitlements; path = shared/security/entitlements/XCMAnalyze.entitlements; sourceTree = SOURCE_ROOT; };
+		843AC0252C22498500B93C62 /* XCMake.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; name = XCMake.entitlements; path = shared/security/entitlements/XCMake.entitlements; sourceTree = SOURCE_ROOT; };
+		843AC0282C2253BA00B93C62 /* XCMAnalyze.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCMAnalyze.h; sourceTree = "<group>"; };
+		843AC0292C2253BA00B93C62 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = main.m; sourceTree = "<group>"; };
+		843AC02C2C2253FD00B93C62 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = main.m; sourceTree = "<group>"; };
+		843AC02D2C2253FD00B93C62 /* XCMake.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = XCMake.h; sourceTree = "<group>"; };
 		843C23C82AA9516A00F8F65C /* XCMBuildSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = XCMBuildSystem.h; sourceTree = "<group>"; };
 		843C23C92AA9516A00F8F65C /* XCMBuildSystem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = XCMBuildSystem.m; sourceTree = "<group>"; };
 		843E5D2A2ADA0CF00063C8FA /* XcodeCompileScriptsDebug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = XcodeCompileScriptsDebug.xcconfig; path = Config/XcodeCompileScriptsDebug.xcconfig; sourceTree = "<group>"; };
@@ -536,11 +710,12 @@
 		847031332AD0E85F00386F22 /* XCMProcesses.m */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; fileEncoding = 4; lineEnding = 0; name = XCMProcesses.m; path = XCMBuild/XCMProcesses.m; sourceTree = SOURCE_ROOT; };
 		847031352AD11D6300386F22 /* XCMProcesses.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = XCMProcesses.h; sourceTree = "<group>"; usesTabs = 1; };
 		84709D402ACBD19E00B660DB /* libsandbox.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsandbox.tbd; path = usr/lib/libsandbox.tbd; sourceTree = SDKROOT; };
+		8474A6672C28FF3A0010EF4B /* XCM_STUBNAME_.entitlements.m4 */ = {isa = PBXFileReference; lastKnownFileType = text; name = XCM_STUBNAME_.entitlements.m4; path = shared/security/entitlements/XCM_STUBNAME_.entitlements.m4; sourceTree = SOURCE_ROOT; };
 		847527F42AA150E000B1FDE3 /* apfs_dir_CONFIG_ACLs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; lineEnding = 0; path = apfs_dir_CONFIG_ACLs; sourceTree = "<group>"; };
 		847527F52AA150E000B1FDE3 /* apfs_dir_DEVELOPER_ACLs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = apfs_dir_DEVELOPER_ACLs; sourceTree = "<group>"; };
 		847527F62AA150E000B1FDE3 /* apfs_file_CONFIG_ACLs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = apfs_file_CONFIG_ACLs; sourceTree = "<group>"; };
 		847527FB2AA1546100B1FDE3 /* test_shell_scripts.bash */ = {isa = PBXFileReference; explicitFileType = text.script.bash; fileEncoding = 4; lastKnownFileType = text.script.bash; lineEnding = 0; name = test_shell_scripts.bash; path = tests/test_shell_scripts.bash; sourceTree = SOURCE_ROOT; usesTabs = 1; };
-		8476C8502AFDC1EE009F1995 /* XCMBuild.make */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; name = XCMBuild.make; path = includes/XCMBuild.make; sourceTree = "<group>"; };
+		8476C8502AFDC1EE009F1995 /* XCMBuild.make */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; fileEncoding = 4; lineEnding = 0; name = XCMBuild.make; path = includes/XCMBuild.make; sourceTree = "<group>"; };
 		8477F5192ACA331000688CF2 /* XCMShellDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCMShellDelegate.h; sourceTree = "<group>"; };
 		8477F51B2ACA363100688CF2 /* XCMShellDelegate.m */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; fileEncoding = 4; lineEnding = 0; path = XCMShellDelegate.m; sourceTree = "<group>"; };
 		847A70752ACF6AC900215F96 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text; name = Base; path = "Resources/Base.lproj/LICENSE-2.0.txt"; sourceTree = "<group>"; };
@@ -582,30 +757,47 @@
 		849C3D272AEA0A4B007989BA /* XCMBuild 2.2.6 Installer.pkg */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.installer-pkg"; path = "XCMBuild 2.2.6 Installer.pkg"; sourceTree = BUILT_PRODUCTS_DIR; };
 		849C3D2A2AEA0B1B007989BA /* XCMBuild_debug */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; name = XCMBuild_debug; path = XCMBuild.framework/XCMBuild_debug; sourceTree = BUILT_PRODUCTS_DIR; };
 		84A1429F2AEB126400595650 /* NoTAPIConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = NoTAPIConfig.xcconfig; path = Config/NoTAPIConfig.xcconfig; sourceTree = "<group>"; };
-		84AFD86E2AFAF37B00FB9CC7 /* resources.make */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; lineEnding = 0; name = resources.make; path = includes/resources.make; sourceTree = "<group>"; usesTabs = 1; };
+		84AE0C272C2643F90088BE6C /* XCMArchive */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = XCMArchive; sourceTree = BUILT_PRODUCTS_DIR; };
+		84AE0C282C26443D0088BE6C /* XCMArchive.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCMArchive.h; sourceTree = "<group>"; };
+		84AE0C2B2C2644BC0088BE6C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		84AE0C3F2C26458F0088BE6C /* XCMInstall */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = XCMInstall; sourceTree = BUILT_PRODUCTS_DIR; };
+		84AE0C402C2645E90088BE6C /* XCMInstall.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCMInstall.h; sourceTree = "<group>"; };
+		84AE0C422C2646020088BE6C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		84AE0C462C2646BB0088BE6C /* XCMDocBuild.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = XCMDocBuild.h; sourceTree = "<group>"; };
+		84AE0C472C2646BB0088BE6C /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = main.m; sourceTree = "<group>"; };
+		84AE0C5B2C264B150088BE6C /* XCMDocBuild */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = XCMDocBuild; sourceTree = BUILT_PRODUCTS_DIR; };
+		84AFD86E2AFAF37B00FB9CC7 /* resources.make */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; fileEncoding = 4; lineEnding = 0; name = resources.make; path = includes/resources.make; sourceTree = "<group>"; usesTabs = 1; };
 		84AFD86F2AFB01DC00FB9CC7 /* headers.make */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; name = headers.make; path = includes/headers.make; sourceTree = "<group>"; };
 		84B0D58A2ADF3B4A00C9C5D2 /* clonefile */ = {isa = PBXFileReference; explicitFileType = text.script.sh; fileEncoding = 4; lineEnding = 0; name = clonefile; path = bin/clonefile; sourceTree = SOURCE_ROOT; };
+		84B1ECDF2C239A580095FC99 /* XCM_STUBNAME_.h.m4 */ = {isa = PBXFileReference; lastKnownFileType = text; path = XCM_STUBNAME_.h.m4; sourceTree = "<group>"; };
 		84B1F4A32ACE65AB00DD1513 /* XCRunShell.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = XCRunShell.docc; sourceTree = "<group>"; };
 		84B1F4A52ACE8A4D00DD1513 /* XCMTest.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = XCMTest.docc; sourceTree = "<group>"; };
 		84B6F86A2AEC89F80028B471 /* compilerflags.make */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; fileEncoding = 4; lineEnding = 0; name = compilerflags.make; path = includes/compilerflags.make; sourceTree = "<group>"; };
 		84B6F86B2AECA9BC0028B471 /* test_makefiles.bash */ = {isa = PBXFileReference; explicitFileType = text.script.sh; fileEncoding = 4; lineEnding = 0; name = test_makefiles.bash; path = tests/test_makefiles.bash; sourceTree = "<group>"; usesTabs = 1; };
+		84BB3C572C29113A00A8C82F /* tool_gen_XCMTools_SRC_helper.bash */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; lineEnding = 0; name = tool_gen_XCMTools_SRC_helper.bash; path = bin/tool_gen_XCMTools_SRC_helper.bash; sourceTree = "<group>"; };
 		84BD1E632AAFDCB1004F72DF /* CommonConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = CommonConfig.xcconfig; path = shared/Config/CommonConfig.xcconfig; sourceTree = SOURCE_ROOT; };
 		84BD1E642AAFDFD7004F72DF /* XcodeTestingConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = XcodeTestingConfig.xcconfig; path = shared/Config/XcodeTestingConfig.xcconfig; sourceTree = SOURCE_ROOT; };
 		84BF4DF52ABA564D00E33993 /* XcodePreBuildGlueConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = XcodePreBuildGlueConfig.xcconfig; path = shared/Config/XcodePreBuildGlueConfig.xcconfig; sourceTree = SOURCE_ROOT; };
 		84BF4DF62ABA581700E33993 /* XcodePreBuildDebugGlueConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = XcodePreBuildDebugGlueConfig.xcconfig; path = shared/Config/XcodePreBuildDebugGlueConfig.xcconfig; sourceTree = SOURCE_ROOT; };
+		84C204FD2C2629D10029B011 /* main.m.m4 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; lineEnding = 0; path = main.m.m4; sourceTree = "<group>"; };
+		84C204FE2C2630360029B011 /* XCM_STUBNAME_-Info.plist.m4 */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "XCM_STUBNAME_-Info.plist.m4"; sourceTree = "<group>"; };
+		84C204FF2C263EEF0029B011 /* XCM_STUB_EQUIV.list */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; lineEnding = 0; path = XCM_STUB_EQUIV.list; sourceTree = "<group>"; };
+		84C205002C263EEF0029B011 /* XCM_STUB_DESC.list */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; lineEnding = 0; path = XCM_STUB_DESC.list; sourceTree = "<group>"; };
 		84C245D32B16D21600D3703A /* fxip */ = {isa = PBXFileReference; explicitFileType = text.script.sh; fileEncoding = 4; lineEnding = 0; name = fxip; path = bin/fxip; sourceTree = SOURCE_ROOT; usesTabs = 1; };
 		84C78FEF2AF45FE00036B2D8 /* version.make */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; name = version.make; path = includes/version.make; sourceTree = "<group>"; };
 		84C78FF02AF46D9C0036B2D8 /* genversc.bash */ = {isa = PBXFileReference; explicitFileType = text.script.sh; fileEncoding = 4; lineEnding = 0; name = genversc.bash; path = bin/genversc.bash; sourceTree = SOURCE_ROOT; usesTabs = 1; };
 		84CEAD462A8B2A4700EBE49A /* libobjc.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libobjc.tbd; path = usr/lib/libobjc.tbd; sourceTree = SDKROOT; };
 		84CEAD482A8B2A8A00EBE49A /* libc.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libc.tbd; path = usr/lib/libc.tbd; sourceTree = SDKROOT; };
 		84D12C322B23C99300E7B4DF /* XCMClean.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = XCMClean.entitlements; path = security/entitlements/XCMClean.entitlements; sourceTree = "<group>"; };
-		84D12C332B23CAB700E7B4DF /* XCMClean.make */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; lineEnding = 0; name = XCMClean.make; path = includes/XCMClean.make; sourceTree = "<group>"; usesTabs = 1; };
+		84D12C332B23CAB700E7B4DF /* XCMClean.make */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; fileEncoding = 4; lineEnding = 0; name = XCMClean.make; path = includes/XCMClean.make; sourceTree = "<group>"; usesTabs = 1; };
 		84D3F4523A7C38650022D176 /* Makefile */ = {isa = PBXFileReference; explicitFileType = sourcecode.makefile.make; fileEncoding = 4; lastKnownFileType = sourcecode.make; lineEnding = 0; path = Makefile; sourceTree = SOURCE_ROOT; };
+		84D44CF12C01A29700591F3A /* XCMBuildMetaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XCMBuildMetaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		84D44CF32C01A29700591F3A /* XCMBuildMetaTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCMBuildMetaTests.m; sourceTree = "<group>"; };
 		84DCECF32B0BF91000B7626A /* stemname */ = {isa = PBXFileReference; explicitFileType = text.script.sh; fileEncoding = 4; lineEnding = 0; name = stemname; path = bin/stemname; sourceTree = SOURCE_ROOT; usesTabs = 1; };
 		84DFD9482A844E190078F7F9 /* .github */ = {isa = PBXFileReference; lastKnownFileType = folder; path = .github; sourceTree = SOURCE_ROOT; };
 		84E1D7A02A8AB66000779732 /* xcrunshell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = xcrunshell.h; sourceTree = "<group>"; };
 		84E3F7AA2AD7CA0000E7DB40 /* XCMBuild-Components.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "XCMBuild-Components.plist"; sourceTree = "<group>"; };
-		84F6B2172B193B7C00A9750E /* XCMTest.make */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; name = XCMTest.make; path = includes/XCMTest.make; sourceTree = "<group>"; };
+		84F6B2172B193B7C00A9750E /* XCMTest.make */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; fileEncoding = 4; lineEnding = 0; name = XCMTest.make; path = includes/XCMTest.make; sourceTree = "<group>"; };
 		84FADEA02AABBD5400C31C1A /* xcode_run_tests.bash */ = {isa = PBXFileReference; explicitFileType = text.script.bash; fileEncoding = 4; lastKnownFileType = text.script.bash; name = xcode_run_tests.bash; path = bin/xcode_run_tests.bash; sourceTree = SOURCE_ROOT; };
 		84FADEA12AABBD5400C31C1A /* xcode_run_tool.bash */ = {isa = PBXFileReference; explicitFileType = text.script.bash; fileEncoding = 4; lastKnownFileType = text.script.bash; name = xcode_run_tool.bash; path = bin/xcode_run_tool.bash; sourceTree = SOURCE_ROOT; };
 		84FADEA82AABEAA200C31C1A /* XCMTest.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = XCMTest.entitlements; path = shared/security/entitlements/XCMTest.entitlements; sourceTree = SOURCE_ROOT; };
@@ -614,6 +806,19 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		843AC0122C22439400B93C62 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				843AC0132C22439400B93C62 /* libobjc.tbd in Frameworks */,
+				843AC0142C22439400B93C62 /* XCMBuild.framework in Frameworks */,
+				843AC0152C22439400B93C62 /* Foundation.framework in Frameworks */,
+				843AC0162C22439400B93C62 /* CoreFoundation.framework in Frameworks */,
+				843AC0172C22439400B93C62 /* libc.tbd in Frameworks */,
+				843AC0182C22439400B93C62 /* libdispatch.tbd in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		84619D752A85BCA7009C5753 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -667,6 +872,53 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		84AE0C1C2C2643F90088BE6C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84AE0C1D2C2643F90088BE6C /* libobjc.tbd in Frameworks */,
+				84AE0C1E2C2643F90088BE6C /* XCMBuild.framework in Frameworks */,
+				84AE0C1F2C2643F90088BE6C /* Foundation.framework in Frameworks */,
+				84AE0C202C2643F90088BE6C /* CoreFoundation.framework in Frameworks */,
+				84AE0C212C2643F90088BE6C /* libc.tbd in Frameworks */,
+				84AE0C222C2643F90088BE6C /* libdispatch.tbd in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84AE0C342C26458F0088BE6C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84AE0C352C26458F0088BE6C /* libobjc.tbd in Frameworks */,
+				84AE0C362C26458F0088BE6C /* XCMBuild.framework in Frameworks */,
+				84AE0C372C26458F0088BE6C /* Foundation.framework in Frameworks */,
+				84AE0C382C26458F0088BE6C /* CoreFoundation.framework in Frameworks */,
+				84AE0C392C26458F0088BE6C /* libc.tbd in Frameworks */,
+				84AE0C3A2C26458F0088BE6C /* libdispatch.tbd in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84AE0C502C264B150088BE6C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84AE0C512C264B150088BE6C /* libobjc.tbd in Frameworks */,
+				84AE0C522C264B150088BE6C /* XCMBuild.framework in Frameworks */,
+				84AE0C532C264B150088BE6C /* Foundation.framework in Frameworks */,
+				84AE0C542C264B150088BE6C /* CoreFoundation.framework in Frameworks */,
+				84AE0C552C264B150088BE6C /* libc.tbd in Frameworks */,
+				84AE0C562C264B150088BE6C /* libdispatch.tbd in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84D44CEE2C01A29700591F3A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84D44CF52C01A29700591F3A /* XCMBuild.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -694,12 +946,16 @@
 				844870012B153F7300787510 /* XCRS-orderfile */,
 				840745082AA6DAF200D6FDA6 /* module.modulemap */,
 				84502A772AB8E44300AA5382 /* module.private.modulemap */,
+				84C205002C263EEF0029B011 /* XCM_STUB_DESC.list */,
+				84C204FF2C263EEF0029B011 /* XCM_STUB_EQUIV.list */,
 				8486BF562AA684AC005A02F4 /* XCMTest.xctestplan */,
 				842EF5C82AE368D70071992D /* makefiles */,
 				848904922ACE4129008CF5F1 /* Security */,
 				8411D9A52A82E9430029B632 /* envs */,
+				84C204FE2C2630360029B011 /* XCM_STUBNAME_-Info.plist.m4 */,
 				8496E0242ACB86990009ECC9 /* xcrunshell-Info.plist */,
 				8404B6992AD4FF670050DF38 /* XCMTest-Info.plist */,
+				843AC0212C22477B00B93C62 /* XCMAnalyze-Info.plist */,
 				8493A7D32B23C88D0000F3B1 /* XCMClean-Info.plist */,
 				84E3F7AA2AD7CA0000E7DB40 /* XCMBuild-Components.plist */,
 				848904902ACE3FCF008CF5F1 /* Configuration */,
@@ -741,8 +997,14 @@
 		8416208B2AD8D4CD0062CB5E /* private */ = {
 			isa = PBXGroup;
 			children = (
+				84AE0C482C26472A0088BE6C /* XCM_STUBNAME_ */,
 				840558872AD89B6B00FFFBAC /* Compat.h */,
+				84AE0C452C2646740088BE6C /* XCMDocBuild */,
 				84FD74132A84381800F72966 /* XCMClean */,
+				84AE0C2A2C2644580088BE6C /* XCMArchive */,
+				843AC0272C22536700B93C62 /* XCMAnalyze */,
+				84AE0C442C2646490088BE6C /* XCMInstall */,
+				843AC0262C22535800B93C62 /* XCMake */,
 				8486BF3F2AA67B6D005A02F4 /* XCMTest */,
 				84619D792A85BCA7009C5753 /* xcrunshell */,
 			);
@@ -756,9 +1018,11 @@
 				84C78FEF2AF45FE00036B2D8 /* version.make */,
 				84B6F86A2AEC89F80028B471 /* compilerflags.make */,
 				846511C42AE37618006BE76A /* framework.make */,
+				843AC0232C22481800B93C62 /* XCMake.make */,
 				8476C8502AFDC1EE009F1995 /* XCMBuild.make */,
 				84101C8F2B0AC95E00F4E97B /* XCRunShell.make */,
 				84F6B2172B193B7C00A9750E /* XCMTest.make */,
+				843AC0222C22480D00B93C62 /* XCM_STUBNAME_.make.m4 */,
 				84D12C332B23CAB700E7B4DF /* XCMClean.make */,
 				84AFD86E2AFAF37B00FB9CC7 /* resources.make */,
 				84AFD86F2AFB01DC00FB9CC7 /* headers.make */,
@@ -781,6 +1045,24 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		843AC0262C22535800B93C62 /* XCMake */ = {
+			isa = PBXGroup;
+			children = (
+				843AC02D2C2253FD00B93C62 /* XCMake.h */,
+				843AC02C2C2253FD00B93C62 /* main.m */,
+			);
+			path = XCMake;
+			sourceTree = "<group>";
+		};
+		843AC0272C22536700B93C62 /* XCMAnalyze */ = {
+			isa = PBXGroup;
+			children = (
+				843AC0282C2253BA00B93C62 /* XCMAnalyze.h */,
+				843AC0292C2253BA00B93C62 /* main.m */,
+			);
+			path = XCMAnalyze;
+			sourceTree = "<group>";
+		};
 		8446EC0D2A7C843D00B93693 /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
@@ -801,7 +1083,6 @@
 				8446EC102A7C849700B93693 /* pretests.sh */,
 				8446EC122A7C849700B93693 /* runtests.sh */,
 				8446EC152A7C849700B93693 /* styletests.sh */,
-				8446EC142A7C849700B93693 /* tool_shlock_helper.bash */,
 				840E89992B0450EB008A6A1E /* setIcon */,
 				84B0D58A2ADF3B4A00C9C5D2 /* clonefile */,
 				84C78FF02AF46D9C0036B2D8 /* genversc.bash */,
@@ -813,6 +1094,8 @@
 				84838D2D2A7D8A46008BC8C1 /* flatten */,
 				84DCECF32B0BF91000B7626A /* stemname */,
 				846E3C0F2AC91D8200666235 /* snooze */,
+				8446EC142A7C849700B93693 /* tool_shlock_helper.bash */,
+				84BB3C572C29113A00A8C82F /* tool_gen_XCMTools_SRC_helper.bash */,
 			);
 			name = bin;
 			sourceTree = "<group>";
@@ -886,6 +1169,9 @@
 			isa = PBXGroup;
 			children = (
 				8411D9A54F82E9430029B632 /* ACLs */,
+				843AC0252C22498500B93C62 /* XCMake.entitlements */,
+				8474A6672C28FF3A0010EF4B /* XCM_STUBNAME_.entitlements.m4 */,
+				843AC0242C22498500B93C62 /* XCMAnalyze.entitlements */,
 				84FADEA82AABEAA200C31C1A /* XCMTest.entitlements */,
 				84D12C322B23C99300E7B4DF /* XCMClean.entitlements */,
 				847CEBDB2AB38E8300D86C91 /* XCMTestRelease.entitlements */,
@@ -904,6 +1190,42 @@
 			name = unittests;
 			sourceTree = "<group>";
 		};
+		84AE0C2A2C2644580088BE6C /* XCMArchive */ = {
+			isa = PBXGroup;
+			children = (
+				84AE0C282C26443D0088BE6C /* XCMArchive.h */,
+				84AE0C2B2C2644BC0088BE6C /* main.m */,
+			);
+			path = XCMArchive;
+			sourceTree = "<group>";
+		};
+		84AE0C442C2646490088BE6C /* XCMInstall */ = {
+			isa = PBXGroup;
+			children = (
+				84AE0C422C2646020088BE6C /* main.m */,
+				84AE0C402C2645E90088BE6C /* XCMInstall.h */,
+			);
+			path = XCMInstall;
+			sourceTree = "<group>";
+		};
+		84AE0C452C2646740088BE6C /* XCMDocBuild */ = {
+			isa = PBXGroup;
+			children = (
+				84AE0C462C2646BB0088BE6C /* XCMDocBuild.h */,
+				84AE0C472C2646BB0088BE6C /* main.m */,
+			);
+			path = XCMDocBuild;
+			sourceTree = "<group>";
+		};
+		84AE0C482C26472A0088BE6C /* XCM_STUBNAME_ */ = {
+			isa = PBXGroup;
+			children = (
+				84B1ECDF2C239A580095FC99 /* XCM_STUBNAME_.h.m4 */,
+				84C204FD2C2629D10029B011 /* main.m.m4 */,
+			);
+			path = XCM_STUBNAME_;
+			sourceTree = "<group>";
+		};
 		84D3F4502A7C38650022D176 = {
 			isa = PBXGroup;
 			children = (
@@ -914,6 +1236,7 @@
 				8411D9A22A82E8720029B632 /* shared */,
 				8411D9982A82E6910029B632 /* tests */,
 				849B23BB2A8989B000962A8A /* unittests */,
+				84D44CF22C01A29700591F3A /* XCMBuildMetaTests */,
 				84D3F45A2A7C38650022D176 /* Products */,
 				8446EC0D2A7C843D00B93693 /* Recovered References */,
 				84DFD9482A844E190078F7F9 /* .github */,
@@ -934,8 +1257,21 @@
 				848312552ACCE00C00EBC152 /* XCMTest_profile */,
 				849C3D272AEA0A4B007989BA /* XCMBuild 2.2.6 Installer.pkg */,
 				8493A7CB2B23C5E10000F3B1 /* XCMClean */,
+				84D44CF12C01A29700591F3A /* XCMBuildMetaTests.xctest */,
+				843AC01D2C22439400B93C62 /* XCMAnalyze */,
+				84AE0C272C2643F90088BE6C /* XCMArchive */,
+				84AE0C3F2C26458F0088BE6C /* XCMInstall */,
+				84AE0C5B2C264B150088BE6C /* XCMDocBuild */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		84D44CF22C01A29700591F3A /* XCMBuildMetaTests */ = {
+			isa = PBXGroup;
+			children = (
+				84D44CF32C01A29700591F3A /* XCMBuildMetaTests.m */,
+			);
+			path = XCMBuildMetaTests;
 			sourceTree = "<group>";
 		};
 		84FD74132A84381800F72966 /* XCMClean */ = {
@@ -965,6 +1301,14 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		843AC00E2C22439400B93C62 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				843AC02A2C2253BA00B93C62 /* XCMAnalyze.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8486BF4C2AA68162005A02F4 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -1001,6 +1345,30 @@
 			buildActionMask = 2147483647;
 			files = (
 				84E1D7A22A8ABA3700779732 /* xcrunshell.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84AE0C182C2643F90088BE6C /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84AE0C292C26443D0088BE6C /* XCMArchive.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84AE0C302C26458F0088BE6C /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84AE0C412C2645E90088BE6C /* XCMInstall.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84AE0C4C2C264B150088BE6C /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84AE0C5D2C264B3F0088BE6C /* XCMDocBuild.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1054,6 +1422,25 @@
 /* End PBXLegacyTarget section */
 
 /* Begin PBXNativeTarget section */
+		843AC00B2C22439400B93C62 /* XCMAnalyze */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 843AC01A2C22439400B93C62 /* Build configuration list for PBXNativeTarget "XCMAnalyze" */;
+			buildPhases = (
+				843AC00E2C22439400B93C62 /* Headers */,
+				843AC0102C22439400B93C62 /* Sources */,
+				843AC0122C22439400B93C62 /* Frameworks */,
+				843AC0192C22439400B93C62 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				84AE0C122C2643C00088BE6C /* PBXTargetDependency */,
+			);
+			name = XCMAnalyze;
+			productName = XCMTest;
+			productReference = 843AC01D2C22439400B93C62 /* XCMAnalyze */;
+			productType = "com.apple.product-type.tool";
+		};
 		84619D772A85BCA7009C5753 /* xcrunshell */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 84619D7C2A85BCA7009C5753 /* Build configuration list for PBXNativeTarget "xcrunshell" */;
@@ -1128,12 +1515,87 @@
 			buildRules = (
 			);
 			dependencies = (
-				8493A7B92B23C5E10000F3B1 /* PBXTargetDependency */,
+				84AE0C142C2643CD0088BE6C /* PBXTargetDependency */,
 			);
 			name = XCMClean;
 			productName = XCMTest;
 			productReference = 8493A7CB2B23C5E10000F3B1 /* XCMClean */;
 			productType = "com.apple.product-type.tool";
+		};
+		84AE0C152C2643F90088BE6C /* XCMArchive */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 84AE0C242C2643F90088BE6C /* Build configuration list for PBXNativeTarget "XCMArchive" */;
+			buildPhases = (
+				84AE0C182C2643F90088BE6C /* Headers */,
+				84AE0C1A2C2643F90088BE6C /* Sources */,
+				84AE0C1C2C2643F90088BE6C /* Frameworks */,
+				84AE0C232C2643F90088BE6C /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				84AE0C162C2643F90088BE6C /* PBXTargetDependency */,
+			);
+			name = XCMArchive;
+			productName = XCMTest;
+			productReference = 84AE0C272C2643F90088BE6C /* XCMArchive */;
+			productType = "com.apple.product-type.tool";
+		};
+		84AE0C2D2C26458F0088BE6C /* XCMInstall */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 84AE0C3C2C26458F0088BE6C /* Build configuration list for PBXNativeTarget "XCMInstall" */;
+			buildPhases = (
+				84AE0C302C26458F0088BE6C /* Headers */,
+				84AE0C322C26458F0088BE6C /* Sources */,
+				84AE0C342C26458F0088BE6C /* Frameworks */,
+				84AE0C3B2C26458F0088BE6C /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				84AE0C2E2C26458F0088BE6C /* PBXTargetDependency */,
+			);
+			name = XCMInstall;
+			productName = XCMTest;
+			productReference = 84AE0C3F2C26458F0088BE6C /* XCMInstall */;
+			productType = "com.apple.product-type.tool";
+		};
+		84AE0C492C264B150088BE6C /* XCMDocBuild */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 84AE0C582C264B150088BE6C /* Build configuration list for PBXNativeTarget "XCMDocBuild" */;
+			buildPhases = (
+				84AE0C4C2C264B150088BE6C /* Headers */,
+				84AE0C4E2C264B150088BE6C /* Sources */,
+				84AE0C502C264B150088BE6C /* Frameworks */,
+				84AE0C572C264B150088BE6C /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				84AE0C4A2C264B150088BE6C /* PBXTargetDependency */,
+			);
+			name = XCMDocBuild;
+			productName = XCMTest;
+			productReference = 84AE0C5B2C264B150088BE6C /* XCMDocBuild */;
+			productType = "com.apple.product-type.tool";
+		};
+		84D44CF02C01A29700591F3A /* XCMBuildMetaTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 84D44CF82C01A29700591F3A /* Build configuration list for PBXNativeTarget "XCMBuildMetaTests" */;
+			buildPhases = (
+				84D44CED2C01A29700591F3A /* Sources */,
+				84D44CEE2C01A29700591F3A /* Frameworks */,
+				84D44CEF2C01A29700591F3A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				84D44D002C01AA3900591F3A /* PBXTargetDependency */,
+			);
+			name = XCMBuildMetaTests;
+			productName = XCMBuildMetaTests;
+			productReference = 84D44CF12C01A29700591F3A /* XCMBuildMetaTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -1183,6 +1645,12 @@
 					84AB43C42AAB8FC200E24981 = {
 						CreatedOnToolsVersion = 14.3.1;
 					};
+					84B1ECE02C23CA870095FC99 = {
+						CreatedOnToolsVersion = 15.4;
+					};
+					84D44CF02C01A29700591F3A = {
+						CreatedOnToolsVersion = 15.4;
+					};
 				};
 			};
 			buildConfigurationList = 84D3F4542A7C38650022D176 /* Build configuration list for PBXProject "XCMBuild" */;
@@ -1201,9 +1669,14 @@
 				8462AFE92A901205001EFB68 /* preflight_XCMB_build */,
 				8489034A2A84535000F5F241 /* XCMBuild */,
 				8498B8702AB147B8001084D8 /* Audit Core Codesign */,
+				84B1ECE02C23CA870095FC99 /* Enumerate Helper Headers */,
 				84619D772A85BCA7009C5753 /* xcrunshell */,
 				8486BF432AA67BD9005A02F4 /* XCMTest */,
+				843AC00B2C22439400B93C62 /* XCMAnalyze */,
+				84AE0C152C2643F90088BE6C /* XCMArchive */,
 				8493A7B82B23C5E10000F3B1 /* XCMClean */,
+				84AE0C2D2C26458F0088BE6C /* XCMInstall */,
+				84AE0C492C264B150088BE6C /* XCMDocBuild */,
 				847517542A9006BE00C93D65 /* Combine Prune Scripts */,
 				8459CF3E2AA1485600DAFF86 /* Combine Copy Scripts */,
 				8477F50B2ACA206600688CF2 /* Combine Snooze Script */,
@@ -1213,6 +1686,7 @@
 				8462AFDD2A900F1E001EFB68 /* All */,
 				84AB43C42AAB8FC200E24981 /* Test */,
 				843E5D2E2ADA22BE0063C8FA /* Installer */,
+				84D44CF02C01A29700591F3A /* XCMBuildMetaTests */,
 			);
 		};
 /* End PBXProject section */
@@ -1229,6 +1703,13 @@
 				8404B6952AD4FECC0050DF38 /* ToolTestIcon.icns in Resources */,
 				8434DD412ACF71600081E26E /* Icon.icns in Resources */,
 				847A70762ACF6AC900215F96 /* LICENSE-2.0.txt in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84D44CEF2C01A29700591F3A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1509,6 +1990,60 @@
 			shellPath = /bin/bash;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n";
 		};
+		84B1ECE62C23CAA60095FC99 /* Generate Source Files */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/XCMBuild/XCM_STUBNAME_/XCM_STUBNAME_.h.m4",
+				"$(SRCROOT)/XCMBuild/XCM_STUBNAME_/main.m.m4",
+				"$(SRCROOT)/shared/includes/XCM_STUBNAME_.make.m4",
+				"$(SRCROOT)/shared/XCM_STUBNAME_-Info.plist.m4",
+				"$(SRCROOT)/shared/security/entitlements/XCM_STUBNAME_.entitlements.m4",
+				"$(SRCROOT)/shared/XCM_STUB_DESC.list",
+				"$(SRCROOT)/shared/XCM_STUB_EQUIV.list",
+				"$(SRCROOT)/bin/tool_gen_XCMTools_SRC_helper.bash",
+				"$(SRCROOT)/bin/tool_shlock_helper.bash",
+				"$(TMPDIR)/org.pak.dt.XCMBuild.XCMGenSourceM4.lock",
+			);
+			name = "Generate Source Files";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(SRCROOT)/XCMBuild/XCMClean/XCMClean.h",
+				"$(SRCROOT)/XCMBuild/XCMClean/main.m",
+				"$(SRCROOT)/shared/XCMClean-Info.plist",
+				"$(SRCROOT)/shared/includes/XCMClean.make",
+				"$(SRCROOT)/shared/security/entitlements/XCMClean.entitlements",
+				"$(SRCROOT)/XCMBuild/XCMAnalyze/XCMAnalyze.h",
+				"$(SRCROOT)/XCMBuild/XCMAnalyze/main.m",
+				"$(SRCROOT)/shared/XCMAnalyze-Info.plist",
+				"$(SRCROOT)/shared/includes/XCMAnalyze.make",
+				"$(SRCROOT)/shared/security/entitlements/XCMAnalyze.entitlements",
+				"$(SRCROOT)/XCMBuild/XCMArchive/XCMArchive.h",
+				"$(SRCROOT)/XCMBuild/XCMArchive/main.m",
+				"$(SRCROOT)/shared/XCMArchive-Info.plist",
+				"$(SRCROOT)/shared/includes/XCMArchive.make",
+				"$(SRCROOT)/shared/security/entitlements/XCMArchive.entitlements",
+				"$(SRCROOT)/XCMBuild/XCMInstall/XCMInstall.h",
+				"$(SRCROOT)/XCMBuild/XCMInstall/main.m",
+				"$(SRCROOT)/shared/XCMInstall-Info.plist",
+				"$(SRCROOT)/shared/includes/XCMInstall.make",
+				"$(SRCROOT)/shared/security/entitlements/XCMInstall.entitlements",
+				"$(SRCROOT)/XCMBuild/XCMDocBuild/XCMDocBuild.h",
+				"$(SRCROOT)/XCMBuild/XCMDocBuild/main.m",
+				"$(SRCROOT)/shared/XCMDocBuild-Info.plist",
+				"$(SRCROOT)/shared/includes/XCMDocBuild.make",
+				"$(SRCROOT)/shared/security/entitlements/XCMDocBuild.entitlements",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "if [[ ( -z \"$SHELL\" ) ]] || [[ ( \"$SHELL\" != *bash ) ]] ; then\n\texport SHELL=\"bash\" ;\n\tbash -c \"${@} ; exit $?\" ; wait ; exit $? ;\nfi ;\n\nif [[ ( -z \"$ACTION\" ) ]] ; then\n\texit 126 ;\nfi ;\n\n# Type a script or drag a script file from your workspace to insert its path.\nif [[ -d \"${BUILT_PRODUCTS_DIR}/XCMBuild.framework\" ]] && [[ \"${ACTION}\" == *build ]]; then\n\n{ bash ${SRCROOT}/bin/tool_gen_XCMTools_SRC_helper.bash ; wait ; } || exit 3 ;\n\nelse\nif [[ ( -z \"$ACTION\" ) ]] && [[ ( \"$ACTION\" != *clean ) ]] ; then\n\techo \"$0:${BASH_LINE_NO:-39}: warning: $ACTION Not supported.\" >&2 ;\n\texit 1;\nfi ;\nfor INDEX_NUM in $( seq 0 $((5*5)) ) ; do\nif [[ -e \"${SCRIPT_OUTPUT_FILE_${INDEX_NUM}}\" ]] ; then\n\trm -vf \"${SCRIPT_OUTPUT_FILE_${INDEX_NUM}}\" 2>/dev/null || true ;\n\tunlink -f \"${SCRIPT_OUTPUT_FILE_${INDEX_NUM}}\" 2>/dev/null || true ;\nelse\n\texit 2;\nfi ;\ndone;\nfi;\n\nexit 0 ;\n";
+			showEnvVarsInLog = 0;
+		};
 		84BD1E5E2AAFC73C004F72DF /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 8;
@@ -1551,6 +2086,10 @@
 				"$(DSTROOT:standardizepath)/$(DYLIB_INSTALL_NAME_BASE:standardizepath)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/usr/bin/**",
 				"$(DSTROOT:standardizepath)/$(DYLIB_INSTALL_NAME_BASE:standardizepath)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/usr/lib/**",
 				"$(DSTROOT:standardizepath)/$(DOCUMENTATION_FOLDER_PATH:standardizepath)/**",
+				"$(DSTROOT:standardizepath)/$(DYLIB_INSTALL_NAME_BASE:standardizepath)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/usr/bin/XCMAnalyze",
+				"$(DSTROOT:standardizepath)/$(DYLIB_INSTALL_NAME_BASE:standardizepath)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/usr/bin/XCMArchive",
+				"$(DSTROOT:standardizepath)/$(DYLIB_INSTALL_NAME_BASE:standardizepath)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/usr/bin/XCMInstall",
+				"$(DSTROOT:standardizepath)/$(DYLIB_INSTALL_NAME_BASE:standardizepath)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/usr/bin/XCMDocBuild",
 			);
 			outputFileListPaths = (
 			);
@@ -1576,6 +2115,14 @@
 				"$(BUILT_PRODUCTS_DIR:standardizepath)/XCMClean_debug",
 				"$(BUILT_PRODUCTS_DIR:standardizepath)/xcrunshell_profile",
 				"$(BUILT_PRODUCTS_DIR:standardizepath)/xcrunshell_debug",
+				"$(BUILT_PRODUCTS_DIR:standardizepath)/XCMAnalyze_profile",
+				"$(BUILT_PRODUCTS_DIR:standardizepath)/XCMAnalyze_debug",
+				"$(BUILT_PRODUCTS_DIR:standardizepath)/XCMArchive_profile",
+				"$(BUILT_PRODUCTS_DIR:standardizepath)/XCMArchive_debug",
+				"$(BUILT_PRODUCTS_DIR:standardizepath)/XCMInstall_profile",
+				"$(BUILT_PRODUCTS_DIR:standardizepath)/XCMInstall_debug",
+				"$(BUILT_PRODUCTS_DIR:standardizepath)/XCMDocBuild_profile",
+				"$(BUILT_PRODUCTS_DIR:standardizepath)/XCMDocBuild_debug",
 			);
 			outputFileListPaths = (
 			);
@@ -1684,6 +2231,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		843AC0102C22439400B93C62 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				843AC02B2C2253BA00B93C62 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		84619D742A85BCA7009C5753 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1719,6 +2274,38 @@
 			buildActionMask = 2147483647;
 			files = (
 				8493A7D22B23C7670000F3B1 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84AE0C1A2C2643F90088BE6C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84AE0C2C2C2644BD0088BE6C /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84AE0C322C26458F0088BE6C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84AE0C432C2646020088BE6C /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84AE0C4E2C264B150088BE6C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84AE0C5C2C264B2E0088BE6C /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84D44CED2C01A29700591F3A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84D44CF42C01A29700591F3A /* XCMBuildMetaTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1760,6 +2347,11 @@
 			target = 841FB8D52AD645FE00C70DBD /* Inject Shell Tools */;
 			targetProxy = 841FB8E12AD6462800C70DBD /* PBXContainerItemProxy */;
 		};
+		843AC0202C2244D800B93C62 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 843AC00B2C22439400B93C62 /* XCMAnalyze */;
+			targetProxy = 843AC01F2C2244D800B93C62 /* PBXContainerItemProxy */;
+		};
 		843C23CE2AA963F900F8F65C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 8486BF432AA67BD9005A02F4 /* XCMTest */;
@@ -1790,11 +2382,6 @@
 			target = 8498B8702AB147B8001084D8 /* Audit Core Codesign */;
 			targetProxy = 8477F50D2ACA206600688CF2 /* PBXContainerItemProxy */;
 		};
-		8493A7B92B23C5E10000F3B1 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 8498B8702AB147B8001084D8 /* Audit Core Codesign */;
-			targetProxy = 8493A7BA2B23C5E10000F3B1 /* PBXContainerItemProxy */;
-		};
 		8493A7CE2B23C6B20000F3B1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 8493A7B82B23C5E10000F3B1 /* XCMClean */;
@@ -1809,6 +2396,56 @@
 			isa = PBXTargetDependency;
 			target = 8462AFDD2A900F1E001EFB68 /* All */;
 			targetProxy = 84AB43C82AAB900400E24981 /* PBXContainerItemProxy */;
+		};
+		84AE0C102C2643B60088BE6C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8498B8702AB147B8001084D8 /* Audit Core Codesign */;
+			targetProxy = 84AE0C0F2C2643B60088BE6C /* PBXContainerItemProxy */;
+		};
+		84AE0C122C2643C00088BE6C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 84B1ECE02C23CA870095FC99 /* Enumerate Helper Headers */;
+			targetProxy = 84AE0C112C2643C00088BE6C /* PBXContainerItemProxy */;
+		};
+		84AE0C142C2643CD0088BE6C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 84B1ECE02C23CA870095FC99 /* Enumerate Helper Headers */;
+			targetProxy = 84AE0C132C2643CD0088BE6C /* PBXContainerItemProxy */;
+		};
+		84AE0C162C2643F90088BE6C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 84B1ECE02C23CA870095FC99 /* Enumerate Helper Headers */;
+			targetProxy = 84AE0C172C2643F90088BE6C /* PBXContainerItemProxy */;
+		};
+		84AE0C2E2C26458F0088BE6C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 84B1ECE02C23CA870095FC99 /* Enumerate Helper Headers */;
+			targetProxy = 84AE0C2F2C26458F0088BE6C /* PBXContainerItemProxy */;
+		};
+		84AE0C4A2C264B150088BE6C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 84B1ECE02C23CA870095FC99 /* Enumerate Helper Headers */;
+			targetProxy = 84AE0C4B2C264B150088BE6C /* PBXContainerItemProxy */;
+		};
+		84AE0C5F2C264B930088BE6C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 84AE0C152C2643F90088BE6C /* XCMArchive */;
+			targetProxy = 84AE0C5E2C264B930088BE6C /* PBXContainerItemProxy */;
+		};
+		84AE0C612C264B930088BE6C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 84AE0C492C264B150088BE6C /* XCMDocBuild */;
+			targetProxy = 84AE0C602C264B930088BE6C /* PBXContainerItemProxy */;
+		};
+		84AE0C632C264B930088BE6C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 84AE0C2D2C26458F0088BE6C /* XCMInstall */;
+			targetProxy = 84AE0C622C264B930088BE6C /* PBXContainerItemProxy */;
+		};
+		84D44D002C01AA3900591F3A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8462AFDD2A900F1E001EFB68 /* All */;
+			targetProxy = 84D44CFF2C01AA3900591F3A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1887,6 +2524,32 @@
 			};
 			name = Release;
 		};
+		843AC01B2C22439400B93C62 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 843F3C952ABE392600A11150 /* XcodeCompileToolsDebug.xcconfig */;
+			buildSettings = {
+				DEFINES_MODULE = NO;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/usr/lib/system",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		843AC01C2C22439400B93C62 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 843F3C962ABE3ECF00A11150 /* XcodeCompileToolsRelease.xcconfig */;
+			buildSettings = {
+				DEFINES_MODULE = NO;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/usr/lib/system",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		843E5D412ADA22BF0063C8FA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 843E5D462ADA2E1A0063C8FA /* XcodePackagingConfig.xcconfig */;
@@ -1938,6 +2601,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 845C71132AC2367B00DD9EE9 /* XcodeCompileRunShellDebug.xcconfig */;
 			buildSettings = {
+				DEFINES_MODULE = NO;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SDKROOT)/usr/lib/system",
@@ -1949,6 +2613,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 845C71142AC237E900DD9EE9 /* XcodeCompileRunShell.xcconfig */;
 			buildSettings = {
+				DEFINES_MODULE = NO;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SDKROOT)/usr/lib/system",
@@ -2128,6 +2793,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 843F3C952ABE392600A11150 /* XcodeCompileToolsDebug.xcconfig */;
 			buildSettings = {
+				DEFINES_MODULE = NO;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SDKROOT)/usr/lib/system",
@@ -2139,6 +2805,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 843F3C962ABE3ECF00A11150 /* XcodeCompileToolsRelease.xcconfig */;
 			buildSettings = {
+				DEFINES_MODULE = NO;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SDKROOT)/usr/lib/system",
@@ -2183,7 +2850,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 843F3C952ABE392600A11150 /* XcodeCompileToolsDebug.xcconfig */;
 			buildSettings = {
-				INFOPLIST_FILE = "XCMClean-Info.plist";
+				DEFINES_MODULE = NO;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SDKROOT)/usr/lib/system",
@@ -2196,7 +2863,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 843F3C962ABE3ECF00A11150 /* XcodeCompileToolsRelease.xcconfig */;
 			buildSettings = {
-				INFOPLIST_FILE = "XCMClean-Info.plist";
+				DEFINES_MODULE = NO;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SDKROOT)/usr/lib/system",
@@ -2249,6 +2916,102 @@
 			};
 			name = Release;
 		};
+		84AE0C252C2643F90088BE6C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 843F3C952ABE392600A11150 /* XcodeCompileToolsDebug.xcconfig */;
+			buildSettings = {
+				DEFINES_MODULE = NO;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/usr/lib/system",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		84AE0C262C2643F90088BE6C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 843F3C962ABE3ECF00A11150 /* XcodeCompileToolsRelease.xcconfig */;
+			buildSettings = {
+				DEFINES_MODULE = NO;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/usr/lib/system",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		84AE0C3D2C26458F0088BE6C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 843F3C952ABE392600A11150 /* XcodeCompileToolsDebug.xcconfig */;
+			buildSettings = {
+				DEFINES_MODULE = NO;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/usr/lib/system",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		84AE0C3E2C26458F0088BE6C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 843F3C962ABE3ECF00A11150 /* XcodeCompileToolsRelease.xcconfig */;
+			buildSettings = {
+				DEFINES_MODULE = NO;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/usr/lib/system",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		84AE0C592C264B150088BE6C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 843F3C952ABE392600A11150 /* XcodeCompileToolsDebug.xcconfig */;
+			buildSettings = {
+				DEFINES_MODULE = NO;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/usr/lib/system",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		84AE0C5A2C264B150088BE6C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 843F3C962ABE3ECF00A11150 /* XcodeCompileToolsRelease.xcconfig */;
+			buildSettings = {
+				DEFINES_MODULE = NO;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/usr/lib/system",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		84B1ECE22C23CA870095FC99 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = FAF5N99QTH;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		84B1ECE32C23CA870095FC99 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = FAF5N99QTH;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		84D3F45E2A7C38650022D176 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 847CEBDD2AB3958800D86C91 /* Debug.xcconfig */;
@@ -2265,6 +3028,154 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "$(RELEASE_CODE_SIGN_IDENTITY)";
 				CODE_SIGN_STYLE = Manual;
+			};
+			name = Release;
+		};
+		84D44CF92C01A29700591F3A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				BUILD_VARIANTS = normal;
+				BUNDLE_CONTENTS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH:standardizepath)";
+				BUNDLE_CONTENTS_FOLDER_PATH_deep = "$(BUNDLE_CONTENTS_FOLDER_PATH:standardizepath)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CONTENTS_FOLDER_PATH = "$(WRAPPER_NAME)/Contents";
+				CONTENTS_FOLDER_PATH_SHALLOW_BUNDLE_NO = "$(CONTENTS_FOLDER_PATH:standardizepath)";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = FAF5N99QTH;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.5;
+				MODULES_FOLDER_PATH = "";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CODE_SIGN_FLAGS = "$(inhereted) --prefix=$(PRODUCT_ORG_IDENTIFIER) --identifier=$(PRODUCT_BUNDLE_IDENTIFIER)";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(PRODUCT_ORG_IDENTIFIER)$(PRODUCT_NAME)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		84D44CFA2C01A29700591F3A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				BUNDLE_CONTENTS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH:standardizepath)";
+				BUNDLE_CONTENTS_FOLDER_PATH_deep = "$(BUNDLE_CONTENTS_FOLDER_PATH:standardizepath)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CONTENTS_FOLDER_PATH = "$(WRAPPER_NAME)/Contents";
+				CONTENTS_FOLDER_PATH_SHALLOW_BUNDLE_NO = "$(CONTENTS_FOLDER_PATH:standardizepath)";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = FAF5N99QTH;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.5;
+				MODULES_FOLDER_PATH = "";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				OTHER_CODE_SIGN_FLAGS = "$(inhereted) --prefix=$(PRODUCT_ORG_IDENTIFIER) --identifier=$(PRODUCT_BUNDLE_IDENTIFIER)";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(PRODUCT_ORG_IDENTIFIER)$(PRODUCT_NAME)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -2288,6 +3199,15 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		843AC01A2C22439400B93C62 /* Build configuration list for PBXNativeTarget "XCMAnalyze" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				843AC01B2C22439400B93C62 /* Debug */,
+				843AC01C2C22439400B93C62 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
 		};
 		843E5D402ADA22BF0063C8FA /* Build configuration list for PBXAggregateTarget "Installer" */ = {
 			isa = XCConfigurationList;
@@ -2406,11 +3326,56 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
+		84AE0C242C2643F90088BE6C /* Build configuration list for PBXNativeTarget "XCMArchive" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				84AE0C252C2643F90088BE6C /* Debug */,
+				84AE0C262C2643F90088BE6C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		84AE0C3C2C26458F0088BE6C /* Build configuration list for PBXNativeTarget "XCMInstall" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				84AE0C3D2C26458F0088BE6C /* Debug */,
+				84AE0C3E2C26458F0088BE6C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		84AE0C582C264B150088BE6C /* Build configuration list for PBXNativeTarget "XCMDocBuild" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				84AE0C592C264B150088BE6C /* Debug */,
+				84AE0C5A2C264B150088BE6C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		84B1ECE12C23CA870095FC99 /* Build configuration list for PBXAggregateTarget "Enumerate Helper Headers" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				84B1ECE22C23CA870095FC99 /* Debug */,
+				84B1ECE32C23CA870095FC99 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
 		84D3F4542A7C38650022D176 /* Build configuration list for PBXProject "XCMBuild" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				84D3F45E2A7C38650022D176 /* Debug */,
 				84D3F45F2A7C38650022D176 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		84D44CF82C01A29700591F3A /* Build configuration list for PBXNativeTarget "XCMBuildMetaTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				84D44CF92C01A29700591F3A /* Debug */,
+				84D44CFA2C01A29700591F3A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

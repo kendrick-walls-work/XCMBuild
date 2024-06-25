@@ -4,7 +4,7 @@
 //
 // reactive-firewall/XCMBuild General Config
 // ..................................
-// Copyright (c) 2023, Mr. Walls
+// Copyright (c) 2023-2024, Mr. Walls
 // ..................................
 // Licensed under APACHE-2 (the "License");
 // you may not use this file except in compliance with the License.
@@ -41,7 +41,7 @@ LD_GENERATE_MAP_FILE[arch=i386] = $(ONLY_ACTIVE_ARCH) // !$(ALLOW_TARGET_PLATFOR
 EAGER_LINKING = NO
 COMPILER_INDEX_STORE_ENABLE = $(LD_GENERATE_MAP_FILE)
 INFOPLIST_OUTPUT_FORMAT = XML
-PRODUCT_NAME = $(TARGET_NAME:c99extidentifier)
+PRODUCT_NAME = $(TARGET_NAME:c17extidentifier)
 PLIST_FILE_OUTPUT_FORMAT = XML
 ALWAYS_SEARCH_USER_PATHS = NO
 //CODE_SIGN_IDENTITY = $(inhereted)
@@ -50,6 +50,7 @@ DEVELOPMENT_TEAM[sdk=macosx*] = $(inhereted)
 ENABLE_HARDENED_RUNTIME = $(VALIDATE_PRODUCT)
 OTHER_CFLAGS = -greproducible
 OTHER_DOCC_FLAGS = --analyze --enable-inherited-docs --ide-console-output
+CODE_SIGN_ALLOW_ENTITLEMENTS_MODIFICATION = YES
 OTHER_CODE_SIGN_FLAGS = $(inhereted) --prefix=$(PRODUCT_ORG_IDENTIFIER)
 GENERATE_TEXT_BASED_STUBS = NO
 //GENERATE_TEXT_BASED_STUBS[sdk=macosx*] = $(SKIP_INSTALL)

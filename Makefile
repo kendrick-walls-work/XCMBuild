@@ -2,7 +2,7 @@
 
 # reactive-firewall/XCMBuild Repo Makefile
 # ..................................
-# Copyright (c) 2014-2023, Mr. Walls
+# Copyright (c) 2014-2024, Mr. Walls
 # ..................................
 # Licensed under APACHE-2 (the "License");
 # you may not use this file except in compliance with the License.
@@ -186,7 +186,7 @@ endif
 
 .PHONY: all clean init init-start must_be_root bootstrap cleanup cleanup_DS_Store cleanup_temps cleanup_tmp_obj checkin install uninstall test
 
-all:: init build XCMBuild-framework bootstrap xcrunshell-cli XCMTest-cli XCMClean-cli install test
+all:: init build XCMBuild-framework bootstrap xcrunshell-cli XCMTest-cli XCMClean-cli XCMDocBuild-cli XCMAnalyze-cli XCMArchive-cli install test
 	$(QUITE)$(DO_FAIL) ;
 	$(QUIET)$(ECHO) "$@: Done."
 
@@ -238,7 +238,7 @@ $(TARGET_TEMP_DIR): |init-start
 init-start::
 	$(QUIET)$(ECHO) "Starting fresh." ;
 
-init: |init-start init-tmp-dirs init-tool-dirs
+init: |init-start init-tmp-dirs init-tool-dirs init-tool-generated-sources
 	$(QUIET)$(ECHO) "$(SDKROOT)" || DO_FAIL="exit 2" ;
 	$(QUIET)$(ECHO) "$(SET_FILE_ATTR)" || DO_FAIL="exit 2" ;
 	$(QUIET)$(ECHO) "$(UNMARK)" || DO_FAIL="exit 2" ;
@@ -292,6 +292,10 @@ init-tool-prunefile: $(TARGET_TEMP_DIR)/build/bin/prunefile |init-lib-flatten
 init-tool-clonefile: $(TARGET_TEMP_DIR)/build/bin/xcode_clonefile.bash $(TARGET_TEMP_DIR)/build/bin/clonefile |init-lib-serialize
 	$(DO_FAIL) ;
 	$(QUIET)$(ECHO) "Added clonefile to Cache." ;
+
+init-tool-generated-sources:: |init-start
+	$(QUIET)bin/tool_gen_XCMTools_SRC_helper.bash 2>/dev/null || DO_FAIL="exit 2" ;
+	$(QUIET)$(ECHO) "Dynamic source files regenerated." ;
 
 install:: |build bootstrap init
 	$(QUIET)$(WAIT)
@@ -626,11 +630,6 @@ $(BUILD_ROOT)/XCMTest_vers.c: |build
 	$(QUIET)$(WAIT) ;
 	$(DO_FAIL) ;
 
-$(BUILD_ROOT)/XCMClean_vers.c: |build
-	$(QUIET)$(ECHO) "Generating Version Source: $@ ( XCMClean )" ;
-	$(QUIET)$(XCMB_GEN_VER_SRC_BUILD_TOOL) XCMClean $(CURRENT_PROJECT_VERSION) >"$@" || DO_FAIL="exit 2" ;
-	$(QUIET)$(WAIT) ;
-	$(DO_FAIL) ;
 
 $(BUILD_ROOT)/xcrunshell_vers.c: |build
 	$(QUIET)$(ECHO) "Generating Version Source: $@ ( xcrunshell )" ;
@@ -848,90 +847,6 @@ $(TARGET_TEMP_DIR)/build/Object-arm64-normal/arm64/XCMTest_vers.o:: $(BUILD_ROOT
 	$(DO_FAIL) ;
 
 
-$(TARGET_TEMP_DIR)/build/Object-x86_64-normal/x86_64/XCMClean/main.o: XCMBuild/XCMClean/main.m XCMBuild/XCMClean/XCMClean.h $(TARGET_TEMP_DIR)/build/Object-x86_64-normal/x86_64/XCMClean_vers.o |$(TARGET_TEMP_DIR)/build/Object-x86_64-normal/x86_64/XCMClean
-	$(QUIET)$(ECHO) "Compile XCMClean: $@ (x86_64)" ;
-	$(QUIET)$(CLANG) -x objective-c -target x86_64-apple-macos$(MACOSX_DEPLOYMENT_TARGET) \
-	$(CLANG_FLAGS_ALL) -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit\=0 \
-	$(CLANG_OBJC_ARC_FLAGS) $(CLANG_OBJC_BLOCKS_FLAGS) -fobjc-weak \
-	-fbuild-session-file\=$(BUILD_ROOT)/XCMClean_vers.c \
-	-fmodules -gmodules \
-	-mincremental-linker-compatible \
-	-O0 -flto\=thin -fno-common -isysroot $(SDKROOT) $(CCFLAGS_DARWIN) \
-	-I$(PROJECT_ROOT)/XCMBuild/XCMClean -I$(PROJECT_ROOT)/XCMBuild \
-	-I$(TARGET_TEMP_DIR)/build/Object-x86_64-normal/x86_64/XCMClean \
-	-F/$(DYLIB_INSTALL_NAME_BASE) \
-	-iframeworkwithsysroot $(DYLIB_INSTALL_NAME_BASE) \
-	-iframeworkwithsysroot usr/lib \
-	-iframeworkwithsysroot usr/lib/System \
-	-F/$(DYLIB_INSTALL_NAME_BASE)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION) \
-	-MMD -MT dependencies -MF $(TARGET_TEMP_DIR)/build/Object-x86_64-normal/x86_64/XCMClean.d \
-	-c $< -o $@ || DO_FAIL="exit 2" ;
-	$(QUIET)$(BSMARK) $@ || DO_FAIL="exit 2" ;
-	$(DO_FAIL) ;
-
-$(TARGET_TEMP_DIR)/build/Object-x86_64-normal/x86_64/XCMClean_vers.o:: $(BUILD_ROOT)/XCMClean_vers.c $(TARGET_TEMP_DIR)/build/Object-x86_64-normal/x86_64 |build
-	$(QUIET)$(ECHO) "Compile Version Header: $@ (x86_64)" ;
-	$(QUIET)$(CLANG) -target x86_64-apple-macos$(MACOSX_DEPLOYMENT_TARGET) \
-	$(CLANG_FLAGS_ALL) -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit\=0 \
-	$(CLANG_OBJC_ARC_FLAGS) $(CLANG_OBJC_BLOCKS_FLAGS) -fobjc-weak \
-	-fbuild-session-file\=$(BUILD_ROOT)/XCMClean_vers.c \
-	-fmodules -gmodules \
-	-mincremental-linker-compatible \
-	-O0 -flto\=thin -fno-common -isysroot $(SDKROOT) $(CCFLAGS_DARWIN) \
-	-F/$(DYLIB_INSTALL_NAME_BASE) \
-	-iframeworkwithsysroot $(DYLIB_INSTALL_NAME_BASE) \
-	-iframeworkwithsysroot usr/lib \
-	-iframeworkwithsysroot usr/lib/System \
-	-F/$(DYLIB_INSTALL_NAME_BASE)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION) \
-	-iframeworkwithsysroot /$(DYLIB_INSTALL_NAME_BASE)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION) \
-	-x objective-c \
-	-MMD -MT dependencies -MF $(TARGET_TEMP_DIR)/build/Object-x86_64-normal/x86_64/XCMClean_vers.d \
-	-c $< -o $@ || DO_FAIL="exit 2" ;
-	$(QUIET)$(BSMARK) $@ || DO_FAIL="exit 2" ;
-	$(DO_FAIL) ;
-
-$(TARGET_TEMP_DIR)/build/Object-arm64-normal/arm64/XCMClean/main.o: XCMBuild/XCMClean/main.m XCMBuild/XCMClean/XCMClean.h $(TARGET_TEMP_DIR)/build/Object-arm64-normal/arm64/XCMClean_vers.o |$(TARGET_TEMP_DIR)/build/Object-arm64-normal/arm64/XCMClean
-	$(QUIET)$(ECHO) "Compile XCMClean: $@ (arm64)" ;
-	$(QUIET)$(CLANG) -x objective-c -target arm64-apple-macos$(MACOSX_DEPLOYMENT_TARGET) \
-	$(CLANG_FLAGS_ALL) -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit\=0 \
-	$(CLANG_OBJC_ARC_FLAGS) $(CLANG_OBJC_BLOCKS_FLAGS) -fobjc-weak \
-	-fbuild-session-file\=$(BUILD_ROOT)/XCMClean_vers.c \
-	-fmodules -gmodules \
-	-mincremental-linker-compatible \
-	-O0 -flto\=thin -fno-common -isysroot $(SDKROOT) $(CCFLAGS_DARWIN) \
-	-I$(PROJECT_ROOT)/XCMBuild/XCMClean -I$(PROJECT_ROOT)/XCMBuild \
-	-I$(TARGET_TEMP_DIR)/build/Object-arm64-normal/arm64/XCMClean \
-	-F/$(DYLIB_INSTALL_NAME_BASE) \
-	-iframeworkwithsysroot $(DYLIB_INSTALL_NAME_BASE) \
-	-iframeworkwithsysroot usr/lib \
-	-iframeworkwithsysroot usr/lib/System \
-	-F/$(DYLIB_INSTALL_NAME_BASE)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION) \
-	-MMD -MT dependencies -MF $(TARGET_TEMP_DIR)/build/Object-arm64-normal/arm64/XCMClean.d \
-	-c $< -o $@ || DO_FAIL="exit 2" ;
-	$(QUIET)$(BSMARK) $@ || DO_FAIL="exit 2" ;
-	$(DO_FAIL) ;
-
-$(TARGET_TEMP_DIR)/build/Object-arm64-normal/arm64/XCMClean_vers.o:: $(BUILD_ROOT)/XCMClean_vers.c $(TARGET_TEMP_DIR)/build/Object-arm64-normal/arm64 |build
-	$(QUIET)$(ECHO) "Compile Version Header: $@ (arm64)" ;
-	$(QUIET)$(CLANG) -target arm64-apple-macos$(MACOSX_DEPLOYMENT_TARGET) \
-	$(CLANG_FLAGS_ALL) -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit\=0 \
-	$(CLANG_OBJC_ARC_FLAGS) $(CLANG_OBJC_BLOCKS_FLAGS) -fobjc-weak \
-	-fbuild-session-file\=$(BUILD_ROOT)/XCMClean_vers.c \
-	-fmodules -gmodules \
-	-mincremental-linker-compatible \
-	-O0 -flto\=thin -fno-common -isysroot $(SDKROOT) $(CCFLAGS_DARWIN) \
-	-F/$(DYLIB_INSTALL_NAME_BASE) \
-	-iframeworkwithsysroot /$(DYLIB_INSTALL_NAME_BASE) \
-	-iframeworkwithsysroot usr/lib \
-	-iframeworkwithsysroot usr/lib/System \
-	-F/$(DYLIB_INSTALL_NAME_BASE)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION) \
-	-iframeworkwithsysroot /$(DYLIB_INSTALL_NAME_BASE)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION) \
-	-x objective-c \
-	-MMD -MT dependencies -MF $(TARGET_TEMP_DIR)/build/Object-arm64-normal/arm64/XCMClean_vers.d \
-	-c $< -o $@ || DO_FAIL="exit 2" ;
-	$(QUIET)$(BSMARK) $@ || DO_FAIL="exit 2" ;
-	$(DO_FAIL) ;
-
 
 $(TARGET_TEMP_DIR)/build/Object-x86_64-debug/x86_64/xcrunshell/main.o: XCMBuild/xcrunshell/main.m XCMBuild/xcrunshell/xcrunshell.h $(TARGET_TEMP_DIR)/build/Object-x86_64-debug/x86_64/xcrunshell_vers.o |$(TARGET_TEMP_DIR)/build/Object-x86_64-debug/x86_64/xcrunshell
 	$(QUIET)$(ECHO) "Compile Run-Tool: $@ (x86_64)" ;
@@ -1115,94 +1030,6 @@ $(TARGET_TEMP_DIR)/build/Object-arm64-debug/arm64/XCMTest_vers.o:: $(BUILD_ROOT)
 	$(DO_FAIL) ;
 
 
-$(TARGET_TEMP_DIR)/build/Object-x86_64-debug/x86_64/XCMClean/main.o: XCMBuild/XCMClean/main.m XCMBuild/XCMClean/XCMClean.h $(TARGET_TEMP_DIR)/build/Object-x86_64-debug/x86_64/XCMClean_vers.o |$(TARGET_TEMP_DIR)/build/Object-x86_64-debug/x86_64/XCMClean
-	$(QUIET)$(ECHO) "Compile XCMClean: $@ (x86_64)" ;
-	$(QUIET)$(CLANG) -x objective-c -target x86_64-apple-macos$(MACOSX_DEPLOYMENT_TARGET) \
-	$(CLANG_FLAGS_ALL) -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit\=0 \
-	$(CLANG_OBJC_ARC_FLAGS) $(CLANG_OBJC_BLOCKS_FLAGS) -fobjc-weak \
-	-fbuild-session-file\=$(BUILD_ROOT)/XCMClean_vers.c \
-	-fmodules -gmodules -greproducible \
-	-mincremental-linker-compatible \
-	-Xpreprocessor -DDEBUG\=1 \
-	-O0 -flto\=thin -fno-common -isysroot $(SDKROOT) $(CCFLAGS_DARWIN) \
-	-I$(PROJECT_ROOT)/XCMBuild/XCMClean -I$(PROJECT_ROOT)/XCMBuild \
-	-I$(TARGET_TEMP_DIR)/build/Object-x86_64-debug/x86_64/XCMClean \
-	-F/$(DYLIB_INSTALL_NAME_BASE) \
-	-iframeworkwithsysroot $(DYLIB_INSTALL_NAME_BASE) \
-	-iframeworkwithsysroot usr/lib \
-	-iframeworkwithsysroot usr/lib/System \
-	-F/$(DYLIB_INSTALL_NAME_BASE)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION) \
-	-MMD -MT dependencies -MF $(TARGET_TEMP_DIR)/build/Object-x86_64-debug/x86_64/XCMClean.d \
-	-c $< -o $@ || DO_FAIL="exit 2" ;
-	$(QUIET)$(BSMARK) $@ || DO_FAIL="exit 2" ;
-	$(DO_FAIL) ;
-
-$(TARGET_TEMP_DIR)/build/Object-x86_64-debug/x86_64/XCMClean_vers.o:: $(BUILD_ROOT)/XCMClean_vers.c $(TARGET_TEMP_DIR)/build/Object-x86_64-debug/x86_64 |build
-	$(QUIET)$(ECHO) "Compile Version Header: $@ (x86_64)" ;
-	$(QUIET)$(CLANG) -target x86_64-apple-macos$(MACOSX_DEPLOYMENT_TARGET) \
-	$(CLANG_FLAGS_ALL) -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit\=0 \
-	$(CLANG_OBJC_ARC_FLAGS) $(CLANG_OBJC_BLOCKS_FLAGS) -fobjc-weak \
-	-fbuild-session-file\=$(BUILD_ROOT)/XCMClean_vers.c \
-	-fmodules -gmodules	-greproducible \
-	-mincremental-linker-compatible \
-	-Xpreprocessor -DDEBUG\=1 \
-	-O0 -flto\=thin -fno-common -isysroot $(SDKROOT) $(CCFLAGS_DARWIN) \
-	-F/$(DYLIB_INSTALL_NAME_BASE) \
-	-iframeworkwithsysroot $(DYLIB_INSTALL_NAME_BASE) \
-	-iframeworkwithsysroot usr/lib \
-	-iframeworkwithsysroot usr/lib/System \
-	-F/$(DYLIB_INSTALL_NAME_BASE)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION) \
-	-iframeworkwithsysroot /$(DYLIB_INSTALL_NAME_BASE)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION) \
-	-x objective-c \
-	-MMD -MT dependencies -MF $(TARGET_TEMP_DIR)/build/Object-x86_64-debug/x86_64/XCMClean_vers.d \
-	-c $< -o $@ || DO_FAIL="exit 2" ;
-	$(QUIET)$(BSMARK) $@ || DO_FAIL="exit 2" ;
-	$(DO_FAIL) ;
-
-$(TARGET_TEMP_DIR)/build/Object-arm64-debug/arm64/XCMClean/main.o: XCMBuild/XCMClean/main.m XCMBuild/XCMClean/XCMClean.h $(TARGET_TEMP_DIR)/build/Object-arm64-debug/arm64/XCMClean_vers.o |$(TARGET_TEMP_DIR)/build/Object-arm64-debug/arm64/XCMClean
-	$(QUIET)$(ECHO) "Compile XCMClean: $@ (arm64)" ;
-	$(QUIET)$(CLANG) -x objective-c -target arm64-apple-macos$(MACOSX_DEPLOYMENT_TARGET) \
-	$(CLANG_FLAGS_ALL) -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit\=0 \
-	$(CLANG_OBJC_ARC_FLAGS) $(CLANG_OBJC_BLOCKS_FLAGS) -fobjc-weak \
-	-fbuild-session-file\=$(BUILD_ROOT)/XCMClean_vers.c \
-	-fmodules -gmodules -greproducible \
-	-mincremental-linker-compatible \
-	-Xpreprocessor -DDEBUG\=1 \
-	-O0 -flto\=thin -fno-common -isysroot $(SDKROOT) $(CCFLAGS_DARWIN) \
-	-I$(PROJECT_ROOT)/XCMBuild/XCMClean -I$(PROJECT_ROOT)/XCMBuild \
-	-I$(TARGET_TEMP_DIR)/build/Object-arm64-debug/arm64/XCMClean \
-	-F/$(DYLIB_INSTALL_NAME_BASE) \
-	-iframeworkwithsysroot $(DYLIB_INSTALL_NAME_BASE) \
-	-iframeworkwithsysroot usr/lib \
-	-iframeworkwithsysroot usr/lib/System \
-	-F/$(DYLIB_INSTALL_NAME_BASE)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION) \
-	-MMD -MT dependencies -MF $(TARGET_TEMP_DIR)/build/Object-arm64-debug/arm64/XCMClean.d \
-	-c $< -o $@ || DO_FAIL="exit 2" ;
-	$(QUIET)$(BSMARK) $@ || DO_FAIL="exit 2" ;
-	$(DO_FAIL) ;
-
-$(TARGET_TEMP_DIR)/build/Object-arm64-debug/arm64/XCMClean_vers.o:: $(BUILD_ROOT)/XCMClean_vers.c $(TARGET_TEMP_DIR)/build/Object-arm64-debug/arm64 |build
-	$(QUIET)$(ECHO) "Compile Version Header: $@ (arm64)" ;
-	$(QUIET)$(CLANG) -target arm64-apple-macos$(MACOSX_DEPLOYMENT_TARGET) \
-	$(CLANG_FLAGS_ALL) -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit\=0 \
-	$(CLANG_OBJC_ARC_FLAGS) $(CLANG_OBJC_BLOCKS_FLAGS) -fobjc-weak \
-	-fbuild-session-file\=$(BUILD_ROOT)/XCMClean_vers.c \
-	-fmodules -gmodules	-greproducible -fmodule-name\=XCMBuild.XCMClean \
-	-mincremental-linker-compatible \
-	-Xpreprocessor -DDEBUG\=1 \
-	-O0 -flto\=thin -fno-common -isysroot $(SDKROOT) $(CCFLAGS_DARWIN) \
-	-F/$(DYLIB_INSTALL_NAME_BASE) \
-	-iframeworkwithsysroot $(DYLIB_INSTALL_NAME_BASE) \
-	-iframeworkwithsysroot usr/lib \
-	-iframeworkwithsysroot usr/lib/System \
-	-F/$(DYLIB_INSTALL_NAME_BASE)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION) \
-	-iframeworkwithsysroot /$(DYLIB_INSTALL_NAME_BASE)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION) \
-	-x objective-c \
-	-MMD -MT dependencies -MF $(TARGET_TEMP_DIR)/build/Object-arm64-debug/arm64/XCMClean_vers.d \
-	-c $< -o $@ || DO_FAIL="exit 2" ;
-	$(QUIET)$(BSMARK) $@ || DO_FAIL="exit 2" ;
-	$(DO_FAIL) ;
-
 $(TARGET_TEMP_DIR)/build/Object-x86_64-normal/x86_64/%_vers.o:: $(BUILD_ROOT)/%_vers.c $(TARGET_TEMP_DIR)/build/Object-x86_64-normal/x86_64 |build
 	$(QUIET)$(ECHO) "Compile Version Header: $@ (x86_64)" ;
 	$(QUIET)$(CLANG) -x objective-c -target x86_64-apple-macos$(MACOSX_DEPLOYMENT_TARGET) \
@@ -1368,6 +1195,10 @@ $(TARGET_TEMP_DIR)/build/Object-arch64-debug/arch64/%.o: XCMBuild/%.m XCMBuild/%
 	$(QUIET)$(BSMARK) $@ || DO_FAIL="exit 2" ;
 	$(QUITE)$(DO_FAIL) ;
 
+XCMBuild/XCM%/main.m: XCMBuild/XCM%/ |init-tool-generated-sources
+	$(DO_FAIL) ;
+	$(QUIET)$(ECHO) "$@: Enumerated." ;
+
 XCMBuild/%/%.m:: XCMBuild/%/ |init-start
 	$(QUIET)$(TEST) -d $% || DO_FAIL="exit 2" ;
 	$(QUIET)$(ECHO) "Checking ... $<" ;
@@ -1384,6 +1215,10 @@ include shared/includes/resources.make
 include shared/includes/XCRunShell.make
 include shared/includes/XCMTest.make
 include shared/includes/XCMClean.make
+include shared/includes/XCMAnalyze.make
+include shared/includes/XCMArchive.make
+include shared/includes/XCMInstall.make
+include shared/includes/XCMDocBuild.make
 
 
 $(TARGET_TEMP_DIR)/build/Object-x86_64-normal/x86_64/Binary/%: $(TARGET_TEMP_DIR)/build/Object-x86_64-normal/x86_64/%.o $(TARGET_TEMP_DIR)/build/Object-x86_64-normal/x86_64/%.LinkFileList shared/%-Info.plist |XCMBuild-dynamic-library
@@ -1411,14 +1246,14 @@ $(TARGET_TEMP_DIR)/build/Object-x86_64-normal/x86_64/Binary/%: $(TARGET_TEMP_DIR
 unbuild/%::
 	$(QUIET)$(ECHO) "Removing $% from buildroot ..." ;
 	$(QUIET)$(RMDIR) $(BUILD_ROOT)/$% 2>/dev/null || true ;
-	$(QUITE)$(DO_FAIL) ;
+	$(DO_FAIL) ;
 
 unbin/%: $(TARGET_TEMP_DIR)/build/bin/%
 	$(QUIET)$(ECHO) "Removing $< from build-cache ..." ;
 	$(QUIET)$(RM) $(WITH_FORCE) $< 2>/dev/null || true ;
 	$(QUITE)$(DO_FAIL) ;
 
-uninstall-tool-dir:: unbin/xcode_clonefile.bash unbin/clonefile unbin/prunefile unbin/fxip unbin/tool_shlock_helper.bash
+uninstall-tool-dir:: unbin/xcode_clonefile.bash unbin/clonefile unbin/prunefile unbin/serialized unbin/setIcon unbin/fxip unbin/tool_shlock_helper.bash
 	$(QUIET)$(WAIT) ;
 	$(QUIET)$(RMDIR) $(TARGET_TEMP_DIR)/build/bin/ 2>/dev/null || true ;
 	$(QUIET)$(ECHO) "$@: Done." ;
@@ -1437,22 +1272,107 @@ uninstall-temp-dir:: uninstall-stage-dir |cleanup_tmp_obj cleanup
 	$(QUIET)$(RMDIR) $(TARGET_TEMP_DIR) 2>/dev/null || true ;
 	$(QUIET)$(ECHO) "$(TARGET_TEMP_DIR): Removed. ( $@ )" ;
 
+uninstall-generated-headers::
+	$(QUIET)$(RM) $(WITH_FORCE) XCMBuild/XCMAnalyze/XCMAnalyze.h 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) XCMBuild/XCMAnalyze/XCMAnalyze.h~ 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) XCMBuild/XCMArchive/XCMArchive.h 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) XCMBuild/XCMArchive/XCMArchive.h~ 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) XCMBuild/XCMClean/XCMClean.h 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) XCMBuild/XCMClean/XCMClean.h~ 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) XCMBuild/XCMDocBuild/XCMDocBuild.h 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) XCMBuild/XCMDocBuild/XCMDocBuild.h~ 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) XCMBuild/XCMInstall/XCMInstall.h 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) XCMBuild/XCMInstall/XCMInstall.h~ 2>/dev/null || true
+	$(QUIET)$(WAIT)
+	$(QUIET)$(ECHO) "$<: Removed. ( $@ )"
+
+uninstall-generated-mains::
+	$(QUIET)$(RM) $(WITH_FORCE) XCMBuild/XCMAnalyze/main.m 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) XCMBuild/XCMAnalyze/main.m~ 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) XCMBuild/XCMArchive/main.m 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) XCMBuild/XCMArchive/main.m~ 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) XCMBuild/XCMClean/main.m 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) XCMBuild/XCMClean/main.m~ 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) XCMBuild/XCMDocBuild/main.m 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) XCMBuild/XCMDocBuild/main.m~ 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) XCMBuild/XCMInstall/main.m 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) XCMBuild/XCMInstall/main.m~ 2>/dev/null || true
+	$(QUIET)$(WAIT)
+	$(QUIET)$(ECHO) "$@: Done." ;
+
+uninstall-generated-info-plists::
+	$(QUIET)$(RM) $(WITH_FORCE) shared/XCMAnalyze-Info.plist 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) shared/XCMAnalyze-Info.plist~ 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) shared/XCMArchive-Info.plist 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) shared/XCMArchive-Info.plist~ 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) shared/XCMClean-Info.plist 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) shared/XCMClean-Info.plist~ 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) shared/XCMDocBuild-Info.plist 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) shared/XCMDocBuild-Info.plist~ 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) shared/XCMInstall-Info.plist 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) shared/XCMInstall-Info.plist~ 2>/dev/null || true
+	$(QUIET)$(WAIT)
+	$(QUIET)$(ECHO) "$@: Done." ;
+
+uninstall-generated-makefiles::
+	$(QUIET)$(RM) $(WITH_FORCE) shared/includes/XCMAnalyze.make 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) shared/includes/XCMAnalyze.make~ 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) shared/includes/XCMArchive.make 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) shared/includes/XCMArchive.make~ 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) shared/includes/XCMClean.make 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) shared/includes/XCMClean.make~ 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) shared/includes/XCMDocBuild.make 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) shared/includes/XCMDocBuild.make~ 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) shared/includes/XCMInstall.make 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) shared/includes/XCMInstall.make~ 2>/dev/null || true
+	$(QUIET)$(WAIT)
+	$(QUIET)$(ECHO) "$@: Done." ;
+
+uninstall-generated-entitlements::
+	$(QUIET)$(RM) $(WITH_FORCE) shared/security/entitlements/XCMAnalyze.entitlements 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) shared/security/entitlements/XCMAnalyze.entitlements~ 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) shared/security/entitlements/XCMArchive.entitlements 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) shared/security/entitlements/XCMArchive.entitlements~ 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) shared/security/entitlements/XCMClean.entitlements 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) shared/security/entitlements/XCMClean.entitlements~ 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) shared/security/entitlements/XCMDocBuild.entitlements 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) shared/security/entitlements/XCMDocBuild.entitlements~ 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) shared/security/entitlements/XCMInstall.entitlements 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) shared/security/entitlements/XCMInstall.entitlements~ 2>/dev/null || true
+	$(QUIET)$(WAIT)
+	$(QUIET)$(ECHO) "$@: Done." ;
+
+uninstall-tool-generated-sources:: uninstall-generated-headers uninstall-generated-mains uninstall-generated-info-plists uninstall-generated-entitlements  |cleanup_tmp_obj cleanup
+	$(QUIET)$(RMDIR) XCMBuild/XCMAnalyze/ 2>/dev/null || true
+	$(QUIET)$(ECHO) "XCMBuild/XCMAnalyze: Removed. ( $@ )"
+	$(QUIET)$(RMDIR) XCMBuild/XCMArchive/ 2>/dev/null || true
+	$(QUIET)$(ECHO) "XCMBuild/XCMArchive: Removed. ( $@ )"
+	$(QUIET)$(RMDIR) XCMBuild/XCMClean/ 2>/dev/null || true
+	$(QUIET)$(ECHO) "XCMBuild/XCMClean: Removed. ( $@ )"
+	$(QUIET)$(RMDIR) XCMBuild/XCMDocBuild/ 2>/dev/null || true
+	$(QUIET)$(ECHO) "XCMBuild/XCMDocBuild: Removed. ( $@ )"
+	$(QUIET)$(RMDIR) XCMBuild/XCMInstall/ 2>/dev/null || true
+	$(QUIET)$(ECHO) "XCMBuild/XCMInstall: Removed. ( $@ )"
+	$(QUIET)$(WAIT)
+	$(QUIET)$(ECHO) "$@: Done." ;
+
 uninstall: unbuild/$(CONFIGURATION) uninstall-temp-dir
 	$(QUIET)$(RM) $(WITH_FORCE) $(OBJECT_FILE_DIR) 2>/dev/null || true ;
 	$(QUIET)$(RMDIR) $(abspath $(PROJECT_TEMP_ROOT))/Cache 2>/dev/null || true ;
 	$(QUIET)$(WAIT) ;
 	$(QUIET)$(ECHO) "$@: Done." ;
 
-purge: clean uninstall-resources uninstall-tool-dir uninstall
+purge: clean uninstall-resources uninstall-tool-dir uninstall-tool-generated-sources uninstall
 	$(QUIET)$(RMDIR) $(BUILD_ROOT) 2>/dev/null || true ;
 	$(QUIET)$(RMDIR) $(DSTROOT) 2>/dev/null || true
-	$(QUIET)$(ECHO) "$@: Done. (Please restart)"
+	$(QUIET)$(ECHO) "$@: Done. (Please restart)" ;
 
 test:: init cleanup
 	$(QUIET)$(ECHO) "$@: START." ;
 	$(QUIET)$(WAIT) ;
-	$(QUIET)$(GIT) ls-files ./tests/test_*sh -z 2>/dev/null | xargs -0 -L1 -I{} $(SHELL) -c "({} && echo -e '\t{}: Succeded') || echo -e '\t{}: FAILURE' >&2 ; " ;
+	$(QUIET)$(GIT) ls-files ./tests/test_*sh -z 2>/dev/null | xargs -0 -L1 -I{} $(SHELL) -c "({} && echo -e '\t{}: Succeded') || (echo -e '\t{}: FAILURE' >&2 && false ) " || DO_FAIL="exit 2" ;
 	$(QUIET)$(WAIT) ;
+	$(DO_FAIL) ;
 	$(QUIET)$(ECHO) "$@: END." ;
 
 test-tox: cleanup

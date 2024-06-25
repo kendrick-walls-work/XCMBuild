@@ -2,7 +2,7 @@
 
 # reactive-firewall/XCMBuild project Makefile
 # ..................................
-# Copyright (c) 2023, Mr. Walls
+# Copyright (c) 2023-2024, Mr. Walls
 # ..................................
 # Licensed under APACHE-2 (the "License");
 # you may not use this file except in compliance with the License.
@@ -32,7 +32,7 @@ $(TARGET_TEMP_DIR)/build/Object-x86_64-normal/x86_64/XCMTest-Info.plist: shared/
 	$(QUIET)$(CLANG) -E -P -x c -Wno-trigraphs Resources/XCMBuild-Info.plist -F$(BUILD_ROOT)/$(CONFIGURATION) \
 	-target x86_64-apple-macos$(MACOSX_DEPLOYMENT_TARGET) \
 	-isysroot $(SDKROOT) \
-	-DPRODUCT_IDENTIFIER\=org.pak.dt.XCMBuild.XCMTest \
+	-DPRODUCT_IDENTIFIER\=$(PRODUCT_ORG_IDENTIFIER)XCMBuild.XCMTest \
 	-o $(TARGET_TEMP_DIR)/build/Object-x86_64-normal/x86_64/XCMTest-Info.plist.xml || DO_FAIL="exit 2" ;
 	$(DO_FAIL) ;
 	$(QUIET)$(FIX_INFO_PLIST) "$@.xml" >"$@" || DO_FAIL="exit 2" ;
@@ -46,7 +46,7 @@ $(TARGET_TEMP_DIR)/build/Object-arm64-normal/arm64/XCMTest-Info.plist: shared/XC
 	$(QUIET)$(CLANG) -E -P -x c -Wno-trigraphs shared/XCMTest-Info.plist -F$(BUILD_ROOT)/$(CONFIGURATION) \
 	-target arm64-apple-macos$(MACOSX_DEPLOYMENT_TARGET) \
 	-isysroot $(SDKROOT) \
-	-DPRODUCT_IDENTIFIER\=org.pak.dt.XCMBuild.XCMTest \
+	-DPRODUCT_IDENTIFIER\=$(PRODUCT_ORG_IDENTIFIER)XCMBuild.XCMTest \
 	-o $(TARGET_TEMP_DIR)/build/Object-arm64-normal/arm64/XCMTest-Info.plist.xml || DO_FAIL="exit 2" ;
 	$(DO_FAIL) ;
 	$(QUIET)$(FIX_INFO_PLIST) "$@.xml" >"$@" || DO_FAIL="exit 2" ;
@@ -59,7 +59,7 @@ $(TARGET_TEMP_DIR)/build/Object-arch64-normal/arch64/XCMTest-Info.plist: shared/
 	$(QUIET)$(CLANG) -E -P -x c -Wno-trigraphs shared/XCMTest-Info.plist -F$(BUILD_ROOT)/$(CONFIGURATION) \
 	-target aarch64-apple-macos$(MACOSX_DEPLOYMENT_TARGET) \
 	-isysroot $(SDKROOT) \
-	-DPRODUCT_IDENTIFIER\=org.pak.dt.XCMBuild.XCMTest \
+	-DPRODUCT_IDENTIFIER\=$(PRODUCT_ORG_IDENTIFIER)XCMBuild.XCMTest \
 	-o $(TARGET_TEMP_DIR)/build/Object-arch64-normal/arch64/XCMTest-Info.plist.xml || DO_FAIL="exit 2" ;
 	$(DO_FAIL) ;
 	$(QUIET)$(FIX_INFO_PLIST) "$@.xml" >"$@" || DO_FAIL="exit 2" ;
@@ -72,7 +72,7 @@ $(TARGET_TEMP_DIR)/build/Object-x86_64-debug/x86_64/XCMTest-Info.plist: shared/X
 	$(QUIET)$(CLANG) -E -P -x c -Wno-trigraphs shared/XCMTest-Info.plist -F$(BUILD_ROOT)/$(CONFIGURATION) \
 	-target x86_64-apple-macos$(MACOSX_DEPLOYMENT_TARGET) \
 	-isysroot $(SDKROOT) \
-	-DPRODUCT_IDENTIFIER\=org.pak.dt.XCMBuild.XCMTest \
+	-DPRODUCT_IDENTIFIER\=$(PRODUCT_ORG_IDENTIFIER)XCMBuild.XCMTest \
 	-o $(TARGET_TEMP_DIR)/build/Object-x86_64-debug/x86_64/XCMTest-Info.plist.xml ;
 	$(DO_FAIL) ;
 	$(QUIET)$(FIX_INFO_PLIST) "$@.xml" >"$@" ;
@@ -84,7 +84,7 @@ $(TARGET_TEMP_DIR)/build/Object-arm64-debug/arm64/Binary/XCMTest-Info.plist: sha
 	$(QUIET)$(CLANG) -E -P -x c -Wno-trigraphs shared/XCMTest-Info.plist -F$(BUILD_ROOT)/$(CONFIGURATION) \
 	-target arm64-apple-macos$(MACOSX_DEPLOYMENT_TARGET) \
 	-isysroot $(SDKROOT) \
-	-DPRODUCT_IDENTIFIER\=org.pak.dt.XCMBuild.XCMTest \
+	-DPRODUCT_IDENTIFIER\=$(PRODUCT_ORG_IDENTIFIER)XCMBuild.XCMTest \
 	-o $(TARGET_TEMP_DIR)/build/Object-arm64-debug/arm64/XCMTest-Info.plist.xml ;
 	$(DO_FAIL) ;
 	$(QUIET)$(FIX_INFO_PLIST) "$@.xml" >"$@" ;
@@ -96,7 +96,7 @@ $(TARGET_TEMP_DIR)/build/Object-arch64-debug/arch64/XCMTest-Info.plist: shared/X
 	$(QUIET)$(CLANG) -E -P -x c -Wno-trigraphs shared/XCMTest-Info.plist -F$(BUILD_ROOT)/$(CONFIGURATION) \
 	-target aarch64-apple-macos$(MACOSX_DEPLOYMENT_TARGET) \
 	-isysroot $(SDKROOT) \
-	-DPRODUCT_IDENTIFIER\=org.pak.dt.XCMBuild.XCMTest \
+	-DPRODUCT_IDENTIFIER\=$(PRODUCT_ORG_IDENTIFIER)XCMBuild.XCMTest \
 	-o $(TARGET_TEMP_DIR)/build/Object-arch64-debug/arch64/XCMTest-Info.plist.xml ;
 	$(DO_FAIL) ;
 	$(QUIET)$(FIX_INFO_PLIST) "$@.xml" >"$@" ;
@@ -326,8 +326,8 @@ $(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/
 	$(QUIET)$(SETICON) $(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/Resources/ToolTestIcon.icns "$@" || DO_FAIL="exit 2" ;
 	$(QUIET)$(CHMOD) $(INST_TOOL_OPTS) $@ 2>/dev/null || DO_FAIL="exit 2" ;
 	$(QUIET)$(UNMARK) $@ || DO_FAIL="exit 2" ;
-	$(QUIET)codesign --force -vvvv --sign ${CODE_SIGN_IDENTITY} --prefix=org.pak.dt. --entitlements shared/security/entitlements/XCMTest.entitlements --identifier=org.pak.dt.XCMBuild.XCMTest --preserve-metadata=identifier,requirements,entitlements,flags -o linker-signed,hard --timestamp=none --generate-entitlement-der "$@" ;
-	$(QUIET)codesign --force -vvvv --sign ${CODE_SIGN_IDENTITY} --bundle-version $(FRAMEWORK_VERSION) --prefix=org.pak.dt. --identifier=org.pak.dt.XCMBuild --preserve-metadata=identifier,requirements,entitlements,flags -o linker-signed,hard --timestamp=none --generate-entitlement-der $(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework || DO_FAIL="exit 2" ;
+	$(QUIET)codesign --force -vvvv --sign ${CODE_SIGN_IDENTITY} --prefix=$(PRODUCT_ORG_IDENTIFIER) --entitlements shared/security/entitlements/XCMTest.entitlements --identifier=$(PRODUCT_ORG_IDENTIFIER)XCMBuild.XCMTest --preserve-metadata=identifier,requirements,entitlements,flags -o linker-signed,hard --timestamp=none --generate-entitlement-der "$@" ;
+	$(QUIET)codesign --force -vvvv --sign ${CODE_SIGN_IDENTITY} --bundle-version $(FRAMEWORK_VERSION) --prefix=$(PRODUCT_ORG_IDENTIFIER) --identifier=$(PRODUCT_ORG_IDENTIFIER)XCMBuild --preserve-metadata=identifier,requirements,entitlements,flags -o linker-signed,hard --timestamp=none --generate-entitlement-der $(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework || DO_FAIL="exit 2" ;
 	$(DO_FAIL) ;
 	$(QUIET)$(ECHO) "Built with XCMTest-$(FRAMEWORK_VERSION)." ;
 
@@ -336,8 +336,8 @@ $(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/
 	$(QUIET)$(CHOWN) $(INST_USER_OWN) $@ 2>/dev/null || DO_FAIL="exit 2" ;
 	$(QUIET)$(CHMOD) $(INST_TOOL_OPTS) $@ 2>/dev/null || DO_FAIL="exit 2" ;
 	$(QUIET)$(UNMARK) $@ || DO_FAIL="exit 2" ;
-	$(QUIET)codesign --force -vvvv --sign ${CODE_SIGN_IDENTITY} --prefix=org.pak.dt. --entitlements shared/security/entitlements/XCMTest.entitlements --identifier=org.pak.dt.XCMBuild.XCMTest.Debug -o hard --timestamp=none --generate-entitlement-der "$@" ;
-	$(QUIET)codesign --force -vvvv --sign ${CODE_SIGN_IDENTITY} --bundle-version $(FRAMEWORK_VERSION) --prefix=org.pak.dt. --identifier=org.pak.dt.XCMBuild --preserve-metadata=identifier,requirements,entitlements,flags -o linker-signed,hard --timestamp=none --generate-entitlement-der $(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework || DO_FAIL="exit 2" ;
+	$(QUIET)codesign --force -vvvv --sign ${CODE_SIGN_IDENTITY} --prefix=$(PRODUCT_ORG_IDENTIFIER) --entitlements shared/security/entitlements/XCMTest.entitlements --identifier=$(PRODUCT_ORG_IDENTIFIER)XCMBuild.XCMTest.Debug -o hard --timestamp=none --generate-entitlement-der "$@" ;
+	$(QUIET)codesign --force -vvvv --sign ${CODE_SIGN_IDENTITY} --bundle-version $(FRAMEWORK_VERSION) --prefix=$(PRODUCT_ORG_IDENTIFIER) --identifier=$(PRODUCT_ORG_IDENTIFIER)XCMBuild --preserve-metadata=identifier,requirements,entitlements,flags -o linker-signed,hard --timestamp=none --generate-entitlement-der $(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework || DO_FAIL="exit 2" ;
 	$(DO_FAIL) ;
 	$(QUIET)$(ECHO) "Built with XCMTest-$(FRAMEWORK_VERSION). (DEBUG)" ;
 

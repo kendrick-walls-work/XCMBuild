@@ -4,7 +4,7 @@
 //
 // reactive-firewall/XCMBuild Testing xcconfig
 // ..................................
-// Copyright (c) 2023, Mr. Walls
+// Copyright (c) 2023-2024, Mr. Walls
 // ..................................
 // Licensed under APACHE-2 (the "License");
 // you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ PLIST_FILE_OUTPUT_FORMAT = XML
 APPLY_RULES_IN_COPY_FILES = YES
 STRINGS_FILE_OUTPUT_ENCODING = UTF-8
 WRAPPER_EXTENSION = framework
-PRODUCT_MODULE_NAME = $(PROJECT_NAME:c99extidentifier).$(PRODUCT_NAME:c99extidentifier)
+PRODUCT_MODULE_NAME = $(PROJECT_NAME:c17extidentifier).$(PRODUCT_NAME:c17extidentifier)
 OTHER_CODE_SIGN_FLAGS = --prefix=$(PRODUCT_ORG_IDENTIFIER) --preserve-metadata=identifier,requirements,entitlements,flags --identifier=$(PRODUCT_ORG_IDENTIFIER)$(PROJECT_NAME) -o hard,linker-signed,runtime --generate-entitlement-der
 LD_RUNPATH_SEARCH_PATHS = $(inherited) @executable_path/../Frameworks @executable_path/../lib @executable_path/../../Frameworks/ @executable_path/../../../$(FRAMEWORK_VERSION) @loader_path/Frameworks
-WRAPPER_NAME = $(PRODUCT_NAME:c99extidentifier).$(WRAPPER_EXTENSION)
+WRAPPER_NAME = $(PRODUCT_NAME:c17extidentifier).$(WRAPPER_EXTENSION)

@@ -4,7 +4,7 @@
 //
 // reactive-firewall/XCMBuild Repo Makefile
 // ..................................
-// Copyright (c) 2023, Mr. Walls
+// Copyright (c) 2023-2024, Mr. Walls
 // ..................................
 // Licensed under APACHE-2 (the "License");
 // you may not use this file except in compliance with the License.
@@ -26,9 +26,9 @@
 SDK_NAME = macosx
 BUILD_VARIANTS = normal debug
 PRODUCT_ORG_IDENTIFIER = org.adhoc.dt.
-PROJECT_VERSION_BUILD = 6
+PROJECT_VERSION_BUILD = 1
 PROJECT_VERSION_MAJOR = 2
-PROJECT_VERSION_MINOR = 2
+PROJECT_VERSION_MINOR = 3
 TEMP_FILES_DIR = $(PROJECT_TEMP_DIR:standardizepath)/Debug/Cache
 #include "CommonConfig.xcconfig"
 #include "NoTAPIConfig.xcconfig"

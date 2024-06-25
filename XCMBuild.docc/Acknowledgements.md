@@ -1,6 +1,6 @@
 # Acknowledgements
 
-Copyright (c) 2014-2023 Mr. Walls
+Copyright (c) 2014-2024 Mr. Walls
 
 ## Overview
 ### License

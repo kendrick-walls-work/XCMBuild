@@ -1,6 +1,6 @@
 /*!
  * @file xcrunshell/xcrunshell.h
- * @copyright Copyright (c) 2023 Mr.Walls
+ * @copyright Copyright (c) 2023-2024 Mr.Walls
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,13 +42,13 @@
 
 #ifndef _XCRS_MINARGS
 #define _XCRS_MINARGS
+/// Minimum arguments expected.
 const int XCRS_MINARGS = 1;
 #endif
 
 #ifndef _XCMB_IFS
-#define _XCMB_IFS
 /// Internal Feild Seporator for xcrunshell.
-extern NSString * const XCMB_IFS XCMHELPER_NEEDED;
+XCMB_IMPORT NSString *_Null_unspecified const XCMB_IFS XCMHELPER_NEEDED;
 #endif /* !XCMB_IFS */
 
 #ifndef XCMShellDelegate_h
@@ -82,6 +82,12 @@ extern NSString * const XCMB_IFS XCMHELPER_NEEDED;
 #pragma clang final(XCMShell_h)
 #endif /* !__clang__ */
 #endif /* XCMShell_h (outer) */
+
+XCMB_IMPORT
+/// Parse comandline arguments for the given command.
+/// - Parameters:
+///   - argsv: the NSArray of  non-zero index arguments from `[[NSProcessInfo processInfo] arguments]
+NSString *_Nullable parseArguments(NSArray *_Nullable argsv);
 
 #if defined(XCRS_RUNSHELL_MAIN_MARK)
 #if XCRS_RUNSHELL_MAIN_MARK < __INCLUDE_LEVEL__ && XCRS_RUNSHELL_MAIN_MARK < 1 && __INCLUDE_LEVEL__ <= 2

@@ -2,7 +2,7 @@
 
 # reactive-firewall/XCMBuild project Makefile
 # ..................................
-# Copyright (c) 2023, Mr. Walls
+# Copyright (c) 2023-2024, Mr. Walls
 # ..................................
 # Licensed under APACHE-2 (the "License");
 # you may not use this file except in compliance with the License.
@@ -140,7 +140,7 @@ $(TARGET_TEMP_DIR)/build/Object-x86_64-normal/x86_64/Binary/XCMBuild.dylib: $(TA
 	-Xlinker -keep_private_externs \
 	-Xlinker -no_adhoc_codesign -compatibility_version $(DYLIB_COMPATIBILITY_VERSION) \
 	-current_version $(DYLIB_CURRENT_VERSION) -Xlinker -dependency_info \
-	-Xlinker $(TARGET_TEMP_DIR)/Object-x86_64-normal/x86_64/XCMBuild_dependency_info.dat -o $@ ;
+	-Xlinker $(TARGET_TEMP_DIR)/build/Object-x86_64-normal/x86_64/XCMBuild_dependency_info.dat -o $@ ;
 	$(QUIET)$(ECHO) "Compiled Dynamic Libarary ($@)" || DO_FAIL="exit 2" ;
 	$(DO_FAIL) ;
 	$(QUIET)$(BSMARK) $@ || DO_FAIL="exit 2" ;
@@ -163,7 +163,7 @@ $(TARGET_TEMP_DIR)/build/Object-arm64-normal/arm64/Binary/XCMBuild.dylib: $(TARG
 	-Xlinker -keep_private_externs \
 	-Xlinker -no_adhoc_codesign -compatibility_version $(DYLIB_COMPATIBILITY_VERSION) \
 	-current_version $(DYLIB_CURRENT_VERSION) -Xlinker -dependency_info \
-	-Xlinker $(TARGET_TEMP_DIR)/Object-arm64-normal/arm64/XCMBuild_dependency_info.dat -o $@ ;
+	-Xlinker $(TARGET_TEMP_DIR)/build/Object-arm64-normal/arm64/XCMBuild_dependency_info.dat -o $@ ;
 	$(QUIET)$(ECHO) "Compiled Dynamic Libarary ($@)" || DO_FAIL="exit 2" ;
 	$(DO_FAIL) ;
 	$(QUIET)$(BSMARK) $@ || DO_FAIL="exit 2" ;
@@ -186,7 +186,7 @@ $(TARGET_TEMP_DIR)/build/Object-arch64-normal/arch64/Binary/XCMBuild.dylib: $(TA
 	-Xlinker -keep_private_externs \
 	-Xlinker -no_adhoc_codesign -compatibility_version $(DYLIB_COMPATIBILITY_VERSION) \
 	-current_version $(DYLIB_CURRENT_VERSION) -Xlinker -dependency_info \
-	-Xlinker $(TARGET_TEMP_DIR)/Object-arch64-normal/arch64/XCMBuild_dependency_info.dat -o $@ ;
+	-Xlinker $(TARGET_TEMP_DIR)/build/Object-arch64-normal/arch64/XCMBuild_dependency_info.dat -o $@ ;
 	$(QUIET)$(ECHO) "Compiled Dynamic Libarary ($@)" || DO_FAIL="exit 2" ;
 	$(DO_FAIL) ;
 	$(QUIET)$(BSMARK) $@ || DO_FAIL="exit 2" ;
@@ -238,7 +238,7 @@ $(TARGET_TEMP_DIR)/build/Object-x86_64-debug/x86_64/Binary/XCMBuild.dylib: $(TAR
 	-Xlinker -keep_private_externs \
 	-Xlinker -no_adhoc_codesign -compatibility_version $(DYLIB_COMPATIBILITY_VERSION) \
 	-current_version $(DYLIB_CURRENT_VERSION) -Xlinker -dependency_info \
-	-Xlinker $(TARGET_TEMP_DIR)/Object-x86_64-debug/x86_64/XCMBuild_dependency_info.dat -o $@ ;
+	-Xlinker $(TARGET_TEMP_DIR)/build/Object-x86_64-debug/x86_64/XCMBuild_dependency_info.dat -o $@ ;
 	$(QUIET)$(ECHO) "Compiled Dynamic Libarary ($@ Debug)" || DO_FAIL="exit 2" ;
 	$(DO_FAIL) ;
 	$(QUIET)$(BSMARK) $@ || DO_FAIL="exit 2" ;
@@ -261,7 +261,7 @@ $(TARGET_TEMP_DIR)/build/Object-arm64-debug/arm64/Binary/XCMBuild.dylib: $(TARGE
 	-Xlinker -keep_private_externs \
 	-Xlinker -no_adhoc_codesign -compatibility_version $(DYLIB_COMPATIBILITY_VERSION) \
 	-current_version $(DYLIB_CURRENT_VERSION) -Xlinker -dependency_info \
-	-Xlinker $(TARGET_TEMP_DIR)/Object-arm64-debug/arm64/XCMBuild_dependency_info.dat -o $@ ;
+	-Xlinker $(TARGET_TEMP_DIR)/build/Object-arm64-debug/arm64/XCMBuild_dependency_info.dat -o $@ ;
 	$(QUIET)$(ECHO) "Compiled Dynamic Libarary ($@ Debug)" || DO_FAIL="exit 2" ;
 	$(DO_FAIL) ;
 	$(QUIET)$(BSMARK) $@ || DO_FAIL="exit 2" ;
@@ -284,7 +284,7 @@ $(TARGET_TEMP_DIR)/build/Object-arch64-debug/arch64/Binary/XCMBuild.dylib: $(TAR
 	-Xlinker -keep_private_externs \
 	-Xlinker -no_adhoc_codesign -compatibility_version $(DYLIB_COMPATIBILITY_VERSION) \
 	-current_version $(DYLIB_CURRENT_VERSION) -Xlinker -dependency_info \
-	-Xlinker $(TARGET_TEMP_DIR)/Object-arch64-debug/arch64/XCMBuild_dependency_info.dat -o $@ ;
+	-Xlinker $(TARGET_TEMP_DIR)/build/Object-arch64-debug/arch64/XCMBuild_dependency_info.dat -o $@ ;
 	$(QUIET)$(ECHO) "Compiled Dynamic Libarary ($@ Debug)" || DO_FAIL="exit 2" ;
 	$(DO_FAIL) ;
 	$(QUIET)$(BSMARK) $@ || DO_FAIL="exit 2" ;
@@ -320,7 +320,7 @@ XCMBuild-framework:: $(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/ $(BUILD_
 	$(QUIET)$(TEST) -f $(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/XCMBuild || DO_FAIL="exit 2" ;
 	$(QUIET)$(SETICON) $(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/Resources/Icon.icns $(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework || DO_FAIL="exit 2" ;
 	$(DO_FAIL) ;
-	$(QUIET)codesign --force -vvvv --sign ${CODE_SIGN_IDENTITY} --bundle-version $(FRAMEWORK_VERSION) --prefix=org.pak.dt. --identifier=org.pak.dt.XCMBuild --preserve-metadata=identifier,requirements,entitlements,flags -o linker-signed,hard --timestamp=none --generate-entitlement-der "$<" || DO_FAIL="exit 2" ;
+	$(QUIET)codesign --force -vvvv --sign ${CODE_SIGN_IDENTITY} --bundle-version $(FRAMEWORK_VERSION) --prefix=$(PRODUCT_ORG_IDENTIFIER) --identifier=$(PRODUCT_ORG_IDENTIFIER)XCMBuild --preserve-metadata=identifier,requirements,entitlements,flags -o linker-signed,hard --timestamp=none --generate-entitlement-der "$<" || DO_FAIL="exit 2" ;
 	$(QUIET)$(WAIT) ;
 	$(DO_FAIL) ;
 	$(QUIET)$(ECHO) "$@: Done." ;
@@ -352,7 +352,7 @@ XCMBuild-dynamic-library-debug:: XCMBuild-all-headers XCMBuild-vers-hdr $(PROJEC
 
 install-XCMBuild-fmwk:: XCMBuild-framework $(DSTROOT) $(DSTROOT)/$(DYLIB_INSTALL_NAME_BASE) $(DSTROOT)/$(DYLIB_INSTALL_NAME_BASE)/XCMBuild.framework
 	$(QUIET)$(UNMARK) "$(DSTROOT)/$(DYLIB_INSTALL_NAME_BASE)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/XCMBuild" || DO_FAIL="exit 2" ;
-	$(QUIET)codesign --force --sign $(CODE_SIGN_IDENTITY) -vvvvv --prefix=org.pak.dt. --entitlements shared/security/entitlements/XCMBuildRelease.entitlements --preserve-metadata=identifier,entitlements,flags --identifier=$(PRODUCT_BUNDLE_IDENTIFIER) -o linker-signed,hard,runtime --timestamp=none --generate-entitlement-der $(DSTROOT)/$(DYLIB_INSTALL_NAME_BASE)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/XCMBuild || true ;
+	$(QUIET)codesign --force --sign $(CODE_SIGN_IDENTITY) -vvvvv --prefix=$(PRODUCT_ORG_IDENTIFIER) --entitlements shared/security/entitlements/XCMBuildRelease.entitlements --preserve-metadata=identifier,entitlements,flags --identifier=$(PRODUCT_BUNDLE_IDENTIFIER) -o linker-signed,hard,runtime --timestamp=none --generate-entitlement-der $(DSTROOT)/$(DYLIB_INSTALL_NAME_BASE)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/XCMBuild || true ;
 	$(QUIET)$(WAIT) ;
 	$(DO_FAIL) ;
 	$(QUIET)$(ECHO) "Installed XCMBuild." ;

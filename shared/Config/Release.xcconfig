@@ -4,7 +4,7 @@
 //
 // reactive-firewall/XCMBuild General Config
 // ..................................
-// Copyright (c) 2023, Mr. Walls
+// Copyright (c) 2023-2024, Mr. Walls
 // ..................................
 // Licensed under APACHE-2 (the "License");
 // you may not use this file except in compliance with the License.
@@ -45,7 +45,7 @@ LD_GENERATE_MAP_FILE[arch=i386] = $(ONLY_ACTIVE_ARCH) // !$(ALLOW_TARGET_PLATFOR
 EAGER_LINKING = $(LD_GENERATE_MAP_FILE)
 COMPILER_INDEX_STORE_ENABLE = Default
 GENERATE_INFOPLIST_FILE = YES
-PRODUCT_NAME = $(TARGET_NAME:c99extidentifier)
+PRODUCT_NAME = $(TARGET_NAME:c17extidentifier)
 ALWAYS_SEARCH_USER_PATHS = NO
 FRAMEWORK_SEARCH_PATHS[sdk=macosx*] = $(inhereted) $(LOCAL_SYSTEM_LIBRARY) $(BUILT_PRODUCTS_DIR:standardizepath)
 //CODE_SIGN_IDENTITY = $(inhereted)
@@ -53,6 +53,7 @@ DEVELOPMENT_TEAM = $(inhereted)
 DEVELOPMENT_TEAM[sdk=macosx*] = $(inhereted)
 ENABLE_HARDENED_RUNTIME = YES
 //OTHER_CFLAGS = $(inhereted)
+CODE_SIGN_ALLOW_ENTITLEMENTS_MODIFICATION = YES
 OTHER_CODE_SIGN_FLAGS = $(inhereted) --prefix=$(PRODUCT_ORG_IDENTIFIER)
 GENERATE_TEXT_BASED_STUBS = NO
 TAPI_ENABLE_PROJECT_HEADERS[sdk=macosx*] = $(GENERATE_TEXT_BASED_STUBS) && $(EAGER_LINKING)

@@ -4,7 +4,7 @@
 //
 // reactive-firewall/XCMBuild XcodeCompileToolsDebug xcconfig
 // ..................................
-// Copyright (c) 2023, Mr. Walls
+// Copyright (c) 2023-2024, Mr. Walls
 // ..................................
 // Licensed under APACHE-2 (the "License");
 // you may not use this file except in compliance with the License.
@@ -33,7 +33,7 @@ MACOSX_DEPLOYMENT_TARGET = 13.3
 MACOSX_DEPLOYMENT_TARGET[arch=arm64e] = 13.3
 MACOSX_DEPLOYMENT_TARGET[arch=arm64] = 13.3
 MACH_O_TYPE = mh_execute
-MODULE_NAME = $(TARGET_NAME:c99extidentifier)
+MODULE_NAME = $(TARGET_NAME:c17extidentifier)
 LLVM_LTO = YES_THIN
 LLVM_LTO[sdk=macosx*][arch=arm64] = YES_THIN
 LLVM_LTO[sdk=macosx*][arch=x86_64] = YES_THIN
@@ -49,17 +49,17 @@ CREATE_INFOPLIST_SECTION_IN_BINARY = YES
 EXECUTABLE_EXTENSION_profile = -profile
 EXECUTABLE_EXTENSION_debug = -debug
 EXECUTABLE_EXTENSION = $(inhereted)
-PRODUCT_NAME = $(TARGET_NAME:c99extidentifier)
-PRODUCT_MODULE_NAME = $(PROJECT_NAME:c99extidentifier).$(PRODUCT_NAME:c99extidentifier)
-CODE_SIGN_ENTITLEMENTS = shared/security/entitlements/$(PRODUCT_NAME:c99extidentifier).entitlements
+PRODUCT_NAME = $(TARGET_NAME:c17extidentifier)
+PRODUCT_MODULE_NAME = $(PROJECT_NAME:c17extidentifier).$(PRODUCT_NAME:c17extidentifier)
+CODE_SIGN_ENTITLEMENTS = shared/security/entitlements/$(PRODUCT_NAME:c17extidentifier).entitlements
 //CODE_SIGN_STYLE = $(inhereted)
 ENABLE_HARDENED_RUNTIME = YES
 TAPI_EXCLUDE_PROJECT_HEADERS = xcrunshell.h
 TAPI_EXTRA_PROJECT_HEADERS = Compat.h XCMBuild.h XCMShellDelegate.h XCMShell.h
-TAPI_EXTRA_PUBLIC_HEADERS = $(PRODUCT_NAME:c99extidentifier).h
+TAPI_EXTRA_PUBLIC_HEADERS = $(PRODUCT_NAME:c17extidentifier).h
 GCC_INPUT_FILETYPE = sourcecode.c.objc
 CLANG_MODULES_AUTOLINK = $(DEFINES_MODULE)
 ENABLE_MODULE_VERIFIER = $(DEFINES_MODULE)
-CONTENTS_FOLDER_PATH = $(PROJECT_NAME:c99extidentifier).framework/Versions/$(FRAMEWORK_VERSION)
+CONTENTS_FOLDER_PATH = $(PROJECT_NAME:c17extidentifier).framework/Versions/$(FRAMEWORK_VERSION)
 
 // CLANG_TIDY_MISC_REDUNDANT_EXPRESSION = NO

@@ -1,6 +1,6 @@
 /*!
  * @file XCMTest/XCMTest.m
- * @copyright Copyright (c) 2023 Mr.Walls
+ * @copyright Copyright (c) 2023-2024 Mr.Walls
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,6 +26,7 @@
 #if __has_attribute(used)
 #ifndef _XCMTestCommandArgumentsString
 #define _XCMTestCommandArgumentsString "make -f Makefile test"
+XCMB_EXPORT __kindof NSString * const XCMTestCommandArgumentsString;
 NSString * const XCMTestCommandArgumentsString __attribute__ ((used)) = @"/usr/bin/command -p make -f Makefile test";
 #if defined(__clang__) && __clang__
 #pragma clang final(_XCMTestCommandArgumentsString)

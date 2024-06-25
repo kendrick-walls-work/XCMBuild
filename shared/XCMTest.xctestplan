@@ -4,18 +4,33 @@
       "id" : "26D975EF-3D62-430A-8704-A14D94C9C8F9",
       "name" : "debug",
       "options" : {
-
+        "diagnosticCollectionPolicy" : "Always",
+        "mainThreadCheckerEnabled" : true,
+        "maximumTestExecutionTimeAllowance" : 1200,
+        "maximumTestRepetitions" : 9,
+        "preferredScreenCaptureFormat" : "screenshot",
+        "repeatInNewRunnerProcess" : true,
+        "testExecutionOrdering" : "alphabetical",
+        "testRepetitionMode" : "retryOnFailure",
+        "testTimeoutsEnabled" : true,
+        "undefinedBehaviorSanitizerEnabled" : true
       }
     },
     {
       "id" : "C38A38E8-1CE5-436B-B1C5-1E68B7A94E99",
       "name" : "normal",
       "options" : {
-
+        "defaultTestExecutionTimeAllowance" : 100,
+        "maximumTestExecutionTimeAllowance" : 300,
+        "repeatInNewRunnerProcess" : true,
+        "testExecutionOrdering" : "random",
+        "testRepetitionMode" : "retryOnFailure",
+        "testTimeoutsEnabled" : true
       }
     }
   ],
   "defaultOptions" : {
+    "mainThreadCheckerEnabled" : false,
     "targetForVariableExpansion" : {
       "containerPath" : "container:XCMBuild.xcodeproj",
       "identifier" : "8462AFDD2A900F1E001EFB68",
@@ -23,7 +38,14 @@
     }
   },
   "testTargets" : [
-
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:XCMBuild.xcodeproj",
+        "identifier" : "84D44CF02C01A29700591F3A",
+        "name" : "XCMBuildMetaTests"
+      }
+    }
   ],
   "version" : 1
 }

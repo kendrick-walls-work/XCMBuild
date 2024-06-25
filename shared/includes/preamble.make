@@ -2,7 +2,7 @@
 
 # reactive-firewall/XCMBuild Repo Makefile
 # ..................................
-# Copyright (c) 2011-2023, Mr. Walls
+# Copyright (c) 2011-2024, Mr. Walls
 # ..................................
 # Licensed under APACHE-2 (the "License");
 # you may not use this file except in compliance with the License.
@@ -164,6 +164,10 @@ ifeq "$(MV)" ""
 	ifeq "$(WITH_FORCE)" ""
 		WITH_FORCE=-f
 	endif
+endif
+
+ifeq "$(PRODUCT_ORG_IDENTIFIER)" ""
+	PRODUCT_ORG_IDENTIFIER="org.adhoc.dt."
 endif
 
 ifeq "$(PRINT)" ""

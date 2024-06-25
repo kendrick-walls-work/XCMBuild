@@ -2,7 +2,7 @@
 
 # reactive-firewall/XCMBuild Repo Version settings Makefile
 # ..................................
-# Copyright (c) 2011-2023, Mr. Walls
+# Copyright (c) 2011-2024, Mr. Walls
 # ..................................
 # Licensed under APACHE-2 (the "License");
 # you may not use this file except in compliance with the License.
@@ -53,23 +53,23 @@ ifeq "$(PRODUCT_BUNDLE_IDENTIFIER)" ""
 endif
 
 ifeq "$(INFOPLIST_KEY_NSHumanReadableCopyright)" ""
-	INFOPLIST_KEY_NSHumanReadableCopyright="Copyright (c) 2014-2023 $(PRODUCT_BUNDLE_IDENTIFIER) - Mr. Walls"
+	INFOPLIST_KEY_NSHumanReadableCopyright="Copyright (c) 2014-2024 $(PRODUCT_BUNDLE_IDENTIFIER) - Mr. Walls"
 endif
 
 ifeq "$(PROJECT_VERSION_MAJOR)" ""
 	PROJECT_VERSION_MAJOR=2
 endif
 ifeq "$(PROJECT_VERSION_MINOR)" ""
-	PROJECT_VERSION_MINOR=2
+	PROJECT_VERSION_MINOR=3
 endif
 ifeq "$(PROJECT_VERSION_BUILD)" ""
 	ifeq "$(CONFIGURATION)" "Debug"
-		PROJECT_VERSION_BUILD=6
+		PROJECT_VERSION_BUILD=1
 	else
 		ifeq "$(CONFIGURATION)" "Release"
-			PROJECT_VERSION_BUILD=9
+			PROJECT_VERSION_BUILD=3
 		else
-			PROJECT_VERSION_BUILD=7
+			PROJECT_VERSION_BUILD=2
 		endif
 	endif
 endif
