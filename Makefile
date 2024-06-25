@@ -238,7 +238,7 @@ $(TARGET_TEMP_DIR): |init-start
 init-start::
 	$(QUIET)$(ECHO) "Starting fresh." ;
 
-init: |init-start init-tmp-dirs init-tool-dirs
+init: |init-start init-tmp-dirs init-tool-dirs init-tool-generated-sources
 	$(QUIET)$(ECHO) "$(SDKROOT)" || DO_FAIL="exit 2" ;
 	$(QUIET)$(ECHO) "$(SET_FILE_ATTR)" || DO_FAIL="exit 2" ;
 	$(QUIET)$(ECHO) "$(UNMARK)" || DO_FAIL="exit 2" ;
@@ -292,6 +292,10 @@ init-tool-prunefile: $(TARGET_TEMP_DIR)/build/bin/prunefile |init-lib-flatten
 init-tool-clonefile: $(TARGET_TEMP_DIR)/build/bin/xcode_clonefile.bash $(TARGET_TEMP_DIR)/build/bin/clonefile |init-lib-serialize
 	$(DO_FAIL) ;
 	$(QUIET)$(ECHO) "Added clonefile to Cache." ;
+
+init-tool-generated-sources:: |init-start
+	$(QUIET)bin/tool_gen_XCMTools_SRC_helper.bash 2>/dev/null || DO_FAIL="exit 2" ;
+	$(QUIET)$(ECHO) "Dynamic source files regenerated." ;
 
 install:: |build bootstrap init
 	$(QUIET)$(WAIT)
@@ -1191,6 +1195,10 @@ $(TARGET_TEMP_DIR)/build/Object-arch64-debug/arch64/%.o: XCMBuild/%.m XCMBuild/%
 	$(QUIET)$(BSMARK) $@ || DO_FAIL="exit 2" ;
 	$(QUITE)$(DO_FAIL) ;
 
+XCMBuild/XCM%/main.m: XCMBuild/XCM%/ |init-tool-generated-sources
+	$(DO_FAIL) ;
+	$(QUIET)$(ECHO) "$@: Enumerated." ;
+
 XCMBuild/%/%.m:: XCMBuild/%/ |init-start
 	$(QUIET)$(TEST) -d $% || DO_FAIL="exit 2" ;
 	$(QUIET)$(ECHO) "Checking ... $<" ;
@@ -1245,7 +1253,7 @@ unbin/%: $(TARGET_TEMP_DIR)/build/bin/%
 	$(QUIET)$(RM) $(WITH_FORCE) $< 2>/dev/null || true ;
 	$(QUITE)$(DO_FAIL) ;
 
-uninstall-tool-dir:: unbin/xcode_clonefile.bash unbin/clonefile unbin/prunefile unbin/fxip unbin/tool_shlock_helper.bash
+uninstall-tool-dir:: unbin/xcode_clonefile.bash unbin/clonefile unbin/prunefile unbin/serialized unbin/setIcon unbin/fxip unbin/tool_shlock_helper.bash
 	$(QUIET)$(WAIT) ;
 	$(QUIET)$(RMDIR) $(TARGET_TEMP_DIR)/build/bin/ 2>/dev/null || true ;
 	$(QUIET)$(ECHO) "$@: Done." ;
@@ -1264,13 +1272,97 @@ uninstall-temp-dir:: uninstall-stage-dir |cleanup_tmp_obj cleanup
 	$(QUIET)$(RMDIR) $(TARGET_TEMP_DIR) 2>/dev/null || true ;
 	$(QUIET)$(ECHO) "$(TARGET_TEMP_DIR): Removed. ( $@ )" ;
 
+uninstall-generated-headers::
+	$(QUIET)$(RM) $(WITH_FORCE) XCMBuild/XCMAnalyze/XCMAnalyze.h 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) XCMBuild/XCMAnalyze/XCMAnalyze.h~ 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) XCMBuild/XCMArchive/XCMArchive.h 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) XCMBuild/XCMArchive/XCMArchive.h~ 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) XCMBuild/XCMClean/XCMClean.h 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) XCMBuild/XCMClean/XCMClean.h~ 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) XCMBuild/XCMDocBuild/XCMDocBuild.h 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) XCMBuild/XCMDocBuild/XCMDocBuild.h~ 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) XCMBuild/XCMInstall/XCMInstall.h 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) XCMBuild/XCMInstall/XCMInstall.h~ 2>/dev/null || true
+	$(QUIET)$(WAIT)
+	$(QUIET)$(ECHO) "$<: Removed. ( $@ )"
+
+uninstall-generated-mains::
+	$(QUIET)$(RM) $(WITH_FORCE) XCMBuild/XCMAnalyze/main.m 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) XCMBuild/XCMAnalyze/main.m~ 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) XCMBuild/XCMArchive/main.m 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) XCMBuild/XCMArchive/main.m~ 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) XCMBuild/XCMClean/main.m 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) XCMBuild/XCMClean/main.m~ 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) XCMBuild/XCMDocBuild/main.m 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) XCMBuild/XCMDocBuild/main.m~ 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) XCMBuild/XCMInstall/main.m 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) XCMBuild/XCMInstall/main.m~ 2>/dev/null || true
+	$(QUIET)$(WAIT)
+	$(QUIET)$(ECHO) "$@: Done." ;
+
+uninstall-generated-info-plists::
+	$(QUIET)$(RM) $(WITH_FORCE) shared/XCMAnalyze-Info.plist 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) shared/XCMAnalyze-Info.plist~ 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) shared/XCMArchive-Info.plist 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) shared/XCMArchive-Info.plist~ 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) shared/XCMClean-Info.plist 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) shared/XCMClean-Info.plist~ 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) shared/XCMDocBuild-Info.plist 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) shared/XCMDocBuild-Info.plist~ 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) shared/XCMInstall-Info.plist 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) shared/XCMInstall-Info.plist~ 2>/dev/null || true
+	$(QUIET)$(WAIT)
+	$(QUIET)$(ECHO) "$@: Done." ;
+
+uninstall-generated-makefiles::
+	$(QUIET)$(RM) $(WITH_FORCE) shared/includes/XCMAnalyze.make 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) shared/includes/XCMAnalyze.make~ 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) shared/includes/XCMArchive.make 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) shared/includes/XCMArchive.make~ 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) shared/includes/XCMClean.make 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) shared/includes/XCMClean.make~ 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) shared/includes/XCMDocBuild.make 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) shared/includes/XCMDocBuild.make~ 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) shared/includes/XCMInstall.make 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) shared/includes/XCMInstall.make~ 2>/dev/null || true
+	$(QUIET)$(WAIT)
+	$(QUIET)$(ECHO) "$@: Done." ;
+
+uninstall-generated-entitlements::
+	$(QUIET)$(RM) $(WITH_FORCE) shared/security/entitlements/XCMAnalyze.entitlements 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) shared/security/entitlements/XCMAnalyze.entitlements~ 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) shared/security/entitlements/XCMArchive.entitlements 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) shared/security/entitlements/XCMArchive.entitlements~ 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) shared/security/entitlements/XCMClean.entitlements 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) shared/security/entitlements/XCMClean.entitlements~ 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) shared/security/entitlements/XCMDocBuild.entitlements 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) shared/security/entitlements/XCMDocBuild.entitlements~ 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) shared/security/entitlements/XCMInstall.entitlements 2>/dev/null || true
+	$(QUIET)$(RM) $(WITH_FORCE) shared/security/entitlements/XCMInstall.entitlements~ 2>/dev/null || true
+	$(QUIET)$(WAIT)
+	$(QUIET)$(ECHO) "$@: Done." ;
+
+uninstall-tool-generated-sources:: uninstall-generated-headers uninstall-generated-mains uninstall-generated-info-plists uninstall-generated-entitlements  |cleanup_tmp_obj cleanup
+	$(QUIET)$(RMDIR) XCMBuild/XCMAnalyze/ 2>/dev/null || true
+	$(QUIET)$(ECHO) "XCMBuild/XCMAnalyze: Removed. ( $@ )"
+	$(QUIET)$(RMDIR) XCMBuild/XCMArchive/ 2>/dev/null || true
+	$(QUIET)$(ECHO) "XCMBuild/XCMArchive: Removed. ( $@ )"
+	$(QUIET)$(RMDIR) XCMBuild/XCMClean/ 2>/dev/null || true
+	$(QUIET)$(ECHO) "XCMBuild/XCMClean: Removed. ( $@ )"
+	$(QUIET)$(RMDIR) XCMBuild/XCMDocBuild/ 2>/dev/null || true
+	$(QUIET)$(ECHO) "XCMBuild/XCMDocBuild: Removed. ( $@ )"
+	$(QUIET)$(RMDIR) XCMBuild/XCMInstall/ 2>/dev/null || true
+	$(QUIET)$(ECHO) "XCMBuild/XCMInstall: Removed. ( $@ )"
+	$(QUIET)$(WAIT)
+	$(QUIET)$(ECHO) "$@: Done." ;
+
 uninstall: unbuild/$(CONFIGURATION) uninstall-temp-dir
 	$(QUIET)$(RM) $(WITH_FORCE) $(OBJECT_FILE_DIR) 2>/dev/null || true ;
 	$(QUIET)$(RMDIR) $(abspath $(PROJECT_TEMP_ROOT))/Cache 2>/dev/null || true ;
 	$(QUIET)$(WAIT) ;
 	$(QUIET)$(ECHO) "$@: Done." ;
 
-purge: clean uninstall-resources uninstall-tool-dir uninstall
+purge: clean uninstall-resources uninstall-tool-dir uninstall-tool-generated-sources uninstall
 	$(QUIET)$(RMDIR) $(BUILD_ROOT) 2>/dev/null || true ;
 	$(QUIET)$(RMDIR) $(DSTROOT) 2>/dev/null || true
 	$(QUIET)$(ECHO) "$@: Done. (Please restart)" ;

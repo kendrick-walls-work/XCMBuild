@@ -192,7 +192,7 @@ XCMBuild/xcrunshell/: |init-start
 	$(DO_FAIL) ;
 	$(QUIET)$(ECHO) "$@: Available." ;
 
-XCMBuild/%/%.h: XCMBuild/%/ |init-start
+XCMBuild/%/%.h: XCMBuild/%/ |init-tool-generated-sources
 	$(QUIET)$(TEST) -d $< || DO_FAIL="exit 2" ;
 	$(QUIET)$(ECHO) "Checking ... $<" ;
 	$(QUIET)$(TEST) -f $@ || DO_FAIL="exit 2" ;

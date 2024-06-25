@@ -1,12 +1,8 @@
-divert(-1)
-define(`FRAMEWORK', `XCMBuild')dnl
-define(`FILESTUB', ``XCM'STUBNAME()')dnl
-divert(0)dnl
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <!--
-FILESTUB()`-Info.plist'
-FRAMEWORK()
+XCMake-Info.plist
+XCMBuild
 
 Copyright (c) 2023-2024 Mr.Walls
 

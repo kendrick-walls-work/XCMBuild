@@ -5,10 +5,10 @@ divert(0)dnl
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <!--
-FILESTUB()`-Info.plist'
+FILESTUB()`.entitlements'
 FRAMEWORK()
 
-Copyright (c) 2023-2024 Mr.Walls
+Copyright (c) 2024 Mr.Walls
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -24,21 +24,9 @@ limitations under the License.
 -->
 <plist version="1.0">
 <dict>
-	<key>CFBundleIdentifier</key>
-	<string>$(PRODUCT_IDENTIFIER)</string>
-	<key>LSArchitecturePriority</key>
-	<array>
-		<string>x86_64</string>
-		<string>arm64</string>
-		<string>arch64</string>
-	</array>
-	<key>LSExecutableArchitectures</key>
-	<array>
-		<string>x86_64</string>
-		<string>arm64</string>
-		<string>arch64</string>
-	</array>
-	<key>LSRequiresNativeExecution</key>
+	<key>com.apple.security.application-groups</key>
+	<string>org.pak.dt</string>
+	<key>com.apple.security.cs.disable-library-validation</key>
 	<true/>
 </dict>
 </plist>

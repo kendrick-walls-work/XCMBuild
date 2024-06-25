@@ -710,6 +710,7 @@
 		847031332AD0E85F00386F22 /* XCMProcesses.m */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; fileEncoding = 4; lineEnding = 0; name = XCMProcesses.m; path = XCMBuild/XCMProcesses.m; sourceTree = SOURCE_ROOT; };
 		847031352AD11D6300386F22 /* XCMProcesses.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = XCMProcesses.h; sourceTree = "<group>"; usesTabs = 1; };
 		84709D402ACBD19E00B660DB /* libsandbox.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsandbox.tbd; path = usr/lib/libsandbox.tbd; sourceTree = SDKROOT; };
+		8474A6672C28FF3A0010EF4B /* XCM_STUBNAME_.entitlements.m4 */ = {isa = PBXFileReference; lastKnownFileType = text; name = XCM_STUBNAME_.entitlements.m4; path = shared/security/entitlements/XCM_STUBNAME_.entitlements.m4; sourceTree = SOURCE_ROOT; };
 		847527F42AA150E000B1FDE3 /* apfs_dir_CONFIG_ACLs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; lineEnding = 0; path = apfs_dir_CONFIG_ACLs; sourceTree = "<group>"; };
 		847527F52AA150E000B1FDE3 /* apfs_dir_DEVELOPER_ACLs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = apfs_dir_DEVELOPER_ACLs; sourceTree = "<group>"; };
 		847527F62AA150E000B1FDE3 /* apfs_file_CONFIG_ACLs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = apfs_file_CONFIG_ACLs; sourceTree = "<group>"; };
@@ -773,6 +774,7 @@
 		84B1F4A52ACE8A4D00DD1513 /* XCMTest.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = XCMTest.docc; sourceTree = "<group>"; };
 		84B6F86A2AEC89F80028B471 /* compilerflags.make */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; fileEncoding = 4; lineEnding = 0; name = compilerflags.make; path = includes/compilerflags.make; sourceTree = "<group>"; };
 		84B6F86B2AECA9BC0028B471 /* test_makefiles.bash */ = {isa = PBXFileReference; explicitFileType = text.script.sh; fileEncoding = 4; lineEnding = 0; name = test_makefiles.bash; path = tests/test_makefiles.bash; sourceTree = "<group>"; usesTabs = 1; };
+		84BB3C572C29113A00A8C82F /* tool_gen_XCMTools_SRC_helper.bash */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; lineEnding = 0; name = tool_gen_XCMTools_SRC_helper.bash; path = bin/tool_gen_XCMTools_SRC_helper.bash; sourceTree = "<group>"; };
 		84BD1E632AAFDCB1004F72DF /* CommonConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = CommonConfig.xcconfig; path = shared/Config/CommonConfig.xcconfig; sourceTree = SOURCE_ROOT; };
 		84BD1E642AAFDFD7004F72DF /* XcodeTestingConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = XcodeTestingConfig.xcconfig; path = shared/Config/XcodeTestingConfig.xcconfig; sourceTree = SOURCE_ROOT; };
 		84BF4DF52ABA564D00E33993 /* XcodePreBuildGlueConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = XcodePreBuildGlueConfig.xcconfig; path = shared/Config/XcodePreBuildGlueConfig.xcconfig; sourceTree = SOURCE_ROOT; };
@@ -1081,7 +1083,6 @@
 				8446EC102A7C849700B93693 /* pretests.sh */,
 				8446EC122A7C849700B93693 /* runtests.sh */,
 				8446EC152A7C849700B93693 /* styletests.sh */,
-				8446EC142A7C849700B93693 /* tool_shlock_helper.bash */,
 				840E89992B0450EB008A6A1E /* setIcon */,
 				84B0D58A2ADF3B4A00C9C5D2 /* clonefile */,
 				84C78FF02AF46D9C0036B2D8 /* genversc.bash */,
@@ -1093,6 +1094,8 @@
 				84838D2D2A7D8A46008BC8C1 /* flatten */,
 				84DCECF32B0BF91000B7626A /* stemname */,
 				846E3C0F2AC91D8200666235 /* snooze */,
+				8446EC142A7C849700B93693 /* tool_shlock_helper.bash */,
+				84BB3C572C29113A00A8C82F /* tool_gen_XCMTools_SRC_helper.bash */,
 			);
 			name = bin;
 			sourceTree = "<group>";
@@ -1167,6 +1170,7 @@
 			children = (
 				8411D9A54F82E9430029B632 /* ACLs */,
 				843AC0252C22498500B93C62 /* XCMake.entitlements */,
+				8474A6672C28FF3A0010EF4B /* XCM_STUBNAME_.entitlements.m4 */,
 				843AC0242C22498500B93C62 /* XCMAnalyze.entitlements */,
 				84FADEA82AABEAA200C31C1A /* XCMTest.entitlements */,
 				84D12C322B23C99300E7B4DF /* XCMClean.entitlements */,
@@ -1998,8 +2002,12 @@
 				"$(SRCROOT)/XCMBuild/XCM_STUBNAME_/main.m.m4",
 				"$(SRCROOT)/shared/includes/XCM_STUBNAME_.make.m4",
 				"$(SRCROOT)/shared/XCM_STUBNAME_-Info.plist.m4",
+				"$(SRCROOT)/shared/security/entitlements/XCM_STUBNAME_.entitlements.m4",
 				"$(SRCROOT)/shared/XCM_STUB_DESC.list",
 				"$(SRCROOT)/shared/XCM_STUB_EQUIV.list",
+				"$(SRCROOT)/bin/tool_gen_XCMTools_SRC_helper.bash",
+				"$(SRCROOT)/bin/tool_shlock_helper.bash",
+				"$(TMPDIR)/org.pak.dt.XCMBuild.XCMGenSourceM4.lock",
 			);
 			name = "Generate Source Files";
 			outputFileListPaths = (
@@ -2009,26 +2017,31 @@
 				"$(SRCROOT)/XCMBuild/XCMClean/main.m",
 				"$(SRCROOT)/shared/XCMClean-Info.plist",
 				"$(SRCROOT)/shared/includes/XCMClean.make",
+				"$(SRCROOT)/shared/security/entitlements/XCMClean.entitlements",
 				"$(SRCROOT)/XCMBuild/XCMAnalyze/XCMAnalyze.h",
 				"$(SRCROOT)/XCMBuild/XCMAnalyze/main.m",
 				"$(SRCROOT)/shared/XCMAnalyze-Info.plist",
 				"$(SRCROOT)/shared/includes/XCMAnalyze.make",
+				"$(SRCROOT)/shared/security/entitlements/XCMAnalyze.entitlements",
 				"$(SRCROOT)/XCMBuild/XCMArchive/XCMArchive.h",
 				"$(SRCROOT)/XCMBuild/XCMArchive/main.m",
 				"$(SRCROOT)/shared/XCMArchive-Info.plist",
 				"$(SRCROOT)/shared/includes/XCMArchive.make",
+				"$(SRCROOT)/shared/security/entitlements/XCMArchive.entitlements",
 				"$(SRCROOT)/XCMBuild/XCMInstall/XCMInstall.h",
 				"$(SRCROOT)/XCMBuild/XCMInstall/main.m",
 				"$(SRCROOT)/shared/XCMInstall-Info.plist",
 				"$(SRCROOT)/shared/includes/XCMInstall.make",
+				"$(SRCROOT)/shared/security/entitlements/XCMInstall.entitlements",
 				"$(SRCROOT)/XCMBuild/XCMDocBuild/XCMDocBuild.h",
 				"$(SRCROOT)/XCMBuild/XCMDocBuild/main.m",
 				"$(SRCROOT)/shared/XCMDocBuild-Info.plist",
 				"$(SRCROOT)/shared/includes/XCMDocBuild.make",
+				"$(SRCROOT)/shared/security/entitlements/XCMDocBuild.entitlements",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "if [[ ( -z \"$SHELL\" ) ]] || [[ ( \"$SHELL\" != *bash ) ]] ; then\n\texport SHELL=\"bash\" ;\n\tbash -c \"${0} ; exit $?\" ; wait ; exit $? ;\nfi ;\n\nif [[ ( -z \"$ACTION\" ) ]] ; then\n\texit 126 ;\nfi ;\n\n# Type a script or drag a script file from your workspace to insert its path.\nif [[ -d \"${BUILT_PRODUCTS_DIR}/XCMBuild.framework\" ]] && [[ \"${ACTION}\" == *build ]]; then\ndeclare -i INUM=0;\n\nfor NAMESTUB in \"Clean\" \"Analyze\" \"Archive\" \"Install\" \"DocBuild\" ; do\nINUM=$(((${INUM}+1)));\nP_VAR=$(head -n ${INUM} ${SCRIPT_INPUT_FILE_4} | tail -n 1 );\nEQ_VAR=$(head -n ${INUM} ${SCRIPT_INPUT_FILE_5} | tail -n 1 );\nprintf \"%s\\n\" \"Generate ${SRCROOT}/XCMBuild/XCM\"${NAMESTUB}\"/XCM\"${NAMESTUB}\".h source\"\ncat <\"${SCRIPT_INPUT_FILE_0}\" |m4 -DSTUBNAME=\"${NAMESTUB}\" -DPURPSTUB=\"${P_VAR}\" -DEQUIVSTUB=\"${EQ_VAR}\" | tee \"${SRCROOT}/XCMBuild/XCM\"${NAMESTUB}\"/XCM\"${NAMESTUB}\".h\" > /dev/null 2>/dev/null ;\nxattr -sw com.apple.xcode.CreatedByBuildSystem true \"${SRCROOT}/XCMBuild/XCM${NAMESTUB}/XCM${NAMESTUB}.h\" 2>/dev/null\ntouch -am \"${SRCROOT}/XCMBuild/XCM${NAMESTUB}/XCM${NAMESTUB}.h\" ; wait ;\nprintf \"%s\\n\" \"Generate ${SRCROOT}/XCMBuild/XCM\"${NAMESTUB}\"/main.m source\"\ncat <\"${SCRIPT_INPUT_FILE_1}\" |m4 -DSTUBNAME=\"${NAMESTUB}\" -DPURPSTUB=\"${P_VAR}\" -DEQUIVSTUB=\"${EQ_VAR}\" | tee \"${SRCROOT}/XCMBuild/XCM\"${NAMESTUB}\"/main.m\" > /dev/null 2>/dev/null ;\nxattr -sw com.apple.xcode.CreatedByBuildSystem true \"${SRCROOT}/XCMBuild/XCM${NAMESTUB}/main.m\" 2>/dev/null\ntouch -am \"${SRCROOT}/XCMBuild/XCM${NAMESTUB}/main.m\" ; wait ;\nprintf \"%s\\n\" \"Generate ${SRCROOT}/shared/includes/XCM${NAMESTUB}.make source\"\ncat <\"${SCRIPT_INPUT_FILE_2}\" |m4 -DSTUBNAME=\"${NAMESTUB}\" | tee \"${SRCROOT}/shared/includes/XCM\"${NAMESTUB}\".make\" > /dev/null 2>/dev/null ;\nxattr -sw com.apple.xcode.CreatedByBuildSystem true \"${SRCROOT}/shared/includes/XCM${NAMESTUB}.make\" 2>/dev/null\ntouch -am \"${SRCROOT}/shared/includes/XCM${NAMESTUB}.make\" ; wait ;\nprintf \"%s\\n\" \"Generate ${SRCROOT}/shared/XCM\"${NAMESTUB}\"-Info.plist source\"\ncat <\"${SCRIPT_INPUT_FILE_3}\" |m4 -DSTUBNAME=\"${NAMESTUB}\" | tee \"${SRCROOT}/shared/XCM\"${NAMESTUB}\"-Info.plist\" > /dev/null 2>/dev/null ;\nxattr -sw com.apple.xcode.CreatedByBuildSystem true \"${SRCROOT}/shared/includes/XCM${NAMESTUB}-Info.plist\" 2>/dev/null\ntouch -am \"${SRCROOT}/shared/XCM${NAMESTUB}-Info.plist\" ; wait ;\nprintf \"%s\\n\" \"Success: $0:${BASH_LINE_NO:-34}: note: Generated 4 sources with STUB=${NAMESTUB}\" ;\nwait ;\ndone;\nunset INUM 2>/dev/null || true ;\nelse\nif [[ ( -z \"$ACTION\" ) ]] && [[ ( \"$ACTION\" != *clean ) ]] ; then\n\techo \"$0:${BASH_LINE_NO:-39}: warning: $ACTION Not supported.\" >&2 ;\n\texit 1;\nfi ;\nfor INDEX_NUM in $( seq 0 $((5*4)) ) ; do\nif [[ -e \"${SCRIPT_OUTPUT_FILE_${INDEX_NUM}}\" ]] ; then\n\trm -vf \"${SCRIPT_OUTPUT_FILE_${INDEX_NUM}}\" 2>/dev/null || true ;\n\tunlink -f \"${SCRIPT_OUTPUT_FILE_${INDEX_NUM}}\" 2>/dev/null || true ;\nelse\n\texit 2;\nfi ;\ndone;\nfi;\n\nexit 0 ;\n";
+			shellScript = "if [[ ( -z \"$SHELL\" ) ]] || [[ ( \"$SHELL\" != *bash ) ]] ; then\n\texport SHELL=\"bash\" ;\n\tbash -c \"${@} ; exit $?\" ; wait ; exit $? ;\nfi ;\n\nif [[ ( -z \"$ACTION\" ) ]] ; then\n\texit 126 ;\nfi ;\n\n# Type a script or drag a script file from your workspace to insert its path.\nif [[ -d \"${BUILT_PRODUCTS_DIR}/XCMBuild.framework\" ]] && [[ \"${ACTION}\" == *build ]]; then\n\n{ bash ${SRCROOT}/bin/tool_gen_XCMTools_SRC_helper.bash ; wait ; } || exit 3 ;\n\nelse\nif [[ ( -z \"$ACTION\" ) ]] && [[ ( \"$ACTION\" != *clean ) ]] ; then\n\techo \"$0:${BASH_LINE_NO:-39}: warning: $ACTION Not supported.\" >&2 ;\n\texit 1;\nfi ;\nfor INDEX_NUM in $( seq 0 $((5*5)) ) ; do\nif [[ -e \"${SCRIPT_OUTPUT_FILE_${INDEX_NUM}}\" ]] ; then\n\trm -vf \"${SCRIPT_OUTPUT_FILE_${INDEX_NUM}}\" 2>/dev/null || true ;\n\tunlink -f \"${SCRIPT_OUTPUT_FILE_${INDEX_NUM}}\" 2>/dev/null || true ;\nelse\n\texit 2;\nfi ;\ndone;\nfi;\n\nexit 0 ;\n";
 			showEnvVarsInLog = 0;
 		};
 		84BD1E5E2AAFC73C004F72DF /* ShellScript */ = {

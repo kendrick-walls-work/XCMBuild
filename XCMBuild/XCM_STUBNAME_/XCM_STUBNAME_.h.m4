@@ -33,7 +33,7 @@ foreach(`Z',`MIDBLKCOMM(`Z')',`@file FILESTUB()/FILESTUB().h',
 `FRAMEWORK() tool to PURPSTUB() a project.')dnl
 ENDBLKCOMM()
 
-`// 'syscmd(`date -j +%c%m%d| grep -oE "[0-9]{8}" 2>/dev/null')
+STARTBLKCOMM()` Auto-Generated 'syscmd(`date -j +%c%m%d| grep -oE "[0-9]{8}" 2>/dev/null')` DO NOT EDIT 'ENDBLKCOMM()
 
 `#ifndef' FILESTUB()_h
 `#ifndef' FRAMEWORK()_h
