@@ -48,19 +48,23 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest]
+        os: [macos-13, macos-14, macos-latest]
         python-version: [3.11, 3.12]
-        lang-var: ["de.utf-8", "jp.utf-8"]
+        lang-var: ["en_US.utf-8", "de.utf-8", "jp.utf-8"]
         experimental: [true]
         include:
           - os: macos-latest
             python-version: 3.11
             lang-var: "en_US.utf-8"
-            experimental: false
-          - os: ubuntu-latest
+            experimental: true
+          - os: macos-13
             python-version: 3.11
             lang-var: "en_US.utf-8"
-            experimental: true
+            experimental: false
+            - os: macos-14
+            python-version: 3.11
+            lang-var: "en_US.utf-8"
+            experimental: false
           - os: macos-latest
             python-version: 3.11
             lang-var: "de.utf-8"
@@ -68,8 +72,8 @@ jobs:
           - os: macos-latest
             python-version: 3.11
             lang-var: "jp.utf-8"
-            experimental: false
-          - os: ubuntu-latest
+            experimental: true
+          - os: macos-latest
             python-version: 3.12
             lang-var: "en_US.utf-8"
             experimental: true
@@ -88,10 +92,14 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
     - name: Pre-build
-      id: bootstrap
+      id: init-clean
       run: |
         make -j1 -f Makefile init || true ;
         make -j1 -f Makefile clean || true ;
+      shell: bash
+    - name: Pre-build
+      id: bootstrap
+      run: |
         make -j1 -f Makefile bootstrap ;
       shell: bash
     - name: Test Info
@@ -115,7 +123,7 @@ jobs:
         shell: bash
     timeout-minutes: 10
     env:
-      OS: macos-latest
+      OS: macos-14
       CODE_SIGN_IDENTITY: '-'
       PYTHON_VERSION: 3.11
       LANG: "en_US.utf-8"
@@ -123,12 +131,14 @@ jobs:
     - uses: actions/checkout@v3
     - name: Pre-Clean
       id: clean
-      run: make -j1 -f Makefile purge || true ;
+      run: |
+        make -j1 -f Makefile init || true ;
+        make -j1 -f Makefile purge || true ;
     - name: Build for Testing
       id: xcodebuild
       run: |
-        xcodebuild -sdk macosx -project XCMBuild.xcodeproj -configuration Release -scheme "XCMBuild (All)" clean ;
-        xcodebuild -sdk macosx -project XCMBuild.xcodeproj -configuration Release -scheme "XCMBuild (All)" build ;
+        xcodebuild -sdk macosx -project XCMBuild.xcodeproj -configuration Debug -scheme "XCMBuild (All)" clean ;
+        xcodebuild -sdk macosx -project XCMBuild.xcodeproj -configuration Debug -scheme "XCMBuild (All)" build ;
     - name: Run Tests
       id: tests
       run: |
