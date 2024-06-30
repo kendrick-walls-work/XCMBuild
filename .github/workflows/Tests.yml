@@ -56,7 +56,7 @@ jobs:
           - os: macos-latest
             python-version: 3.11
             lang-var: "en_US.utf-8"
-            experimental: true
+            experimental: false
           - os: macos-13
             python-version: 3.11
             lang-var: "en_US.utf-8"
