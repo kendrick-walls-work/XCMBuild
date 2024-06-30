@@ -11,7 +11,7 @@ on:
 jobs:
   BUILD:
     if: ${{ always() }}
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     defaults:
       run:
         shell: bash
@@ -119,10 +119,12 @@ jobs:
         shell: bash
     timeout-minutes: 10
     env:
-      OS: macos-14
+      OS: macos-latest
       CODE_SIGN_IDENTITY: '-'
       PYTHON_VERSION: 3.11
       LANG: "en_US.utf-8"
+      CLANG_ENABLE_OBJC_ARC: YES
+      CONFIGURATION: 'Default'
     steps:
     - uses: actions/checkout@v3
     - name: Pre-Clean
@@ -131,10 +133,10 @@ jobs:
         make -j1 -f Makefile init || true ;
         make -j1 -f Makefile purge || true ;
     - name: Build for Testing
-      id: xcodebuild
+      id: build
       run: |
-        xcodebuild -sdk macosx -project XCMBuild.xcodeproj -configuration Debug -scheme "XCMBuild (All)" clean ;
-        xcodebuild -sdk macosx -project XCMBuild.xcodeproj -configuration Debug -scheme "XCMBuild (All)" build ;
+        make -f Makefile -j1 clean ;
+        make -f Makefile -j1 build ;
     - name: Run Tests
       id: tests
       run: |
@@ -143,5 +145,5 @@ jobs:
         make -f Makefile clean || true ;
     - name: Post-Clean
       id: post
-      run: make -j1 -f Makefile clean || true ;
+      run: make -j1 -f Makefile purge || true ;
       if: ${{ always() }}
