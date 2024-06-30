@@ -223,6 +223,10 @@ ifeq "$(TOUCH)" ""
 	TOUCH=$(COMMAND) touch -am
 endif
 
+ifeq "$(UNLINK)" ""
+	UNLINK=$(COMMAND) unlink
+endif
+
 ifeq "$(UNTAR)" ""
 	UNTAR=$(COMMAND) tar --extract
 	UNTAR_OPTION = --file

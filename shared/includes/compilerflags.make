@@ -175,11 +175,11 @@ ifeq "$(GCCWARNS_MAC)" ""
 endif
 
 ifeq "$(LLDFLAGS_ALL)" ""
-	LLDFLAGS_ALL=-fexceptions -fobjc-exceptions $(CLANG_OBJC_ARC_FLAGS) $(CLANG_OBJC_BLOCKS_FLAGS) -fobjc-exceptions -Lbuild/Debug -Fbuild/Debug -lobjc
+	LLDFLAGS_ALL=-fexceptions -fobjc-exceptions $(CLANG_OBJC_ARC_FLAGS) $(CLANG_OBJC_BLOCKS_FLAGS) -fobjc-exceptions -Lbuild/$(CONFIGURATION) -Fbuild/$(CONFIGURATION) -lobjc
 endif
 
 ifeq "$(LLDFLAGS_DARWIN)" ""
-	LLDFLAGS_DARWIN=-no_dead_strip_inits_and_terms -isysroot $(SDKROOT) -mmacosx-version-min\=$(MACOSX_DEPLOYMENT_TARGET)
+	LLDFLAGS_DARWIN=-isysroot $(SDKROOT) -mmacosx-version-min\=$(MACOSX_DEPLOYMENT_TARGET)
 	OLD_LLDFLAGS_DARWIN=-execute -fasm-blocks -no_dead_strip_inits_and_terms -isysroot $(OSX_SDK_ROOT_PATH) -mmacosx-version-min\=$(MACOSX_DEPLOYMENT_TARGET)
 endif
 

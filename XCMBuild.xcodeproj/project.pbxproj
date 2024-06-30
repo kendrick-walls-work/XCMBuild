@@ -2041,7 +2041,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "if [[ ( -z \"$SHELL\" ) ]] || [[ ( \"$SHELL\" != *bash ) ]] ; then\n\texport SHELL=\"bash\" ;\n\tbash -c \"${@} ; exit $?\" ; wait ; exit $? ;\nfi ;\n\nif [[ ( -z \"$ACTION\" ) ]] ; then\n\texit 126 ;\nfi ;\n\n# Type a script or drag a script file from your workspace to insert its path.\nif [[ -d \"${BUILT_PRODUCTS_DIR}/XCMBuild.framework\" ]] && [[ \"${ACTION}\" == *build ]]; then\n\n{ bash ${SRCROOT}/bin/tool_gen_XCMTools_SRC_helper.bash ; wait ; } || exit 3 ;\n\nelse\nif [[ ( -z \"$ACTION\" ) ]] && [[ ( \"$ACTION\" != *clean ) ]] ; then\n\techo \"$0:${BASH_LINE_NO:-39}: warning: $ACTION Not supported.\" >&2 ;\n\texit 1;\nfi ;\nfor INDEX_NUM in $( seq 0 $((5*5)) ) ; do\nif [[ -e \"${SCRIPT_OUTPUT_FILE_${INDEX_NUM}}\" ]] ; then\n\trm -vf \"${SCRIPT_OUTPUT_FILE_${INDEX_NUM}}\" 2>/dev/null || true ;\n\tunlink -f \"${SCRIPT_OUTPUT_FILE_${INDEX_NUM}}\" 2>/dev/null || true ;\nelse\n\texit 2;\nfi ;\ndone;\nfi;\n\nexit 0 ;\n";
+			shellScript = "if [[ ( -z \"$SHELL\" ) ]] || [[ ( \"$SHELL\" != *bash ) ]] ; then\n\texport SHELL=\"bash\" ;\n\tbash -c \"${@} ; exit $?\" ; wait ; exit $? ;\nfi ;\n\nif [[ ( -z \"$ACTION\" ) ]] ; then\n\texit 126 ;\nfi ;\n\n# Type a script or drag a script file from your workspace to insert its path.\nif [[ \"${ACTION}\" == *build ]]; then\n\n{ bash ${SRCROOT}/bin/tool_gen_XCMTools_SRC_helper.bash ; wait ; } || exit 3 ;\n\nelse\nif [[ ( -z \"$ACTION\" ) ]] && [[ ( \"$ACTION\" != *clean ) ]] ; then\n\techo \"$0:${BASH_LINE_NO:-39}: warning: $ACTION Not supported.\" >&2 ;\n\texit 1;\nfi ;\nfor INDEX_NUM in $( seq 0 $((5*5)) ) ; do\nif [[ -e \"${SCRIPT_OUTPUT_FILE_${INDEX_NUM}}\" ]] ; then\n\trm -vf \"${SCRIPT_OUTPUT_FILE_${INDEX_NUM}}\" 2>/dev/null || true ;\n\tunlink -f \"${SCRIPT_OUTPUT_FILE_${INDEX_NUM}}\" 2>/dev/null || true ;\nelse\n\texit 2;\nfi ;\ndone;\nfi;\n\nexit 0 ;\n";
 			showEnvVarsInLog = 0;
 		};
 		84BD1E5E2AAFC73C004F72DF /* ShellScript */ = {
@@ -2656,7 +2656,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 840C0E222AE4C83D00EEAA73 /* XcodeFrameworkDebugConfig.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = FC31A4A7C4E85B713A881BB85755FD9C7799B2F9;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				INFOPLIST_KEY_NSPrincipalClass = XCMBuildSystem;
@@ -2675,7 +2674,6 @@
 			baseConfigurationReference = 840C0E232AE4C8AD00EEAA73 /* XcodeFrameworkReleaseConfig.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = shared/security/entitlements/XCMBuildRelease.entitlements;
-				CODE_SIGN_IDENTITY = FC31A4A7C4E85B713A881BB85755FD9C7799B2F9;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
@@ -2998,7 +2996,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = FAF5N99QTH;
+				DEVELOPMENT_TEAM = QK5MNJR585;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -3007,7 +3005,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = FAF5N99QTH;
+				DEVELOPMENT_TEAM = QK5MNJR585;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -3066,14 +3064,14 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "$(RELEASE_CODE_SIGN_IDENTITY)";
 				CODE_SIGN_STYLE = Automatic;
 				CONTENTS_FOLDER_PATH = "$(WRAPPER_NAME)/Contents";
 				CONTENTS_FOLDER_PATH_SHALLOW_BUNDLE_NO = "$(CONTENTS_FOLDER_PATH:standardizepath)";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = FAF5N99QTH;
+				DEVELOPMENT_TEAM = QK5MNJR585;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -3143,14 +3141,14 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "$(RELEASE_CODE_SIGN_IDENTITY)";
 				CODE_SIGN_STYLE = Automatic;
 				CONTENTS_FOLDER_PATH = "$(WRAPPER_NAME)/Contents";
 				CONTENTS_FOLDER_PATH_SHALLOW_BUNDLE_NO = "$(CONTENTS_FOLDER_PATH:standardizepath)";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = FAF5N99QTH;
+				DEVELOPMENT_TEAM = QK5MNJR585;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;

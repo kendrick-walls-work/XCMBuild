@@ -186,12 +186,13 @@ endif
 
 .PHONY: all clean init init-start must_be_root bootstrap cleanup cleanup_DS_Store cleanup_temps cleanup_tmp_obj checkin install uninstall test
 
-all:: init build XCMBuild-framework bootstrap xcrunshell-cli XCMTest-cli XCMClean-cli XCMDocBuild-cli XCMAnalyze-cli XCMArchive-cli install test
+all:: init build XCMBuild-framework bootstrap xcrunshell-cli XCMTest-cli XCMClean-cli XCMDocBuild-cli XCMAnalyze-cli XCMArchive-cli test
 	$(QUITE)$(DO_FAIL) ;
 	$(QUIET)$(ECHO) "$@: Done."
 
 bootstrap:: |build install-XCMBuild-fmwk init
 	$(QUIET)$(WAIT)
+	$(QUIET)$(LINK) $(DSTROOT)/$(DYLIB_INSTALL_NAME_BASE)/XCMBuild.framework /$(DYLIB_INSTALL_NAME_BASE)/XCMBuild.framework || DO_FAIL="exit 2" ;
 	$(QUIET)$(ECHO) "$@: Done."
 
 checkin: |init
@@ -293,12 +294,17 @@ init-tool-clonefile: $(TARGET_TEMP_DIR)/build/bin/xcode_clonefile.bash $(TARGET_
 	$(DO_FAIL) ;
 	$(QUIET)$(ECHO) "Added clonefile to Cache." ;
 
-init-tool-generated-sources:: |init-start
-	$(QUIET)bin/tool_gen_XCMTools_SRC_helper.bash 2>/dev/null || DO_FAIL="exit 2" ;
+init-tool-generated-sources:: $(TARGET_TEMP_DIR)/build/bin/tool_gen_XCMTools_SRC_helper.bash |init-start
+	$(QUIET)$(TARGET_TEMP_DIR)/build/bin/tool_gen_XCMTools_SRC_helper.bash 2>/dev/null || DO_FAIL="exit 2" ;
+	$(DO_FAIL) ;
 	$(QUIET)$(ECHO) "Dynamic source files regenerated." ;
 
-install:: |build bootstrap init
-	$(QUIET)$(WAIT)
+install:: bootstrap |build bootstrap init
+	$(QUIET)$(UNLINK) /$(DYLIB_INSTALL_NAME_BASE)/XCMBuild.framework || DO_FAIL="exit 2" ;
+	$(QUIET)$(WAIT) ;
+	$(QUIET)$(CPDIR) $(DSTROOT)/$(DYLIB_INSTALL_NAME_BASE)/XCMBuild.framework /$(DYLIB_INSTALL_NAME_BASE)/XCMBuild.framework || DO_FAIL="exit 2" ;
+	$(QUIET)$(WAIT) ;
+	$(DO_FAIL) ;
 	$(QUIET)$(ECHO) "$@: Done."
 
 init-env: must_be_root XCMBuild_environment |init-start
@@ -639,9 +645,9 @@ $(BUILD_ROOT)/xcrunshell_vers.c: |build
 
 #$(TARGET_TEMP_DIR)/build/Object-x86_64-normal/x86_64/%.o: XCMBuild/%/%.m XCMBuild/%/%.h |$(TARGET_TEMP_DIR)/build/Object-x86_64-normal/x86_64
 #	$(QUIET)$(CLANG) -x objective-c -target x86_64-apple-macos$(MACOSX_DEPLOYMENT_TARGET) \
-#	-fmodules -fmodule-name\=XCMBuild.$% $(CLANG_FLAGS_ALL) $(CLANG_OBJC_FLAGS) \
+#	-fmodules -fmodule-name\=XCMBuild.$(@:$(TARGET_TEMP_DIR)/build/Object-x86_64-normal/x86_64/%.o=%) $(CLANG_FLAGS_ALL) $(CLANG_OBJC_FLAGS) \
 #	-L/Library -F/Library/Frameworks -Fdist/Library/Frameworks \
-#	-I XCMBuild/"$%" \
+#	-I XCMBuild/"$(@:$(TARGET_TEMP_DIR)/build/Object-x86_64-normal/x86_64/%.o=%)" \
 #	-c $< -o $@ || DO_FAIL="exit 2" ;
 #
 #$(TARGET_TEMP_DIR)/build/Object-arm64-normal/arm64/%.o: XCMBuild/%/%.m XCMBuild/%/%.h |$(TARGET_TEMP_DIR)/build/Object-arm64-normal/arm64
@@ -1214,11 +1220,12 @@ include shared/includes/headers.make
 include shared/includes/resources.make
 include shared/includes/XCRunShell.make
 include shared/includes/XCMTest.make
-include shared/includes/XCMClean.make
+
 include shared/includes/XCMAnalyze.make
 include shared/includes/XCMArchive.make
-include shared/includes/XCMInstall.make
+include shared/includes/XCMClean.make
 include shared/includes/XCMDocBuild.make
+include shared/includes/XCMInstall.make
 
 
 $(TARGET_TEMP_DIR)/build/Object-x86_64-normal/x86_64/Binary/%: $(TARGET_TEMP_DIR)/build/Object-x86_64-normal/x86_64/%.o $(TARGET_TEMP_DIR)/build/Object-x86_64-normal/x86_64/%.LinkFileList shared/%-Info.plist |XCMBuild-dynamic-library
@@ -1226,7 +1233,7 @@ $(TARGET_TEMP_DIR)/build/Object-x86_64-normal/x86_64/Binary/%: $(TARGET_TEMP_DIR
 	$(QUIET)$(CLANG) -Xlinker -reproducible -target x86_64-apple-macos$(MACOSX_DEPLOYMENT_TARGET) \
 	-O0 -L$(PROJECT_TEMP_ROOT)/EagerLinkingTBDs/$(CONFIGURATION) -L$(SYMROOT) \
 	-F$(SYMROOT) -Fdist/Library/Frameworks \
-	-Fbuild/$(CONFIGURATION) $(CCFLAGS_DARWIN) \
+	-Fbuild/$(CONFIGURATION) $(LLDFLAGS_DARWIN) \
 	-fmodules -gmodules -fmodule-name\=XCMBuild.XCRunner \
 	-filelist $(TARGET_TEMP_DIR)/build/Object-x86_64-normal/x86_64/$%.LinkFileList -Xlinker -no_exported_symbols -Xlinker -rpath \
 	-Xlinker @executable_path/../Frameworks -Xlinker -rpath -Xlinker @executable_path/../../../Current \
@@ -1244,8 +1251,8 @@ $(TARGET_TEMP_DIR)/build/Object-x86_64-normal/x86_64/Binary/%: $(TARGET_TEMP_DIR
 
 
 unbuild/%::
-	$(QUIET)$(ECHO) "Removing $% from buildroot ..." ;
-	$(QUIET)$(RMDIR) $(BUILD_ROOT)/$% 2>/dev/null || true ;
+	$(QUIET)$(ECHO) "Removing $(@:unbuild/%=%) from buildroot ..." ;
+	$(QUIET)$(RMDIR) $(BUILD_ROOT)/$(@:unbuild/%=%) 2>/dev/null || true ;
 	$(DO_FAIL) ;
 
 unbin/%: $(TARGET_TEMP_DIR)/build/bin/%
@@ -1284,7 +1291,7 @@ uninstall-generated-headers::
 	$(QUIET)$(RM) $(WITH_FORCE) XCMBuild/XCMInstall/XCMInstall.h 2>/dev/null || true
 	$(QUIET)$(RM) $(WITH_FORCE) XCMBuild/XCMInstall/XCMInstall.h~ 2>/dev/null || true
 	$(QUIET)$(WAIT)
-	$(QUIET)$(ECHO) "$<: Removed. ( $@ )"
+	$(QUIET)$(ECHO) "$@: Removed. ( $@ )"
 
 uninstall-generated-mains::
 	$(QUIET)$(RM) $(WITH_FORCE) XCMBuild/XCMAnalyze/main.m 2>/dev/null || true

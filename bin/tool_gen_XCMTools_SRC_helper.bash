@@ -82,12 +82,15 @@ umask 0112
 test -x "$(command -v head)" || exit 126 ;
 test -x "$(command -v sync)" || exit 126 ;
 test -x "$(command -v grep)" || exit 126 ;
+test -x "$(command -v cat)" || exit 126 ;
 test -x "$(command -v curl)" || exit 126 ;
 test -x "$(command -v find)" || exit 126 ;
 test -x "$(command -v git)" || exit 126 ;
 test -x "$(command -v wc)" || exit 126 ;
 test -x "$(command -v dirname)" || exit 126 ;
 test -x "$(command -v mkdir)" || exit 126 ;
+test -x "$(command -v m4)" || exit 126 ;
+test -x "$(command -v tee)" || exit 126 ;
 export LANG=en_US.${STRINGS_FILE_OUTPUT_ENCODING:-"UTF-8"} ;
 # shellcheck disable=SC2155,SC2046
 export __CF_USER_TEXT_ENCODING=$( printf "%s" $( printf "%s\n" "${__CF_USER_TEXT_ENCODING:-0x0}" | cut -d : -f 1 ):0x08000100:0x0 ) ;
@@ -99,14 +102,13 @@ test -x "$(command -v shlock)" || exit 126 ;
 declare LOCK_FILE="${TMPDIR:-/tmp}/org.pak.dt.XCMBuild.XCMGenSourceM4.lock" ;
 declare -i PID_VALUE="${PPID:-$$}" ;
 declare -i EXIT_CODE=1 ;
+declare -i XCMB_MACRO_VERBOSE=${XCMB_MACRO_VERBOSE:-1} ;
 
 function cleanup() {
 	rm -f "${LOCK_FILE}" 2>/dev/null || true ; wait ;
 	hash -d shlock 2>/dev/null > /dev/null || : ;
 }
 #declare -i VERSION=20231031
-
-#TODO: use better env vars (for example XCMB_???_VERBOSE instead of VERBOSE_PBXCP etc.)
 
 export XPC_SERVICE_NAME="XCMGenSourceM4" ;
 
@@ -126,39 +128,61 @@ else
 	false ;
 	EXIT_CODE=127 ;
 fi ;
+
+if [[ ${VERBOSE_PBXCP:-NO} == *NO ]] && [[ (${XCMB_MACRO_VERBOSE:-0} -lt 1) ]] ; then
+	: ;
+else
+	export VERBOSE_PBXCP=YES;
+fi ;
+
+function wrappedM4() {
+	local JUNK="${1}" ;
+	local JUNK_OUT="${2}" ;
+	local JUNK_ARGS=( "${@:3:$#}" ) ;
+	if [[ ( -e "${JUNK}" ) ]] ; then
+	if [[ ( -f "${JUNK}") ]] ; then
+	{ if [[ (${XCMB_MACRO_VERBOSE:-0} -ge 1) ]] ; then printf "%s\n" "${FUNCNAME:-$0}:${BASH_LINENO:-0}: note: Generate ${JUNK_OUT} source" || : ; fi ;
+		{ { cat <"${JUNK}" |m4 "${JUNK_ARGS[@]}" || false ;} | tee "${JUNK_OUT}" > /dev/null 2>/dev/null ;} || false ;
+			if [[ ${COMPILER_INDEX_STORE_ENABLE:-NO} != *NO ]] ; then wait ; sync ; fi ;
+		xattr -sw com.apple.xcode.CreatedByBuildSystem true "${JUNK_OUT}" 2>/dev/null || false ;
+		touch -am "${JUNK_OUT}" ; wait ;} || false ;
+	if [[ ${COMPILER_INDEX_STORE_ENABLE:-NO} != *NO ]] ; then wait ; sync ; fi ;
+	else
+	return ;
+	fi ;
+	fi ;
+	unset JUNK 2>/dev/null || : ;
+	unset JUNK_OUT 2>/dev/null || : ;
+	unset JUNK_ARGS 2>/dev/null || : ;
+	true ;
+}
+
+export -f wrappedM4 ;
+
 # shellcheck disable=SC2086
 export SRCROOT="${SRCROOT:-$(git rev-parse --show-toplevel 2>/dev/null)}" ;
 if [[ ( $EXIT_CODE -eq 0 ) ]] ; then
 	declare -i INUM=0;
 	for NAMESTUB in "Clean" "Analyze" "Archive" "Install" "DocBuild" ; do
-		INUM=$(( ${INUM}+1 ));
+		INUM=$(( INUM+1 ));
+		{ if [[ (${XCMB_MACRO_VERBOSE:-0} -ge 1) ]] ; then printf "%s\n" "${FUNCNAME:-$0}:${BASH_LINENO:-0}: note: result is ${INUM} " ; fi ;}
 		P_VAR=$(head -n ${INUM} "${SRCROOT}/shared/XCM_STUB_DESC.list" | tail -n 1 );
 		EQ_VAR=$(head -n ${INUM} "${SRCROOT}/shared/XCM_STUB_EQUIV.list" | tail -n 1 );
-		if [[ !( -d "${SRCROOT}/XCMBuild/XCM${NAMESTUB}" ) ]] ; then
-			{ if [[ ${VERBOSE_PBXCP} == *YES ]] ; then printf "%s\n" "${FUNCNAME:-$0}:${BASH_LINENO:-0}: note: Generate ${SRCROOT}/XCMBuild/XCM${NAMESTUB}/ directory" ; fi ;
+		if [[ ( -d "${SRCROOT}/XCMBuild/XCM${NAMESTUB}" ) ]] ; then : ; else
+			{ if [[ (${XCMB_MACRO_VERBOSE:-0} -ge 1) ]] ; then printf "%s\n" "${FUNCNAME:-$0}:${BASH_LINENO:-0}: note: Generate ${SRCROOT}/XCMBuild/XCM${NAMESTUB}/ directory" ; fi ;
 			mkdir "${SRCROOT}/XCMBuild/XCM${NAMESTUB}" >/dev/null ;} || : ;
 		fi ;
-		{ if [[ ${VERBOSE_PBXCP} == *YES ]] ; then printf "%s\n" "${FUNCNAME:-$0}:${BASH_LINENO:-0}: note: Generate ${SRCROOT}/XCMBuild/XCM${NAMESTUB}/XCM${NAMESTUB}.h source" ; fi ;
-		cat <"${SRCROOT}/XCMBuild/XCM_STUBNAME_/XCM_STUBNAME_.h.m4" |m4 -DSTUBNAME="${NAMESTUB}" -DPURPSTUB="${P_VAR}" -DEQUIVSTUB="${EQ_VAR}" | tee "${SRCROOT}/XCMBuild/XCM${NAMESTUB}/XCM${NAMESTUB}.h" > /dev/null 2>/dev/null ; wait ;
-		xattr -sw com.apple.xcode.CreatedByBuildSystem true "${SRCROOT}/XCMBuild/XCM${NAMESTUB}/XCM${NAMESTUB}.h" 2>/dev/null ;
-		touch -am "${SRCROOT}/XCMBuild/XCM${NAMESTUB}/XCM${NAMESTUB}.h" ; wait ;} || : ;
-		{ if [[ ${VERBOSE_PBXCP} == *YES ]] ; then printf "%s\n" "${FUNCNAME:-$0}:${BASH_LINENO:-0}: note: Generate ${SRCROOT}/XCMBuild/XCM${NAMESTUB}/main.m source" ; fi ;
-		cat <"${SRCROOT}/XCMBuild/XCM_STUBNAME_/main.m.m4" |m4 -DSTUBNAME="${NAMESTUB}" -DPURPSTUB="${P_VAR}" -DEQUIVSTUB="${EQ_VAR}" | tee "${SRCROOT}/XCMBuild/XCM${NAMESTUB}/main.m" > /dev/null 2>/dev/null ; wait ;
-		xattr -sw com.apple.xcode.CreatedByBuildSystem true "${SRCROOT}/XCMBuild/XCM${NAMESTUB}/main.m" 2>/dev/null
-		touch -am "${SRCROOT}/XCMBuild/XCM${NAMESTUB}/main.m" ; wait ;} || : ;
-		{ if [[ ${VERBOSE_PBXCP} == *YES ]] ; then printf "%s\n" "${FUNCNAME:-$0}:${BASH_LINENO:-0}: note: Generate ${SRCROOT}/shared/includes/XCM${NAMESTUB}.make source" ; fi ;
-		cat <"${SRCROOT}/shared/includes/XCM_STUBNAME_.make.m4" |m4 -DSTUBNAME="${NAMESTUB}" | tee "${SRCROOT}/shared/includes/XCM${NAMESTUB}.make" > /dev/null 2>/dev/null ; wait ;
-		xattr -sw com.apple.xcode.CreatedByBuildSystem true "${SRCROOT}/shared/includes/XCM${NAMESTUB}.make" 2>/dev/null
-		touch -am "${SRCROOT}/shared/includes/XCM${NAMESTUB}.make" ; wait ;} || : ;
-		{ if [[ ${VERBOSE_PBXCP} == *YES ]] ; then printf "%s\n" "${FUNCNAME:-$0}:${BASH_LINENO:-0}: note: Generate ${SRCROOT}/shared/XCM${NAMESTUB}-Info.plist source" ; fi ;
-		cat <"${SRCROOT}/shared/XCM_STUBNAME_-Info.plist.m4" |m4 -DSTUBNAME="${NAMESTUB}" | tee "${SRCROOT}/shared/XCM${NAMESTUB}-Info.plist" > /dev/null 2>/dev/null ; wait ;
-		xattr -sw com.apple.xcode.CreatedByBuildSystem true "${SRCROOT}/shared/XCM${NAMESTUB}-Info.plist" 2>/dev/null
-		touch -am "${SRCROOT}/shared/XCM${NAMESTUB}-Info.plist" ; wait ;} || : ;
-		{ if [[ ${VERBOSE_PBXCP} == *YES ]] ; then printf "%s\n" "${FUNCNAME:-$0}:${BASH_LINENO:-0}: note: Generate ${SRCROOT}/shared/XCM${NAMESTUB}.entitlements source" ; fi ;
-		cat <"${SRCROOT}/shared/security/entitlements/XCM_STUBNAME_.entitlements.m4" |m4 -DSTUBNAME="${NAMESTUB}" | tee "${SRCROOT}/shared/security/entitlements/XCM${NAMESTUB}.entitlements" > /dev/null 2>/dev/null ; wait ;
-		xattr -sw com.apple.xcode.CreatedByBuildSystem true "${SRCROOT}/shared/security/entitlements/XCM${NAMESTUB}.entitlements" 2>/dev/null
-		touch -am "${SRCROOT}/shared/security/entitlements/XCM${NAMESTUB}.entitlements" ; wait ;} || : ;
-		if [[ ${VERBOSE_PBXCP} == *YES ]] ; then printf "%s\n" "Success: $0:${BASH_LINE_NO:-156}: note: Generated 5 sources with STUB=${NAMESTUB}" ; fi ;
+		{ wrappedM4 "${SRCROOT}/XCMBuild/XCM_STUBNAME_/XCM_STUBNAME_.h.m4" "${SRCROOT}/XCMBuild/XCM${NAMESTUB}/XCM${NAMESTUB}.h" -DSTUBNAME="${NAMESTUB}" -DPURPSTUB="${P_VAR}" -DEQUIVSTUB="${EQ_VAR}" ;
+		wait ;} || : ;
+		{ wrappedM4 "${SRCROOT}/XCMBuild/XCM_STUBNAME_/main.m.m4" "${SRCROOT}/XCMBuild/XCM${NAMESTUB}/main.m" -DSTUBNAME="${NAMESTUB}" -DPURPSTUB="${P_VAR}" -DEQUIVSTUB="${EQ_VAR}" ;
+		wait ;} || : ;
+		{ wrappedM4 "${SRCROOT}/shared/includes/XCM_STUBNAME_.make.m4" "${SRCROOT}/shared/includes/XCM${NAMESTUB}.make" -DSTUBNAME="${NAMESTUB}" ;
+		wait ;} || : ;
+		{ wrappedM4 "${SRCROOT}/shared/XCM_STUBNAME_-Info.plist.m4" "${SRCROOT}/shared/XCM${NAMESTUB}-Info.plist" -DSTUBNAME="${NAMESTUB}" ;
+		wait ;} || : ;
+		{ wrappedM4 "${SRCROOT}/shared/security/entitlements/XCM_STUBNAME_.entitlements.m4" "${SRCROOT}/shared/security/entitlements/XCM${NAMESTUB}.entitlements" -DSTUBNAME="${NAMESTUB}" ;
+		wait ;} || : ;
+		if [[ (${XCMB_MACRO_VERBOSE:-0} -ge 1) ]] ; then printf "%s\n" "Success: $0:${BASH_LINE_NO:-156}: note: Generated 5 sources with STUB=${NAMESTUB}" ; fi ;
 		wait ;
 	done;
 	unset INUM 2>/dev/null || true ;

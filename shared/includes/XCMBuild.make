@@ -125,7 +125,7 @@ $(TARGET_TEMP_DIR)/build/XCMBuild-order-debug.txt:: shared/Clang/orderfile |$(TA
 $(TARGET_TEMP_DIR)/build/Object-x86_64-normal/x86_64/Binary/XCMBuild.dylib: $(TARGET_TEMP_DIR)/build/Object-x86_64-normal/x86_64/Binary |$(TARGET_TEMP_DIR)/build/Object-x86_64-normal/x86_64/XCMBuild_vers.o $(TARGET_TEMP_DIR)/build/Object-x86_64-normal/x86_64/XCMBuild.LinkFileList $(TARGET_TEMP_DIR)/build/XCMBuild-order-normal.txt
 	$(QUIET)$(CLANG) -Xlinker -reproducible -target x86_64-apple-macos$(MACOSX_DEPLOYMENT_TARGET) -dynamiclib \
 	-O0 -L$(PROJECT_TEMP_ROOT)/EagerLinkingTBDs/$(CONFIGURATION) -L$(SYMROOT) \
-	-F$(SYMROOT) $(CCFLAGS_DARWIN) \
+	-F$(SYMROOT) $(LLDFLAGS_DARWIN) \
 	-fmodules -gmodules -fmodule-name\=XCMBuild \
 	-filelist "$(TARGET_TEMP_DIR)/build/Object-x86_64-normal/x86_64/XCMBuild.LinkFileList" -Xlinker --no-demangle \
 	-install_name /$(DYLIB_INSTALL_NAME_BASE)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/XCMBuild \
@@ -148,7 +148,7 @@ $(TARGET_TEMP_DIR)/build/Object-x86_64-normal/x86_64/Binary/XCMBuild.dylib: $(TA
 $(TARGET_TEMP_DIR)/build/Object-arm64-normal/arm64/Binary/XCMBuild.dylib: $(TARGET_TEMP_DIR)/build/Object-arm64-normal/arm64/Binary |$(TARGET_TEMP_DIR)/build/Object-arm64-normal/arm64/XCMBuild_vers.o $(TARGET_TEMP_DIR)/build/Object-arm64-normal/arm64/XCMBuild.LinkFileList $(TARGET_TEMP_DIR)/build/XCMBuild-order-normal.txt
 	$(QUIET)$(CLANG) -Xlinker -reproducible -target arm64-apple-macos$(MACOSX_DEPLOYMENT_TARGET) -dynamiclib \
 	-O0 -L$(PROJECT_TEMP_ROOT)/EagerLinkingTBDs/$(CONFIGURATION) -L$(SYMROOT) \
-	-F$(SYMROOT) $(CCFLAGS_DARWIN) \
+	-F$(SYMROOT) $(LLDFLAGS_DARWIN) \
 	-fmodules -gmodules -fmodule-name\=XCMBuild \
 	-filelist "$(TARGET_TEMP_DIR)/build/Object-arm64-normal/arm64/XCMBuild.LinkFileList" -Xlinker --no-demangle \
 	-install_name /$(DYLIB_INSTALL_NAME_BASE)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/XCMBuild \
@@ -171,7 +171,7 @@ $(TARGET_TEMP_DIR)/build/Object-arm64-normal/arm64/Binary/XCMBuild.dylib: $(TARG
 $(TARGET_TEMP_DIR)/build/Object-arch64-normal/arch64/Binary/XCMBuild.dylib: $(TARGET_TEMP_DIR)/build/Object-arch64-normal/arch64/Binary |$(TARGET_TEMP_DIR)/build/Object-arch64-normal/arch64/XCMBuild_vers.o $(TARGET_TEMP_DIR)/build/Object-arch64-normal/arch64/XCMBuild.LinkFileList $(TARGET_TEMP_DIR)/build/XCMBuild-order-normal.txt
 	$(QUIET)$(CLANG) -Xlinker -reproducible -target aarch64-apple-macos$(MACOSX_DEPLOYMENT_TARGET) -dynamiclib \
 	-O0 -L$(PROJECT_TEMP_ROOT)/EagerLinkingTBDs/$(CONFIGURATION) -L$(SYMROOT) \
-	-F$(SYMROOT) $(CCFLAGS_DARWIN) \
+	-F$(SYMROOT) $(LLDFLAGS_DARWIN) \
 	-fmodules -gmodules -fmodule-name\=XCMBuild \
 	-filelist "$(TARGET_TEMP_DIR)/build/Object-arch64-normal/arch64/XCMBuild.LinkFileList" -Xlinker --no-demangle \
 	-install_name /$(DYLIB_INSTALL_NAME_BASE)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/XCMBuild \
@@ -223,7 +223,7 @@ $(TARGET_TEMP_DIR)/build/Object-arch64-normal/arch64/XCMBuild.LinkFileList:: $(T
 $(TARGET_TEMP_DIR)/build/Object-x86_64-debug/x86_64/Binary/XCMBuild.dylib: $(TARGET_TEMP_DIR)/build/Object-x86_64-debug/x86_64/Binary |$(TARGET_TEMP_DIR)/build/Object-x86_64-debug/x86_64/XCMBuild_vers.o $(TARGET_TEMP_DIR)/build/Object-x86_64-debug/x86_64/XCMBuild.LinkFileList $(TARGET_TEMP_DIR)/build/XCMBuild-order-debug.txt
 	$(QUIET)$(CLANG) -Xlinker -reproducible -target x86_64-apple-macos$(MACOSX_DEPLOYMENT_TARGET) -dynamiclib \
 	-O0 -L$(PROJECT_TEMP_ROOT)/EagerLinkingTBDs/$(CONFIGURATION) -L$(SYMROOT) \
-	-F$(SYMROOT) $(CCFLAGS_DARWIN) \
+	-F$(SYMROOT) $(LLDFLAGS_DARWIN) \
 	-fmodules -gmodules -greproducible -fmodule-name\=XCMBuild \
 	-filelist "$(TARGET_TEMP_DIR)/build/Object-x86_64-debug/x86_64/XCMBuild.LinkFileList" -Xlinker --no-demangle \
 	-install_name /$(DYLIB_INSTALL_NAME_BASE)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/XCMBuild \
@@ -246,7 +246,7 @@ $(TARGET_TEMP_DIR)/build/Object-x86_64-debug/x86_64/Binary/XCMBuild.dylib: $(TAR
 $(TARGET_TEMP_DIR)/build/Object-arm64-debug/arm64/Binary/XCMBuild.dylib: $(TARGET_TEMP_DIR)/build/Object-arm64-debug/arm64/Binary |$(TARGET_TEMP_DIR)/build/Object-arm64-debug/arm64/XCMBuild_vers.o $(TARGET_TEMP_DIR)/build/Object-arm64-debug/arm64/XCMBuild.LinkFileList $(TARGET_TEMP_DIR)/build/XCMBuild-order-debug.txt
 	$(QUIET)$(CLANG) -Xlinker -reproducible -target arm64-apple-macos$(MACOSX_DEPLOYMENT_TARGET) -dynamiclib \
 	-O0 -L$(PROJECT_TEMP_ROOT)/EagerLinkingTBDs/$(CONFIGURATION) -L$(SYMROOT) \
-	-F$(SYMROOT) $(CCFLAGS_DARWIN) \
+	-F$(SYMROOT) $(LLDFLAGS_DARWIN) \
 	-fmodules -gmodules -greproducible -fmodule-name\=XCMBuild \
 	-filelist "$(TARGET_TEMP_DIR)/build/Object-arm64-debug/arm64/XCMBuild.LinkFileList" -Xlinker --no-demangle \
 	-install_name /$(DYLIB_INSTALL_NAME_BASE)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/XCMBuild \
@@ -269,7 +269,7 @@ $(TARGET_TEMP_DIR)/build/Object-arm64-debug/arm64/Binary/XCMBuild.dylib: $(TARGE
 $(TARGET_TEMP_DIR)/build/Object-arch64-debug/arch64/Binary/XCMBuild.dylib: $(TARGET_TEMP_DIR)/build/Object-arch64-debug/arch64/Binary |$(TARGET_TEMP_DIR)/build/Object-arch64-debug/arch64/XCMBuild_vers.o $(TARGET_TEMP_DIR)/build/Object-arch64-debug/arch64/XCMBuild.LinkFileList $(TARGET_TEMP_DIR)/build/XCMBuild-order-debug.txt
 	$(QUIET)$(CLANG) -Xlinker -reproducible -target aarch64-apple-macos$(MACOSX_DEPLOYMENT_TARGET) -dynamiclib \
 	-O0 -L$(PROJECT_TEMP_ROOT)/EagerLinkingTBDs/$(CONFIGURATION) -L$(SYMROOT) \
-	-F$(SYMROOT) $(CCFLAGS_DARWIN) \
+	-F$(SYMROOT) $(LLDFLAGS_DARWIN) \
 	-fmodules -gmodules -greproducible -fmodule-name\=XCMBuild \
 	-filelist "$(TARGET_TEMP_DIR)/build/Object-arch64-debug/arch64/XCMBuild.LinkFileList" -Xlinker --no-demangle \
 	-install_name /$(DYLIB_INSTALL_NAME_BASE)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/XCMBuild \

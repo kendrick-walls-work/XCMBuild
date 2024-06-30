@@ -21,7 +21,7 @@
 
 ifndef BUILD_ROOT
 
-.PHONY: all init test clean install archive analyze docbuild ake XCMBuild-public-headers XCMBuild-private-headers XCMBuild-all-headers
+.PHONY: all init test clean XCMBuild-public-headers XCMBuild-private-headers XCMBuild-all-headers
 
 else
 
@@ -137,7 +137,7 @@ XCMBuild-XCMClean-headers: $(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/Ver
 XCMBuild-XCMake-headers: $(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/PrivateHeaders/XCMake.h |$(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/PrivateHeaders XCMBuild-System-headers
 	$(DO_FAIL) ;
 
-XCMBuild-XCAnalyze-headers: $(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/PrivateHeaders/XCAnalyze.h |$(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/PrivateHeaders XCMBuild-System-headers
+XCMBuild-XCMAnalyze-headers: $(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/PrivateHeaders/XCAnalyze.h |$(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/PrivateHeaders XCMBuild-System-headers
 	$(DO_FAIL) ;
 
 XCMBuild-XCMArchive-headers: $(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/PrivateHeaders/XCArchive.h |$(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/Versions/$(FRAMEWORK_VERSION)/PrivateHeaders XCMBuild-System-headers

@@ -334,7 +334,7 @@ else
 	$(DO_FAIL) ;
 `	$(QUIET)$(ECHO) "XCM'STUBNAME()` Object Sub-Directory Ready (arch64 debug)" ;'
 
-`$(TARGET_TEMP_DIR)/build/Object-x86_64-normal/x86_64/Binary/XCM'STUBNAME()`: $(TARGET_TEMP_DIR)/build/Object-x86_64-normal/x86_64/Binary $(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/Modules/module.private.modulemap $(TARGET_TEMP_DIR)/build/Object-x86_64-normal/x86_64/XCM'STUBNAME()`_vers.o $(TARGET_TEMP_DIR)/build/Object-x86_64-normal/x86_64/XCM'STUBNAME()`/main.o $(TARGET_TEMP_DIR)/build/Object-x86_64-normal/x86_64/XCM'STUBNAME()`.LinkFileList $(TARGET_TEMP_DIR)/build/Object-x86_64-normal/x86_64/XCM'STUBNAME()`-Info.plist |XCMBuild-dynamic-library XCMBuild-XCM'STUBNAME()`-headers'
+`$(TARGET_TEMP_DIR)/build/Object-x86_64-normal/x86_64/Binary/XCM'STUBNAME()`: $(TARGET_TEMP_DIR)/build/Object-x86_64-normal/x86_64/Binary $(TARGET_TEMP_DIR)/build/Object-x86_64-normal/x86_64/XCM'STUBNAME()`_vers.o $(TARGET_TEMP_DIR)/build/Object-x86_64-normal/x86_64/XCM'STUBNAME()`/main.o $(TARGET_TEMP_DIR)/build/Object-x86_64-normal/x86_64/XCM'STUBNAME()`.LinkFileList $(TARGET_TEMP_DIR)/build/Object-x86_64-normal/x86_64/XCM'STUBNAME()`-Info.plist |XCMBuild-dynamic-library XCMBuild-XCM'STUBNAME()`-headers'
 	$(QUIET)$(ECHO) "Combining objects into command line tool ($@)" || DO_FAIL="exit 2" ;
 	$(QUIET)$(CLANG) -Xlinker -reproducible -target x86_64-apple-macos$(MACOSX_DEPLOYMENT_TARGET) -Xlinker -execute \
 	-isysroot $(SDKROOT) \
@@ -349,7 +349,7 @@ else
 	-iframeworkwithsysroot /Library/Frameworks \
 	-L/usr/lib -L/usr/lib/System \
 `	-filelist "$(TARGET_TEMP_DIR)/build/Object-x86_64-normal/x86_64/XCM'STUBNAME()`.LinkFileList" \'
-	-Xlinker -no_exported_symbols -Xlinker -rpath -Xlinker $(DYLIB_INSTALL_NAME_BASE)/\*\* \
+	-Xlinker -rpath -Xlinker $(DYLIB_INSTALL_NAME_BASE)/\*\* \
 	-Xlinker -rpath -Xlinker @executable_path/../Frameworks \
 	-Xlinker -rpath -Xlinker @executable_path/../../../Current -Xlinker -rpath \
 	-Xlinker @loader_path/Frameworks -Xlinker -rpath \
@@ -373,7 +373,7 @@ else
 	$(DO_FAIL) ;
 
 
-`$(TARGET_TEMP_DIR)/build/Object-arm64-normal/arm64/Binary/XCM'STUBNAME()`: $(TARGET_TEMP_DIR)/build/Object-arm64-normal/arm64/Binary $(BUILD_ROOT)/$(CONFIGURATION)/XCMBuild.framework/Modules/module.private.modulemap $(TARGET_TEMP_DIR)/build/Object-arm64-normal/arm64/XCM'STUBNAME()`_vers.o $(TARGET_TEMP_DIR)/build/Object-arm64-normal/arm64/XCM'STUBNAME()`/main.o $(TARGET_TEMP_DIR)/build/Object-arm64-normal/arm64/XCM'STUBNAME()`.LinkFileList $(TARGET_TEMP_DIR)/build/Object-arm64-normal/arm64/XCM'STUBNAME()`-Info.plist |XCMBuild-dynamic-library XCMBuild-XCM'STUBNAME()`-headers'
+`$(TARGET_TEMP_DIR)/build/Object-arm64-normal/arm64/Binary/XCM'STUBNAME()`: $(TARGET_TEMP_DIR)/build/Object-arm64-normal/arm64/Binary $(TARGET_TEMP_DIR)/build/Object-arm64-normal/arm64/XCM'STUBNAME()`_vers.o $(TARGET_TEMP_DIR)/build/Object-arm64-normal/arm64/XCM'STUBNAME()`/main.o $(TARGET_TEMP_DIR)/build/Object-arm64-normal/arm64/XCM'STUBNAME()`.LinkFileList $(TARGET_TEMP_DIR)/build/Object-arm64-normal/arm64/XCM'STUBNAME()`-Info.plist |XCMBuild-dynamic-library XCMBuild-XCM'STUBNAME()`-headers'
 	$(QUIET)$(ECHO) "Combining objects into command line tool ($@)" || DO_FAIL="exit 2" ;
 	$(QUIET)$(CLANG) -Xlinker -reproducible -target arm64-apple-macos$(MACOSX_DEPLOYMENT_TARGET) -Xlinker -execute \
 	-isysroot $(SDKROOT) \

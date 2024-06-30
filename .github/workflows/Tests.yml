@@ -74,6 +74,8 @@ jobs:
       PYTHON_VERSION: ${{ matrix.python-version }}
       LANG: ${{ matrix.lang-var }}
       LC_CTYPE: ${{ matrix.lang-var }}
+      CODE_SIGN_IDENTITY: '-'
+      CLANG_ENABLE_OBJC_ARC: YES
     steps:
     - uses: actions/checkout@v3
     - name: Setup Python
@@ -87,6 +89,7 @@ jobs:
     - name: Pre-build
       id: bootstrap
       run: |
+        make -j1 -f Makefile init || true ;
         make -j1 -f Makefile clean || true ;
         make -j1 -f Makefile bootstrap ;
       shell: bash
@@ -123,8 +126,8 @@ jobs:
     - name: Build for Testing
       id: xcodebuild
       run: |
-        xcodebuild -sdk macosx -project XCMBuild.xcodeproj -configuration Release -scheme All clean ;
-        xcodebuild -sdk macosx -project XCMBuild.xcodeproj -configuration Release -scheme All build ;
+        xcodebuild -sdk macosx -project XCMBuild.xcodeproj -configuration Release -scheme "XCMBuild (All)" clean ;
+        xcodebuild -sdk macosx -project XCMBuild.xcodeproj -configuration Release -scheme "XCMBuild (All)" build ;
     - name: Run Tests
       id: tests
       run: |
