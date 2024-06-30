@@ -25,6 +25,9 @@ jobs:
     - name: Pre-Clean
       id: clean
       run: make -j1 -f Makefile purge 2>/dev/null || true ;
+    - name: Pre-Test Init
+      id: init
+      run: make -j1 -f Makefile init 2>/dev/null || true ;
     - name: Test Build
       id: build
       run: make -j1 -f Makefile build ;
@@ -77,16 +80,13 @@ jobs:
       LC_CTYPE: ${{ matrix.lang-var }}
       CODE_SIGN_IDENTITY: '-'
       CLANG_ENABLE_OBJC_ARC: YES
+      CONFIGURATION: 'Debug'
     steps:
     - uses: actions/checkout@v3
     - name: Setup Python
       uses: actions/setup-python@v3
       with:
         python-version: ${{ matrix.python-version }}
-    - name: Setup dependencies
-      run: |
-        python -m pip install --upgrade pip setuptools wheel
-        pip install -r ./requirements.txt
     - name: Pre-build
       id: bootstrap
       run: |
