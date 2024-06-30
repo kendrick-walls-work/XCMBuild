@@ -48,7 +48,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-13, macos-14, macos-latest]
+        os: [macos-13, macos-latest]
         python-version: [3.11, 3.12]
         lang-var: ["en_US.utf-8", "de.utf-8", "jp.utf-8"]
         experimental: [true]
@@ -58,10 +58,6 @@ jobs:
             lang-var: "en_US.utf-8"
             experimental: true
           - os: macos-13
-            python-version: 3.11
-            lang-var: "en_US.utf-8"
-            experimental: false
-         - os: macos-14
             python-version: 3.11
             lang-var: "en_US.utf-8"
             experimental: false
