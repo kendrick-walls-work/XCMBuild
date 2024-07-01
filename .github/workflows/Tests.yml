@@ -3,7 +3,7 @@ on:
   push:
     branches:
       - dev
-      - dev-ci-testing
+      - main
       - stable
     tags:
       - v*
