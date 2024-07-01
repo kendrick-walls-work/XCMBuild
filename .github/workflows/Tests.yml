@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - dev
+      - dev-ci-testing
       - stable
     tags:
       - v*
@@ -10,26 +11,33 @@ on:
 jobs:
   BUILD:
     if: ${{ always() }}
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     defaults:
       run:
         shell: bash
     env:
       LANG: "en_US.UTF-8"
+      CODE_SIGN_IDENTITY: '-'
+      CLANG_ENABLE_OBJC_ARC: YES
+      CONFIGURATION: 'Default'
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - uses: actions/setup-python@v3
       with:
-        python-version: 3.11
+        python-version: 3.12
     - name: Pre-Clean
       id: clean
       run: make -j1 -f Makefile purge 2>/dev/null || true ;
+    - name: Pre-Test Init
+      id: init
+      run: make -j1 -f Makefile init 2>/dev/null || true ;
     - name: Test Build
       id: build
       run: make -j1 -f Makefile build ;
     - name: Post-Clean
       id: post
       run: make -j1 -f Makefile purge || true ;
+      if: ${{ always() }}
 
 
   BOOTSTRAP:
@@ -44,19 +52,19 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest]
+        os: [macos-13, macos-latest]
         python-version: [3.11, 3.12]
-        lang-var: ["de.utf-8", "jp.utf-8"]
+        lang-var: ["en_US.utf-8", "de.utf-8", "jp.utf-8"]
         experimental: [true]
         include:
           - os: macos-latest
             python-version: 3.11
             lang-var: "en_US.utf-8"
-            experimental: false
-          - os: ubuntu-latest
+            experimental: true
+          - os: macos-13
             python-version: 3.11
             lang-var: "en_US.utf-8"
-            experimental: true
+            experimental: false
           - os: macos-latest
             python-version: 3.11
             lang-var: "de.utf-8"
@@ -64,8 +72,8 @@ jobs:
           - os: macos-latest
             python-version: 3.11
             lang-var: "jp.utf-8"
-            experimental: false
-          - os: ubuntu-latest
+            experimental: true
+          - os: macos-latest
             python-version: 3.12
             lang-var: "en_US.utf-8"
             experimental: true
@@ -76,21 +84,22 @@ jobs:
       LC_CTYPE: ${{ matrix.lang-var }}
       CODE_SIGN_IDENTITY: '-'
       CLANG_ENABLE_OBJC_ARC: YES
+      CONFIGURATION: 'Debug'
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Setup Python
       uses: actions/setup-python@v3
       with:
         python-version: ${{ matrix.python-version }}
-    - name: Setup dependencies
-      run: |
-        python -m pip install --upgrade pip setuptools wheel
-        pip install -r ./requirements.txt
     - name: Pre-build
-      id: bootstrap
+      id: init-clean
       run: |
         make -j1 -f Makefile init || true ;
         make -j1 -f Makefile clean || true ;
+      shell: bash
+    - name: Pre-build
+      id: bootstrap
+      run: |
         make -j1 -f Makefile bootstrap ;
       shell: bash
     - name: Test Info
@@ -118,23 +127,127 @@ jobs:
       CODE_SIGN_IDENTITY: '-'
       PYTHON_VERSION: 3.11
       LANG: "en_US.utf-8"
+      CLANG_ENABLE_OBJC_ARC: YES
+      CONFIGURATION: 'Default'
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Pre-Clean
-      id: clean
-      run: make -j1 -f Makefile purge || true ;
-    - name: Build for Testing
-      id: xcodebuild
+      id: clean-init
       run: |
-        xcodebuild -sdk macosx -project XCMBuild.xcodeproj -configuration Release -scheme "XCMBuild (All)" clean ;
-        xcodebuild -sdk macosx -project XCMBuild.xcodeproj -configuration Release -scheme "XCMBuild (All)" build ;
+        make -j1 -f Makefile init || true ;
+        make -j1 -f Makefile purge || true ;
+    - name: Build for Testing
+      id: build-mats
+      run: |
+        make -f Makefile -j1 clean ;
+        make -f Makefile -j1 build ;
     - name: Run Tests
-      id: tests
+      id: mats
       run: |
         make -f Makefile purge || true ;
         make -f Makefile test || true ;
         make -f Makefile clean || true ;
     - name: Post-Clean
+      id: post-mats
+      run: make -j1 -f Makefile purge || true ;
+      if: ${{ always() }}
+
+  TESTS:
+    if: ${{ success() }}
+    needs: [MATS, BOOTSTRAP]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    timeout-minutes: 10
+    continue-on-error: ${{ matrix.experimental }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-13, macos-latest]
+        python-version: [3.11, 3.12]
+        lang-var: ["en_US.utf-8", "de.utf-8", "jp.utf-8"]
+        config-var: ["Default", "Debug", "Release"]
+        experimental: [true]
+        include:
+          - os: macos-latest
+            python-version: 3.11
+            lang-var: "en_US.utf-8"
+            config-var: "Debug"
+            experimental: false
+          - os: macos-13
+            python-version: 3.11
+            lang-var: "en_US.utf-8"
+            config-var: "Debug"
+            experimental: false
+          - os: macos-13
+            python-version: 3.11
+            lang-var: "de.utf-8"
+            config-var: "Debug"
+            experimental: true
+          - os: macos-13
+            python-version: 3.11
+            lang-var: "jp.utf-8"
+            config-var: "Debug"
+            experimental: true
+          - os: macos-latest
+            python-version: 3.12
+            lang-var: "en_US.utf-8"
+            config-var: "Debug"
+            experimental: true
+          - os: macos-latest
+            python-version: 3.12
+            lang-var: "de.utf-8"
+            config-var: "Debug"
+            experimental: true
+          - os: macos-latest
+            python-version: 3.12
+            lang-var: "jp.utf-8"
+            config-var: "Debug"
+            experimental: true
+          - os: macos-latest
+            python-version: 3.12
+            lang-var: "en_US.utf-8"
+            config-var: "Default"
+            experimental: true
+          - os: macos-latest
+            python-version: 3.12
+            lang-var: "de.utf-8"
+            config-var: "Default"
+            experimental: true
+          - os: macos-latest
+            python-version: 3.12
+            lang-var: "jp.utf-8"
+            config-var: "Default"
+            experimental: true
+    env:
+      OS: ${{ matrix.os }}
+      PYTHON_VERSION: ${{ matrix.python-version }}
+      LANG: ${{ matrix.lang-var }}
+      LC_CTYPE: ${{ matrix.lang-var }}
+      CODE_SIGN_IDENTITY: '-'
+      CLANG_ENABLE_OBJC_ARC: YES
+      CONFIGURATION: ${{ matrix.config-var }}
+    steps:
+    - uses: actions/checkout@v4
+    - name: Pre-Clean
+      id: clean
+      run: |
+        make -j1 -f Makefile init || true ;
+        make -j1 -f Makefile purge || true ;
+    - name: Build for Testing
+      id: build
+      run: |
+        make -f Makefile -j1 clean ;
+        make -f Makefile -j1 build ;
+      if: ${{ success() }}
+    - name: Run Tests
+      id: tests
+      run: |
+        make -f Makefile purge 2>/dev/null || true ;
+        make -f Makefile test || false ;
+      if: ${{ success() }}
+    - name: Post-Clean
       id: post
-      run: make -j1 -f Makefile clean || true ;
+      run: make -j1 -f Makefile purge || true ;
       if: ${{ always() }}
